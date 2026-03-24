@@ -1,0 +1,152 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ludo": "https://ludo.ai/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "GameAsset": {
+      "@id": "ludo:GameAsset",
+      "@context": {
+        "assetType": "ludo:assetType",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "requestId": "ludo:requestId",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "creditsConsumed": "ludo:creditsConsumed",
+        "expiresAt": {
+          "@id": "schema:expires",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Image": {
+      "@id": "ludo:Image",
+      "@context": {
+        "imageType": "ludo:imageType",
+        "artStyle": "ludo:artStyle",
+        "perspective": "ludo:perspective",
+        "aspectRatio": "ludo:aspectRatio",
+        "prompt": "ludo:prompt"
+      }
+    },
+
+    "Spritesheet": {
+      "@id": "ludo:Spritesheet",
+      "@context": {
+        "spritesheetUrl": {
+          "@id": "ludo:spritesheetUrl",
+          "@type": "@id"
+        },
+        "videoUrl": {
+          "@id": "ludo:videoUrl",
+          "@type": "@id"
+        },
+        "gifUrl": {
+          "@id": "ludo:gifUrl",
+          "@type": "@id"
+        },
+        "numFrames": {
+          "@id": "ludo:numFrames",
+          "@type": "xsd:integer"
+        },
+        "numCols": {
+          "@id": "ludo:numCols",
+          "@type": "xsd:integer"
+        },
+        "numRows": {
+          "@id": "ludo:numRows",
+          "@type": "xsd:integer"
+        },
+        "frameSize": {
+          "@id": "ludo:frameSize",
+          "@type": "xsd:integer"
+        },
+        "loop": {
+          "@id": "ludo:loop",
+          "@type": "xsd:boolean"
+        },
+        "motionPrompt": "ludo:motionPrompt",
+        "individualFrameUrls": {
+          "@id": "ludo:individualFrameUrls",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Model3D": {
+      "@id": "ludo:Model3D",
+      "@context": {
+        "modelUrl": {
+          "@id": "ludo:modelUrl",
+          "@type": "@id"
+        },
+        "snapshots": {
+          "@id": "ludo:snapshots",
+          "@container": "@set"
+        },
+        "textureType": "ludo:textureType",
+        "textureSize": {
+          "@id": "ludo:textureSize",
+          "@type": "xsd:integer"
+        },
+        "targetNumFaces": {
+          "@id": "ludo:targetNumFaces",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Video": {
+      "@id": "ludo:Video",
+      "@context": {
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:integer"
+        },
+        "prompt": "ludo:prompt",
+        "model": "ludo:model"
+      }
+    },
+
+    "AudioAsset": {
+      "@id": "ludo:AudioAsset",
+      "@context": {
+        "audioType": "ludo:audioType",
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:decimal"
+        },
+        "voicePresetId": "ludo:voicePresetId",
+        "emotion": "ludo:emotion",
+        "language": {
+          "@id": "schema:inLanguage"
+        }
+      }
+    },
+
+    "AnimationPreset": {
+      "@id": "ludo:AnimationPreset",
+      "@context": {
+        "name": "schema:name",
+        "category": "schema:category",
+        "description": "schema:description",
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:decimal"
+        },
+        "previewUrl": {
+          "@id": "ludo:previewUrl",
+          "@type": "@id"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1665 @@
+openapi: 3.1.0
+info:
+  title: Ludo.ai REST API
+  description: >-
+    The Ludo.ai REST API provides programmatic access to AI-powered game asset
+    generation capabilities. Developers can generate sprites, icons, UI assets,
+    textures, and backgrounds through image generation endpoints, edit existing
+    images with text instructions, convert 2D images to 3D GLB models with PBR
+    textures, create animated spritesheets from static images, produce sound
+    effects, music tracks, character voices, and generate short videos. All API
+    requests require an API key passed via the Authentication header, and
+    requests consume credits that vary by endpoint type. The API is currently
+    in beta.
+  version: '1.0.0'
+  contact:
+    name: Ludo.ai Support
+    url: https://ludo.ai
+  termsOfService: https://ludo.ai/terms
+externalDocs:
+  description: Ludo.ai API Documentation
+  url: https://api.ludo.ai/api-documentation
+servers:
+  - url: https://api.ludo.ai/api
+    description: Production Server
+tags:
+  - name: Images
+    description: >-
+      Generate, edit, and manipulate game-ready images including sprites, icons,
+      UI assets, textures, and backgrounds.
+  - name: Animation
+    description: >-
+      Create animated spritesheets from static sprites, transfer motion from
+      videos or presets, and list available animation presets.
+  - name: 3D Models
+    description: >-
+      Convert 2D images into textured 3D GLB models with PBR textures and
+      configurable quality settings.
+  - name: Video
+    description: >-
+      Generate short videos from images with motion prompts, suitable for
+      cinematics, trailers, and dynamic backgrounds.
+  - name: Audio
+    description: >-
+      Generate sound effects, background music, character voices, and
+      text-to-speech audio for games.
+  - name: Results
+    description: >-
+      Retrieve previously generated assets using request IDs or browse recent
+      API-generated content.
+security:
+  - apiKeyAuth: []
+paths:
+  /images/create:
+    post:
+      operationId: createImage
+      summary: Generate a game-ready image
+      description: >-
+        Generate sprites, icons, backgrounds, UI assets, textures, and other
+        game-ready images from text descriptions. Supports multiple art styles
+        and perspectives. Costs 0.5 credits per image generated.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageRequest'
+      responses:
+        '200':
+          description: Successfully generated image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded or insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/edit:
+    post:
+      operationId: editImage
+      summary: Edit an existing image
+      description: >-
+        Modify an existing image using text instructions for smart editing.
+        Supports operations like background removal, color adjustments, and
+        content additions. An optional reference image can guide style or
+        content. Costs 0.5 credits per image generated.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditImageRequest'
+      responses:
+        '200':
+          description: Successfully edited image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/generate-with-style:
+    post:
+      operationId: generateWithStyle
+      summary: Generate an image matching a reference style
+      description: >-
+        Generate new content while maintaining the visual style of a reference
+        image. Useful for creating consistent asset sets that share an art
+        direction. Costs 0.5 credits per image generated.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateWithStyleRequest'
+      responses:
+        '200':
+          description: Successfully generated styled image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/generate-pose:
+    post:
+      operationId: generatePose
+      summary: Generate a new pose for an existing sprite
+      description: >-
+        Generate a new pose for an existing sprite character. Best used before
+        animateSprite to ensure the starting pose matches the intended
+        animation. Returns a suggested motion prompt for optimal animation
+        results. Costs 0.5 credits per image generated.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneratePoseRequest'
+      responses:
+        '200':
+          description: Successfully generated pose(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoseResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/remove-background:
+    post:
+      operationId: removeImageBackground
+      summary: Remove background from an image
+      description: >-
+        Remove the background from an image, returning a transparent PNG.
+        Costs 0.5 credits per image.
+      tags:
+        - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveBackgroundRequest'
+      responses:
+        '200':
+          description: Successfully removed background
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sprites/animate:
+    post:
+      operationId: animateSprite
+      summary: Create animated spritesheets from static images
+      description: >-
+        Transform a static sprite image into an animated spritesheet by
+        describing the desired motion. Supports configurable frame counts from
+        4 to 64, frame sizes, seamless looping, and optional GIF output.
+        Processing takes 30 to 90 seconds. Costs 5 credits per animation.
+      tags:
+        - Animation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimateSpriteRequest'
+      responses:
+        '200':
+          description: Successfully created animation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimationResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sprites/transfer-motion:
+    post:
+      operationId: transferMotion
+      summary: Transfer motion onto a static sprite
+      description: >-
+        Transfer motion from a video or animation preset onto a static sprite,
+        producing an animated spritesheet. Provide either a video URL or a
+        preset ID with perspective and direction. Costs 5 credits per transfer.
+      tags:
+        - Animation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferMotionRequest'
+      responses:
+        '200':
+          description: Successfully transferred motion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimationResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /animation-presets:
+    get:
+      operationId: listAnimationPresets
+      summary: List available animation presets
+      description: >-
+        Retrieve the catalog of available animation presets for use with
+        motion transfer. Returns preset animations with their categories,
+        descriptions, and preview URLs, along with available perspectives
+        and directions. Free endpoint that does not consume credits.
+      tags:
+        - Animation
+      responses:
+        '200':
+          description: Successfully retrieved animation presets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimationPresetsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /3d-models/create:
+    post:
+      operationId: create3DModel
+      summary: Convert a 2D image to a 3D model
+      description: >-
+        Convert a 2D image into a textured 3D GLB model with configurable
+        PBR textures, polygon count, and texture resolution. Processing takes
+        60 to 120 seconds. Returns the GLB model URL and four snapshot images
+        from different angles. Costs 3 credits per model.
+      tags:
+        - 3D Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create3DModelRequest'
+      responses:
+        '200':
+          description: Successfully created 3D model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model3DResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /videos/create:
+    post:
+      operationId: createVideo
+      summary: Generate a short video from an image
+      description: >-
+        Generate a short video from a source image and motion prompt. Supports
+        durations from 3 to 10 seconds. Suitable for cinematics, trailers, and
+        dynamic backgrounds. Credit cost varies by duration from 5 to 15
+        credits.
+      tags:
+        - Video
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideoRequest'
+      responses:
+        '200':
+          description: Successfully created video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/sound-effects:
+    post:
+      operationId: createSoundEffect
+      summary: Generate a game sound effect
+      description: >-
+        Generate game sound effects from text descriptions. Supports
+        configurable duration from 0 to 10 seconds where 0 uses automatic
+        duration. Costs 3 credits per sound effect.
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSoundEffectRequest'
+      responses:
+        '200':
+          description: Successfully created sound effect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/music:
+    post:
+      operationId: createMusic
+      summary: Generate background music
+      description: >-
+        Generate background music and themes from text descriptions. Supports
+        optional lyrics for vocal tracks. Costs 3 credits per track.
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMusicRequest'
+      responses:
+        '200':
+          description: Successfully created music track
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/voice:
+    post:
+      operationId: createVoice
+      summary: Generate a unique character voice
+      description: >-
+        Generate unique character voices by describing the character and
+        providing text to speak. Supports human and non-human voice types.
+        Maximum 200 characters of text. Costs 3 credits per voice.
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVoiceRequest'
+      responses:
+        '200':
+          description: Successfully created voice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/speech:
+    post:
+      operationId: createSpeech
+      summary: Clone a voice from an audio sample
+      description: >-
+        Generate text-to-speech audio by cloning a voice from a provided audio
+        sample. Maximum 1000 characters of text. Costs 3 credits per
+        generation.
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpeechRequest'
+      responses:
+        '200':
+          description: Successfully created speech
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/speech-preset:
+    post:
+      operationId: createSpeechPreset
+      summary: Generate speech using a preset voice
+      description: >-
+        Generate text-to-speech audio using preset voice characters with
+        optional emotion and language settings. Maximum 1000 characters of
+        text. Costs 3 credits per generation.
+      tags:
+        - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpeechPresetRequest'
+      responses:
+        '200':
+          description: Successfully created speech
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /results/images:
+    get:
+      operationId: getImageResults
+      summary: Retrieve generated image results
+      description: >-
+        Retrieve recent API-generated images. Optionally filter by request ID.
+        Returns up to 100 recent assets. Results are available for 7 days.
+        Free endpoint that does not consume credits.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/RequestIdQuery'
+      responses:
+        '200':
+          description: Successfully retrieved image results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResultsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /results/sprites:
+    get:
+      operationId: getSpriteResults
+      summary: Retrieve generated spritesheet results
+      description: >-
+        Retrieve recent API-generated spritesheets. Optionally filter by
+        request ID. Returns up to 100 recent assets. Results are available
+        for 7 days. Free endpoint that does not consume credits.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/RequestIdQuery'
+      responses:
+        '200':
+          description: Successfully retrieved sprite results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpriteResultsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /results/videos:
+    get:
+      operationId: getVideoResults
+      summary: Retrieve generated video results
+      description: >-
+        Retrieve recent API-generated videos. Optionally filter by request ID.
+        Returns up to 100 recent assets. Results are available for 7 days.
+        Free endpoint that does not consume credits.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/RequestIdQuery'
+      responses:
+        '200':
+          description: Successfully retrieved video results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResultsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /results/audio:
+    get:
+      operationId: getAudioResults
+      summary: Retrieve generated audio results
+      description: >-
+        Retrieve recent API-generated audio files. Optionally filter by
+        request ID. Returns up to 100 recent assets. Results are available
+        for 7 days. Free endpoint that does not consume credits.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/RequestIdQuery'
+      responses:
+        '200':
+          description: Successfully retrieved audio results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResultsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /results/3d-models:
+    get:
+      operationId: get3DModelResults
+      summary: Retrieve generated 3D model results
+      description: >-
+        Retrieve recent API-generated 3D models. Optionally filter by request
+        ID. Returns up to 100 recent assets. Results are available for 7 days.
+        Free endpoint that does not consume credits.
+      tags:
+        - Results
+      parameters:
+        - $ref: '#/components/parameters/RequestIdQuery'
+      responses:
+        '200':
+          description: Successfully retrieved 3D model results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model3DResultsResponse'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
+      description: >-
+        API key authentication. Pass your API key in the Authentication header
+        with the format: ApiKey YOUR_API_KEY
+  parameters:
+    RequestIdQuery:
+      name: request_id
+      in: query
+      required: false
+      description: >-
+        Filter results to a specific request by its client-provided request ID.
+      schema:
+        type: string
+  schemas:
+    CreateImageRequest:
+      type: object
+      required:
+        - prompt
+        - image_type
+      properties:
+        prompt:
+          type: string
+          description: >-
+            Detailed description of the image to generate.
+        image_type:
+          type: string
+          description: >-
+            The type of game asset to generate.
+          enum:
+            - sprite
+            - icon
+            - screenshot
+            - art
+            - asset
+            - sprite-vfx
+            - ui_asset
+            - fixed_background
+            - texture
+            - 3d
+            - generic
+        art_style:
+          type: string
+          description: >-
+            The art style for the generated image.
+          enum:
+            - Pixel Art (16-Bit)
+            - Pixel Art (8-Bit)
+            - Low Poly
+            - Cartoonish
+            - Stylized 3D
+            - Flat Design
+            - Anime/Manga
+            - Voxel Art
+        perspective:
+          type: string
+          description: >-
+            The camera perspective for the generated image.
+          enum:
+            - Side-Scroll
+            - Top-Down
+            - Isometric
+            - First-Person
+            - Third-Person
+            - 2.5D
+        aspect_ratio:
+          type: string
+          description: >-
+            The aspect ratio for the generated image.
+          default: default
+          enum:
+            - default
+            - ar_1_1
+            - ar_4_3
+            - ar_16_9
+            - ar_9_16
+        n:
+          type: integer
+          description: >-
+            Number of image variations to generate.
+          minimum: 1
+          maximum: 8
+          default: 1
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    EditImageRequest:
+      type: object
+      required:
+        - image
+        - prompt
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded image to edit.
+        prompt:
+          type: string
+          description: >-
+            Description of changes to apply to the image.
+        reference_image:
+          type: string
+          description: >-
+            URL or base64-encoded reference image for style or content
+            guidance.
+        n:
+          type: integer
+          description: >-
+            Number of edited variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    GenerateWithStyleRequest:
+      type: object
+      required:
+        - style_image
+        - prompt
+        - image_type
+      properties:
+        style_image:
+          type: string
+          description: >-
+            URL or base64-encoded reference image for style matching.
+        prompt:
+          type: string
+          description: >-
+            Description of what to generate while maintaining the reference
+            style.
+        image_type:
+          type: string
+          description: >-
+            The type of game asset to generate.
+          enum:
+            - sprite
+            - icon
+            - screenshot
+            - art
+            - asset
+            - sprite-vfx
+            - ui_asset
+            - fixed_background
+            - texture
+            - 3d
+            - generic
+        n:
+          type: integer
+          description: >-
+            Number of image variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    GeneratePoseRequest:
+      type: object
+      required:
+        - image
+        - pose
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded sprite image.
+        pose:
+          type: string
+          description: >-
+            Target pose for the sprite. Can be a preset or custom description.
+          enum:
+            - Idle (Front)
+            - Idle (Back)
+            - Walk / Run (Left)
+            - Attack Ready
+            - Jumping
+            - Crouching
+            - Flying
+            - Defending / Blocking
+        description:
+          type: string
+          description: >-
+            Additional instructions to guide pose generation.
+        n:
+          type: integer
+          description: >-
+            Number of pose variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    RemoveBackgroundRequest:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded image to remove background from.
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    AnimateSpriteRequest:
+      type: object
+      required:
+        - initial_image
+        - motion_prompt
+      properties:
+        initial_image:
+          type: string
+          description: >-
+            URL or base64-encoded image of the starting frame.
+        motion_prompt:
+          type: string
+          description: >-
+            Description of the animation motion such as walking cycle, idle
+            breathing, or attack slash.
+        image_type:
+          type: string
+          description: >-
+            The type of sprite being animated.
+          enum:
+            - sprite
+            - sprite-vfx
+            - ui_asset
+        frames:
+          type: integer
+          description: >-
+            Number of frames in the output spritesheet.
+          enum:
+            - 4
+            - 9
+            - 16
+            - 25
+            - 36
+            - 49
+            - 64
+          default: 36
+        frame_size:
+          type: integer
+          description: >-
+            Size of each frame in pixels. Use 0 for maximum resolution.
+          enum:
+            - 64
+            - 128
+            - 256
+            - 0
+          default: 256
+        loop:
+          type: boolean
+          description: >-
+            Whether to create a seamless looping animation.
+          default: true
+        model:
+          type: string
+          description: >-
+            Animation model to use. The new model produces higher quality
+            results.
+          enum:
+            - standard
+            - new
+          default: standard
+        duration:
+          type: number
+          description: >-
+            Animation duration in seconds. Standard model supports 1.2 to 3
+            seconds. New model supports up to 4 seconds.
+        final_image:
+          type: string
+          description: >-
+            URL or base64-encoded ending frame for interpolation between start
+            and end poses.
+        gif:
+          type: boolean
+          description: >-
+            Whether to also generate an animated GIF.
+          default: false
+        individual_frames:
+          type: boolean
+          description: >-
+            Whether to extract and return individual frame images.
+          default: false
+        spritesheet_with_background:
+          type: boolean
+          description: >-
+            Whether to also return the spritesheet with background intact
+            before background removal.
+          default: false
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    TransferMotionRequest:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded sprite image to apply motion to.
+        video:
+          type: string
+          description: >-
+            URL of the video to use as motion source. Videos up to 4 seconds
+            produce better results. Either video or preset_id with perspective
+            and direction must be provided.
+        preset_id:
+          type: string
+          description: >-
+            ID of an animation preset to use instead of a video URL. When
+            using a preset, perspective and direction are required.
+        direction:
+          type: string
+          description: >-
+            Direction for the animation preset. Required when using a preset.
+          enum:
+            - N
+            - NE
+            - E
+            - SE
+            - S
+            - SW
+            - W
+            - NW
+        perspective:
+          type: string
+          description: >-
+            Perspective ID to use with the animation preset. Required when
+            using a preset.
+        frames:
+          type: integer
+          description: >-
+            Number of frames in the output spritesheet.
+        frame_size:
+          type: integer
+          description: >-
+            Size of each frame in pixels.
+        loop:
+          type: boolean
+          description: >-
+            Whether to trim the animation for seamless looping.
+        crop:
+          type: boolean
+          description: >-
+            Whether to crop frames to fit content.
+        margin_ratio:
+          type: number
+          description: >-
+            Padding around the sprite as a ratio from 0.0 to 1.0.
+          minimum: 0.0
+          maximum: 1.0
+        margin_ratio_mode:
+          type: string
+          description: >-
+            Mode for margin ratio application.
+          enum:
+            - manual
+            - none
+          default: manual
+        gif:
+          type: boolean
+          description: >-
+            Whether to also generate an animated GIF.
+          default: false
+        individual_frames:
+          type: boolean
+          description: >-
+            Whether to extract and return individual frame images.
+          default: false
+        spritesheet_with_background:
+          type: boolean
+          description: >-
+            Whether to also return the spritesheet with background intact
+            before background removal.
+          default: false
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    Create3DModelRequest:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded 2D image to convert to a 3D model.
+        texture_type:
+          type: string
+          description: >-
+            Type of texture to apply to the 3D model.
+          enum:
+            - pbr
+            - simple
+            - none
+          default: pbr
+        texture_size:
+          type: integer
+          description: >-
+            Texture resolution in pixels.
+          enum:
+            - 1024
+            - 2048
+            - 4096
+          default: 2048
+        target_num_faces:
+          type: integer
+          description: >-
+            Target triangle count for the 3D model mesh.
+          minimum: 1000
+          maximum: 100000
+          default: 50000
+        high_detail_shape:
+          type: boolean
+          description: >-
+            Enable for complex shapes that require more detail. Results in
+            slower processing.
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateVideoRequest:
+      type: object
+      required:
+        - image
+        - prompt
+      properties:
+        image:
+          type: string
+          description: >-
+            URL or base64-encoded starting frame image.
+        prompt:
+          type: string
+          description: >-
+            Motion description for the video such as camera zooms in or
+            character walks forward.
+        duration:
+          type: integer
+          description: >-
+            Video duration in seconds. Credit cost varies by duration.
+          enum:
+            - 3
+            - 5
+            - 8
+            - 10
+          default: 5
+        model:
+          type: string
+          description: >-
+            Video generation model to use.
+          enum:
+            - standard
+            - new
+          default: standard
+        final_image:
+          type: string
+          description: >-
+            URL or base64-encoded ending frame for interpolation.
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateSoundEffectRequest:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: >-
+            Text description of the sound effect to generate such as laser gun
+            firing, footsteps on gravel, or coin pickup.
+        duration:
+          type: number
+          description: >-
+            Duration in seconds from 0 to 10. Use 0 for automatic duration.
+          minimum: 0
+          maximum: 10
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateMusicRequest:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: >-
+            Text description of the music to generate such as epic orchestral
+            battle theme, calm piano melody, or 8-bit chiptune.
+        lyrics:
+          type: string
+          description: >-
+            Optional lyrics for vocal tracks.
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateVoiceRequest:
+      type: object
+      required:
+        - voice_description
+        - text
+      properties:
+        voice_description:
+          type: string
+          description: >-
+            Character description for the voice such as gruff old warrior or
+            cheerful young girl.
+        text:
+          type: string
+          description: >-
+            Text for the character to speak.
+          maxLength: 200
+        type:
+          type: string
+          description: >-
+            Type of voice to generate.
+          enum:
+            - human
+            - non-human
+          default: human
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateSpeechRequest:
+      type: object
+      required:
+        - text
+        - sample
+      properties:
+        text:
+          type: string
+          description: >-
+            Text to speak using the cloned voice.
+          maxLength: 1000
+        sample:
+          type: string
+          description: >-
+            URL or base64-encoded audio sample for voice cloning.
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    CreateSpeechPresetRequest:
+      type: object
+      required:
+        - text
+        - voice_preset_id
+      properties:
+        text:
+          type: string
+          description: >-
+            Text to speak using the preset voice.
+          maxLength: 1000
+        voice_preset_id:
+          type: string
+          description: >-
+            ID of the preset voice character to use.
+          enum:
+            - Serious woman
+            - Wise woman
+            - Calm woman
+            - Patient man
+            - Determined man
+            - Deep voice man
+            - Teen boy
+            - Sweet girl
+        emotion:
+          type: string
+          description: >-
+            Emotion to apply to the speech delivery.
+          enum:
+            - Default
+            - Happy
+            - Sad
+            - Angry
+            - Fearful
+            - Surprised
+            - Neutral
+        language:
+          type: string
+          description: >-
+            Language for the speech output.
+          enum:
+            - auto
+            - English
+            - Spanish
+            - French
+            - German
+            - Japanese
+            - Korean
+        request_id:
+          type: string
+          description: >-
+            Client-provided ID to retrieve results later via the results
+            endpoint.
+    ImageResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: >-
+            Array of generated image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: >-
+                  URL of the generated image. Expires after 7 days.
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    PoseResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: >-
+            Array of generated pose image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: >-
+                  URL of the generated pose image. Expires after 7 days.
+              pose:
+                type: string
+                description: >-
+                  The pose that was generated.
+              motion_prompt:
+                type: string
+                description: >-
+                  Suggested motion prompt for use with animateSprite to get
+                  optimal animation results from this pose.
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    AnimationResponse:
+      type: object
+      properties:
+        spritesheet_url:
+          type: string
+          format: uri
+          description: >-
+            URL of the generated spritesheet image. Expires after 7 days.
+        video_url:
+          type: string
+          format: uri
+          description: >-
+            URL of the animation as a video file. Expires after 7 days.
+        gif_url:
+          type: string
+          format: uri
+          description: >-
+            URL of the animated GIF if gif was set to true. Expires after 7
+            days.
+        individual_frame_urls:
+          type: array
+          description: >-
+            Array of individual frame image URLs if individual_frames was set
+            to true.
+          items:
+            type: string
+            format: uri
+        spritesheet_with_background_url:
+          type: string
+          format: uri
+          description: >-
+            URL of the spritesheet with background intact if
+            spritesheet_with_background was set to true.
+        individual_frame_with_background_urls:
+          type: array
+          description: >-
+            Array of individual frame URLs with background intact.
+          items:
+            type: string
+            format: uri
+        num_frames:
+          type: integer
+          description: >-
+            Total number of frames in the spritesheet.
+        num_cols:
+          type: integer
+          description: >-
+            Number of columns in the spritesheet grid.
+        num_rows:
+          type: integer
+          description: >-
+            Number of rows in the spritesheet grid.
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    AnimationPresetsResponse:
+      type: object
+      properties:
+        animations:
+          type: array
+          description: >-
+            Array of available animation presets.
+          items:
+            $ref: '#/components/schemas/AnimationPreset'
+        perspectives:
+          type: array
+          description: >-
+            Array of available perspectives. All animations support all
+            perspectives.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: >-
+                  Perspective identifier.
+              name:
+                type: string
+                description: >-
+                  Human-readable perspective name.
+              description:
+                type: string
+                description: >-
+                  Description of the perspective.
+        directions:
+          type: array
+          description: >-
+            Available directions for animation presets. All animations support
+            all directions.
+          items:
+            type: string
+            enum:
+              - N
+              - NE
+              - E
+              - SE
+              - S
+              - SW
+              - W
+              - NW
+    AnimationPreset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: >-
+            Unique identifier for the animation preset.
+        name:
+          type: string
+          description: >-
+            Human-readable name of the animation preset.
+        category:
+          type: string
+          description: >-
+            Category grouping for the preset.
+        description:
+          type: string
+          description: >-
+            Description of the animation motion.
+        duration:
+          type: number
+          description: >-
+            Duration of the preset animation in seconds.
+        preview_url:
+          type: string
+          format: uri
+          description: >-
+            URL to preview the animation preset.
+    Model3DResponse:
+      type: object
+      properties:
+        model_url:
+          type: string
+          format: uri
+          description: >-
+            URL of the generated GLB 3D model file. Expires after 7 days.
+        snapshots:
+          type: array
+          description: >-
+            Four snapshot images of the 3D model from different angles.
+          items:
+            type: string
+            format: uri
+          minItems: 4
+          maxItems: 4
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    VideoResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: >-
+            URL of the generated video file. Expires after 7 days.
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    AudioResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: >-
+            URL of the generated audio file. Expires after 7 days.
+        request_id:
+          type: string
+          description: >-
+            The request ID if one was provided.
+    ImageResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: >-
+            Array of recent API-generated image results.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: >-
+                  URL of the generated image.
+              request_id:
+                type: string
+                description: >-
+                  The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the image was generated.
+    SpriteResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: >-
+            Array of recent API-generated spritesheet results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: >-
+                  The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the spritesheet was generated.
+    VideoResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: >-
+            Array of recent API-generated video results.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: >-
+                  URL of the generated video.
+              request_id:
+                type: string
+                description: >-
+                  The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the video was generated.
+    AudioResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: >-
+            Array of recent API-generated audio results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: >-
+                  The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the audio was generated.
+    Model3DResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: >-
+            Array of recent API-generated 3D model results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: >-
+                  The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: >-
+                  Timestamp when the 3D model was generated.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: >-
+            Error message describing what went wrong.
+        code:
+          type: string
+          description: >-
+            Machine-readable error code.

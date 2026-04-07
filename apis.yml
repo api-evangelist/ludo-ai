@@ -3,20 +3,19 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml
 name: Ludo.ai
 type: Index
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: 
+  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Game Development
   - Artificial Intelligence
   - Asset Generation
   - Game Design
 description: >-
-  Ludo.ai is a game design hub that uses artificial intelligence to help
-  developers generate production-ready game assets including images, 3D models,
-  audio, and animations. The platform entered beta for its Model Context Protocol
-  (MCP) integration, exposing its asset generation suite as a headless API that
-  enables vibe coding where developers can trigger asset creation directly from
-  AI assistants like Claude or Cursor. Ludo.ai offers both a REST API for
-  programmatic control and an MCP server for conversational asset generation.
+  Ludo.ai is a game design hub that uses artificial intelligence to help developers
+  generate production-ready game assets including images, 3D models, audio, and animations.
+  The platform entered beta for its Model Context Protocol (MCP) integration, exposing
+  its asset generation suite as a headless API that enables vibe coding where developers
+  can trigger asset creation directly from AI assistants like Claude or Cursor.
 created: '2026-03-24'
 modified: '2026-03-24'
 specificationVersion: '0.19'
@@ -31,7 +30,8 @@ apis:
       - Audio
       - Animation
       - Sprites
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.ludo.ai/api/
     humanURL: https://ludo.ai/api-mcp-integration
     properties:
@@ -40,14 +40,11 @@ apis:
       - url: openapi/ludo-ai-rest-api-openapi.yml
         type: OpenAPI
     description: >-
-      The Ludo.ai REST API provides programmatic access to the full suite of
-      AI-powered game asset generation capabilities. Developers can generate
-      sprites, icons, UI assets, textures, and backgrounds through image
-      generation endpoints, convert 2D images to 3D GLB models with PBR
-      textures, create animated spritesheets from static images, and produce
-      sound effects, music tracks, and character voices. All API requests
-      require an API key passed via the Authentication header, and requests
-      consume credits that vary by endpoint type. The API is currently in beta.
+      The Ludo.ai REST API provides programmatic access to the full suite of AI-powered
+      game asset generation capabilities. Developers can generate sprites, icons,
+      UI assets, textures, and backgrounds through image generation endpoints, convert
+      2D images to 3D GLB models with PBR textures, create animated spritesheets from
+      static images, and produce sound effects, music tracks, and character voices.
   - aid: ludo-ai:mcp-server
     name: Ludo.ai MCP Server
     tags:
@@ -56,7 +53,8 @@ apis:
       - AI Assistants
       - Asset Generation
       - Vibe Coding
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://mcp.ludo.ai/mcp
     humanURL: https://ludo.ai/docs/api-mcp
     properties:
@@ -65,15 +63,11 @@ apis:
       - url: https://github.com/Ludo-AI/ludo-mcp
         type: GitHubRepository
     description: >-
-      The Ludo.ai MCP Server exposes the platform's asset generation tools via
-      the Model Context Protocol, allowing AI assistants like Claude and Cursor
-      to generate game assets through natural language conversations. The server
-      provides over 20 tools including createImage, editImage, animateSprite,
-      create3DModel, createSoundEffect, createMusic, createVoice, and
-      createVideo. Developers can add the MCP server to their AI assistant
-      configuration using the endpoint at mcp.ludo.ai and authenticate with
-      their API key. This enables a vibe coding workflow where production-ready
-      game assets are created directly within the development environment.
+      The Ludo.ai MCP Server exposes the platform's asset generation tools via the
+      Model Context Protocol, allowing AI assistants like Claude and Cursor to generate
+      game assets through natural language conversations. The server provides over
+      20 tools including createImage, editImage, animateSprite, create3DModel, createSoundEffect,
+      createMusic, createVoice, and createVideo.
   - aid: ludo-ai:unity-plugin
     name: Ludo.ai Unity Plugin
     tags:
@@ -81,7 +75,8 @@ apis:
       - Unity
       - Plugin
       - Asset Generation
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
     properties:

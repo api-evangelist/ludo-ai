@@ -53,7 +53,7 @@ paths:
   /images/create:
     post:
       operationId: createImage
-      summary: Generate a game-ready image
+      summary: Ludo.ai Generate a game-ready image
       description: >-
         Generate sprites, icons, backgrounds, UI assets, textures, and other
         game-ready images from text descriptions. Supports multiple art styles
@@ -94,7 +94,7 @@ paths:
   /images/edit:
     post:
       operationId: editImage
-      summary: Edit an existing image
+      summary: Ludo.ai Edit an existing image
       description: >-
         Modify an existing image using text instructions for smart editing.
         Supports operations like background removal, color adjustments, and
@@ -130,7 +130,7 @@ paths:
   /images/generate-with-style:
     post:
       operationId: generateWithStyle
-      summary: Generate an image matching a reference style
+      summary: Ludo.ai Generate an image matching a reference style
       description: >-
         Generate new content while maintaining the visual style of a reference
         image. Useful for creating consistent asset sets that share an art
@@ -165,7 +165,7 @@ paths:
   /images/generate-pose:
     post:
       operationId: generatePose
-      summary: Generate a new pose for an existing sprite
+      summary: Ludo.ai Generate a new pose for an existing sprite
       description: >-
         Generate a new pose for an existing sprite character. Best used before
         animateSprite to ensure the starting pose matches the intended
@@ -201,7 +201,7 @@ paths:
   /images/remove-background:
     post:
       operationId: removeImageBackground
-      summary: Remove background from an image
+      summary: Ludo.ai Remove background from an image
       description: >-
         Remove the background from an image, returning a transparent PNG.
         Costs 0.5 credits per image.
@@ -235,7 +235,7 @@ paths:
   /sprites/animate:
     post:
       operationId: animateSprite
-      summary: Create animated spritesheets from static images
+      summary: Ludo.ai Create animated spritesheets from static images
       description: >-
         Transform a static sprite image into an animated spritesheet by
         describing the desired motion. Supports configurable frame counts from
@@ -271,7 +271,7 @@ paths:
   /sprites/transfer-motion:
     post:
       operationId: transferMotion
-      summary: Transfer motion onto a static sprite
+      summary: Ludo.ai Transfer motion onto a static sprite
       description: >-
         Transfer motion from a video or animation preset onto a static sprite,
         producing an animated spritesheet. Provide either a video URL or a
@@ -306,7 +306,7 @@ paths:
   /animation-presets:
     get:
       operationId: listAnimationPresets
-      summary: List available animation presets
+      summary: Ludo.ai List available animation presets
       description: >-
         Retrieve the catalog of available animation presets for use with
         motion transfer. Returns preset animations with their categories,
@@ -330,7 +330,7 @@ paths:
   /3d-models/create:
     post:
       operationId: create3DModel
-      summary: Convert a 2D image to a 3D model
+      summary: Ludo.ai Convert a 2D image to a 3D model
       description: >-
         Convert a 2D image into a textured 3D GLB model with configurable
         PBR textures, polygon count, and texture resolution. Processing takes
@@ -366,7 +366,7 @@ paths:
   /videos/create:
     post:
       operationId: createVideo
-      summary: Generate a short video from an image
+      summary: Ludo.ai Generate a short video from an image
       description: >-
         Generate a short video from a source image and motion prompt. Supports
         durations from 3 to 10 seconds. Suitable for cinematics, trailers, and
@@ -402,7 +402,7 @@ paths:
   /audio/sound-effects:
     post:
       operationId: createSoundEffect
-      summary: Generate a game sound effect
+      summary: Ludo.ai Generate a game sound effect
       description: >-
         Generate game sound effects from text descriptions. Supports
         configurable duration from 0 to 10 seconds where 0 uses automatic
@@ -437,7 +437,7 @@ paths:
   /audio/music:
     post:
       operationId: createMusic
-      summary: Generate background music
+      summary: Ludo.ai Generate background music
       description: >-
         Generate background music and themes from text descriptions. Supports
         optional lyrics for vocal tracks. Costs 3 credits per track.
@@ -471,7 +471,7 @@ paths:
   /audio/voice:
     post:
       operationId: createVoice
-      summary: Generate a unique character voice
+      summary: Ludo.ai Generate a unique character voice
       description: >-
         Generate unique character voices by describing the character and
         providing text to speak. Supports human and non-human voice types.
@@ -506,7 +506,7 @@ paths:
   /audio/speech:
     post:
       operationId: createSpeech
-      summary: Clone a voice from an audio sample
+      summary: Ludo.ai Clone a voice from an audio sample
       description: >-
         Generate text-to-speech audio by cloning a voice from a provided audio
         sample. Maximum 1000 characters of text. Costs 3 credits per
@@ -541,7 +541,7 @@ paths:
   /audio/speech-preset:
     post:
       operationId: createSpeechPreset
-      summary: Generate speech using a preset voice
+      summary: Ludo.ai Generate speech using a preset voice
       description: >-
         Generate text-to-speech audio using preset voice characters with
         optional emotion and language settings. Maximum 1000 characters of
@@ -576,7 +576,7 @@ paths:
   /results/images:
     get:
       operationId: getImageResults
-      summary: Retrieve generated image results
+      summary: Ludo.ai Retrieve generated image results
       description: >-
         Retrieve recent API-generated images. Optionally filter by request ID.
         Returns up to 100 recent assets. Results are available for 7 days.
@@ -601,7 +601,7 @@ paths:
   /results/sprites:
     get:
       operationId: getSpriteResults
-      summary: Retrieve generated spritesheet results
+      summary: Ludo.ai Retrieve generated spritesheet results
       description: >-
         Retrieve recent API-generated spritesheets. Optionally filter by
         request ID. Returns up to 100 recent assets. Results are available
@@ -626,7 +626,7 @@ paths:
   /results/videos:
     get:
       operationId: getVideoResults
-      summary: Retrieve generated video results
+      summary: Ludo.ai Retrieve generated video results
       description: >-
         Retrieve recent API-generated videos. Optionally filter by request ID.
         Returns up to 100 recent assets. Results are available for 7 days.
@@ -651,7 +651,7 @@ paths:
   /results/audio:
     get:
       operationId: getAudioResults
-      summary: Retrieve generated audio results
+      summary: Ludo.ai Retrieve generated audio results
       description: >-
         Retrieve recent API-generated audio files. Optionally filter by
         request ID. Returns up to 100 recent assets. Results are available
@@ -676,7 +676,7 @@ paths:
   /results/3d-models:
     get:
       operationId: get3DModelResults
-      summary: Retrieve generated 3D model results
+      summary: Ludo.ai Retrieve generated 3D model results
       description: >-
         Retrieve recent API-generated 3D models. Optionally filter by request
         ID. Returns up to 100 recent assets. Results are available for 7 days.

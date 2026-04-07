@@ -3,13 +3,12 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml
 name: Ludo.ai
 type: Index
-image: 
-  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Game Development
   - Artificial Intelligence
   - Asset Generation
   - Game Design
+  - Game Development
 description: >-
   Ludo.ai is a game design hub that uses artificial intelligence to help developers
   generate production-ready game assets including images, 3D models, audio, and animations.
@@ -23,15 +22,14 @@ apis:
   - aid: ludo-ai:rest-api
     name: Ludo.ai REST API
     tags:
-      - Game Development
-      - Asset Generation
-      - Images
       - 3D Models
-      - Audio
       - Animation
+      - Asset Generation
+      - Audio
+      - Game Development
+      - Images
       - Sprites
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.ludo.ai/api/
     humanURL: https://ludo.ai/api-mcp-integration
     properties:
@@ -48,13 +46,12 @@ apis:
   - aid: ludo-ai:mcp-server
     name: Ludo.ai MCP Server
     tags:
-      - Game Development
-      - Model Context Protocol
       - AI Assistants
       - Asset Generation
+      - Game Development
+      - Model Context Protocol
       - Vibe Coding
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://mcp.ludo.ai/mcp
     humanURL: https://ludo.ai/docs/api-mcp
     properties:
@@ -71,12 +68,11 @@ apis:
   - aid: ludo-ai:unity-plugin
     name: Ludo.ai Unity Plugin
     tags:
-      - Game Development
-      - Unity
-      - Plugin
       - Asset Generation
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Game Development
+      - Plugin
+      - Unity
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.example.com
     humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
     properties:

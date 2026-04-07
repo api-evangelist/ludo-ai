@@ -23,30 +23,30 @@ servers:
   - url: https://api.ludo.ai/api
     description: Production Server
 tags:
-  - name: Images
-    description: >-
-      Generate, edit, and manipulate game-ready images including sprites, icons,
-      UI assets, textures, and backgrounds.
-  - name: Animation
-    description: >-
-      Create animated spritesheets from static sprites, transfer motion from
-      videos or presets, and list available animation presets.
   - name: 3D Models
     description: >-
       Convert 2D images into textured 3D GLB models with PBR textures and
       configurable quality settings.
-  - name: Video
+  - name: Animation
     description: >-
-      Generate short videos from images with motion prompts, suitable for
-      cinematics, trailers, and dynamic backgrounds.
+      Create animated spritesheets from static sprites, transfer motion from
+      videos or presets, and list available animation presets.
   - name: Audio
     description: >-
       Generate sound effects, background music, character voices, and
       text-to-speech audio for games.
+  - name: Images
+    description: >-
+      Generate, edit, and manipulate game-ready images including sprites, icons,
+      UI assets, textures, and backgrounds.
   - name: Results
     description: >-
       Retrieve previously generated assets using request IDs or browse recent
       API-generated content.
+  - name: Video
+    description: >-
+      Generate short videos from images with motion prompts, suitable for
+      cinematics, trailers, and dynamic backgrounds.
 security:
   - apiKeyAuth: []
 paths:

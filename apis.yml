@@ -16,7 +16,7 @@ description: >-
   its asset generation suite as a headless API that enables vibe coding where developers
   can trigger asset creation directly from AI assistants like Claude or Cursor.
 created: '2026-03-24'
-modified: '2026-03-24'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 apis:
   - aid: ludo-ai:rest-api

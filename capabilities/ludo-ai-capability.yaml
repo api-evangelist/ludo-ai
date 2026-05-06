@@ -1,0 +1,663 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ludo.ai REST API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers
+    can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images
+    with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static
+    images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an
+    API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently
+    in be
+  tags:
+  - Ludo
+  - Ai
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: ludo-ai
+    baseUri: https://api.ludo.ai/api
+    description: Ludo.ai REST API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authentication
+      value: '{{LUDO_AI_TOKEN}}'
+    resources:
+    - name: images-create
+      path: /images/create
+      operations:
+      - name: createimage
+        method: POST
+        description: Ludo.ai Generate a game-ready image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: images-edit
+      path: /images/edit
+      operations:
+      - name: editimage
+        method: POST
+        description: Ludo.ai Edit an existing image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: images-generate-with-style
+      path: /images/generate-with-style
+      operations:
+      - name: generatewithstyle
+        method: POST
+        description: Ludo.ai Generate an image matching a reference style
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: images-generate-pose
+      path: /images/generate-pose
+      operations:
+      - name: generatepose
+        method: POST
+        description: Ludo.ai Generate a new pose for an existing sprite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: images-remove-background
+      path: /images/remove-background
+      operations:
+      - name: removeimagebackground
+        method: POST
+        description: Ludo.ai Remove background from an image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sprites-animate
+      path: /sprites/animate
+      operations:
+      - name: animatesprite
+        method: POST
+        description: Ludo.ai Create animated spritesheets from static images
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sprites-transfer-motion
+      path: /sprites/transfer-motion
+      operations:
+      - name: transfermotion
+        method: POST
+        description: Ludo.ai Transfer motion onto a static sprite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: animation-presets
+      path: /animation-presets
+      operations:
+      - name: listanimationpresets
+        method: GET
+        description: Ludo.ai List available animation presets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: 3d-models-create
+      path: /3d-models/create
+      operations:
+      - name: create3dmodel
+        method: POST
+        description: Ludo.ai Convert a 2D image to a 3D model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: videos-create
+      path: /videos/create
+      operations:
+      - name: createvideo
+        method: POST
+        description: Ludo.ai Generate a short video from an image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: audio-sound-effects
+      path: /audio/sound-effects
+      operations:
+      - name: createsoundeffect
+        method: POST
+        description: Ludo.ai Generate a game sound effect
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: audio-music
+      path: /audio/music
+      operations:
+      - name: createmusic
+        method: POST
+        description: Ludo.ai Generate background music
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: audio-voice
+      path: /audio/voice
+      operations:
+      - name: createvoice
+        method: POST
+        description: Ludo.ai Generate a unique character voice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: audio-speech
+      path: /audio/speech
+      operations:
+      - name: createspeech
+        method: POST
+        description: Ludo.ai Clone a voice from an audio sample
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: audio-speech-preset
+      path: /audio/speech-preset
+      operations:
+      - name: createspeechpreset
+        method: POST
+        description: Ludo.ai Generate speech using a preset voice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-images
+      path: /results/images
+      operations:
+      - name: getimageresults
+        method: GET
+        description: Ludo.ai Retrieve generated image results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-sprites
+      path: /results/sprites
+      operations:
+      - name: getspriteresults
+        method: GET
+        description: Ludo.ai Retrieve generated spritesheet results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-videos
+      path: /results/videos
+      operations:
+      - name: getvideoresults
+        method: GET
+        description: Ludo.ai Retrieve generated video results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-audio
+      path: /results/audio
+      operations:
+      - name: getaudioresults
+        method: GET
+        description: Ludo.ai Retrieve generated audio results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-3d-models
+      path: /results/3d-models
+      operations:
+      - name: get3dmodelresults
+        method: GET
+        description: Ludo.ai Retrieve generated 3D model results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: ludo-ai-rest
+    description: REST adapter for Ludo.ai REST API.
+    resources:
+    - path: /images/create
+      name: createimage
+      operations:
+      - method: POST
+        name: createimage
+        description: Ludo.ai Generate a game-ready image
+        call: ludo-ai.createimage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /images/edit
+      name: editimage
+      operations:
+      - method: POST
+        name: editimage
+        description: Ludo.ai Edit an existing image
+        call: ludo-ai.editimage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /images/generate-with-style
+      name: generatewithstyle
+      operations:
+      - method: POST
+        name: generatewithstyle
+        description: Ludo.ai Generate an image matching a reference style
+        call: ludo-ai.generatewithstyle
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /images/generate-pose
+      name: generatepose
+      operations:
+      - method: POST
+        name: generatepose
+        description: Ludo.ai Generate a new pose for an existing sprite
+        call: ludo-ai.generatepose
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /images/remove-background
+      name: removeimagebackground
+      operations:
+      - method: POST
+        name: removeimagebackground
+        description: Ludo.ai Remove background from an image
+        call: ludo-ai.removeimagebackground
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /sprites/animate
+      name: animatesprite
+      operations:
+      - method: POST
+        name: animatesprite
+        description: Ludo.ai Create animated spritesheets from static images
+        call: ludo-ai.animatesprite
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /sprites/transfer-motion
+      name: transfermotion
+      operations:
+      - method: POST
+        name: transfermotion
+        description: Ludo.ai Transfer motion onto a static sprite
+        call: ludo-ai.transfermotion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /animation-presets
+      name: listanimationpresets
+      operations:
+      - method: GET
+        name: listanimationpresets
+        description: Ludo.ai List available animation presets
+        call: ludo-ai.listanimationpresets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /3d-models/create
+      name: create3dmodel
+      operations:
+      - method: POST
+        name: create3dmodel
+        description: Ludo.ai Convert a 2D image to a 3D model
+        call: ludo-ai.create3dmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /videos/create
+      name: createvideo
+      operations:
+      - method: POST
+        name: createvideo
+        description: Ludo.ai Generate a short video from an image
+        call: ludo-ai.createvideo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /audio/sound-effects
+      name: createsoundeffect
+      operations:
+      - method: POST
+        name: createsoundeffect
+        description: Ludo.ai Generate a game sound effect
+        call: ludo-ai.createsoundeffect
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /audio/music
+      name: createmusic
+      operations:
+      - method: POST
+        name: createmusic
+        description: Ludo.ai Generate background music
+        call: ludo-ai.createmusic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /audio/voice
+      name: createvoice
+      operations:
+      - method: POST
+        name: createvoice
+        description: Ludo.ai Generate a unique character voice
+        call: ludo-ai.createvoice
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /audio/speech
+      name: createspeech
+      operations:
+      - method: POST
+        name: createspeech
+        description: Ludo.ai Clone a voice from an audio sample
+        call: ludo-ai.createspeech
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /audio/speech-preset
+      name: createspeechpreset
+      operations:
+      - method: POST
+        name: createspeechpreset
+        description: Ludo.ai Generate speech using a preset voice
+        call: ludo-ai.createspeechpreset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /results/images
+      name: getimageresults
+      operations:
+      - method: GET
+        name: getimageresults
+        description: Ludo.ai Retrieve generated image results
+        call: ludo-ai.getimageresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /results/sprites
+      name: getspriteresults
+      operations:
+      - method: GET
+        name: getspriteresults
+        description: Ludo.ai Retrieve generated spritesheet results
+        call: ludo-ai.getspriteresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /results/videos
+      name: getvideoresults
+      operations:
+      - method: GET
+        name: getvideoresults
+        description: Ludo.ai Retrieve generated video results
+        call: ludo-ai.getvideoresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /results/audio
+      name: getaudioresults
+      operations:
+      - method: GET
+        name: getaudioresults
+        description: Ludo.ai Retrieve generated audio results
+        call: ludo-ai.getaudioresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /results/3d-models
+      name: get3dmodelresults
+      operations:
+      - method: GET
+        name: get3dmodelresults
+        description: Ludo.ai Retrieve generated 3D model results
+        call: ludo-ai.get3dmodelresults
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: ludo-ai-mcp
+    transport: http
+    description: MCP adapter for Ludo.ai REST API for AI agent use.
+    tools:
+    - name: createimage
+      description: Ludo.ai Generate a game-ready image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createimage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: editimage
+      description: Ludo.ai Edit an existing image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.editimage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generatewithstyle
+      description: Ludo.ai Generate an image matching a reference style
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.generatewithstyle
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generatepose
+      description: Ludo.ai Generate a new pose for an existing sprite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.generatepose
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeimagebackground
+      description: Ludo.ai Remove background from an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.removeimagebackground
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: animatesprite
+      description: Ludo.ai Create animated spritesheets from static images
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.animatesprite
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: transfermotion
+      description: Ludo.ai Transfer motion onto a static sprite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.transfermotion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listanimationpresets
+      description: Ludo.ai List available animation presets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.listanimationpresets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create3dmodel
+      description: Ludo.ai Convert a 2D image to a 3D model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.create3dmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createvideo
+      description: Ludo.ai Generate a short video from an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createvideo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createsoundeffect
+      description: Ludo.ai Generate a game sound effect
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createsoundeffect
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createmusic
+      description: Ludo.ai Generate background music
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createmusic
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createvoice
+      description: Ludo.ai Generate a unique character voice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createvoice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createspeech
+      description: Ludo.ai Clone a voice from an audio sample
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createspeech
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createspeechpreset
+      description: Ludo.ai Generate speech using a preset voice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ludo-ai.createspeechpreset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getimageresults
+      description: Ludo.ai Retrieve generated image results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.getimageresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getspriteresults
+      description: Ludo.ai Retrieve generated spritesheet results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.getspriteresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getvideoresults
+      description: Ludo.ai Retrieve generated video results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.getvideoresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getaudioresults
+      description: Ludo.ai Retrieve generated audio results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.getaudioresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get3dmodelresults
+      description: Ludo.ai Retrieve generated 3D model results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ludo-ai.get3dmodelresults
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    LUDO_AI_TOKEN: LUDO_AI_TOKEN

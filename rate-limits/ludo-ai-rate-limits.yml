@@ -4,95 +4,60 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Ludo.ai
 providerId: ludo-ai
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Artificial Intelligence
-  - Asset Generation
-  - Game Design
-  - Game Development
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Ludo.ai API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Generative AI
+  - Game Development
+description: Ludo.ai rate limits are expressed primarily as concurrent-request limits per plan and an
+  annual credit allotment that gates total throughput. API/MCP access starts at the Pro tier (1 concurrent
+  request); Studio raises this to 5; Enterprise is custom.
+sources:
+  - https://ludo.ai/pricing
 responseCodes:
   throttled: 429
   quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Ludo.ai REST API
-      - Ludo.ai MCP Server
-      - Ludo.ai Unity Plugin
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Ludo.ai REST API
-      - Ludo.ai MCP Server
-      - Ludo.ai Unity Plugin
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Ludo.ai REST API
-      - Ludo.ai MCP Server
-      - Ludo.ai Unity Plugin
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Ludo.ai REST API
-      - Ludo.ai MCP Server
-      - Ludo.ai Unity Plugin
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
+  - name: API/MCP concurrent requests (Indie)
+    scope: account
+    metric: concurrent_requests
+    limit: 0
+    notes: API/MCP access not included on Indie tier.
+  - name: API/MCP concurrent requests (Pro)
+    scope: account
+    metric: concurrent_requests
+    limit: 1
+  - name: API/MCP concurrent requests (Studio)
+    scope: account
+    metric: concurrent_requests
+    limit: 5
+  - name: API/MCP concurrent requests (Enterprise)
     scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Ludo.ai REST API
-      - Ludo.ai MCP Server
-      - Ludo.ai Unity Plugin
+    metric: concurrent_requests
+    limit: 'see contract'
+  - name: Annual credit quota (Indie)
+    scope: account
+    metric: credits_per_year
+    limit: 3000
+    timeFrame: year
+  - name: Annual credit quota (Pro)
+    scope: account
+    metric: credits_per_year
+    limit: 12000
+    timeFrame: year
+  - name: Annual credit quota (Studio)
+    scope: account
+    metric: credits_per_year
+    limit: 120000
+    timeFrame: year
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - name: Concurrency-based throttling
+    description: API and MCP access throttle by concurrent requests rather than per-second RPS.
+  - name: Top-up credits
+    description: Monthly plans can top up credits mid-cycle to avoid running out.
+  - name: Refund window
+    description: Annual plans have a 30-day refund window if fewer than 250 credits used (1,000 for Pro/Studio);
+      monthly plans non-refundable.
+  - name: Backoff
+    description: On 429, retry with exponential backoff and respect Retry-After when present.

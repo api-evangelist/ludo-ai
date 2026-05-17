@@ -86,7 +86,7 @@ apis:
       connects to the Ludo.ai API to deliver generated assets directly into
       Unity projects, streamlining the game development workflow.
 common:
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/ludo-ai-context.jsonld
   - type: JSONSchema
     url: json-schema/ludo-ai-game-asset-schema.json

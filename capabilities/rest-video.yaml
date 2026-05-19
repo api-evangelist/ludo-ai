@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ludo.ai REST API — Video
+  description: 'Ludo.ai REST API — Video. 1 operations. Lead operation: Ludo.ai Generate a short video from an image. Self-contained
+    Naftiko capability covering one Ludo Ai business surface.'
+  tags:
+  - Ludo Ai
+  - Video
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LUDO_AI_API_KEY: LUDO_AI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-video
+    baseUri: https://api.ludo.ai/api
+    description: Ludo.ai REST API — Video business capability. Self-contained, no shared references.
+    resources:
+    - name: videos-create
+      path: /videos/create
+      operations:
+      - name: createvideo
+        method: POST
+        description: Ludo.ai Generate a short video from an image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authentication
+      value: '{{env.LUDO_AI_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-video-rest
+    port: 8080
+    description: REST adapter for Ludo.ai REST API — Video. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/videos/create
+      name: videos-create
+      description: REST surface for videos-create.
+      operations:
+      - method: POST
+        name: createvideo
+        description: Ludo.ai Generate a short video from an image
+        call: rest-video.createvideo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-video-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ludo.ai REST API — Video. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ludo-ai-generate-short-video-image
+      description: Ludo.ai Generate a short video from an image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-video.createvideo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ludo.ai REST API — Results
+  description: 'Ludo.ai REST API — Results. 5 operations. Lead operation: Ludo.ai Retrieve generated 3D model results. Self-contained
+    Naftiko capability covering one Ludo Ai business surface.'
+  tags:
+  - Ludo Ai
+  - Results
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LUDO_AI_API_KEY: LUDO_AI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-results
+    baseUri: https://api.ludo.ai/api
+    description: Ludo.ai REST API — Results business capability. Self-contained, no shared references.
+    resources:
+    - name: results-3d-models
+      path: /results/3d-models
+      operations:
+      - name: get3dmodelresults
+        method: GET
+        description: Ludo.ai Retrieve generated 3D model results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-audio
+      path: /results/audio
+      operations:
+      - name: getaudioresults
+        method: GET
+        description: Ludo.ai Retrieve generated audio results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-images
+      path: /results/images
+      operations:
+      - name: getimageresults
+        method: GET
+        description: Ludo.ai Retrieve generated image results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-sprites
+      path: /results/sprites
+      operations:
+      - name: getspriteresults
+        method: GET
+        description: Ludo.ai Retrieve generated spritesheet results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: results-videos
+      path: /results/videos
+      operations:
+      - name: getvideoresults
+        method: GET
+        description: Ludo.ai Retrieve generated video results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authentication
+      value: '{{env.LUDO_AI_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-results-rest
+    port: 8080
+    description: REST adapter for Ludo.ai REST API — Results. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/results/3d-models
+      name: results-3d-models
+      description: REST surface for results-3d-models.
+      operations:
+      - method: GET
+        name: get3dmodelresults
+        description: Ludo.ai Retrieve generated 3D model results
+        call: rest-results.get3dmodelresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/results/audio
+      name: results-audio
+      description: REST surface for results-audio.
+      operations:
+      - method: GET
+        name: getaudioresults
+        description: Ludo.ai Retrieve generated audio results
+        call: rest-results.getaudioresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/results/images
+      name: results-images
+      description: REST surface for results-images.
+      operations:
+      - method: GET
+        name: getimageresults
+        description: Ludo.ai Retrieve generated image results
+        call: rest-results.getimageresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/results/sprites
+      name: results-sprites
+      description: REST surface for results-sprites.
+      operations:
+      - method: GET
+        name: getspriteresults
+        description: Ludo.ai Retrieve generated spritesheet results
+        call: rest-results.getspriteresults
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/results/videos
+      name: results-videos
+      description: REST surface for results-videos.
+      operations:
+      - method: GET
+        name: getvideoresults
+        description: Ludo.ai Retrieve generated video results
+        call: rest-results.getvideoresults
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-results-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ludo.ai REST API — Results. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ludo-ai-retrieve-generated-3d-model
+      description: Ludo.ai Retrieve generated 3D model results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-results.get3dmodelresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-retrieve-generated-audio-results
+      description: Ludo.ai Retrieve generated audio results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-results.getaudioresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-retrieve-generated-image-results
+      description: Ludo.ai Retrieve generated image results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-results.getimageresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-retrieve-generated-spritesheet-results
+      description: Ludo.ai Retrieve generated spritesheet results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-results.getspriteresults
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-retrieve-generated-video-results
+      description: Ludo.ai Retrieve generated video results
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-results.getvideoresults
+      outputParameters:
+      - type: object
+        mapping: $.

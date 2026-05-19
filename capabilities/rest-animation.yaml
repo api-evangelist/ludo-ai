@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ludo.ai REST API — Animation
+  description: 'Ludo.ai REST API — Animation. 3 operations. Lead operation: Ludo.ai List available animation presets. Self-contained
+    Naftiko capability covering one Ludo Ai business surface.'
+  tags:
+  - Ludo Ai
+  - Animation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LUDO_AI_API_KEY: LUDO_AI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-animation
+    baseUri: https://api.ludo.ai/api
+    description: Ludo.ai REST API — Animation business capability. Self-contained, no shared references.
+    resources:
+    - name: animation-presets
+      path: /animation-presets
+      operations:
+      - name: listanimationpresets
+        method: GET
+        description: Ludo.ai List available animation presets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sprites-animate
+      path: /sprites/animate
+      operations:
+      - name: animatesprite
+        method: POST
+        description: Ludo.ai Create animated spritesheets from static images
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sprites-transfer-motion
+      path: /sprites/transfer-motion
+      operations:
+      - name: transfermotion
+        method: POST
+        description: Ludo.ai Transfer motion onto a static sprite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authentication
+      value: '{{env.LUDO_AI_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: rest-animation-rest
+    port: 8080
+    description: REST adapter for Ludo.ai REST API — Animation. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/animation-presets
+      name: animation-presets
+      description: REST surface for animation-presets.
+      operations:
+      - method: GET
+        name: listanimationpresets
+        description: Ludo.ai List available animation presets
+        call: rest-animation.listanimationpresets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sprites/animate
+      name: sprites-animate
+      description: REST surface for sprites-animate.
+      operations:
+      - method: POST
+        name: animatesprite
+        description: Ludo.ai Create animated spritesheets from static images
+        call: rest-animation.animatesprite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sprites/transfer-motion
+      name: sprites-transfer-motion
+      description: REST surface for sprites-transfer-motion.
+      operations:
+      - method: POST
+        name: transfermotion
+        description: Ludo.ai Transfer motion onto a static sprite
+        call: rest-animation.transfermotion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-animation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ludo.ai REST API — Animation. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: ludo-ai-list-available-animation-presets
+      description: Ludo.ai List available animation presets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-animation.listanimationpresets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-create-animated-spritesheets-static
+      description: Ludo.ai Create animated spritesheets from static images
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-animation.animatesprite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ludo-ai-transfer-motion-onto-static
+      description: Ludo.ai Transfer motion onto a static sprite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-animation.transfermotion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

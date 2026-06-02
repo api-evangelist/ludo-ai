@@ -2,13 +2,13 @@
   "repo": "ludo-ai",
   "feeds": [
     {
-      "source": "https://ludo.ai/blog/introducing-ludo-ai-api-mcp-integration",
-      "feed_url": "",
+      "source": "https://ludo.ai/docs",
+      "feed_url": "https://ludo.ai/docs",
       "title": "",
       "saved": 0,
-      "error": "no_feed"
+      "method": "none"
     }
   ],
-  "fetched": "2026-05-17T20:48:52Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 0
 }

@@ -1,0 +1,382 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a game-ready image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Edit an existing image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/edit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate an image matching a reference style",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/generate-with-style",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate a new pose for an existing sprite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/generate-pose",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Remove background from an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/remove-background",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Animation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Create animated spritesheets from static images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/sprites/animate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transform a static sprite image into an animated spritesheet by describing the desired motion. Supports configurable frame counts from 4 to 64, frame sizes, seamless looping, and optional GIF output. Processing takes 30 to 90 seconds. Costs 5 credits per animation."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Transfer motion onto a static sprite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/sprites/transfer-motion",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer motion from a video or animation preset onto a static sprite, producing an animated spritesheet. Provide either a video URL or a preset ID with perspective and direction. Costs 5 credits per transfer."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai List available animation presets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/animation-presets"
+          },
+          "docs": "Retrieve the catalog of available animation presets for use with motion transfer. Returns preset animations with their categories, descriptions, and preview URLs, along with available perspectives and directions. Free endpoint that does not consume credits."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "3D Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Convert a 2D image to a 3D model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/3d-models/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Video",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a short video from an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/videos/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a short video from a source image and motion prompt. Supports durations from 3 to 10 seconds. Suitable for cinematics, trailers, and dynamic backgrounds. Credit cost varies by duration from 5 to 15 credits."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Audio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a game sound effect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/sound-effects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate background music",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/music",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate background music and themes from text descriptions. Supports optional lyrics for vocal tracks. Costs 3 credits per track."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate a unique character voice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/voice",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate unique character voices by describing the character and providing text to speak. Supports human and non-human voice types. Maximum 200 characters of text. Costs 3 credits per voice."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Clone a voice from an audio sample",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/speech",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate text-to-speech audio by cloning a voice from a provided audio sample. Maximum 1000 characters of text. Costs 3 credits per generation."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate speech using a preset voice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/speech-preset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate text-to-speech audio using preset voice characters with optional emotion and language settings. Maximum 1000 characters of text. Costs 3 credits per generation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated image results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/images",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated images. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated spritesheet results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/sprites",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated spritesheets. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated video results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/videos",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated videos. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated audio results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/audio",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated audio files. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated 3D model results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/3d-models",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated 3D models. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

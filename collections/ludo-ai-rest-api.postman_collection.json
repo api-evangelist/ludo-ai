@@ -1,0 +1,3852 @@
+{
+  "item": [
+    {
+      "id": "1166a2fa-8c09-4ea4-af68-e2fa0a4ff47f",
+      "name": "3D Models",
+      "description": {
+        "content": "Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b33f1634-2cbe-4525-9aaf-9a6e87a6933e",
+          "name": "Ludo.ai Convert a 2D image to a 3D model",
+          "request": {
+            "name": "Ludo.ai Convert a 2D image to a 3D model",
+            "description": {
+              "content": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "3d-models",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1eaedf34-71cb-4308-a2fe-9adb473510c8",
+              "name": "Successfully created 3D model",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_url\": \"https://qnUYR.jxmm92-NtluzGg2aPv3c7PlCmDWXp-NTex+1VN,uoLsfR8\",\n  \"snapshots\": [\n    \"https://pmCdfuQZUOLqNsyBVxbHE.zvRfZRTvAK.1qne8qCSymVFc3lf..m3f.1J8W.4dqyX..ipqpotnmV8McUGZCIse7ueiut\",\n    \"https://YnwlKzfKkZubZWrIZwVLkqPRehoCHLh.yzcCOuHP+tOOJ0rN2S78\",\n    \"https://EYWDOaAVDLlbzPGMmiiE.zevndXYXUAYeHiUsU,J4iVS\",\n    \"https://YiwCcddOpNdTtTCOjDhUpTrXhctWrzQgL.kviFgBAQg4ohwtZ4jrHwXq8PrfGZw9AVUyDV\"\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ed76e91-2367-4905-92eb-5948f61c8b12",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c8958f9-accb-4925-9294-f6afabb9042c",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cec64446-a43b-4344-acfa-873ef50e8b82",
+      "name": "Animation",
+      "description": {
+        "content": "Create animated spritesheets from static sprites, transfer motion from videos or presets, and list available animation presets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a44cb91d-d960-4ee3-a34f-89a9976f85e0",
+          "name": "Ludo.ai Create animated spritesheets from static images",
+          "request": {
+            "name": "Ludo.ai Create animated spritesheets from static images",
+            "description": {
+              "content": "Transform a static sprite image into an animated spritesheet by describing the desired motion. Supports configurable frame counts from 4 to 64, frame sizes, seamless looping, and optional GIF output. Processing takes 30 to 90 seconds. Costs 5 credits per animation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sprites",
+                "animate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3df63657-69f1-466a-9e12-dde0ef9b082d",
+              "name": "Successfully created animation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "animate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spritesheet_url\": \"http://SIIJFeFech.qhlYE3jczh9PAlAsjzjEJqBZhGjLN6HvQOASN6Fh\",\n  \"video_url\": \"https://wqoDTUCUHfbyjZVDwwiWgwVEPndozB.etV88fo65wP3ySMcdd5O7Ak4LD\",\n  \"gif_url\": \"https://cuFEEnCmIftcvtvuTlAOXolDcESwy.blmvffZThTc6Qw5wIxXEL7OpVFpw3pGHkr1yGZvBuC-m7LrxzH5g5SMW2H6\",\n  \"individual_frame_urls\": [\n    \"https://ekMlEmFEeRVsCoidkQJFzhlIUuymgQGXV.dvwgGOF9-3bMrWztV3rknoVGbWKP803tOwjSJN32Tz9K3gnWSgJrP2z+0+bR3\",\n    \"http://EESHCuiAtTQDubtXuL.miaRDV9nTNk6Q1psg5v5qLGBiVEt9tPN6jRt3y1ijl.Sgcut.vtKAbHx0\"\n  ],\n  \"spritesheet_with_background_url\": \"http://rYEFchZRjYZLhxBwRIvNcbUe.akSZJi63LFKcDPen-.KGhVNikQpgU.dtkYED8t-riEiJMtWL.dK2zC-uxsKcSD9ajWVQ9z.9\",\n  \"individual_frame_with_background_urls\": [\n    \"http://meVeQLMYFOPJEPfFmthDdcrQhSrtRbGh.exmIx,HBaQyrGTSavGOPKweIV7cz\",\n    \"https://iwyCxGIPCGgRgqNOBVmWnmibktmeYSBHo.ohulekpwE7gd18RszrwLtRMQnl0ivA+HJKgsmT.Ca+Q\"\n  ],\n  \"num_frames\": 257,\n  \"num_cols\": 8952,\n  \"num_rows\": 1552,\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61909362-0c51-45c4-917f-eeba09dd7f5b",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "animate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e90be02-0cb5-4851-b068-746acece37d8",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "animate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d09ed5b-e013-494a-8c35-962b64b2cf05",
+          "name": "Ludo.ai Transfer motion onto a static sprite",
+          "request": {
+            "name": "Ludo.ai Transfer motion onto a static sprite",
+            "description": {
+              "content": "Transfer motion from a video or animation preset onto a static sprite, producing an animated spritesheet. Provide either a video URL or a preset ID with perspective and direction. Costs 5 credits per transfer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sprites",
+                "transfer-motion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c41c078b-6c2f-412e-a3f5-81b62780c42a",
+              "name": "Successfully transferred motion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "transfer-motion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spritesheet_url\": \"http://SIIJFeFech.qhlYE3jczh9PAlAsjzjEJqBZhGjLN6HvQOASN6Fh\",\n  \"video_url\": \"https://wqoDTUCUHfbyjZVDwwiWgwVEPndozB.etV88fo65wP3ySMcdd5O7Ak4LD\",\n  \"gif_url\": \"https://cuFEEnCmIftcvtvuTlAOXolDcESwy.blmvffZThTc6Qw5wIxXEL7OpVFpw3pGHkr1yGZvBuC-m7LrxzH5g5SMW2H6\",\n  \"individual_frame_urls\": [\n    \"https://ekMlEmFEeRVsCoidkQJFzhlIUuymgQGXV.dvwgGOF9-3bMrWztV3rknoVGbWKP803tOwjSJN32Tz9K3gnWSgJrP2z+0+bR3\",\n    \"http://EESHCuiAtTQDubtXuL.miaRDV9nTNk6Q1psg5v5qLGBiVEt9tPN6jRt3y1ijl.Sgcut.vtKAbHx0\"\n  ],\n  \"spritesheet_with_background_url\": \"http://rYEFchZRjYZLhxBwRIvNcbUe.akSZJi63LFKcDPen-.KGhVNikQpgU.dtkYED8t-riEiJMtWL.dK2zC-uxsKcSD9ajWVQ9z.9\",\n  \"individual_frame_with_background_urls\": [\n    \"http://meVeQLMYFOPJEPfFmthDdcrQhSrtRbGh.exmIx,HBaQyrGTSavGOPKweIV7cz\",\n    \"https://iwyCxGIPCGgRgqNOBVmWnmibktmeYSBHo.ohulekpwE7gd18RszrwLtRMQnl0ivA+HJKgsmT.Ca+Q\"\n  ],\n  \"num_frames\": 257,\n  \"num_cols\": 8952,\n  \"num_rows\": 1552,\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf0f207e-c697-41f4-bfa1-2b1cfd704da9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "transfer-motion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "454ed942-33eb-4e81-9275-aee1c3f20085",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sprites",
+                    "transfer-motion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4424d66-4e8c-4124-8ddc-1db67a6e0093",
+          "name": "Ludo.ai List available animation presets",
+          "request": {
+            "name": "Ludo.ai List available animation presets",
+            "description": {
+              "content": "Retrieve the catalog of available animation presets for use with motion transfer. Returns preset animations with their categories, descriptions, and preview URLs, along with available perspectives and directions. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "animation-presets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "027a5585-a8d6-4b43-8e75-d31c9fb27d63",
+              "name": "Successfully retrieved animation presets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "animation-presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"animations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"duration\": 1738.8650799804461,\n      \"preview_url\": \"http://oomwzzgHYGQRgpGTMIToYYajXPEJJ.znncjhTVlHlL,5rNQv-eeq4q\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"duration\": 3564.452398089503,\n      \"preview_url\": \"http://eCfFOBBOzvNIMCdWYaurM.crhTd4S5hwriQNt8ihC3qpnKWibim2lwfHJv1bAcABE6urHet\"\n    }\n  ],\n  \"perspectives\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"directions\": [\n    \"NE\",\n    \"SW\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d743e3ec-e7f7-4082-bd51-4814f15f07ff",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "animation-presets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3c868a04-69d4-4517-8cda-c20064294746",
+      "name": "Audio",
+      "description": {
+        "content": "Generate sound effects, background music, character voices, and text-to-speech audio for games.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8df0da32-8b2e-4968-b64c-1cc88a5f9ed9",
+          "name": "Ludo.ai Generate a game sound effect",
+          "request": {
+            "name": "Ludo.ai Generate a game sound effect",
+            "description": {
+              "content": "Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audio",
+                "sound-effects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23d1ceb9-ca0a-4cde-aa50-6b40ce5fdb95",
+              "name": "Successfully created sound effect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "sound-effects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://VyErLwItmRdmIuiaZimFytj.hhV1.,n1mPhzYCvpvUrh1xu9C+eJ\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6915300-47a7-4521-a921-6ef5f0b67469",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "sound-effects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0946eb94-732b-4aeb-b812-56b0c1adc82f",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "sound-effects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d84844b-aba2-400e-a6a1-b209fb5680a2",
+          "name": "Ludo.ai Generate background music",
+          "request": {
+            "name": "Ludo.ai Generate background music",
+            "description": {
+              "content": "Generate background music and themes from text descriptions. Supports optional lyrics for vocal tracks. Costs 3 credits per track.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audio",
+                "music"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4baa74bb-9acc-4c8a-8ff9-ce50b5a8defa",
+              "name": "Successfully created music track",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "music"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://VyErLwItmRdmIuiaZimFytj.hhV1.,n1mPhzYCvpvUrh1xu9C+eJ\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "099a6880-eeda-4509-aea3-25570d61cd9e",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "music"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb490186-ce33-43d6-ada5-b45962a2235d",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "music"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2f0447d-8eb1-415d-b878-6ff56af9e13d",
+          "name": "Ludo.ai Generate a unique character voice",
+          "request": {
+            "name": "Ludo.ai Generate a unique character voice",
+            "description": {
+              "content": "Generate unique character voices by describing the character and providing text to speak. Supports human and non-human voice types. Maximum 200 characters of text. Costs 3 credits per voice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audio",
+                "voice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11e4dabc-5d10-467f-8d9d-9c251781069f",
+              "name": "Successfully created voice",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "voice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://VyErLwItmRdmIuiaZimFytj.hhV1.,n1mPhzYCvpvUrh1xu9C+eJ\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2e8fe69-2625-4bee-867c-c8e984be1ad9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "voice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d65c5ba-e416-459a-9413-67833793b0f5",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "voice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f9aa684-f89b-4b55-ae55-98e7c8ee8029",
+          "name": "Ludo.ai Clone a voice from an audio sample",
+          "request": {
+            "name": "Ludo.ai Clone a voice from an audio sample",
+            "description": {
+              "content": "Generate text-to-speech audio by cloning a voice from a provided audio sample. Maximum 1000 characters of text. Costs 3 credits per generation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audio",
+                "speech"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a45a5864-169d-402c-9fe5-036cbe1867e5",
+              "name": "Successfully created speech",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://VyErLwItmRdmIuiaZimFytj.hhV1.,n1mPhzYCvpvUrh1xu9C+eJ\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5e68b57-a02f-4e38-994a-a8dfee437feb",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26d3e773-564d-4a9d-b0d2-aedcfeca232d",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86394471-1218-410b-97c5-6556e0dfd281",
+          "name": "Ludo.ai Generate speech using a preset voice",
+          "request": {
+            "name": "Ludo.ai Generate speech using a preset voice",
+            "description": {
+              "content": "Generate text-to-speech audio using preset voice characters with optional emotion and language settings. Maximum 1000 characters of text. Costs 3 credits per generation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "audio",
+                "speech-preset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e788648e-9c5f-4b87-a6d5-dd06141e8f85",
+              "name": "Successfully created speech",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech-preset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://VyErLwItmRdmIuiaZimFytj.hhV1.,n1mPhzYCvpvUrh1xu9C+eJ\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6305a9d0-30db-45db-938e-a581a3f56416",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech-preset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeac03e5-d2c6-46c1-9ab4-d8289fe64b14",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "audio",
+                    "speech-preset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "80310743-f7b8-4a31-b07d-bf5d19179e10",
+      "name": "Images",
+      "description": {
+        "content": "Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb84c11a-ba98-4c8b-83d9-5f51d15cf337",
+          "name": "Ludo.ai Generate a game-ready image",
+          "request": {
+            "name": "Ludo.ai Generate a game-ready image",
+            "description": {
+              "content": "Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65188341-0fb8-4c31-b30a-8cff7e9cc090",
+              "name": "Successfully generated image(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://dmKXaRpH.dnsGQp6cMOU4M3ChUyqMs,gY.sRLKgtu,bOOS.+.BAjGdLIXL,xcns4CVQbBDXX3\"\n    },\n    {\n      \"url\": \"http://iEAGyAg.ncugl9XTeEljVsl4XE+QuVGjjWPLG3hMjVYPWqvqV.3qIS6AiEbjddTQN,su3DJIBudIUi.lsmin\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbd774e3-54da-4a2e-98af-c1ca37927784",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9d6e40c-61a1-4765-8bc2-14fae546e75c",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a55dd9a3-bd6c-4221-9312-6c1ed91b7b58",
+              "name": "Rate limit exceeded or insufficient credits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "308e06cd-cfe6-436d-9a0e-fbdf58f86e3c",
+          "name": "Ludo.ai Edit an existing image",
+          "request": {
+            "name": "Ludo.ai Edit an existing image",
+            "description": {
+              "content": "Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31136590-9dd1-46da-beef-98b1564e6f54",
+              "name": "Successfully edited image(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://dmKXaRpH.dnsGQp6cMOU4M3ChUyqMs,gY.sRLKgtu,bOOS.+.BAjGdLIXL,xcns4CVQbBDXX3\"\n    },\n    {\n      \"url\": \"http://iEAGyAg.ncugl9XTeEljVsl4XE+QuVGjjWPLG3hMjVYPWqvqV.3qIS6AiEbjddTQN,su3DJIBudIUi.lsmin\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38260346-451c-43a5-9502-34fac93857b0",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c8dc828-7972-4c7d-9ff8-7f866d078a11",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87d27a4e-7c57-4a4b-8e23-6a35a2981323",
+          "name": "Ludo.ai Generate an image matching a reference style",
+          "request": {
+            "name": "Ludo.ai Generate an image matching a reference style",
+            "description": {
+              "content": "Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "generate-with-style"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56b4a758-da16-4d51-a125-659bb6303787",
+              "name": "Successfully generated styled image(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-with-style"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://dmKXaRpH.dnsGQp6cMOU4M3ChUyqMs,gY.sRLKgtu,bOOS.+.BAjGdLIXL,xcns4CVQbBDXX3\"\n    },\n    {\n      \"url\": \"http://iEAGyAg.ncugl9XTeEljVsl4XE+QuVGjjWPLG3hMjVYPWqvqV.3qIS6AiEbjddTQN,su3DJIBudIUi.lsmin\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42bb8dcc-12ca-4351-9199-86c268d30c3a",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-with-style"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "066b0d98-2200-451c-876f-977f997762d2",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-with-style"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a4cd61f-475c-445c-9d74-0236c64d6dfc",
+          "name": "Ludo.ai Generate a new pose for an existing sprite",
+          "request": {
+            "name": "Ludo.ai Generate a new pose for an existing sprite",
+            "description": {
+              "content": "Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "generate-pose"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da80455c-876f-4bd8-b429-6ea1950561c6",
+              "name": "Successfully generated pose(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-pose"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://TugFiBE.bpfpobMaDpj0u6EllvN1Di54CNFZT2fodqrlVUOcvDP1C\",\n      \"pose\": \"string\",\n      \"motion_prompt\": \"string\"\n    },\n    {\n      \"url\": \"https://UMRgvaAIeDJKpU.vnveI4mR,hCCFtgKehZbF+a\",\n      \"pose\": \"string\",\n      \"motion_prompt\": \"string\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d285c460-d3b0-41d0-9a18-152a5a4b6bf9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-pose"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afe6d9d3-fef7-4dc0-91aa-9f4ca63e11fd",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generate-pose"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed33bc44-77c4-4d24-9e46-5ca7c6bc77f3",
+          "name": "Ludo.ai Remove background from an image",
+          "request": {
+            "name": "Ludo.ai Remove background from an image",
+            "description": {
+              "content": "Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "remove-background"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5db6071-95e3-49fc-8f06-273ede2adf9f",
+              "name": "Successfully removed background",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "remove-background"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://dmKXaRpH.dnsGQp6cMOU4M3ChUyqMs,gY.sRLKgtu,bOOS.+.BAjGdLIXL,xcns4CVQbBDXX3\"\n    },\n    {\n      \"url\": \"http://iEAGyAg.ncugl9XTeEljVsl4XE+QuVGjjWPLG3hMjVYPWqvqV.3qIS6AiEbjddTQN,su3DJIBudIUi.lsmin\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04c73d25-2d2d-4a26-a1a5-ee3c7330777c",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "remove-background"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33faf85e-9454-49db-82f4-3bbd29dae164",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "remove-background"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ee494c27-493a-441b-bb4c-dd23fa20b15b",
+      "name": "Results",
+      "description": {
+        "content": "Retrieve previously generated assets using request IDs or browse recent API-generated content.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b795f465-e3a1-426f-bf70-d7e96594c90d",
+          "name": "Ludo.ai Retrieve generated image results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated image results",
+            "description": {
+              "content": "Retrieve recent API-generated images. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "669ae6b5-f96b-4b1c-95eb-e8376b4c31b1",
+              "name": "Successfully retrieved image results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"url\": \"http://IvMBADqIOlYcrQKblbaKtUiwtaWppHH.mogmRnFX1DGoRwDo82tbA37bl4XMihLEb5IT+ZnZW3l+9ek+k.Tau0nrDfbT8Fi481eCni1RsGec\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1982-11-29T13:26:28.745Z\"\n    },\n    {\n      \"url\": \"https://EXsjfqRJ.hbjSwGCadQBZSJIruPUoy9E8+p\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1998-03-24T01:03:40.563Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bfd2236-66f1-4fd1-b7be-a051aaddd429",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7220d350-2933-43dc-a62f-75f6b387d5de",
+          "name": "Ludo.ai Retrieve generated spritesheet results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated spritesheet results",
+            "description": {
+              "content": "Retrieve recent API-generated spritesheets. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "sprites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b68a6879-7122-4dd7-90ab-f67e1c545e16",
+              "name": "Successfully retrieved sprite results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "sprites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1991-02-02T15:09:24.944Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1994-10-30T18:02:15.250Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9f17974-080b-47d9-8e47-629059dba671",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "sprites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf45946b-cc81-495a-9998-7452405f0b93",
+          "name": "Ludo.ai Retrieve generated video results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated video results",
+            "description": {
+              "content": "Retrieve recent API-generated videos. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "videos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0cf2ac8-9486-464d-bdb6-21222e7b112e",
+              "name": "Successfully retrieved video results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "videos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"url\": \"http://EvvXTfhfdutZsOJEYpKmk.bxloD8DezA6d-naWxr.UNi.0,KurwWkCNCwNqtq3ahsucEIkqhe\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1984-03-20T07:06:25.958Z\"\n    },\n    {\n      \"url\": \"http://eBMorJMgOuOZVGjDZnDNavRVo.vnrrNtqex-XdtYCC4gCmBGe2P5dCjRBpzrbQtjPaf.eHmkcD3FYFHuH.LqDYaTTRhScX6MSc4SI0\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1978-07-05T12:04:29.332Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b575d4a4-81ec-48f0-8833-7c3ecd059edc",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "videos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f715ef59-5ba6-4cf8-bc60-83c8205eeeff",
+          "name": "Ludo.ai Retrieve generated audio results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated audio results",
+            "description": {
+              "content": "Retrieve recent API-generated audio files. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "audio"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23234d71-36f6-412d-9c20-e82868ac1bb1",
+              "name": "Successfully retrieved audio results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"2024-02-20T22:09:40.526Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1973-06-16T04:55:22.842Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "308dc658-1a16-48eb-9774-641226ab3c42",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "476dea38-4719-4cce-8a8e-5756384d2ecf",
+          "name": "Ludo.ai Retrieve generated 3D model results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated 3D model results",
+            "description": {
+              "content": "Retrieve recent API-generated 3D models. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "3d-models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6622926f-ea87-4c3d-8b93-7c1008b00134",
+              "name": "Successfully retrieved 3D model results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "3d-models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"2004-02-29T21:41:08.975Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1977-10-25T13:43:37.584Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d157c9d2-ddd7-4b0b-9904-c3d11a23c64c",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "3d-models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b4291b64-c607-48cf-89de-e6e0d54e538a",
+      "name": "Video",
+      "description": {
+        "content": "Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic backgrounds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f15c2a2b-52f7-4abd-94d3-7e3d5e30bf9e",
+          "name": "Ludo.ai Generate a short video from an image",
+          "request": {
+            "name": "Ludo.ai Generate a short video from an image",
+            "description": {
+              "content": "Generate a short video from a source image and motion prompt. Supports durations from 3 to 10 seconds. Suitable for cinematics, trailers, and dynamic backgrounds. Credit cost varies by duration from 5 to 15 credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "videos",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41f696b6-a33e-40eb-8b83-94d4cd9d0240",
+              "name": "Successfully created video",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://LOU.gviiKmQOqQSApCqgrGIx647I0FxAF\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca7d8350-a8fa-4c01-a267-07b4f1f9ed1c",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da7bc90b-42b8-4475-b65d-91986c83d81d",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ludo.ai/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authentication"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7c0ab32f-3918-491b-99a7-48052c3f17f7",
+    "name": "Ludo.ai REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -2,17 +2,13 @@
   "repo": "ludo-ai",
   "feeds": [
     {
-      "source": "https://ludo.ai/blog/",
-      "error": "HTTPError"
-    },
-    {
-      "source": "https://ludo.ai/docs",
-      "feed_url": "https://ludo.ai/docs",
-      "title": "",
+      "source": "https://ludo.ai/blog",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:53:02Z",
+  "agent_pulled": "2026-06-27"
 }

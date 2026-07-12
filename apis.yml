@@ -80,6 +80,10 @@ apis:
       and animation tools without leaving the editor. The plugin connects to the Ludo.ai API to deliver generated assets
       directly into Unity projects, streamlining the game development workflow.
 common:
+  - type: DomainSecurity
+    url: security/ludo-ai-domain-security.yml
+  - type: Authentication
+    url: authentication/ludo-ai-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/ludoai
   - type: JSONLD

@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: ludo.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 16 11:59:49 2026 GMT
+  hsts: false
+- host: api.ludo.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 21 08:00:10 2026 GMT
+  hsts: true
+  hsts_max_age: 15552000
+- host: mcp.ludo.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  7 09:08:06 2026 GMT
+  hsts: null
+domains:
+- domain: ludo.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

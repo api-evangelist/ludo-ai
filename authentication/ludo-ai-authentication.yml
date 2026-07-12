@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ludo-ai-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authentication
+  description: 'API key authentication. Pass your API key in the Authentication header with
+    the format: ApiKey YOUR_API_KEY'
+  sources:
+  - openapi/ludo-ai-rest-api-openapi.yml

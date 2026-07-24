@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: Ludo.ai REST 3D Models Video API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  version: 1.0.0
+  contact:
+    name: Ludo.ai Support
+    url: https://ludo.ai
+  termsOfService: https://ludo.ai/terms
+servers:
+- url: https://api.ludo.ai/api
+  description: Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Video
+  description: Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic backgrounds.
+paths:
+  /videos/create:
+    post:
+      operationId: createVideo
+      summary: Ludo.ai Generate a short video from an image
+      description: Generate a short video from a source image and motion prompt. Supports durations from 3 to 10 seconds. Suitable for cinematics, trailers, and dynamic backgrounds. Credit cost varies by duration from 5 to 15 credits.
+      tags:
+      - Video
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideoRequest'
+      responses:
+        '200':
+          description: Successfully created video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    VideoResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the generated video file. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    CreateVideoRequest:
+      type: object
+      required:
+      - image
+      - prompt
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded starting frame image.
+        prompt:
+          type: string
+          description: Motion description for the video such as camera zooms in or character walks forward.
+        duration:
+          type: integer
+          description: Video duration in seconds. Credit cost varies by duration.
+          enum:
+          - 3
+          - 5
+          - 8
+          - 10
+          default: 5
+        model:
+          type: string
+          description: Video generation model to use.
+          enum:
+          - standard
+          - new
+          default: standard
+        final_image:
+          type: string
+          description: URL or base64-encoded ending frame for interpolation.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
+      description: 'API key authentication. Pass your API key in the Authentication header with the format: ApiKey YOUR_API_KEY'
+externalDocs:
+  description: Ludo.ai API Documentation
+  url: https://api.ludo.ai/api-documentation

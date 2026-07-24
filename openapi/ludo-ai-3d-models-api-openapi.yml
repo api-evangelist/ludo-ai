@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Ludo.ai REST 3D Models API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  version: 1.0.0
+  contact:
+    name: Ludo.ai Support
+    url: https://ludo.ai
+  termsOfService: https://ludo.ai/terms
+servers:
+- url: https://api.ludo.ai/api
+  description: Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: 3D Models
+  description: Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.
+paths:
+  /3d-models/create:
+    post:
+      operationId: create3DModel
+      summary: Ludo.ai Convert a 2D image to a 3D model
+      description: Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model.
+      tags:
+      - 3D Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create3DModelRequest'
+      responses:
+        '200':
+          description: Successfully created 3D model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model3DResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    Model3DResponse:
+      type: object
+      properties:
+        model_url:
+          type: string
+          format: uri
+          description: URL of the generated GLB 3D model file. Expires after 7 days.
+        snapshots:
+          type: array
+          description: Four snapshot images of the 3D model from different angles.
+          items:
+            type: string
+            format: uri
+          minItems: 4
+          maxItems: 4
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    Create3DModelRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded 2D image to convert to a 3D model.
+        texture_type:
+          type: string
+          description: Type of texture to apply to the 3D model.
+          enum:
+          - pbr
+          - simple
+          - none
+          default: pbr
+        texture_size:
+          type: integer
+          description: Texture resolution in pixels.
+          enum:
+          - 1024
+          - 2048
+          - 4096
+          default: 2048
+        target_num_faces:
+          type: integer
+          description: Target triangle count for the 3D model mesh.
+          minimum: 1000
+          maximum: 100000
+          default: 50000
+        high_detail_shape:
+          type: boolean
+          description: Enable for complex shapes that require more detail. Results in slower processing.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
+      description: 'API key authentication. Pass your API key in the Authentication header with the format: ApiKey YOUR_API_KEY'
+externalDocs:
+  description: Ludo.ai API Documentation
+  url: https://api.ludo.ai/api-documentation

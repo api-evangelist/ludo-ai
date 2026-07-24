@@ -1,0 +1,412 @@
+openapi: 3.1.0
+info:
+  title: Ludo.ai REST 3D Models Images API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  version: 1.0.0
+  contact:
+    name: Ludo.ai Support
+    url: https://ludo.ai
+  termsOfService: https://ludo.ai/terms
+servers:
+- url: https://api.ludo.ai/api
+  description: Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Images
+  description: Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.
+paths:
+  /images/create:
+    post:
+      operationId: createImage
+      summary: Ludo.ai Generate a game-ready image
+      description: Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageRequest'
+      responses:
+        '200':
+          description: Successfully generated image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded or insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/edit:
+    post:
+      operationId: editImage
+      summary: Ludo.ai Edit an existing image
+      description: Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditImageRequest'
+      responses:
+        '200':
+          description: Successfully edited image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/generate-with-style:
+    post:
+      operationId: generateWithStyle
+      summary: Ludo.ai Generate an image matching a reference style
+      description: Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateWithStyleRequest'
+      responses:
+        '200':
+          description: Successfully generated styled image(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/generate-pose:
+    post:
+      operationId: generatePose
+      summary: Ludo.ai Generate a new pose for an existing sprite
+      description: Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneratePoseRequest'
+      responses:
+        '200':
+          description: Successfully generated pose(s)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoseResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images/remove-background:
+    post:
+      operationId: removeImageBackground
+      summary: Ludo.ai Remove background from an image
+      description: Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveBackgroundRequest'
+      responses:
+        '200':
+          description: Successfully removed background
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    GeneratePoseRequest:
+      type: object
+      required:
+      - image
+      - pose
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded sprite image.
+        pose:
+          type: string
+          description: Target pose for the sprite. Can be a preset or custom description.
+          enum:
+          - Idle (Front)
+          - Idle (Back)
+          - Walk / Run (Left)
+          - Attack Ready
+          - Jumping
+          - Crouching
+          - Flying
+          - Defending / Blocking
+        description:
+          type: string
+          description: Additional instructions to guide pose generation.
+        n:
+          type: integer
+          description: Number of pose variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    GenerateWithStyleRequest:
+      type: object
+      required:
+      - style_image
+      - prompt
+      - image_type
+      properties:
+        style_image:
+          type: string
+          description: URL or base64-encoded reference image for style matching.
+        prompt:
+          type: string
+          description: Description of what to generate while maintaining the reference style.
+        image_type:
+          type: string
+          description: The type of game asset to generate.
+          enum:
+          - sprite
+          - icon
+          - screenshot
+          - art
+          - asset
+          - sprite-vfx
+          - ui_asset
+          - fixed_background
+          - texture
+          - 3d
+          - generic
+        n:
+          type: integer
+          description: Number of image variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    RemoveBackgroundRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to remove background from.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    ImageResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: Array of generated image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: URL of the generated image. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    EditImageRequest:
+      type: object
+      required:
+      - image
+      - prompt
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to edit.
+        prompt:
+          type: string
+          description: Description of changes to apply to the image.
+        reference_image:
+          type: string
+          description: URL or base64-encoded reference image for style or content guidance.
+        n:
+          type: integer
+          description: Number of edited variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateImageRequest:
+      type: object
+      required:
+      - prompt
+      - image_type
+      properties:
+        prompt:
+          type: string
+          description: Detailed description of the image to generate.
+        image_type:
+          type: string
+          description: The type of game asset to generate.
+          enum:
+          - sprite
+          - icon
+          - screenshot
+          - art
+          - asset
+          - sprite-vfx
+          - ui_asset
+          - fixed_background
+          - texture
+          - 3d
+          - generic
+        art_style:
+          type: string
+          description: The art style for the generated image.
+          enum:
+          - Pixel Art (16-Bit)
+          - Pixel Art (8-Bit)
+          - Low Poly
+          - Cartoonish
+          - Stylized 3D
+          - Flat Design
+          - Anime/Manga
+          - Voxel Art
+        perspective:
+          type: string
+          description: The camera perspective for the generated image.
+          enum:
+          - Side-Scroll
+          - Top-Down
+          - Isometric
+          - First-Person
+          - Third-Person
+          - 2.5D
+        aspect_ratio:
+          type: string
+          description: The aspect ratio for the generated image.
+          default: default
+          enum:
+          - default
+          - ar_1_1
+          - ar_4_3
+          - ar_16_9
+          - ar_9_16
+        n:
+          type: integer
+          description: Number of image variations to generate.
+          minimum: 1
+          maximum: 8
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    PoseResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: Array of generated pose image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: URL of the generated pose image. Expires after 7 days.
+              pose:
+                type: string
+                description: The pose that was generated.
+              motion_prompt:
+                type: string
+                description: Suggested motion prompt for use with animateSprite to get optimal animation results from this pose.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
+      description: 'API key authentication. Pass your API key in the Authentication header with the format: ApiKey YOUR_API_KEY'
+externalDocs:
+  description: Ludo.ai API Documentation
+  url: https://api.ludo.ai/api-documentation

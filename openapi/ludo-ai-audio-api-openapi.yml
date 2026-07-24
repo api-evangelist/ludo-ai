@@ -1,0 +1,324 @@
+openapi: 3.1.0
+info:
+  title: Ludo.ai REST 3D Models Audio API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  version: 1.0.0
+  contact:
+    name: Ludo.ai Support
+    url: https://ludo.ai
+  termsOfService: https://ludo.ai/terms
+servers:
+- url: https://api.ludo.ai/api
+  description: Production Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Audio
+  description: Generate sound effects, background music, character voices, and text-to-speech audio for games.
+paths:
+  /audio/sound-effects:
+    post:
+      operationId: createSoundEffect
+      summary: Ludo.ai Generate a game sound effect
+      description: Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect.
+      tags:
+      - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSoundEffectRequest'
+      responses:
+        '200':
+          description: Successfully created sound effect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/music:
+    post:
+      operationId: createMusic
+      summary: Ludo.ai Generate background music
+      description: Generate background music and themes from text descriptions. Supports optional lyrics for vocal tracks. Costs 3 credits per track.
+      tags:
+      - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMusicRequest'
+      responses:
+        '200':
+          description: Successfully created music track
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/voice:
+    post:
+      operationId: createVoice
+      summary: Ludo.ai Generate a unique character voice
+      description: Generate unique character voices by describing the character and providing text to speak. Supports human and non-human voice types. Maximum 200 characters of text. Costs 3 credits per voice.
+      tags:
+      - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVoiceRequest'
+      responses:
+        '200':
+          description: Successfully created voice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/speech:
+    post:
+      operationId: createSpeech
+      summary: Ludo.ai Clone a voice from an audio sample
+      description: Generate text-to-speech audio by cloning a voice from a provided audio sample. Maximum 1000 characters of text. Costs 3 credits per generation.
+      tags:
+      - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpeechRequest'
+      responses:
+        '200':
+          description: Successfully created speech
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /audio/speech-preset:
+    post:
+      operationId: createSpeechPreset
+      summary: Ludo.ai Generate speech using a preset voice
+      description: Generate text-to-speech audio using preset voice characters with optional emotion and language settings. Maximum 1000 characters of text. Costs 3 credits per generation.
+      tags:
+      - Audio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpeechPresetRequest'
+      responses:
+        '200':
+          description: Successfully created speech
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Missing or invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CreateVoiceRequest:
+      type: object
+      required:
+      - voice_description
+      - text
+      properties:
+        voice_description:
+          type: string
+          description: Character description for the voice such as gruff old warrior or cheerful young girl.
+        text:
+          type: string
+          description: Text for the character to speak.
+          maxLength: 200
+        type:
+          type: string
+          description: Type of voice to generate.
+          enum:
+          - human
+          - non-human
+          default: human
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateSpeechRequest:
+      type: object
+      required:
+      - text
+      - sample
+      properties:
+        text:
+          type: string
+          description: Text to speak using the cloned voice.
+          maxLength: 1000
+        sample:
+          type: string
+          description: URL or base64-encoded audio sample for voice cloning.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateSpeechPresetRequest:
+      type: object
+      required:
+      - text
+      - voice_preset_id
+      properties:
+        text:
+          type: string
+          description: Text to speak using the preset voice.
+          maxLength: 1000
+        voice_preset_id:
+          type: string
+          description: ID of the preset voice character to use.
+          enum:
+          - Serious woman
+          - Wise woman
+          - Calm woman
+          - Patient man
+          - Determined man
+          - Deep voice man
+          - Teen boy
+          - Sweet girl
+        emotion:
+          type: string
+          description: Emotion to apply to the speech delivery.
+          enum:
+          - Default
+          - Happy
+          - Sad
+          - Angry
+          - Fearful
+          - Surprised
+          - Neutral
+        language:
+          type: string
+          description: Language for the speech output.
+          enum:
+          - auto
+          - English
+          - Spanish
+          - French
+          - German
+          - Japanese
+          - Korean
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    AudioResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the generated audio file. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    CreateMusicRequest:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
+          description: Text description of the music to generate such as epic orchestral battle theme, calm piano melody, or 8-bit chiptune.
+        lyrics:
+          type: string
+          description: Optional lyrics for vocal tracks.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateSoundEffectRequest:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
+          description: Text description of the sound effect to generate such as laser gun firing, footsteps on gravel, or coin pickup.
+        duration:
+          type: number
+          description: Duration in seconds from 0 to 10. Use 0 for automatic duration.
+          minimum: 0
+          maximum: 10
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
+      description: 'API key authentication. Pass your API key in the Authentication header with the format: ApiKey YOUR_API_KEY'
+externalDocs:
+  description: Ludo.ai API Documentation
+  url: https://api.ludo.ai/api-documentation

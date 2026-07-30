@@ -2,7 +2,20 @@ aid: ludo-ai
 url: https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml
 name: Ludo.ai
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ludo-ai.png
 tags:
   - Artificial Intelligence
   - Asset Generation
@@ -17,68 +30,127 @@ created: '2026-03-24'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: ludo-ai:rest-api
-    name: Ludo.ai REST API
-    tags:
-      - 3D Models
-      - Animation
-      - Asset Generation
-      - Audio
-      - Game Development
-      - Images
-      - Sprites
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.ludo.ai/api/
-    humanURL: https://ludo.ai/api-mcp-integration
-    properties:
-      - url: https://ludo.ai/api-mcp-integration
-        type: Documentation
-      - url: openapi/ludo-ai-rest-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Ludo.ai REST API provides programmatic access to the full suite of AI-powered game asset generation
-      capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image
-      generation endpoints, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from
-      static images, and produce sound effects, music tracks, and character voices.
-  - aid: ludo-ai:mcp-server
-    name: Ludo.ai MCP Server
-    tags:
-      - AI Assistants
-      - Asset Generation
-      - Game Development
-      - Model Context Protocol
-      - Vibe Coding
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://mcp.ludo.ai/mcp
-    humanURL: https://ludo.ai/docs/api-mcp
-    properties:
-      - url: https://ludo.ai/docs/api-mcp
-        type: Documentation
-      - url: https://github.com/Ludo-AI/ludo-mcp
-        type: GitHubRepository
-    description: >-
-      The Ludo.ai MCP Server exposes the platform's asset generation tools via the Model Context Protocol, allowing AI
-      assistants like Claude and Cursor to generate game assets through natural language conversations. The server
-      provides over 20 tools including createImage, editImage, animateSprite, create3DModel, createSoundEffect,
-      createMusic, createVoice, and createVideo.
-  - aid: ludo-ai:unity-plugin
-    name: Ludo.ai Unity Plugin
-    tags:
-      - Asset Generation
-      - Game Development
-      - Plugin
-      - Unity
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.example.com
-    humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
-    properties:
-      - url: https://github.com/Ludo-AI/ludo-unity-plugin
-        type: Documentation
-    description: >-
-      The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine. It provides a
-      native interface for Unity developers to access Ludo.ai's image generation, 3D model creation, audio production,
-      and animation tools without leaving the editor. The plugin connects to the Ludo.ai API to deliver generated assets
-      directly into Unity projects, streamlining the game development workflow.
+- aid: ludo-ai:mcp-server
+  name: Ludo.ai MCP Server
+  tags:
+  - AI Assistants
+  - Asset Generation
+  - Game Development
+  - Model Context Protocol
+  - Vibe Coding
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://mcp.ludo.ai/mcp
+  humanURL: https://ludo.ai/docs/api-mcp
+  properties:
+  - url: https://ludo.ai/docs/api-mcp
+    type: Documentation
+  - url: https://github.com/Ludo-AI/ludo-mcp
+    type: GitHubRepository
+  description: >-
+    The Ludo.ai MCP Server exposes the platform's asset generation tools via the Model Context Protocol,
+    allowing AI assistants like Claude and Cursor to generate game assets through natural language conversations.
+    The server provides over 20 tools including createImage, editImage, animateSprite, create3DModel,
+    createSoundEffect, createMusic, createVoice, and createVideo.
+- aid: ludo-ai:unity-plugin
+  name: Ludo.ai Unity Plugin
+  tags:
+  - Asset Generation
+  - Game Development
+  - Plugin
+  - Unity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.example.com
+  humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
+  properties:
+  - url: https://github.com/Ludo-AI/ludo-unity-plugin
+    type: Documentation
+  description: >-
+    The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine.
+    It provides a native interface for Unity developers to access Ludo.ai's image generation, 3D model
+    creation, audio production, and animation tools without leaving the editor. The plugin connects to
+    the Ludo.ai API to deliver generated assets directly into Unity projects, streamlining the game development
+    workflow.
+- aid: ludo-ai:ludo-ai-3d-models-api
+  name: Ludo.ai 3D Models API
+  description: >-
+    Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - 3D Models
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-3d-models-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
+- aid: ludo-ai:ludo-ai-animation-api
+  name: Ludo.ai Animation API
+  description: >-
+    Create animated spritesheets from static sprites, transfer motion from videos or presets, and list
+    available animation presets.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - Animation
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-animation-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
+- aid: ludo-ai:ludo-ai-audio-api
+  name: Ludo.ai Audio API
+  description: >-
+    Generate sound effects, background music, character voices, and text-to-speech audio for games.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - Audio
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-audio-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
+- aid: ludo-ai:ludo-ai-images-api
+  name: Ludo.ai Images API
+  description: >-
+    Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and
+    backgrounds.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-images-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
+- aid: ludo-ai:ludo-ai-results-api
+  name: Ludo.ai Results API
+  description: >-
+    Retrieve previously generated assets using request IDs or browse recent API-generated content.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - Results
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-results-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
+- aid: ludo-ai:ludo-ai-video-api
+  name: Ludo.ai Video API
+  description: >-
+    Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic
+    backgrounds.
+  humanURL: https://ludo.ai/api-mcp-integration
+  baseURL: https://api.ludo.ai/api/
+  tags:
+  - Video
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-video-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/api-mcp-integration
 common:
   - type: AgenticAccess
     url: agentic-access/ludo-ai-agentic-access.yml

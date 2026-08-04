@@ -1,0 +1,24 @@
+{
+  "provider": "ludo-ai",
+  "sources": [
+    "ludo-ai-3d-models-api-openapi.yml",
+    "ludo-ai-animation-api-openapi.yml",
+    "ludo-ai-audio-api-openapi.yml",
+    "ludo-ai-images-api-openapi.yml",
+    "ludo-ai-results-api-openapi.yml",
+    "ludo-ai-video-api-openapi.yml"
+  ],
+  "outputs": [
+    "ludo-ai-3d-models-api-openapi.yml",
+    "ludo-ai-animation-api-openapi.yml",
+    "ludo-ai-audio-api-openapi.yml",
+    "ludo-ai-images-api-openapi.yml",
+    "ludo-ai-results-api-openapi.yml",
+    "ludo-ai-video-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -28,7 +28,7 @@ description: >-
   trigger asset creation directly from AI assistants like Claude or Cursor.
 created: '2026-03-24'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: ludo-ai:mcp-server
   name: Ludo.ai MCP Server

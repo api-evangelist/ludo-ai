@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "6c75ead5-9f7d-49a6-b88f-1b13ccd392c8",
+      "name": "Video",
+      "description": {
+        "content": "Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic backgrounds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc0564b7-1604-4c82-87a1-1e3820e1dbe0",
+          "name": "Ludo.ai Generate a short video from an image",
+          "request": {
+            "name": "Ludo.ai Generate a short video from an image",
+            "description": {
+              "content": "Generate a short video from a source image and motion prompt. Supports durations from 3 to 10 seconds. Suitable for cinematics, trailers, and dynamic backgrounds. Credit cost varies by duration from 5 to 15 credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "videos",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "feeed1b1-6017-4354-b71d-03fd955e39ee",
+              "name": "Successfully created video",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"http://pkVYREPPcjcjLhs.ogrhT43.dRoBTn0wRJ1smlR8R9APjYg-VDPV24WpQk2qRGf0nFPPxFM,ikOkgjkAXnBK+zxEbY5v+AR\",\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a93c59c-ebed-4a11-a628-f6d52e6a67d1",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1618abc7-d540-4d7c-a385-09b06c2db112",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "videos",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"standard\",\n  \"final_image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ludo.ai/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authentication"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb85fd6d-3044-47d2-8b6e-336fb63d5b6a",
+    "name": "Ludo.ai REST 3D Models Video API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

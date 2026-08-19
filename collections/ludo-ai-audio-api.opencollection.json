@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models Audio API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audio",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a game sound effect",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/sound-effects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate background music",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/music",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate background music and themes from text descriptions. Supports optional lyrics for vocal tracks. Costs 3 credits per track."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate a unique character voice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/voice",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate unique character voices by describing the character and providing text to speak. Supports human and non-human voice types. Maximum 200 characters of text. Costs 3 credits per voice."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Clone a voice from an audio sample",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/speech",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate text-to-speech audio by cloning a voice from a provided audio sample. Maximum 1000 characters of text. Costs 3 credits per generation."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate speech using a preset voice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/audio/speech-preset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate text-to-speech audio using preset voice characters with optional emotion and language settings. Maximum 1000 characters of text. Costs 3 credits per generation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

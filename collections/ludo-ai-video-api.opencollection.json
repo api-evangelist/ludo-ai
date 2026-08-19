@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models Video API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Video",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a short video from an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/videos/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a short video from a source image and motion prompt. Supports durations from 3 to 10 seconds. Suitable for cinematics, trailers, and dynamic backgrounds. Credit cost varies by duration from 5 to 15 credits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

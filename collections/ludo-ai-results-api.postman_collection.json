@@ -1,0 +1,754 @@
+{
+  "item": [
+    {
+      "id": "75661542-c9e4-4c7a-89b6-41419ce8e05f",
+      "name": "Results",
+      "description": {
+        "content": "Retrieve previously generated assets using request IDs or browse recent API-generated content.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a31edae6-dd82-44fd-8ac2-ebaa389cb76e",
+          "name": "Ludo.ai Retrieve generated image results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated image results",
+            "description": {
+              "content": "Retrieve recent API-generated images. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbd84605-6170-475f-a21e-470cb350d4aa",
+              "name": "Successfully retrieved image results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"url\": \"https://yDgQisQEslnwXltgLqtFdFnnLaCv.lspJn0TqR,ie6yCLS,9lyq.zRQbanyJAtsNECDF\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1980-03-16T00:10:09.657Z\"\n    },\n    {\n      \"url\": \"http://Rj.zez3NwoI2yPTEpTRS.\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1960-10-04T01:35:26.065Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7303402-b793-497b-9fb6-0910de60c5ec",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cbf5555-af4b-43f8-b1b7-bc0371ada753",
+          "name": "Ludo.ai Retrieve generated spritesheet results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated spritesheet results",
+            "description": {
+              "content": "Retrieve recent API-generated spritesheets. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "sprites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fae83e4-f267-462b-a7ce-703766281f04",
+              "name": "Successfully retrieved sprite results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "sprites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"2021-02-25T13:15:33.414Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1980-06-26T01:27:43.741Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3df7502-1fe6-4939-be45-04a9d462d4b5",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "sprites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "356e6c9d-ecd9-4258-ad58-e09e95221e25",
+          "name": "Ludo.ai Retrieve generated video results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated video results",
+            "description": {
+              "content": "Retrieve recent API-generated videos. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "videos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8936a37a-fab2-4c61-81e6-0a8688568810",
+              "name": "Successfully retrieved video results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "videos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"url\": \"http://oTqm.qyazqayeNLZ2hAp6QeQcvtez+Z,QXMWfXRjaf2Gg3XBqQ5BM\",\n      \"request_id\": \"string\",\n      \"created_at\": \"1966-12-21T01:56:21.404Z\"\n    },\n    {\n      \"url\": \"https://WmrlIyPzOBG.vmyeg\",\n      \"request_id\": \"string\",\n      \"created_at\": \"2011-11-24T06:27:46.588Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e1fcd49-46eb-4853-8c24-2264a806cd41",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "videos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfed322a-4892-42e7-8bdd-c785774eef91",
+          "name": "Ludo.ai Retrieve generated audio results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated audio results",
+            "description": {
+              "content": "Retrieve recent API-generated audio files. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "audio"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec4b0b42-ebde-444f-9a4f-e64160f1008a",
+              "name": "Successfully retrieved audio results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1956-02-06T10:03:21.623Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"2019-08-03T03:31:03.080Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "301d6dd8-cc63-441d-bc1a-3feb4f7a7961",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c15f7a6-946a-4b44-b172-fe50a69b16c0",
+          "name": "Ludo.ai Retrieve generated 3D model results",
+          "request": {
+            "name": "Ludo.ai Retrieve generated 3D model results",
+            "description": {
+              "content": "Retrieve recent API-generated 3D models. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "results",
+                "3d-models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "Filter results to a specific request by its client-provided request ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "643fd791-3bf4-4adf-a126-b6c22cd60390",
+              "name": "Successfully retrieved 3D model results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "3d-models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1998-05-10T06:52:15.746Z\"\n    },\n    {\n      \"request_id\": \"string\",\n      \"created_at\": \"1971-05-23T22:56:37.911Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c2d7228-345a-48ab-8090-434b2e41c174",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "results",
+                    "3d-models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ludo.ai/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authentication"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fb22449b-da3c-414d-b4a7-4f0daccaedd7",
+    "name": "Ludo.ai REST 3D Models Results API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

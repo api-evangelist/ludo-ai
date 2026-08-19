@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models Animation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Animation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Create animated spritesheets from static images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/sprites/animate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transform a static sprite image into an animated spritesheet by describing the desired motion. Supports configurable frame counts from 4 to 64, frame sizes, seamless looping, and optional GIF output. Processing takes 30 to 90 seconds. Costs 5 credits per animation."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Transfer motion onto a static sprite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/sprites/transfer-motion",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer motion from a video or animation preset onto a static sprite, producing an animated spritesheet. Provide either a video URL or a preset ID with perspective and direction. Costs 5 credits per transfer."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai List available animation presets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/animation-presets"
+          },
+          "docs": "Retrieve the catalog of available animation presets for use with motion transfer. Returns preset animations with their categories, descriptions, and preview URLs, along with available perspectives and directions. Free endpoint that does not consume credits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

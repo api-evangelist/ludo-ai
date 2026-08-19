@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models Results API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated image results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/images",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated images. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated spritesheet results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/sprites",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated spritesheets. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated video results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/videos",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated videos. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated audio results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/audio",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated audio files. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Retrieve generated 3D model results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ludo.ai/api/results/3d-models",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific request by its client-provided request ID."
+              }
+            ]
+          },
+          "docs": "Retrieve recent API-generated 3D models. Optionally filter by request ID. Returns up to 100 recent assets. Results are available for 7 days. Free endpoint that does not consume credits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

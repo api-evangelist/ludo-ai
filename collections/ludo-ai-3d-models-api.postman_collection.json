@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "b1e1e385-202f-43bb-83cc-b60e8f15ec8c",
+      "name": "3D Models",
+      "description": {
+        "content": "Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8c56ecb-b5eb-48c3-8db6-e6c09605738f",
+          "name": "Ludo.ai Convert a 2D image to a 3D model",
+          "request": {
+            "name": "Ludo.ai Convert a 2D image to a 3D model",
+            "description": {
+              "content": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "3d-models",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71e051ee-5c28-4192-83d9-0f7d49d335da",
+              "name": "Successfully created 3D model",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model_url\": \"https://jfwFTw.pxolWHwyLNVeVraO1xwVEE\",\n  \"snapshots\": [\n    \"https://zlbcILvEA.lwpg26Z4--xEbUsQVryxGNv6+Ox43aS12EsQm9Mzw\",\n    \"https://eRVRKyklcxFUowfUyXWUwZAvknMFkXI.aklnisu9SfDjDAiE2Hr9YfBCYievYviMp+nq4eRx-eks\",\n    \"http://apJVgEeMTTCfjbSExBNKh.fsnsataphwuVlyoIlxxDs-20hEVzEYw-PxItRaKkjT-JU-Mbi0Vm5hISc4eM70AVWMUH4HXIW3Oq\",\n    \"http://VEvAsX.rybcDkrlS.xHEQvFZ+W7DipYFhSusnNPTxMSmqxrUTYuLDgWhL+Aj6yw6zJ1y.n6rJFWW6xCU\"\n  ],\n  \"request_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16f3f891-daef-45d1-b6c1-2a1a8a8958f0",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6b04231-5b4a-41e2-ac87-308dfcdda7f1",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ludo.ai/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authentication"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2794f3b5-aa42-475f-a23e-3170b845a40f",
+    "name": "Ludo.ai REST 3D Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

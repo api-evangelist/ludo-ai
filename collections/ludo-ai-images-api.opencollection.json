@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models Images API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Generate a game-ready image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Edit an existing image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/edit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate an image matching a reference style",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/generate-with-style",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Generate a new pose for an existing sprite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/generate-pose",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated."
+        },
+        {
+          "info": {
+            "name": "Ludo.ai Remove background from an image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/images/remove-background",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

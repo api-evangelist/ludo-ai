@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ludo.ai REST 3D Models API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authentication",
+      "value": "{{Authentication}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "3D Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ludo.ai Convert a 2D image to a 3D model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ludo.ai/api/3d-models/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

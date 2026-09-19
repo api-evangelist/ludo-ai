@@ -47,7 +47,7 @@ apis:
 - aid: ludo-ai:mcp-server
   name: Ludo.ai MCP Server
   tags:
-  - AI Assistants
+  - AI Assistant
   - Asset Generation
   - Game Development
   - MCP
@@ -74,6 +74,11 @@ apis:
 - aid: ludo-ai:unity-plugin
   name: Ludo.ai Unity Plugin
   tags:
+  - Asset Generation
+  - Game Development
+  - Plugins
+  - Unity
+  tags_raw:
   - Asset Generation
   - Game Development
   - Plugin

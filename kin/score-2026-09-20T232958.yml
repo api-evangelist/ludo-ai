@@ -1,31 +1,29 @@
-# Kin Score artifact — ludo-ai — 2026-08-20T191845
+# Kin Score artifact — ludo-ai — 2026-09-20T232958
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: ludo-ai
-  schema_version: 0.12.0
-  scored_at: '2026-08-20'
-  run_ts: 2026-08-20T191845
-  composite: 36.1
+  schema_version: 0.22.0
+  scored_at: '2026-09-20'
+  run_ts: 2026-09-20T232958
+  composite: 34.4
   band: thin
   facets:
-    discoverability: 64.8
-    contract_quality: 63.6
-    governance: 9.8
+    discoverability: 59.3
+    contract_quality: 61.9
+    contract_governance: 9.8
     operational_transparency: 10.5
     developer_ergonomics: 33.3
-    commercial_clarity: 22.4
-    contract_governance: 9.8
     access_clarity: 22.4
   agent_readiness:
-    score: 40.0
+    score: 29.0
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: false
       mcp_server: documented
-      auth_clarity: true
+      auth_clarity: bearer
       idempotency: false
       error_semantics: verified
       openapi_examples: false
@@ -36,6 +34,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     agentic_access: derived
     contracts:

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ludo.ai REST 3D Models Results API
-  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  title: Ludo.ai REST Results API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.
   version: 1.0.0
   contact:
     name: Ludo.ai Support
@@ -128,58 +128,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Model3DResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated 3D model results.
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the 3D model was generated.
-    SpriteResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated spritesheet results.
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the spritesheet was generated.
-    ImageResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated image results.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: URL of the generated image.
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the image was generated.
     AudioResultsResponse:
       type: object
       properties:
@@ -225,6 +173,58 @@ components:
         code:
           type: string
           description: Machine-readable error code.
+    Model3DResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Array of recent API-generated 3D model results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the 3D model was generated.
+    ImageResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Array of recent API-generated image results.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: URL of the generated image.
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the image was generated.
+    SpriteResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Array of recent API-generated spritesheet results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the spritesheet was generated.
   parameters:
     RequestIdQuery:
       name: request_id

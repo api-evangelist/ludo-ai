@@ -1,0 +1,29 @@
+# Front Door AI Index — ludo-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: ludo-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: ludo.ai
+  final_host: ludo.ai
+  ownership: own
+  owner: ludo-ai
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 36
+  host_score: 36
+  density: 14.25
+  words: 2526
+  tiers:
+    agentic: 21
+    core: 11
+    model: 4
+  ambiguous: 0
+  top_terms:
+    prompts: 16
+    AI: 11
+    Claude: 4
+    MCP: 4
+    AI assistant: 1

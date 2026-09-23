@@ -1,12 +1,7 @@
 {
   "provider": "ludo-ai",
   "sources": [
-    "ludo-ai-3d-models-api-openapi.yml",
-    "ludo-ai-animation-api-openapi.yml",
-    "ludo-ai-audio-api-openapi.yml",
-    "ludo-ai-images-api-openapi.yml",
-    "ludo-ai-results-api-openapi.yml",
-    "ludo-ai-video-api-openapi.yml"
+    "_original/ludo-ai-rest-api-openapi.yml"
   ],
   "outputs": [
     "ludo-ai-3d-models-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ludo-ai-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ludo-ai-3d-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ludo-ai-animation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ludo-ai-audio-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ludo-ai-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ludo-ai-results-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ludo-ai-video-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

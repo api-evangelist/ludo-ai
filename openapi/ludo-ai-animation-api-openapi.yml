@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ludo.ai REST 3D Models Animation API
-  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  title: Ludo.ai REST Animation API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.
   version: 1.0.0
   contact:
     name: Ludo.ai Support
@@ -174,43 +174,37 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    AnimationPresetsResponse:
+    AnimationPreset:
       type: object
       properties:
-        animations:
-          type: array
-          description: Array of available animation presets.
-          items:
-            $ref: '#/components/schemas/AnimationPreset'
-        perspectives:
-          type: array
-          description: Array of available perspectives. All animations support all perspectives.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Perspective identifier.
-              name:
-                type: string
-                description: Human-readable perspective name.
-              description:
-                type: string
-                description: Description of the perspective.
-        directions:
-          type: array
-          description: Available directions for animation presets. All animations support all directions.
-          items:
-            type: string
-            enum:
-            - N
-            - NE
-            - E
-            - SE
-            - S
-            - SW
-            - W
-            - NW
+        id:
+          type: string
+          description: Unique identifier for the animation preset.
+        name:
+          type: string
+          description: Human-readable name of the animation preset.
+        category:
+          type: string
+          description: Category grouping for the preset.
+        description:
+          type: string
+          description: Description of the animation motion.
+        duration:
+          type: number
+          description: Duration of the preset animation in seconds.
+        preview_url:
+          type: string
+          format: uri
+          description: URL to preview the animation preset.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
     TransferMotionRequest:
       type: object
       required:
@@ -322,37 +316,43 @@ components:
         request_id:
           type: string
           description: The request ID if one was provided.
-    AnimationPreset:
+    AnimationPresetsResponse:
       type: object
       properties:
-        id:
-          type: string
-          description: Unique identifier for the animation preset.
-        name:
-          type: string
-          description: Human-readable name of the animation preset.
-        category:
-          type: string
-          description: Category grouping for the preset.
-        description:
-          type: string
-          description: Description of the animation motion.
-        duration:
-          type: number
-          description: Duration of the preset animation in seconds.
-        preview_url:
-          type: string
-          format: uri
-          description: URL to preview the animation preset.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
+        animations:
+          type: array
+          description: Array of available animation presets.
+          items:
+            $ref: '#/components/schemas/AnimationPreset'
+        perspectives:
+          type: array
+          description: Array of available perspectives. All animations support all perspectives.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Perspective identifier.
+              name:
+                type: string
+                description: Human-readable perspective name.
+              description:
+                type: string
+                description: Description of the perspective.
+        directions:
+          type: array
+          description: Available directions for animation presets. All animations support all directions.
+          items:
+            type: string
+            enum:
+            - N
+            - NE
+            - E
+            - SE
+            - S
+            - SW
+            - W
+            - NW
   securitySchemes:
     apiKeyAuth:
       type: apiKey

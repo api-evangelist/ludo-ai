@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ludo.ai REST 3D Models Audio API
-  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  title: Ludo.ai REST Audio API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.
   version: 1.0.0
   contact:
     name: Ludo.ai Support
@@ -178,45 +178,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CreateVoiceRequest:
-      type: object
-      required:
-      - voice_description
-      - text
-      properties:
-        voice_description:
-          type: string
-          description: Character description for the voice such as gruff old warrior or cheerful young girl.
-        text:
-          type: string
-          description: Text for the character to speak.
-          maxLength: 200
-        type:
-          type: string
-          description: Type of voice to generate.
-          enum:
-          - human
-          - non-human
-          default: human
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    CreateSpeechRequest:
-      type: object
-      required:
-      - text
-      - sample
-      properties:
-        text:
-          type: string
-          description: Text to speak using the cloned voice.
-          maxLength: 1000
-        sample:
-          type: string
-          description: URL or base64-encoded audio sample for voice cloning.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
     CreateSpeechPresetRequest:
       type: object
       required:
@@ -264,16 +225,22 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    AudioResponse:
+    CreateSpeechRequest:
       type: object
+      required:
+      - text
+      - sample
       properties:
-        url:
+        text:
           type: string
-          format: uri
-          description: URL of the generated audio file. Expires after 7 days.
+          description: Text to speak using the cloned voice.
+          maxLength: 1000
+        sample:
+          type: string
+          description: URL or base64-encoded audio sample for voice cloning.
         request_id:
           type: string
-          description: The request ID if one was provided.
+          description: Client-provided ID to retrieve results later via the results endpoint.
     CreateMusicRequest:
       type: object
       required:
@@ -288,6 +255,48 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    CreateVoiceRequest:
+      type: object
+      required:
+      - voice_description
+      - text
+      properties:
+        voice_description:
+          type: string
+          description: Character description for the voice such as gruff old warrior or cheerful young girl.
+        text:
+          type: string
+          description: Text for the character to speak.
+          maxLength: 200
+        type:
+          type: string
+          description: Type of voice to generate.
+          enum:
+          - human
+          - non-human
+          default: human
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    AudioResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the generated audio file. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
     CreateSoundEffectRequest:
       type: object
       required:
@@ -304,15 +313,6 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

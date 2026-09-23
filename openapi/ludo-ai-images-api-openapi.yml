@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ludo.ai REST 3D Models Images API
-  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.
+  title: Ludo.ai REST Images API
+  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.
   version: 1.0.0
   contact:
     name: Ludo.ai Support
@@ -184,127 +184,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    GeneratePoseRequest:
-      type: object
-      required:
-      - image
-      - pose
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded sprite image.
-        pose:
-          type: string
-          description: Target pose for the sprite. Can be a preset or custom description.
-          enum:
-          - Idle (Front)
-          - Idle (Back)
-          - Walk / Run (Left)
-          - Attack Ready
-          - Jumping
-          - Crouching
-          - Flying
-          - Defending / Blocking
-        description:
-          type: string
-          description: Additional instructions to guide pose generation.
-        n:
-          type: integer
-          description: Number of pose variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    GenerateWithStyleRequest:
-      type: object
-      required:
-      - style_image
-      - prompt
-      - image_type
-      properties:
-        style_image:
-          type: string
-          description: URL or base64-encoded reference image for style matching.
-        prompt:
-          type: string
-          description: Description of what to generate while maintaining the reference style.
-        image_type:
-          type: string
-          description: The type of game asset to generate.
-          enum:
-          - sprite
-          - icon
-          - screenshot
-          - art
-          - asset
-          - sprite-vfx
-          - ui_asset
-          - fixed_background
-          - texture
-          - 3d
-          - generic
-        n:
-          type: integer
-          description: Number of image variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    RemoveBackgroundRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded image to remove background from.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    ImageResponse:
-      type: object
-      properties:
-        images:
-          type: array
-          description: Array of generated image objects.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: URL of the generated image. Expires after 7 days.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
-    EditImageRequest:
-      type: object
-      required:
-      - image
-      - prompt
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded image to edit.
-        prompt:
-          type: string
-          description: Description of changes to apply to the image.
-        reference_image:
-          type: string
-          description: URL or base64-encoded reference image for style or content guidance.
-        n:
-          type: integer
-          description: Number of edited variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
     CreateImageRequest:
       type: object
       required:
@@ -370,6 +249,100 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
+    GeneratePoseRequest:
+      type: object
+      required:
+      - image
+      - pose
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded sprite image.
+        pose:
+          type: string
+          description: Target pose for the sprite. Can be a preset or custom description.
+          enum:
+          - Idle (Front)
+          - Idle (Back)
+          - Walk / Run (Left)
+          - Attack Ready
+          - Jumping
+          - Crouching
+          - Flying
+          - Defending / Blocking
+        description:
+          type: string
+          description: Additional instructions to guide pose generation.
+        n:
+          type: integer
+          description: Number of pose variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    EditImageRequest:
+      type: object
+      required:
+      - image
+      - prompt
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to edit.
+        prompt:
+          type: string
+          description: Description of changes to apply to the image.
+        reference_image:
+          type: string
+          description: URL or base64-encoded reference image for style or content guidance.
+        n:
+          type: integer
+          description: Number of edited variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    GenerateWithStyleRequest:
+      type: object
+      required:
+      - style_image
+      - prompt
+      - image_type
+      properties:
+        style_image:
+          type: string
+          description: URL or base64-encoded reference image for style matching.
+        prompt:
+          type: string
+          description: Description of what to generate while maintaining the reference style.
+        image_type:
+          type: string
+          description: The type of game asset to generate.
+          enum:
+          - sprite
+          - icon
+          - screenshot
+          - art
+          - asset
+          - sprite-vfx
+          - ui_asset
+          - fixed_background
+          - texture
+          - 3d
+          - generic
+        n:
+          type: integer
+          description: Number of image variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
     PoseResponse:
       type: object
       properties:
@@ -401,6 +374,33 @@ components:
         code:
           type: string
           description: Machine-readable error code.
+    ImageResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: Array of generated image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: URL of the generated image. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    RemoveBackgroundRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to remove background from.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

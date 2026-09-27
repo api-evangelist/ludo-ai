@@ -178,6 +178,94 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    CreateVoiceRequest:
+      type: object
+      required:
+      - voice_description
+      - text
+      properties:
+        voice_description:
+          type: string
+          description: Character description for the voice such as gruff old warrior or cheerful young girl.
+        text:
+          type: string
+          description: Text for the character to speak.
+          maxLength: 200
+        type:
+          type: string
+          description: Type of voice to generate.
+          enum:
+          - human
+          - non-human
+          default: human
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateMusicRequest:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
+          description: Text description of the music to generate such as epic orchestral battle theme, calm piano melody, or 8-bit chiptune.
+        lyrics:
+          type: string
+          description: Optional lyrics for vocal tracks.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    AudioResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the generated audio file. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    CreateSoundEffectRequest:
+      type: object
+      required:
+      - description
+      properties:
+        description:
+          type: string
+          description: Text description of the sound effect to generate such as laser gun firing, footsteps on gravel, or coin pickup.
+        duration:
+          type: number
+          description: Duration in seconds from 0 to 10. Use 0 for automatic duration.
+          minimum: 0
+          maximum: 10
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    CreateSpeechRequest:
+      type: object
+      required:
+      - text
+      - sample
+      properties:
+        text:
+          type: string
+          description: Text to speak using the cloned voice.
+          maxLength: 1000
+        sample:
+          type: string
+          description: URL or base64-encoded audio sample for voice cloning.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
     CreateSpeechPresetRequest:
       type: object
       required:
@@ -222,94 +310,6 @@ components:
           - German
           - Japanese
           - Korean
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    CreateSpeechRequest:
-      type: object
-      required:
-      - text
-      - sample
-      properties:
-        text:
-          type: string
-          description: Text to speak using the cloned voice.
-          maxLength: 1000
-        sample:
-          type: string
-          description: URL or base64-encoded audio sample for voice cloning.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    CreateMusicRequest:
-      type: object
-      required:
-      - description
-      properties:
-        description:
-          type: string
-          description: Text description of the music to generate such as epic orchestral battle theme, calm piano melody, or 8-bit chiptune.
-        lyrics:
-          type: string
-          description: Optional lyrics for vocal tracks.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
-    CreateVoiceRequest:
-      type: object
-      required:
-      - voice_description
-      - text
-      properties:
-        voice_description:
-          type: string
-          description: Character description for the voice such as gruff old warrior or cheerful young girl.
-        text:
-          type: string
-          description: Text for the character to speak.
-          maxLength: 200
-        type:
-          type: string
-          description: Type of voice to generate.
-          enum:
-          - human
-          - non-human
-          default: human
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    AudioResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the generated audio file. Expires after 7 days.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
-    CreateSoundEffectRequest:
-      type: object
-      required:
-      - description
-      properties:
-        description:
-          type: string
-          description: Text description of the sound effect to generate such as laser gun firing, footsteps on gravel, or coin pickup.
-        duration:
-          type: number
-          description: Duration in seconds from 0 to 10. Use 0 for automatic duration.
-          minimum: 0
-          maximum: 10
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.

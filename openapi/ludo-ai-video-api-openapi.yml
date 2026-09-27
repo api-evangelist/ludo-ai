@@ -50,15 +50,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
     CreateVideoRequest:
       type: object
       required:
@@ -93,6 +84,15 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
     VideoResponse:
       type: object
       properties:

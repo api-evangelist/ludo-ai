@@ -184,6 +184,136 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ImageResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          description: Array of generated image objects.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: URL of the generated image. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
+    EditImageRequest:
+      type: object
+      required:
+      - image
+      - prompt
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to edit.
+        prompt:
+          type: string
+          description: Description of changes to apply to the image.
+        reference_image:
+          type: string
+          description: URL or base64-encoded reference image for style or content guidance.
+        n:
+          type: integer
+          description: Number of edited variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    GenerateWithStyleRequest:
+      type: object
+      required:
+      - style_image
+      - prompt
+      - image_type
+      properties:
+        style_image:
+          type: string
+          description: URL or base64-encoded reference image for style matching.
+        prompt:
+          type: string
+          description: Description of what to generate while maintaining the reference style.
+        image_type:
+          type: string
+          description: The type of game asset to generate.
+          enum:
+          - sprite
+          - icon
+          - screenshot
+          - art
+          - asset
+          - sprite-vfx
+          - ui_asset
+          - fixed_background
+          - texture
+          - 3d
+          - generic
+        n:
+          type: integer
+          description: Number of image variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    RemoveBackgroundRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to remove background from.
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    GeneratePoseRequest:
+      type: object
+      required:
+      - image
+      - pose
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded sprite image.
+        pose:
+          type: string
+          description: Target pose for the sprite. Can be a preset or custom description.
+          enum:
+          - Idle (Front)
+          - Idle (Back)
+          - Walk / Run (Left)
+          - Attack Ready
+          - Jumping
+          - Crouching
+          - Flying
+          - Defending / Blocking
+        description:
+          type: string
+          description: Additional instructions to guide pose generation.
+        n:
+          type: integer
+          description: Number of pose variations to generate.
+          minimum: 1
+          maximum: 4
+          default: 1
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
     CreateImageRequest:
       type: object
       required:
@@ -249,100 +379,6 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    GeneratePoseRequest:
-      type: object
-      required:
-      - image
-      - pose
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded sprite image.
-        pose:
-          type: string
-          description: Target pose for the sprite. Can be a preset or custom description.
-          enum:
-          - Idle (Front)
-          - Idle (Back)
-          - Walk / Run (Left)
-          - Attack Ready
-          - Jumping
-          - Crouching
-          - Flying
-          - Defending / Blocking
-        description:
-          type: string
-          description: Additional instructions to guide pose generation.
-        n:
-          type: integer
-          description: Number of pose variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    EditImageRequest:
-      type: object
-      required:
-      - image
-      - prompt
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded image to edit.
-        prompt:
-          type: string
-          description: Description of changes to apply to the image.
-        reference_image:
-          type: string
-          description: URL or base64-encoded reference image for style or content guidance.
-        n:
-          type: integer
-          description: Number of edited variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    GenerateWithStyleRequest:
-      type: object
-      required:
-      - style_image
-      - prompt
-      - image_type
-      properties:
-        style_image:
-          type: string
-          description: URL or base64-encoded reference image for style matching.
-        prompt:
-          type: string
-          description: Description of what to generate while maintaining the reference style.
-        image_type:
-          type: string
-          description: The type of game asset to generate.
-          enum:
-          - sprite
-          - icon
-          - screenshot
-          - art
-          - asset
-          - sprite-vfx
-          - ui_asset
-          - fixed_background
-          - texture
-          - 3d
-          - generic
-        n:
-          type: integer
-          description: Number of image variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
     PoseResponse:
       type: object
       properties:
@@ -365,42 +401,6 @@ components:
         request_id:
           type: string
           description: The request ID if one was provided.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
-    ImageResponse:
-      type: object
-      properties:
-        images:
-          type: array
-          description: Array of generated image objects.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: URL of the generated image. Expires after 7 days.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
-    RemoveBackgroundRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded image to remove background from.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

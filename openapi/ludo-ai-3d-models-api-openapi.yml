@@ -86,15 +86,6 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
     Model3DResponse:
       type: object
       properties:
@@ -113,6 +104,15 @@ components:
         request_id:
           type: string
           description: The request ID if one was provided.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

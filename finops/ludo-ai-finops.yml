@@ -6,19 +6,22 @@ providerId: ludo-ai
 created: '2026-05-04'
 # Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
 # bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+# Corrected 2026-09-29 against https://ludo.ai/pricing and the provider's OpenAPI.
 method: generated
-modified: '2026-05-05'
+modified: '2026-09-29'
 reconciled: true
 tags:
   - FinOps
   - FOCUS
   - Generative AI
   - Game Development
-description: 'FOCUS-aligned FinOps for Ludo.ai: tiered annual subscription with upfront credit allotments
-  consumed by asset generation; annual billing carries a 30-35% discount; API/MCP usage is gated by
-  per-tier concurrency.'
+description: 'FOCUS-aligned FinOps for Ludo.ai: tiered monthly or annual subscription with credit allotments
+  consumed by asset generation (annual grants the year upfront and saves up to 30%); one-time and automatic
+  credit top-ups on every paid plan; API, MCP and CLI calls always draw credits and share the plan''s
+  concurrent-generation limit with the web app.'
 sources:
   - https://ludo.ai/pricing
+  - https://api.ludo.ai/api-documentation/openapi.json
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -29,7 +32,7 @@ publisherName: Ludo.ai
 serviceCategory: AI Infrastructure
 billingModel:
   pricingCategory: Subscription + Prepaid Credits
-  billingFrequency: Annual
+  billingFrequency: Monthly or Annual
   billingCurrency: USD
   chargeCategories:
     - Usage
@@ -71,13 +74,15 @@ meters:
     aggregation: sum
 principles:
   - name: Visibility
-    description: Track annual credit burn against the per-tier allotment in the Ludo.ai dashboard;
-      monitor concurrent-request saturation on Pro/Studio.
+    description: Track credit burn against the plan allotment (GET /assets/account returns the
+      balance, plan and reset time; GET /assets/generations the generation history); monitor
+      queue saturation against the plan's concurrent-generation limit.
   - name: Allocation
     description: Tag generated assets by project; map projects to internal product/team for chargeback.
   - name: Optimization
-    description: Prefer annual billing for the 30-35% saving; right-size between Indie / Pro / Studio
-      based on annual credit need; use Top Up rather than upgrading mid-cycle.
+    description: Prefer annual billing for the saving of up to 30%; right-size between Indie / Pro / Studio
+      on credit need and whether API, MCP or CLI access is needed (Pro and up); use a top-up
+      rather than upgrading mid-cycle; set a CLI spending budget (max_credits) for unattended agents.
   - name: Accountability
     description: Owners review credit burn quarterly; trigger Studio upgrade before Pro credits exhaust;
       track refund-window thresholds at renewal.

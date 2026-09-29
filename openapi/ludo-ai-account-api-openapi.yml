@@ -1,0 +1,538 @@
+# Split of openapi/_original/ludo-ai-rest-api-openapi.yml by tag (Authentication, Account, Files).
+openapi: 3.0.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Account API
+  description: |-
+    Validate an API key, read the account's plan and credit balance, upload input files, send feedback.
+
+    Part of the Ludo.ai public API. Full spec: https://api.ludo.ai/api-documentation/openapi.json
+  x-logo:
+    url: https://api.ludo.ai/static/logo-small.png
+    altText: Logo
+  x-model-lineup: 'Current models: hydra (Hydra) - Most capable all-around model, generates audio. forge
+    (Forge) - Sharper detail, simpler motion. Best for simple body shapes and short actions; may need
+    a few tries. forge-pixel (Forge Pixel) - Best for low-res pixel art animations. griffin (Griffin)
+    - Fast cinematic videos in any style, with audio, 480p. griffin-hd (Griffin HD) - Same as Griffin,
+    but in 720p. Per action - sprite animation: hydra, forge, forge-pixel; motion transfer: hydra, forge,
+    forge-pixel; spritesheet editing: hydra, forge, forge-pixel; video generation: griffin, griffin-hd;
+    references to video: griffin, griffin-hd; video editing: griffin-hd. LEGACY models, still accepted
+    but scheduled for removal - do not use them for new work: blitz, eagle, eagle-audio, tango.'
+  contact:
+    name: Ludo.ai Support
+    email: support@ludo.ai
+    url: https://ludo.ai/contact
+  termsOfService: https://ludo.ai/terms-of-service
+externalDocs:
+  description: API reference
+  url: https://api.ludo.ai/api-documentation
+servers:
+- url: https://api.ludo.ai/api
+  description: Production
+tags:
+- name: Authentication
+paths:
+  /auth/validate-api-key:
+    get:
+      description: Validates an API key. Returns 200 if valid, 403 if invalid.
+      tags:
+      - Authentication
+      operationId: validateApiKeyEndpoint
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: Valid API key
+        '403':
+          description: Invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X GET "https://api.ludo.ai/api/auth/validate-api-key" \
+            -H "Authorization: ApiKey YOUR_API_KEY"
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/auth/validate-api-key", {
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY"
+            }
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.get(
+              "https://api.ludo.ai/api/auth/validate-api-key",
+              headers={"Authorization": "ApiKey YOUR_API_KEY"}
+          )
+
+          print(response.json())
+  /assets/uploads:
+    post:
+      description: Start an upload of a local file, so it can be passed to a generation endpoint by URL
+        instead of inline as base64. Declare the file's MIME type and exact size in bytes (up to 15MB,
+        the same limit the generation endpoints apply); the response carries an upload_url and a file_url.
+        Send the file's bytes in a single PUT to upload_url (no Authorization header; the content type
+        and size are fixed by this call, and a body of any other size is refused). Once the PUT succeeds,
+        pass file_url in any image, audio, video or model field that accepts a URL. The file is public
+        to anyone holding file_url and is deleted 7 days after upload. upload_url is single-use. Free
+        (no credits). Requires an API key (user scope). Not exposed as an MCP tool.
+      tags:
+      - Files
+      operationId: createUpload
+      x-mcp-exclude: true
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUploadPayload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadSession'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/uploads" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"mime_type":"image/png","size":1}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/uploads", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "mime_type": "image/png",
+              "size": 1
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/uploads",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "mime_type": "image/png",
+                "size": 1
+              }
+          )
+
+          print(response.json())
+  /assets/account:
+    get:
+      description: Show your account's credit balance, plan and auto top-up settings. `credits.available`
+        is what generations can spend right now (plan_credits + extra - used); `resets_at` is when the
+        plan's monthly credits refill (unix seconds). When `team_pool` is true the balance is your team's
+        shared pool, and `auto_topup` is null because the team owner manages it. Check this before an
+        expensive generation instead of waiting for a 402. Buying credits and changing auto top-up happen
+        in the web app at `billing_url`. This is a free read-only lookup (no credits, no generation).
+        Requires an API key (user scope).
+      tags:
+      - Account
+      operationId: getAccount
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInfo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X GET "https://api.ludo.ai/api/assets/account" \
+            -H "Authorization: ApiKey YOUR_API_KEY"
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/account", {
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY"
+            }
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.get(
+              "https://api.ludo.ai/api/assets/account",
+              headers={"Authorization": "ApiKey YOUR_API_KEY"}
+          )
+
+          print(response.json())
+  /assets/cli-key:
+    delete:
+      description: Revoke the key making this call, when it was created by a browser login. Other API
+        keys are managed in the web app. Free. Requires an API key (user scope).
+      tags:
+      - Account
+      operationId: revokeCurrentCliKey
+      x-mcp-exclude: true
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '400':
+          description: Not a browser-login key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X DELETE "https://api.ludo.ai/api/assets/cli-key" \
+            -H "Authorization: ApiKey YOUR_API_KEY"
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/cli-key", {
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY"
+            }
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.delete(
+              "https://api.ludo.ai/api/assets/cli-key",
+              headers={"Authorization": "ApiKey YOUR_API_KEY"}
+          )
+
+          print(response.json())
+  /assets/feedback:
+    post:
+      description: 'Send feedback to the Ludo team: a limitation you could not work around, a bug, a result
+        that did not match the documentation, a capability you needed that Ludo does not offer yet, or
+        praise for something that worked well. Describe what you were trying to do and what was missing,
+        and name the operation (and job_id, when there is one) it relates to. Do not include personal
+        data, secrets or file contents. Send one report per issue, and if you are an agent, tell the user
+        what you sent. Free (no credits). Requires an API key (user scope).'
+      tags:
+      - Account
+      operationId: submitApiFeedback
+      security:
+      - ApiKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiFeedbackPayload'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiFeedbackReceipt'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/feedback" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"category":"limitation","message":"string"}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/feedback", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "category": "limitation",
+              "message": "string"
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/feedback",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "category": "limitation",
+                "message": "string"
+              }
+          )
+
+          print(response.json())
+components:
+  schemas:
+    AccountInfo:
+      type: object
+      properties:
+        credits:
+          type: object
+          properties:
+            available:
+              type: number
+              format: float
+              description: Credits generations can spend right now.
+            plan_credits:
+              type: number
+              format: float
+              description: The plan's credits for the current cycle.
+            used:
+              type: number
+              format: float
+              description: Plan credits used this cycle.
+            extra:
+              type: number
+              format: float
+              description: Credits from top-ups and grants, on top of the plan.
+            resets_at:
+              type: integer
+              format: int64
+              description: When the plan credits refill (unix seconds).
+            team_pool:
+              type: boolean
+              description: The balance is a team's shared pool.
+            paused:
+              type: boolean
+            grace_until:
+              type: integer
+              format: int64
+              description: Set when the subscription ended; remaining credits stay spendable until then
+                (unix seconds).
+        plan:
+          type: object
+          properties:
+            name:
+              type: string
+            api_access:
+              type: boolean
+        auto_topup:
+          type: object
+          description: Null for team members; the team owner manages auto top-up.
+          properties:
+            enabled:
+              type: boolean
+            threshold:
+              type: number
+              format: float
+              description: An automatic top-up is bought when available credits drop below this.
+            credits:
+              type: integer
+              description: Credits bought on each automatic top-up.
+        billing_url:
+          type: string
+          description: Web page to buy credits, change plan or change auto top-up.
+          example: <url>
+    ApiFeedbackPayload:
+      type: object
+      required:
+      - category
+      - message
+      properties:
+        category:
+          type: string
+          enum:
+          - limitation
+          - bug
+          - feature_request
+          - praise
+          - other
+          description: limitation - something you needed that did not work or is not supported; bug -
+            something broke or returned a wrong result; feature_request - something new you would like;
+            praise - something that worked well; other - anything else.
+          example: limitation
+        message:
+          type: string
+          minLength: 1
+          maxLength: 4000
+          description: What you were trying to do, what happened, and what would have helped.
+        operation:
+          type: string
+          maxLength: 100
+          description: The operation the feedback is about, e.g. animateSprite.
+        job_id:
+          type: string
+          maxLength: 64
+          description: The job the feedback is about, when there is one.
+        agent:
+          type: string
+          maxLength: 100
+          description: The agent or app sending it, e.g. Claude Code.
+    ApiFeedbackReceipt:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        id:
+          type: string
+    CreateUploadPayload:
+      type: object
+      description: Payload for starting a file upload.
+      required:
+      - mime_type
+      - size
+      properties:
+        mime_type:
+          type: string
+          description: MIME type of the file. Fixed for the upload; the stored file is served with it.
+          enum:
+          - image/png
+          - image/jpeg
+          - image/webp
+          - image/gif
+          - audio/mpeg
+          - audio/wav
+          - audio/x-wav
+          - audio/ogg
+          - audio/flac
+          - audio/mp4
+          - audio/aac
+          - audio/webm
+          - video/mp4
+          - video/webm
+          - video/quicktime
+          - model/gltf-binary
+          example: image/png
+        size:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 15728640
+          description: Exact size of the file in bytes (at most 15MB). The PUT to upload_url must send
+            exactly this many bytes.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+              example: payment
+            client_secret:
+              type: string
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+    UploadSession:
+      type: object
+      required:
+      - upload_url
+      - file_url
+      - mime_type
+      - size
+      properties:
+        upload_url:
+          type: string
+          description: Single-use URL to PUT the file's bytes to, with no Authorization header.
+          example: <url>
+        file_url:
+          type: string
+          description: Public URL of the file once the PUT succeeds. Pass it to any field that accepts
+            a URL. Deleted 7 days after upload.
+          example: <url>
+        mime_type:
+          type: string
+          description: The MIME type the file is stored and served with.
+        size:
+          type: integer
+          format: int64
+          description: The exact number of bytes the PUT must send.
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        For accessing the API a valid API Key token must be passed in all the queries in
+        the 'Authorization' header.
+        The following syntax must be used in the 'Authorization' header: ApiKey xxxxxx.yyyyyyy.zzzzzz

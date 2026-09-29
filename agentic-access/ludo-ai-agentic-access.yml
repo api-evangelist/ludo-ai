@@ -1,22 +1,31 @@
-generated: '2026-07-15'
+generated: '2026-09-29'
 method: generated
-source: openapi/ludo-ai-rest-api-openapi.yml
-description: Recommended x-agentic-access execution contracts, classified heuristically from
-  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
-  audience per deployment. See research/curity/agentic-governance/.
+source: openapi/_original/ludo-ai-rest-api-openapi.yml
+description: Recommended x-agentic-access execution contracts for the operations in Ludo's live public
+  spec. Every write spends credits and produces an asset; none moves money outside the account's own credit
+  balance, touches a physical system or another user's data, so writes are classed acting/write and reads
+  connected/read. Cancelling a job (DELETE /assets/jobs/{id}) refunds its credits.
 summary:
-  operations: 20
+  operations: 43
   by_action_class:
-    acting: 14
-    connected: 6
+    acting: 30
+    connected: 13
   by_consequence:
-    write: 12
-    physical: 1
-    read: 6
-    safety-critical: 1
-  human_in_the_loop_required: 1
+    write: 30
+    read: 13
+  human_in_the_loop_required: 0
 operations:
-- path: /images/create
+- path: /auth/validate-api-key
+  method: get
+  operationId: validateApiKeyEndpoint
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/image
   method: post
   operationId: createImage
   x-agentic-access:
@@ -32,23 +41,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /images/edit
-  method: post
-  operationId: editImage
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /images/generate-with-style
+- path: /assets/image/style
   method: post
   operationId: generateWithStyle
   x-agentic-access:
@@ -64,9 +57,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /images/generate-pose
+- path: /assets/image/edit
   method: post
-  operationId: generatePose
+  operationId: editImage
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -80,23 +73,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /images/remove-background
-  method: post
-  operationId: removeImageBackground
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /sprites/animate
+- path: /assets/sprite/animate
   method: post
   operationId: animateSprite
   x-agentic-access:
@@ -112,37 +89,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /sprites/transfer-motion
+- path: /assets/sprite/animate-keyframes
   method: post
-  operationId: transferMotion
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /animation-presets
-  method: get
-  operationId: listAnimationPresets
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /3d-models/create
-  method: post
-  operationId: create3DModel
+  operationId: animateSpriteKeyframes
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -156,7 +105,117 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /videos/create
+- path: /assets/sprite/pose
+  method: post
+  operationId: generatePose
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/sprite/rotate
+  method: post
+  operationId: rotateSprite
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/sprite/transfer-motion
+  method: post
+  operationId: transferMotion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /docs
+  method: get
+  operationId: getDocs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /docs/search
+  method: get
+  operationId: searchDocs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/sprite/animation-presets
+  method: get
+  operationId: listAnimationPresets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/sprite/edit
+  method: post
+  operationId: editSpritesheet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/sprite/audio
+  method: post
+  operationId: createSpriteAudio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/video
   method: post
   operationId: createVideo
   x-agentic-access:
@@ -172,9 +231,153 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /audio/sound-effects
+- path: /assets/video/references
+  method: post
+  operationId: createVideoFromReferences
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/video/edit
+  method: post
+  operationId: editVideo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/video/upscale
+  method: post
+  operationId: upscaleVideo
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/image/remove-background
+  method: post
+  operationId: removeBackground
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/3d-model
+  method: post
+  operationId: create3DModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/3d-model/rig
+  method: post
+  operationId: rigModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/3d-model/animate
+  method: post
+  operationId: animate3DModel
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/3d-model/animate-preset
+  method: post
+  operationId: animate3DModelPreset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /audio/sound-effect
   method: post
   operationId: createSoundEffect
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /audio/ambiance
+  method: post
+  operationId: createAmbiance
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -191,6 +394,22 @@ operations:
 - path: /audio/music
   method: post
   operationId: createMusic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /audio/transform
+  method: post
+  operationId: createAudioTransform
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -241,18 +460,28 @@ operations:
   operationId: createSpeechPreset
   x-agentic-access:
     action-class: acting
-    consequence: safety-critical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
+      max-ttl: 900
     escalation:
-      human-in-the-loop: required
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
     audit: required
-- path: /results/images
+- path: /assets/generations
+  method: get
+  operationId: listGenerations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/images/results
   method: get
   operationId: getImageResults
   x-agentic-access:
@@ -262,7 +491,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /results/sprites
+- path: /assets/sprites/results
   method: get
   operationId: getSpriteResults
   x-agentic-access:
@@ -272,7 +501,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /results/videos
+- path: /assets/videos/results
   method: get
   operationId: getVideoResults
   x-agentic-access:
@@ -282,7 +511,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /results/audio
+- path: /assets/audio/results
   method: get
   operationId: getAudioResults
   x-agentic-access:
@@ -292,7 +521,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /results/3d-models
+- path: /assets/3d-models/results
   method: get
   operationId: get3DModelResults
   x-agentic-access:
@@ -302,3 +531,97 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /assets/jobs
+  method: get
+  operationId: listApiJobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/jobs/{id}
+  method: get
+  operationId: getApiJob
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/jobs/{id}
+  method: delete
+  operationId: cancelApiJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/uploads
+  method: post
+  operationId: createUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/account
+  method: get
+  operationId: getAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /assets/cli-key
+  method: delete
+  operationId: revokeCurrentCliKey
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /assets/feedback
+  method: post
+  operationId: submitApiFeedback
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

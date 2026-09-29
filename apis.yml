@@ -34,17 +34,16 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ludo-ai.png
 tags:
-  - Artificial Intelligence
-  - Asset Generation
-  - Game Design
-  - Game Development
-description: >-
-  Ludo.ai is a game design hub that uses artificial intelligence to help developers generate production-ready game
-  assets including images, 3D models, audio, and animations. The platform entered beta for its Model Context Protocol
-  (MCP) integration, exposing its asset generation suite as a headless API that enables vibe coding where developers can
-  trigger asset creation directly from AI assistants like Claude or Cursor.
+- Artificial Intelligence
+- Asset Generation
+- Game Design
+- Game Development
+description: 'Ludo.ai generates production-ready game assets with AI: sprites and animated sprite sheets, images,
+  3D models with rigging and animation, sound effects, music, voices and video. The same asset generation is available
+  from the web app, the Ludo CLI, a remote MCP server, a REST API and a Unity plugin, on one account and one set
+  of credits (CLI, MCP and API on the Pro and Studio plans).'
 created: '2026-03-24'
-modified: '2026-05-19'
+modified: '2026-09-29'
 specificationVersion: '0.23'
 apis:
 - aid: ludo-ai:mcp-server
@@ -63,17 +62,34 @@ apis:
   - Vibe Coding
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://mcp.ludo.ai/mcp
-  humanURL: https://ludo.ai/docs/api-mcp
+  humanURL: https://ludo.ai/developers/mcp
   properties:
-  - url: https://ludo.ai/docs/api-mcp
+  - url: https://ludo.ai/developers/mcp
     type: Documentation
   - url: https://github.com/Ludo-AI/ludo-mcp
     type: GitHubRepository
-  description: >-
-    The Ludo.ai MCP Server exposes the platform's asset generation tools via the Model Context Protocol,
-    allowing AI assistants like Claude and Cursor to generate game assets through natural language conversations.
-    The server provides over 20 tools including createImage, editImage, animateSprite, create3DModel,
-    createSoundEffect, createMusic, createVoice, and createVideo.
+  description: Remote MCP server (streamable HTTP) exposing Ludo.ai asset generation to AI assistants such as Claude
+    and Cursor. Tools are generated from the public OpenAPI spec, so they cover the same operations as the REST
+    API. Authenticates with the same API key in the Authorization header.
+- aid: ludo-ai:cli
+  name: Ludo CLI
+  tags:
+  - Agent Skills
+  - Asset Generation
+  - CLI
+  - Game Development
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.ludo.ai/api
+  humanURL: https://ludo.ai/developers/cli
+  properties:
+  - url: https://ludo.ai/developers/cli
+    type: Documentation
+  - url: https://www.npmjs.com/package/@ludoai/cli
+    type: Packages
+  description: 'Command-line client for the Ludo.ai API (npm install -g @ludoai/cli). Commands and prices are built
+    from the live OpenAPI spec. Made for coding agents: `ludo skill install` adds an agent skill for Claude Code,
+    `ludo init` adds instructions for other agents, output is JSON with saved file paths, and --dry-run shows the
+    credit cost before spending.'
 - aid: ludo-ai:unity-plugin
   name: Ludo.ai Unity Plugin
   tags:
@@ -87,128 +103,181 @@ apis:
   - Plugin
   - Unity
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.example.com
-  humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
+  baseURL: https://api.ludo.ai/api
+  humanURL: https://ludo.ai/developers/unity
   properties:
-  - url: https://github.com/Ludo-AI/ludo-unity-plugin
+  - url: https://ludo.ai/developers/unity
     type: Documentation
-  description: >-
-    The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine.
-    It provides a native interface for Unity developers to access Ludo.ai's image generation, 3D model
-    creation, audio production, and animation tools without leaving the editor. The plugin connects to
-    the Ludo.ai API to deliver generated assets directly into Unity projects, streamlining the game development
-    workflow.
+  - url: https://github.com/Ludo-AI/ludo-unity-plugin
+    type: GitHubRepository
+  description: The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine.
+    It provides a native interface for Unity developers to access Ludo.ai's image generation, 3D model creation,
+    audio production, and animation tools without leaving the editor. The plugin connects to the Ludo.ai API to
+    deliver generated assets directly into Unity projects, streamlining the game development workflow.
 - aid: ludo-ai:ludo-ai-3d-models-api
   name: Ludo.ai 3D Models API
-  description: >-
-    Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  description: Turn an image or text into a textured 3D model (GLB), auto-rig it and animate it from a prompt or
+    a preset.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
   - 3D Models
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-3d-models-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
 - aid: ludo-ai:ludo-ai-animation-api
-  name: Ludo.ai Animation API
-  description: >-
-    Create animated spritesheets from static sprites, transfer motion from videos or presets, and list
-    available animation presets.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  name: Ludo.ai Sprite Animation API
+  description: Animate sprites into spritesheets from text, presets, keyframes or motion transferred from a video;
+    pose, rotate and edit spritesheets; add audio.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
   - Animation
+  - Sprites
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-animation-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
 - aid: ludo-ai:ludo-ai-audio-api
   name: Ludo.ai Audio API
-  description: >-
-    Generate sound effects, background music, character voices, and text-to-speech audio for games.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  description: Generate sound effects, ambiances, music, character voices and speech, and transform existing audio.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
   - Audio
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-audio-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
 - aid: ludo-ai:ludo-ai-images-api
   name: Ludo.ai Images API
-  description: >-
-    Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and
-    backgrounds.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  description: 'Generate, restyle, edit and remove the background of game-ready images: sprites, icons, UI, textures
+    and backgrounds.'
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
   - Image
-  tags_raw:
-  - Images
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-images-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
 - aid: ludo-ai:ludo-ai-results-api
-  name: Ludo.ai Results API
-  description: >-
-    Retrieve previously generated assets using request IDs or browse recent API-generated content.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  name: Ludo.ai Jobs and Results API
+  description: Asynchronous job control (list, long-poll, cancel with refund) and the account's generation history.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
+  - Jobs
   - Results
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-results-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
 - aid: ludo-ai:ludo-ai-video-api
   name: Ludo.ai Video API
-  description: >-
-    Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic
-    backgrounds.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
+  description: Generate short videos from an image or references, edit and upscale them.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
   tags:
   - Video
   properties:
   - type: OpenAPI
     url: openapi/ludo-ai-video-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
-common:
-  - type: AgenticAccess
-    url: agentic-access/ludo-ai-agentic-access.yml
-  - type: DomainSecurity
-    url: security/ludo-ai-domain-security.yml
-  - type: Authentication
-    url: authentication/ludo-ai-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/ludoai
-  - type: JSONLD
-    url: json-ld/ludo-ai-context.jsonld
-  - type: JSONSchema
-    url: json-schema/ludo-ai-game-asset-schema.json
-  - type: Website
-    url: https://ludo.ai/
-  - type: Portal
-    url: https://ludo.ai/api-mcp-integration
+    url: https://api.ludo.ai/api-documentation
+- aid: ludo-ai:ludo-ai-account-api
+  name: Ludo.ai Account API
+  description: Validate an API key, read the plan and credit balance, upload input files, send feedback.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-account-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/docs
-  - type: Blog
-    url: https://ludo.ai/blog/introducing-ludo-ai-api-mcp-integration
-  - type: GitHubOrganization
-    url: https://github.com/Ludo-AI
-  - type: Login
-    url: https://ludo.ai/
-  - name: MCP Server
-    url: https://github.com/Ludo-AI/ludo-mcp
-    type: MCPServer
+    url: https://api.ludo.ai/api-documentation
+- aid: ludo-ai:ludo-ai-docs-api
+  name: Ludo.ai Documentation API
+  description: Search and read Ludo's feature guides in plain language. Free, no credits.
+  humanURL: https://ludo.ai/developers/api
+  baseURL: https://api.ludo.ai/api
+  tags:
+  - Documentation
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-docs-api-openapi.yml
+  - type: Documentation
+    url: https://api.ludo.ai/api-documentation
+common:
+- type: AgenticAccess
+  url: agentic-access/ludo-ai-agentic-access.yml
+- type: DomainSecurity
+  url: security/ludo-ai-domain-security.yml
+- type: Authentication
+  url: authentication/ludo-ai-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ludoai
+- type: JSONLD
+  url: json-ld/ludo-ai-context.jsonld
+- type: JSONSchema
+  url: json-schema/ludo-ai-game-asset-schema.json
+- type: Website
+  url: https://ludo.ai/
+- type: GitHubOrganization
+  url: https://github.com/Ludo-AI
+- type: Portal
+  url: https://ludo.ai/developers
+- type: Documentation
+  url: https://ludo.ai/docs
+- type: APIReference
+  url: https://api.ludo.ai/api-documentation
+- type: OpenAPI Source
+  url: https://api.ludo.ai/api-documentation/openapi.json
+- type: GettingStarted
+  url: https://ludo.ai/developers/api
+- type: CLI
+  url: https://ludo.ai/developers/cli
+- type: AgentSkills
+  url: https://ludo.ai/developers/cli
+- type: MCPServer
+  url: https://ludo.ai/developers/mcp
+- type: Signup
+  url: https://app.ludo.ai
+- type: Login
+  url: https://app.ludo.ai
+- type: Pricing
+  url: https://ludo.ai/pricing
+- type: Plans
+  url: plans/ludo-ai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ludo-ai-rate-limits.yml
+- type: ChangeLog
+  url: https://ludo.ai/whats-new
+- type: Blog
+  url: https://ludo.ai/blog
+- type: Support
+  url: https://ludo.ai/contact
+- type: TermsOfService
+  url: https://ludo.ai/terms-of-service
+- type: PrivacyPolicy
+  url: https://ludo.ai/privacy-policies
+- type: SecurityTxt
+  url: https://ludo.ai/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: https://ludo.ai/.well-known/security.txt
+- type: WellKnown
+  url: https://ludo.ai/.well-known/api-catalog
+- type: LLMsTxt
+  url: https://ludo.ai/llms.txt
+- type: Discord
+  url: https://discord.gg/FmTPyugsrR
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,66 +1,102 @@
+# Corrected 2026-09-29 against the provider's live OpenAPI description (info.description)
+# and the public plans endpoint (https://api.ludo.ai/api/payment/plans).
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Ludo.ai
 providerId: ludo-ai
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+method: derived
+modified: '2026-09-29'
 reconciled: true
 tags:
   - Rate Limiting
   - Generative AI
   - Game Development
-description: Ludo.ai rate limits are expressed primarily as concurrent-request limits per plan and an
-  annual credit allotment that gates total throughput. API/MCP access starts at the Pro tier (1 concurrent
-  request); Studio raises this to 5; Enterprise is custom.
+description: Ludo.ai bounds throughput three ways. Each plan runs a fixed number of generations at
+  once (Pro 2, Studio 5), shared by the web app, API, MCP and CLI; further work waits in the queue.
+  Each account may have up to 50 API generations queued or running. Read endpoints (job status,
+  docs) have request windows. Credits gate total volume. API, MCP and CLI access start at Pro.
 sources:
-  - https://ludo.ai/pricing
+  - https://api.ludo.ai/api-documentation/openapi.json
+  - https://api.ludo.ai/api/payment/plans
+  - https://ludo.ai/developers/api
 responseCodes:
   throttled: 429
   quotaExceeded: 429
+headers:
+  retryAfter: Retry-After
 limits:
-  - name: API/MCP concurrent requests (Indie)
+  - name: Concurrent generations (Indie)
     scope: account
-    metric: concurrent_requests
-    limit: 0
-    notes: API/MCP access not included on Indie tier.
-  - name: API/MCP concurrent requests (Pro)
-    scope: account
-    metric: concurrent_requests
+    metric: concurrent_jobs
     limit: 1
-  - name: API/MCP concurrent requests (Studio)
+    notes: Web app only; Indie has no API, MCP or CLI access.
+  - name: Concurrent generations (Pro)
     scope: account
-    metric: concurrent_requests
+    metric: concurrent_jobs
+    limit: 2
+  - name: Concurrent generations (Studio)
+    scope: team
+    metric: concurrent_jobs
     limit: 5
-  - name: API/MCP concurrent requests (Enterprise)
+  - name: Concurrent generations (Enterprise)
     scope: contract
-    metric: concurrent_requests
-    limit: 'see contract'
-  - name: Annual credit quota (Indie)
+    metric: concurrent_jobs
+    limit: see contract
+  - name: Pending API generations
     scope: account
-    metric: credits_per_year
-    limit: 3000
-    timeFrame: year
-  - name: Annual credit quota (Pro)
+    metric: queued_or_running_jobs
+    limit: 50
+    notes: Beyond this a submission returns 429 with code PENDING_JOBS_LIMIT.
+  - name: Job status reads
+    scope: api_key
+    metric: requests
+    limit: 150
+    timeFrame: 5 minutes
+    notes: GET /assets/jobs and GET /assets/jobs/{id}; a 429 carries Retry-After.
+  - name: Documentation search
+    scope: caller
+    metric: requests
+    limit: 60
+    timeFrame: 5 minutes
+    notes: GET /docs/search, also capped at 1000 per day. Free, no credits.
+  - name: Documentation read
+    scope: caller
+    metric: requests
+    limit: 150
+    timeFrame: 5 minutes
+    notes: GET /docs. Free, no credits.
+  - name: Monthly credits (Indie)
     scope: account
-    metric: credits_per_year
-    limit: 12000
-    timeFrame: year
-  - name: Annual credit quota (Studio)
+    metric: credits
+    limit: 250
+    timeFrame: month
+  - name: Monthly credits (Pro)
     scope: account
-    metric: credits_per_year
-    limit: 120000
-    timeFrame: year
+    metric: credits
+    limit: 1000
+    timeFrame: month
+  - name: Monthly credits (Studio)
+    scope: team
+    metric: credits
+    limit: 10000
+    timeFrame: month
+    notes: 1,000 per seat, 10 seats.
 policies:
-  - name: Concurrency-based throttling
-    description: API and MCP access throttle by concurrent requests rather than per-second RPS.
+  - name: Queue, not rejection
+    description: Work above a plan's concurrency waits in the queue rather than failing; only the
+      50-pending cap returns 429.
+  - name: Long-polling
+    description: GET /assets/jobs/{id}?wait=30 holds up to 30 s (max 60) and returns when the job
+      finishes; non-terminal responses carry poll_after_ms. Prefer it to tight polling.
+  - name: Annual credits upfront
+    description: Annual plans grant the whole year of credits at the start of the cycle.
   - name: Top-up credits
-    description: Monthly plans can top up credits mid-cycle to avoid running out.
+    description: Any paid plan can buy 250 to 10,000 extra credits at once, or turn on automatic
+      top-up.
   - name: Refund window
-    description: Annual plans have a 30-day refund window if fewer than 250 credits used (1,000 for Pro/Studio);
-      monthly plans non-refundable.
+    description: Annual plans have a 30-day refund window if fewer than 250 credits were used (1,000
+      for Pro or Studio); monthly plans and top-ups are non-refundable.
   - name: Backoff
-    description: On 429, retry with exponential backoff and respect Retry-After when present.
+    description: On 429, wait for Retry-After when present, otherwise back off exponentially.

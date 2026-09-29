@@ -1,412 +1,838 @@
-openapi: 3.2.0
+# Split of openapi/_original/ludo-ai-rest-api-openapi.yml by tag (Images).
+openapi: 3.0.0
 info:
-  title: Ludo.ai REST Images API
-  description: The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.
-  version: 1.0.0
+  version: 0.9.10
+  title: Ludo.ai Images API
+  description: |-
+    Generate, restyle, edit and remove the background of game-ready images: sprites, icons, UI, textures and backgrounds.
+
+    Part of the Ludo.ai public API. Full spec: https://api.ludo.ai/api-documentation/openapi.json
+  x-logo:
+    url: https://api.ludo.ai/static/logo-small.png
+    altText: Logo
+  x-model-lineup: 'Current models: hydra (Hydra) - Most capable all-around model, generates audio. forge
+    (Forge) - Sharper detail, simpler motion. Best for simple body shapes and short actions; may need
+    a few tries. forge-pixel (Forge Pixel) - Best for low-res pixel art animations. griffin (Griffin)
+    - Fast cinematic videos in any style, with audio, 480p. griffin-hd (Griffin HD) - Same as Griffin,
+    but in 720p. Per action - sprite animation: hydra, forge, forge-pixel; motion transfer: hydra, forge,
+    forge-pixel; spritesheet editing: hydra, forge, forge-pixel; video generation: griffin, griffin-hd;
+    references to video: griffin, griffin-hd; video editing: griffin-hd. LEGACY models, still accepted
+    but scheduled for removal - do not use them for new work: blitz, eagle, eagle-audio, tango.'
   contact:
     name: Ludo.ai Support
-    url: https://ludo.ai
-  termsOfService: https://ludo.ai/terms
+    email: support@ludo.ai
+    url: https://ludo.ai/contact
+  termsOfService: https://ludo.ai/terms-of-service
+externalDocs:
+  description: API reference
+  url: https://api.ludo.ai/api-documentation
 servers:
 - url: https://api.ludo.ai/api
-  description: Production Server
-security:
-- apiKeyAuth: []
+  description: Production
 tags:
 - name: Images
-  description: Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.
 paths:
-  /images/create:
+  /assets/image:
     post:
+      summary: createImage
+      tags:
+      - Images
       operationId: createImage
-      summary: Ludo.ai Generate a game-ready image
-      description: Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated.
-      tags:
-      - Images
+      x-credit-action: GENERATE_IMAGE
+      security:
+      - ApiKey: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateImageRequest'
+              $ref: '#/components/schemas/GenerateImagePayload'
+        required: true
       responses:
         '200':
-          description: Successfully generated image(s)
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ImageResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageResult'
+        '202':
+          description: 'Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous
+            (async: false) call still running after 15 minutes also receives this.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
         '400':
-          description: Invalid request parameters
+          description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Missing or invalid API key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Rate limit exceeded or insufficient credits
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /images/edit:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/image" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"image_type":"generic","prompt":"string"}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/image", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "image_type": "generic",
+              "prompt": "string"
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/image",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "image_type": "generic",
+                "prompt": "string"
+              }
+          )
+
+          print(response.json())
+      x-credit-description: This endpoint consumes 0.5 credits per result
+      x-credit-summary: This endpoint consumes 0.5 credits per result
+      description: |-
+        Generate game-art images from a text prompt alone, selecting an image_type (e.g. sprite) and optionally art_style, perspective, and aspect_ratio. The job result is an array of image results, each with a url; request n (1-8) to control how many variations come back. Because it generates purely from text it takes no source image, so there is no upload size limit to trip. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use createImage to make new images from scratch; use generateWithStyle to match a reference image's art style, editImage to modify an existing image, and removeBackground to cut out a subject. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        > **Credits:** This endpoint consumes 0.5 credits per result.
+      x-mcp-description: |-
+        Generate game-art images from a text prompt alone, selecting an image_type (e.g. sprite) and optionally art_style, perspective, and aspect_ratio. The job result is an array of image results, each with a url; request n (1-8) to control how many variations come back. Because it generates purely from text it takes no source image, so there is no upload size limit to trip. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use createImage to make new images from scratch; use generateWithStyle to match a reference image's art style, editImage to modify an existing image, and removeBackground to cut out a subject. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        Credits: This endpoint consumes 0.5 credits per result.
+  /assets/image/style:
     post:
-      operationId: editImage
-      summary: Ludo.ai Edit an existing image
-      description: Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated.
+      summary: generateWithStyle
       tags:
       - Images
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EditImageRequest'
-      responses:
-        '200':
-          description: Successfully edited image(s)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ImageResponse'
-        '400':
-          description: Invalid request parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Missing or invalid API key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /images/generate-with-style:
-    post:
       operationId: generateWithStyle
-      summary: Ludo.ai Generate an image matching a reference style
-      description: Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated.
-      tags:
-      - Images
+      x-credit-action: GENERATE_IMAGE
+      security:
+      - ApiKey: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GenerateWithStyleRequest'
+              $ref: '#/components/schemas/GenerateWithStylePayload'
+        required: true
       responses:
         '200':
-          description: Successfully generated styled image(s)
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ImageResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageResult'
+        '202':
+          description: 'Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous
+            (async: false) call still running after 15 minutes also receives this.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
         '400':
-          description: Invalid request parameters
+          description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Missing or invalid API key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /images/generate-pose:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/image/style" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"style_image":"<url> OR data:image/png;base64,...","prompt":"string"}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/image/style", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "style_image": "<url> OR data:image/png;base64,...",
+              "prompt": "string"
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/image/style",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "style_image": "<url> OR data:image/png;base64,...",
+                "prompt": "string"
+              }
+          )
+
+          print(response.json())
+      x-credit-description: This endpoint consumes 0.5 credits per result
+      x-credit-summary: This endpoint consumes 0.5 credits per result
+      description: |-
+        Generate new images that match the visual style of a reference image: supply a style_image (URL or base64) plus a text prompt describing what to create and an optional image_type (defaults to sprite). The job result is an array of image results, each with a url; request n (1-4) to control the number of variations. The style_image is uploaded and validated, and an image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use this instead of createImage when style consistency with an existing asset matters; use editImage to alter the content of a specific image rather than borrow its style, and removeBackground to isolate a subject. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        > **Credits:** This endpoint consumes 0.5 credits per result.
+      x-mcp-description: |-
+        Generate new images that match the visual style of a reference image: supply a style_image (URL or base64) plus a text prompt describing what to create and an optional image_type (defaults to sprite). The job result is an array of image results, each with a url; request n (1-4) to control the number of variations. The style_image is uploaded and validated, and an image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use this instead of createImage when style consistency with an existing asset matters; use editImage to alter the content of a specific image rather than borrow its style, and removeBackground to isolate a subject. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        Credits: This endpoint consumes 0.5 credits per result.
+  /assets/image/edit:
     post:
-      operationId: generatePose
-      summary: Ludo.ai Generate a new pose for an existing sprite
-      description: Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated.
+      summary: editImage
       tags:
       - Images
+      operationId: editImage
+      x-credit-action: GENERATE_IMAGE
+      security:
+      - ApiKey: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GeneratePoseRequest'
+              $ref: '#/components/schemas/EditImagePayload'
+        required: true
       responses:
         '200':
-          description: Successfully generated pose(s)
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoseResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageResult'
+        '202':
+          description: 'Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous
+            (async: false) call still running after 15 minutes also receives this.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
         '400':
-          description: Invalid request parameters
+          description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Missing or invalid API key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /images/remove-background:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/image/edit" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"image":"<url> OR data:image/png;base64,...","prompt":"string"}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/image/edit", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "image": "<url> OR data:image/png;base64,...",
+              "prompt": "string"
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/image/edit",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "image": "<url> OR data:image/png;base64,...",
+                "prompt": "string"
+              }
+          )
+
+          print(response.json())
+      x-credit-description: This endpoint consumes 0.5 credits per result
+      x-credit-summary: This endpoint consumes 0.5 credits per result
+      description: |-
+        Modify an existing image according to text instructions: supply a source image (URL or base64) and a prompt describing the changes (e.g. "add clouds", "warmer color scheme"), with an optional reference_image for extra style or content guidance. The job result is an array of image results, each with a url; request n (1-4) to control the number of edited variations. Provided images are uploaded and validated, and any image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use editImage to transform a specific existing image; use createImage to generate from text alone, generateWithStyle to borrow a reference's art style, and removeBackground for the dedicated background-removal case. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        > **Credits:** This endpoint consumes 0.5 credits per result.
+      x-mcp-description: |-
+        Modify an existing image according to text instructions: supply a source image (URL or base64) and a prompt describing the changes (e.g. "add clouds", "warmer color scheme"), with an optional reference_image for extra style or content guidance. The job result is an array of image results, each with a url; request n (1-4) to control the number of edited variations. Provided images are uploaded and validated, and any image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images produced. Use editImage to transform a specific existing image; use createImage to generate from text alone, generateWithStyle to borrow a reference's art style, and removeBackground for the dedicated background-removal case. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll getApiJob (pass wait 30 to long-poll) honouring poll_after_ms, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        Credits: This endpoint consumes 0.5 credits per result.
+  /assets/image/remove-background:
     post:
-      operationId: removeImageBackground
-      summary: Ludo.ai Remove background from an image
-      description: Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image.
+      summary: removeBackground
       tags:
       - Images
+      operationId: removeBackground
+      x-credit-action: GENERATE_IMAGE
+      security:
+      - ApiKey: []
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveBackgroundRequest'
+              $ref: '#/components/schemas/RemoveBackgroundPayload'
+        required: true
       responses:
         '200':
-          description: Successfully removed background
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ImageResponse'
+                $ref: '#/components/schemas/ImageResult'
+        '202':
+          description: 'Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous
+            (async: false) call still running after 15 minutes also receives this.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
         '400':
-          description: Invalid request parameters
+          description: Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Missing or invalid API key
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X POST "https://api.ludo.ai/api/assets/image/remove-background" \
+            -H "Authorization: ApiKey YOUR_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"image":"<url> OR data:image/png;base64,..."}'
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/image/remove-background", {
+            method: "POST",
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "image": "<url> OR data:image/png;base64,..."
+            })
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.post(
+              "https://api.ludo.ai/api/assets/image/remove-background",
+              headers={
+                  "Authorization": "ApiKey YOUR_API_KEY",
+                  "Content-Type": "application/json"
+              },
+              json={
+                "image": "<url> OR data:image/png;base64,..."
+              }
+          )
+
+          print(response.json())
+      x-credit-description: This endpoint consumes 0.5 credits per result
+      x-credit-summary: This endpoint consumes 0.5 credits per result
+      description: |-
+        Remove the background from a single image, returning the subject isolated on a transparent background. Supply the source image (URL or base64); optionally set crop to trim the result to the content, and creative_edit (default true) for higher-quality output that may not match the input pixel-for-pixel - set it false when the subject must stay pixel-identical, e.g. an existing sprite you will animate. The job result is a single image result with a url (not an array). The image is uploaded and validated, and an image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled. Use removeBackground for this dedicated cutout task; editImage can also remove backgrounds via a prompt but is better for broader edits, while createImage and generateWithStyle produce new images rather than process an existing one. Pass an optional request_id to tag the result so you can retrieve it later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll `GET /assets/jobs/{id}`, honouring poll_after_ms or long-polling with wait=30, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        > **Credits:** This endpoint consumes 0.5 credits per result.
+      x-mcp-description: |-
+        Remove the background from a single image, returning the subject isolated on a transparent background. Supply the source image (URL or base64); optionally set crop to trim the result to the content, and creative_edit (default true) for higher-quality output that may not match the input pixel-for-pixel - set it false when the subject must stay pixel-identical, e.g. an existing sprite you will animate. The job result is a single image result with a url (not an array). The image is uploaded and validated, and an image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is cancelled. Use removeBackground for this dedicated cutout task; editImage can also remove backgrounds via a prompt but is better for broader edits, while createImage and generateWithStyle produce new images rather than process an existing one. Pass an optional request_id to tag the result so you can retrieve it later via listGenerations (type image). Requires an API key (user scope). The call returns 202 with a job id - poll `GET /assets/jobs/{id}`, honouring poll_after_ms or long-polling with wait=30, until status is succeeded; its result field is exactly the response documented for this operation. Synchronous responses are deprecated but still supported: pass `async: false` to block until the result is ready and receive it as the response body. Synchronous calls run on the same queue: the response carries an X-Ludo-Job-Id header, and a job still running after 15 minutes comes back as 202 with the job instead of an error. Each account may have up to 50 generations queued or running at once via the API; a request beyond that returns 429 (code PENDING_JOBS_LIMIT).
+
+        Credits: This endpoint consumes 0.5 credits per result.
+  /assets/images/results:
+    get:
+      description: |-
+        **Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.
+        List images you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called createImage, editImage, generateWithStyle, generatePose, rotateSprite, or removeBackground. Requires an API key (user scope).
+      tags:
+      - Images
+      operationId: getImageResults
+      deprecated: true
+      x-mcp-exclude: true
+      security:
+      - ApiKey: []
+      parameters:
+      - name: request_id
+        in: query
+        description: Filter results by request_id
+        required: false
+        schema:
+          type: string
+      - name: source
+        in: query
+        description: 'Which surface the results were generated from: api (default, your API/MCP generations
+          from the last 7 days), web (your Ludo web studio generations, no time limit), or all'
+        required: false
+        schema:
+          type: string
+          enum:
+          - api
+          - web
+          - all
+          default: api
+      responses:
+        '200':
+          description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageResult'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: |-
+          curl -X GET "https://api.ludo.ai/api/assets/images/results" \
+            -H "Authorization: ApiKey YOUR_API_KEY"
+      - lang: JavaScript
+        label: JavaScript
+        source: |-
+          const response = await fetch("https://api.ludo.ai/api/assets/images/results", {
+            headers: {
+              "Authorization": "ApiKey YOUR_API_KEY"
+            }
+          });
+
+          const data = await response.json();
+          console.log(data);
+      - lang: Python
+        label: Python
+        source: |-
+          import requests
+
+          response = requests.get(
+              "https://api.ludo.ai/api/assets/images/results",
+              headers={"Authorization": "ApiKey YOUR_API_KEY"}
+          )
+
+          print(response.json())
 components:
   schemas:
-    ImageResponse:
+    EditImagePayload:
       type: object
-      properties:
-        images:
-          type: array
-          description: Array of generated image objects.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: URL of the generated image. Expires after 7 days.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
-    EditImageRequest:
-      type: object
+      description: Payload for editing an existing image based on text instructions
       required:
       - image
       - prompt
       properties:
         image:
           type: string
-          description: URL or base64-encoded image to edit.
+          description: URL or base64-encoded source image to edit.
+          example: <url> OR data:image/png;base64,...
         prompt:
           type: string
-          description: Description of changes to apply to the image.
+          description: Text description of the changes to make (e.g., "remove the background", "add clouds
+            to the sky", "make it darker", "change the color scheme to warmer tones").
         reference_image:
           type: string
-          description: URL or base64-encoded reference image for style or content guidance.
+          description: Optional URL or base64-encoded reference image for style or content guidance.
+          example: <url> OR data:image/png;base64,...
         n:
-          type: integer
-          description: Number of edited variations to generate.
+          type: number
+          format: integer
+          description: Number of edited variations to generate (1-4).
           minimum: 1
           maximum: 4
           default: 1
+          example: 1
+        augment_prompt:
+          type: boolean
+          default: true
+          description: Augment the prompt behind the scenes. Disable to have more control.
+          example: true
         request_id:
           type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    GenerateWithStyleRequest:
+          description: Optional client-provided identifier, unique per request. Re-sending the same request_id
+            returns the existing job instead of generating again. Also usable as the request_id filter
+            of listGenerations.
+        async:
+          type: boolean
+          default: true
+          description: 'Defaults to true: the call returns 202 immediately with a job id to poll with
+            getApiJob. Set false for a synchronous response (deprecated but supported): the call then
+            blocks until the result is ready.'
+          example: true
+    ErrorResponse:
       type: object
-      required:
-      - style_image
-      - prompt
-      - image_type
       properties:
-        style_image:
+        message:
           type: string
-          description: URL or base64-encoded reference image for style matching.
-        prompt:
+        metadata:
           type: string
-          description: Description of what to generate while maintaining the reference style.
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+              example: payment
+            client_secret:
+              type: string
+    GenerateImagePayload:
+      type: object
+      description: Payload for generating an image from text prompt
+      required:
+      - image_type
+      - prompt
+      properties:
         image_type:
           type: string
-          description: The type of game asset to generate.
+          description: What kind of image to generate.
           enum:
-          - sprite
-          - icon
+          - generic
           - screenshot
           - art
           - asset
+          - sprite
           - sprite-vfx
+          - sprite-tiling-horizontal
+          - sprite-tiling-vertical
+          - icon
+          - logo
           - ui_asset
           - fixed_background
+          - side_scrolling_background
+          - vertical_scrolling_background
+          - parallax_layer
           - texture
+          - tile
+          - item-icon
+          - portrait
+          - card-art
+          - splash
           - 3d
-          - generic
-        n:
-          type: integer
-          description: Number of image variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
-    RemoveBackgroundRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded image to remove background from.
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    GeneratePoseRequest:
-      type: object
-      required:
-      - image
-      - pose
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded sprite image.
-        pose:
-          type: string
-          description: Target pose for the sprite. Can be a preset or custom description.
-          enum:
-          - Idle (Front)
-          - Idle (Back)
-          - Walk / Run (Left)
-          - Attack Ready
-          - Jumping
-          - Crouching
-          - Flying
-          - Defending / Blocking
-        description:
-          type: string
-          description: Additional instructions to guide pose generation.
-        n:
-          type: integer
-          description: Number of pose variations to generate.
-          minimum: 1
-          maximum: 4
-          default: 1
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    CreateImageRequest:
-      type: object
-      required:
-      - prompt
-      - image_type
-      properties:
+          example: generic
         prompt:
           type: string
-          description: Detailed description of the image to generate.
-        image_type:
-          type: string
-          description: The type of game asset to generate.
-          enum:
-          - sprite
-          - icon
-          - screenshot
-          - art
-          - asset
-          - sprite-vfx
-          - ui_asset
-          - fixed_background
-          - texture
-          - 3d
-          - generic
+          description: Text description of the image to generate. The more detailed the prompt, the more
+            accurate the image will be.
         art_style:
           type: string
-          description: The art style for the generated image.
+          description: Visual art style for the sprite (e.g., "Pixel Art", "Cartoonish", "Realistic").
           enum:
-          - Pixel Art (16-Bit)
-          - Pixel Art (8-Bit)
-          - Low Poly
-          - Cartoonish
-          - Stylized 3D
-          - Flat Design
+          - Any style
+          - Cel-Shaded
+          - Inked Painterly
+          - Illustration
+          - Western Cartoon
           - Anime/Manga
+          - Chibi
+          - 8-Bit
+          - 16-Bit
+          - 32-Bit
+          - Hi-Bit
+          - Retro 2D
+          - Hand-Painted
+          - Digital Painting
+          - Comic Book
+          - Block Print
+          - Sketch
+          - Watercolor
+          - Stylized 3D
+          - Pixar Style
+          - Low Poly
+          - Photorealistic 3D
           - Voxel Art
+          - Retro 3D
+          - Flat Design
+          - Minimalist
+          - Silhouette
+          - Noir
+          - Neon
+          - Glitch Art
+          - Claymation
+          - Paper Craft
+          - Textile
+          example: Any style
         perspective:
           type: string
-          description: The camera perspective for the generated image.
+          description: Camera angle/view for the sprite (e.g., "Side view", "Front view", "Isometric").
           enum:
+          - Any perspective
           - Side-Scroll
-          - Top-Down
           - Isometric
+          - High Angle
+          - Top-Down
+          - 2.5D
           - First-Person
           - Third-Person
-          - 2.5D
+          - Over-the-Shoulder
+          - Free Camera
+          example: Any perspective
         aspect_ratio:
           type: string
-          description: The aspect ratio for the generated image.
-          default: default
+          description: Aspect ratio of the output image.
           enum:
           - default
           - ar_1_1
           - ar_4_3
           - ar_16_9
+          - ar_19_9
+          - ar_3_4
           - ar_9_16
+          - ar_9_19
+          example: default
         n:
           type: integer
-          description: Number of image variations to generate.
+          format: integer
+          default: 1
           minimum: 1
           maximum: 8
-          default: 1
+          description: Number of image variations to generate
+          example: 1
+        augment_prompt:
+          type: boolean
+          default: true
+          description: Augment the prompt behind the scenes. Disable to have more control.
+          example: true
         request_id:
           type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    PoseResponse:
+          description: Optional client-provided identifier, unique per request. Re-sending the same request_id
+            returns the existing job instead of generating again. Also usable as the request_id filter
+            of listGenerations.
+        async:
+          type: boolean
+          default: true
+          description: 'Defaults to true: the call returns 202 immediately with a job id to poll with
+            getApiJob. Set false for a synchronous response (deprecated but supported): the call then
+            blocks until the result is ready.'
+          example: true
+    GenerateWithStylePayload:
+      type: object
+      description: Payload for generating new content while maintaining the visual style of a reference
+        image
+      required:
+      - style_image
+      - prompt
+      properties:
+        style_image:
+          type: string
+          description: URL or base64-encoded reference image whose visual style should be matched.
+          example: <url> OR data:image/png;base64,...
+        prompt:
+          type: string
+          description: Text description of what to generate (e.g., "a warrior character", "a forest background",
+            "a treasure chest").
+        image_type:
+          type: string
+          description: What kind of image to generate.
+          default: sprite
+          enum:
+          - generic
+          - screenshot
+          - art
+          - asset
+          - sprite
+          - sprite-vfx
+          - sprite-tiling-horizontal
+          - sprite-tiling-vertical
+          - icon
+          - logo
+          - ui_asset
+          - fixed_background
+          - side_scrolling_background
+          - vertical_scrolling_background
+          - parallax_layer
+          - texture
+          - tile
+          - item-icon
+          - portrait
+          - card-art
+          - splash
+          - 3d
+          example: sprite
+        n:
+          type: number
+          format: integer
+          description: Number of variations to generate (1-4).
+          minimum: 1
+          maximum: 4
+          default: 1
+          example: 1
+        augment_prompt:
+          type: boolean
+          default: true
+          description: Augment the prompt behind the scenes. Disable to have more control.
+          example: true
+        request_id:
+          type: string
+          description: Optional client-provided identifier, unique per request. Re-sending the same request_id
+            returns the existing job instead of generating again. Also usable as the request_id filter
+            of listGenerations.
+        async:
+          type: boolean
+          default: true
+          description: 'Defaults to true: the call returns 202 immediately with a job id to poll with
+            getApiJob. Set false for a synchronous response (deprecated but supported): the call then
+            blocks until the result is ready.'
+          example: true
+    ImageResult:
       type: object
       properties:
-        images:
-          type: array
-          description: Array of generated pose image objects.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: URL of the generated pose image. Expires after 7 days.
-              pose:
-                type: string
-                description: The pose that was generated.
-              motion_prompt:
-                type: string
-                description: Suggested motion prompt for use with animateSprite to get optimal animation results from this pose.
+        url:
+          type: string
+          example: <url>
         request_id:
           type: string
-          description: The request ID if one was provided.
+        created_at:
+          type: integer
+    PublicJob:
+      type: object
+      required:
+      - id
+      - task_type
+      - status
+      - created_at
+      properties:
+        id:
+          type: string
+        task_type:
+          type: string
+          description: 'The public operationId that created this job (e.g. createImage). Determines the
+            shape of `result`: it is exactly the 200 response body documented for that operation.'
+        status:
+          type: string
+          enum:
+          - queued
+          - running
+          - succeeded
+          - failed
+          - canceled
+          example: queued
+        request_id:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+          description: Unix ms
+        finished_at:
+          type: integer
+          format: int64
+        credits_charged:
+          type: number
+          format: float
+          description: Credits this job cost you. Charged at enqueue; reported as 0 once a job fails or
+            is canceled, since the charge is refunded.
+        result:
+          type: object
+          description: Present only when status is succeeded. Same shape as the synchronous response of
+            the operation named by task_type.
+        error:
+          $ref: '#/components/schemas/PublicJobError'
+        poll_after_ms:
+          type: integer
+          format: int32
+          description: 'Present while the job is queued or running: wait at least this many milliseconds
+            before polling again. Prefer GET /assets/jobs/{id}?wait=30 (long-poll) over tight loops.'
+    PublicJobError:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+    RemoveBackgroundPayload:
+      type: object
+      description: Payload for removing the background of an image
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded image to remove the background from.
+          example: <url> OR data:image/png;base64,...
+        crop:
+          type: boolean
+          default: false
+          description: Whether to crop/trim the result to fit the content.
+          example: false
+        creative_edit:
+          type: boolean
+          default: true
+          description: Higher quality results but the image will not be exactly the same as the input.
+          example: true
+        request_id:
+          type: string
+          description: Optional client-provided identifier, unique per request. Re-sending the same request_id
+            returns the existing job instead of generating again. Also usable as the request_id filter
+            of listGenerations.
+        async:
+          type: boolean
+          default: true
+          description: 'Defaults to true: the call returns 202 immediately with a job id to poll with
+            getApiJob. Set false for a synchronous response (deprecated but supported): the call then
+            blocks until the result is ready.'
+          example: true
   securitySchemes:
-    apiKeyAuth:
+    ApiKey:
       type: apiKey
+      name: Authorization
       in: header
-      name: Authentication
-      description: 'API key authentication. Pass your API key in the Authentication header with the format: ApiKey YOUR_API_KEY'
-externalDocs:
-  description: Ludo.ai API Documentation
-  url: https://api.ludo.ai/api-documentation
+      description: |
+        For accessing the API a valid API Key token must be passed in all the queries in
+        the 'Authorization' header.
+        The following syntax must be used in the 'Authorization' header: ApiKey xxxxxx.yyyyyyy.zzzzzz

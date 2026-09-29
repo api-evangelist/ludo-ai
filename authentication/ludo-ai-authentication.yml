@@ -1,17 +1,20 @@
-generated: '2026-07-11'
+generated: '2026-09-29'
 method: derived
-source: openapi/ludo-ai-rest-api-openapi.yml
+source: openapi/_original/ludo-ai-rest-api-openapi.yml
 summary:
   types:
   - apiKey
   api_key_in:
   - header
 schemes:
-- name: apiKeyAuth
+- name: ApiKey
   type: apiKey
   in: header
-  parameter: Authentication
-  description: 'API key authentication. Pass your API key in the Authentication header with
-    the format: ApiKey YOUR_API_KEY'
+  parameter: Authorization
+  description: 'API key in the Authorization header, with the ApiKey prefix: `Authorization:
+    ApiKey YOUR_API_KEY`. Keys are created and revoked in the web app (API Keys in the
+    sidebar) and require a Pro or Studio plan. `GET /auth/validate-api-key` checks a key (200 valid, 403
+    invalid). The MCP server (https://mcp.ludo.ai/mcp) takes the same key in the same header.'
   sources:
-  - openapi/ludo-ai-rest-api-openapi.yml
+  - openapi/_original/ludo-ai-rest-api-openapi.yml
+  - https://ludo.ai/developers/api

@@ -212,3 +212,42 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-correction-request:
+  requested: '2026-10-02'
+  source:
+  - https://github.com/api-evangelist/ludo-ai/pull/1
+  request: >-
+    Submitted by Miguel Duarte (Ludo; npm maintainer of @ludoai/cli as miguel@ludo.ai).
+    Verified live 2026-10-02. CONTRACT: the previous openapi/_original (20 operations,
+    POST /images/create, /sprites/animate, GET /results/images ...) did not match the live
+    API -- invented paths return 404/405 while real ones return 403 unauthenticated. It has
+    been replaced with Ludo's own published spec fetched byte-verbatim from
+    https://api.ludo.ai/api-documentation/openapi.json (OpenAPI 3.0.0, info.version 0.9.10,
+    42 paths / 43 operations, sha256 672ed3e3...; also advertised as service-desc in
+    https://ludo.ai/.well-known/api-catalog). Its servers url is relative ('/api'), resolving to
+    https://api.ludo.ai/api. RE-PROFILE: re-run refine + split from that _original (Ludo's own
+    tags incl. Account and Documentation groups), drop the fabricated per-API splits, Postman and
+    OpenCollection collections and agentic-access derived from the old spec, and regenerate them.
+    AUTH: header is Authorization (not Authentication), value 'ApiKey <key>' -- spec
+    securitySchemes.ApiKey. LIMITS (spec info.description): 50 queued/running API generations per
+    account (429), job-status 150 req / 5 min per key, docs search 60 / 5 min and 1000 / day, docs
+    read 150 / 5 min. PRICING (ludo.ai/pricing): Pro $420/yr ($35/mo annual, saves $180 => $50
+    monthly), Studio $3,600/yr ($300/mo annual, saves $600 => $350 monthly); Indie 1 concurrent
+    job, Pro 2; API/MCP/CLI access from Pro; Auto Top-up and extra credits (250-10,000) on all paid
+    plans; 'save up to 30%' annual. Studio '5 concurrent' NOT found on the pricing page -- leave
+    unstated. POINTERS to add (all 200): APIReference https://api.ludo.ai/api-documentation;
+    OpenAPI https://api.ludo.ai/api-documentation/openapi.json; Portal https://ludo.ai/developers;
+    GettingStarted https://ludo.ai/developers/api; CLI https://ludo.ai/developers/cli (npm
+    @ludoai/cli, repo github.com/Ludo-AI/ludo-cli); MCPServer https://ludo.ai/developers/mcp
+    (https://mcp.ludo.ai/mcp answers initialize, serverInfo ludoai 0.9.10); Unity
+    https://ludo.ai/developers/unity; Pricing https://ludo.ai/pricing; ChangeLog
+    https://ludo.ai/whats-new; TermsOfService https://ludo.ai/terms-of-service (redirects to a
+    PDF); PrivacyPolicy https://ludo.ai/privacy-policies; SecurityTxt
+    https://ludo.ai/.well-known/security.txt; WellKnown https://ludo.ai/.well-known/api-catalog
+    (RFC 9727 linkset); LLMsTxt https://ludo.ai/llms.txt; Support https://ludo.ai/contact; Blog
+    https://ludo.ai/blog. Replace the dead/moved /api-mcp-integration and /docs/api-mcp humanURLs
+    with the /developers pages, and the Unity plugin baseURL placeholder https://api.example.com
+    with https://api.ludo.ai/api. NOT TAKEN: the PR's apis.yml, provenance, plans, rate-limits,
+    finops, authentication and split specs as files (pipeline-generated; regenerate from the
+    verified facts above), and its _original copy (taken from the live URL instead; the PR copy
+    had since drifted from the live file in 13 paths).

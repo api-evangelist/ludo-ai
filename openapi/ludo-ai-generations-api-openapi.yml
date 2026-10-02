@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  title: Ludo Ai Generations API
+  version: 0.9.10
+  x-logo:
+    url: /static/logo-small.png
+    altText: Logo
+  x-refined-note:
+  - x-model-lineup differs across the merged source definitions and was not carried
+  description: 'Operations tagged Generations across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+tags:
+- name: Generations
+paths:
+  /assets/generations:
+    get:
+      description: 'List your generation history - everything you have generated, through the API or in the Ludo web studio - most recent first. This is a free read-only lookup (no credits, no generation); it does not create anything. Pick a media `type` (image, spritesheet, video, audio, or 3d) and optionally narrow by free-text `search` (matched against tags, prompts and the other text on the asset), `source`, a `date_from`/`date_to` range (unix seconds), or the `request_id` you passed when you generated. Results are paginated with `page_size` (default 20, max 100) and 1-based `page_number`, and come back as an object: `items` (this page), plus `page`, `page_size` and `has_more`. Page until `has_more` is false rather than until you get a short page. `has_more` is computed by reading one row beyond the page, so it costs no extra query; there is deliberately no total count.
+
+
+        `source` selects the surface an item came from: `api` returns only your API/MCP generations, `web` only your web-studio ones, `all` (the default) both. API-originated items expire 7 days after creation - their files live under a lifecycle-pruned storage prefix - so `source=api` never returns anything older than 7 days, while web items are kept indefinitely and are not time-bounded. API-originated results expire after 7 days - download anything you want to retain. (Assets can be kept permanently from the Ludo web app.) Each item carries an `id`, its generation-history id, which identifies the item across these listings. Every item also carries `type`, echoing the media type you asked for; on audio items the kind of audio (sfx, music, speech) is reported as `audio_type` so it does not collide with it.
+
+
+        This lists work that has already FINISHED. To follow a generation that is still queued or running, poll getApiJob with the job id you were given instead. Requires an API key (user scope).'
+      x-mcp-description: List your generation history across the API and the web app - filter by type, source (api|web|all), text search, and date range. Returns {items, page, page_size, has_more}; keep paging while has_more is true. API-originated results expire after 7 days - download anything you want to retain. For an in-flight job's status use getApiJob instead.
+      tags:
+      - Generations
+      operationId: listGenerations
+      security:
+      - ApiKey: []
+      parameters:
+      - name: type
+        in: query
+        description: Which kind of generation to list
+        required: true
+        schema:
+          type: string
+          enum:
+          - image
+          - spritesheet
+          - video
+          - audio
+          - 3d
+      - name: search
+        in: query
+        description: Free-text search. Every whitespace-separated term must match (case-insensitive substring) the item's tags or one of its text fields (prompt, hints, style, label, ...), so "dwarf axe" narrows to items matching both.
+        required: false
+        schema:
+          type: string
+      - name: source
+        in: query
+        description: 'Which surface the items were generated from: api (your API/MCP generations, last 7 days only), web (your Ludo web studio generations, no time limit), or all (default, both)'
+        required: false
+        schema:
+          type: string
+          enum:
+          - api
+          - web
+          - all
+          default: all
+      - name: date_from
+        in: query
+        description: Only return items generated at or after this time (unix seconds)
+        required: false
+        schema:
+          type: integer
+      - name: date_to
+        in: query
+        description: Only return items generated at or before this time (unix seconds)
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Items per page (1-100)
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: page_number
+        in: query
+        description: 1-based page number
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: request_id
+        in: query
+        description: Only return items tagged with this request_id when you generated them
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationList'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X GET \"https://api.ludo.ai/api/assets/generations\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/generations\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/generations\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: List generations
+      x-summary-source: derived
+    servers:
+    - url: /api
+components:
+  schemas:
+    GenerationListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Generation-history id of this item, identifying it across these listings. API-originated results expire after 7 days - download anything you want to retain. (Assets can be kept permanently from the Ludo web app.)
+        type:
+          type: string
+          description: The media type of this item, echoing the requested `type`.
+          enum:
+          - image
+          - spritesheet
+          - video
+          - audio
+          - 3d
+          example: image
+        request_id:
+          type: string
+        created_at:
+          type: integer
+          description: When the item was generated (unix seconds).
+        url:
+          type: string
+          description: 'image / video / audio: URL to the generated file.'
+          example: <url>
+        duration:
+          type: number
+          format: float
+          description: 'video / audio / spritesheet: duration in seconds.'
+        has_audio:
+          type: boolean
+          description: video only.
+        audio_type:
+          type: string
+          description: 'audio only: the kind of audio (sfx, music, speech). Named `audio_type` here, not `type`, because `type` reports the media type on every item.'
+        spritesheet_url:
+          type: string
+          description: spritesheet only.
+          example: <url>
+        video_url:
+          type: string
+          description: 'spritesheet only: preview video.'
+          example: <url>
+        audio_url:
+          type: string
+          description: 'spritesheet only: URL of the sheet''s sound effect (MP3 or WAV; the extension says which), when it has one.'
+          example: <url>
+        num_frames:
+          type: integer
+          description: spritesheet only.
+        num_cols:
+          type: integer
+          description: 'spritesheet only: columns in the frame grid. Frames run left-to-right, top-to-bottom.'
+        num_rows:
+          type: integer
+          description: 'spritesheet only: rows in the frame grid. The last row may be only partly filled.'
+        model_url:
+          type: string
+          description: '3d only: URL to the generated model file.'
+          example: <url>
+        snapshots:
+          type: array
+          items:
+            type: string
+          description: '3d only: preview snapshot URLs.'
+    GenerationList:
+      type: object
+      properties:
+        items:
+          type: array
+          description: This page of results, newest first.
+          items:
+            $ref: '#/components/schemas/GenerationListItem'
+        page:
+          type: integer
+          description: The 1-based page number these items came from.
+        page_size:
+          type: integer
+          description: The page size actually applied (your page_size, clamped to 1-100).
+        has_more:
+          type: boolean
+          description: Whether at least one more page exists after this one. Page until this is false rather than until you get a short page.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+              example: payment
+            client_secret:
+              type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+x-refined-from:
+- ludo-ai-rest-api-openapi.yml
+- ludo-ai-openapi.json

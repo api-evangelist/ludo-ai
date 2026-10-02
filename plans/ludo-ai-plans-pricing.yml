@@ -1,203 +1,26 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Ludo.ai
-providerId: ludo-ai
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Artificial Intelligence
-  - Asset Generation
-  - Game Development
-  - Generative AI
-description: Ludo.ai prices via four credit-based subscription tiers — Indie, Pro, Studio, Enterprise.
-  Credits are upfront annual allotments consumed by asset generation; annual billing saves 30-35% vs.
-  monthly. API and MCP access begin at the Pro tier with concurrent-request limits per tier. Top-up
-  credit purchases are available on monthly plans.
-sources:
-  - https://ludo.ai/pricing
+name: Ludo.ai
+generated: '2026-10-02'
+method: searched
+source: https://ludo.ai/pricing
+audience: developer-api
+pricing_basis: per-call
+published: true
 plans:
-  - id: ludo-ai-indie
-    name: Indie
-    type: subscription
-    description: $20/month or $15/month annual ($180/yr). 3,000 credits/year, 1 seat, 5 active projects, basic support.
-    entries:
-      - label: Annual subscription
-        name: subscription_annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '180.00'
-        userMultiplied: false
-      - label: Monthly subscription
-        name: subscription_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '20.00'
-        userMultiplied: false
-      - label: Annual credits
-        name: credits_annual
-        type: quota
-        metric: credits
-        limit: 3000
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Seats
-        name: seats
-        type: quota
-        metric: seat
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: 5 active projects
-      - name: Basic support
-  - id: ludo-ai-pro
-    name: Pro
-    type: subscription
-    description: ~$47/month or $35/month annual ($420/yr). 12,000 credits/year, unlimited active projects,
-      API and MCP access (1 concurrent request), premium support.
-    entries:
-      - label: Annual subscription
-        name: subscription_annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '420.00'
-        userMultiplied: false
-      - label: Monthly subscription
-        name: subscription_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '47.00'
-        userMultiplied: false
-      - label: Annual credits
-        name: credits_annual
-        type: quota
-        metric: credits
-        limit: 12000
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: API concurrent requests
-        name: api_concurrency
-        type: quota
-        metric: concurrent_requests
-        limit: 1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Unlimited active projects
-      - name: Unlimited ideation / game concept / image generation
-      - name: API & MCP access (1 concurrent request)
-      - name: Premium support
-  - id: ludo-ai-studio
-    name: Studio
-    type: subscription
-    description: $300/month annual ($3,600/yr). 120,000 credits/year, 10 seats, real-time collaboration,
-      API/MCP (5 concurrent requests), priority support.
-    entries:
-      - label: Annual subscription
-        name: subscription_annual
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '3600.00'
-        userMultiplied: false
-      - label: Monthly subscription
-        name: subscription_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '300.00'
-        userMultiplied: false
-      - label: Annual credits
-        name: credits_annual
-        type: quota
-        metric: credits
-        limit: 120000
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Seats
-        name: seats
-        type: quota
-        metric: seat
-        limit: 10
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: API concurrent requests
-        name: api_concurrency
-        type: quota
-        metric: concurrent_requests
-        limit: 5
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: 10 seats
-      - name: Real-time collaboration
-      - name: API & MCP (5 concurrent requests)
-      - name: Priority support
-  - id: ludo-ai-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Contact sales. Custom integrations, tailored AI solutions, dedicated support, volume licensing.
-    entries:
-      - label: Custom contract
-        name: custom
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Custom integrations
-      - name: Tailored AI solutions
-      - name: Dedicated support
-      - name: Volume licensing
+  - name: Indie
+    description: For individuals that want to turbocharge their game development. No API / MCP / CLI access.
+    price_text: "$15 / mo paid annually"
+    price: 15
+    currency: USD
+    billing_period: monthly
+    limits:
+      - name: credits_per_year
+        max: 3000
+        window: year
+        note: "0.06 per credit"
+  - name: Pro
+    description: Perfect for solo developers who need unlimited creative freedom. Includes API / MCP / CLI access.
+    price_text: "$35"
+    price: 35
+    currency: USD
+    billing_period: monthly
+    limits: []

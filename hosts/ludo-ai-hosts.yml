@@ -1,0 +1,104 @@
+generated: '2026-10-02'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 4
+  other_domain: 0
+  platform: 2
+  roles:
+  - docs
+  - other
+  - source
+  - website
+hosts:
+- host: api.ludo.ai
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  types:
+  - APIReference
+  serves:
+  - api
+  - docs
+  - spec
+  registrable_domain: ludo.ai
+  role: docs
+  relation: own
+- host: app.ludo.ai
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: ludo.ai
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  - docs-index
+  types:
+  - GitHubOrganization
+  - MCPServer
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: ludo.ai
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - PrivacyPolicy
+  - Pricing
+  - ChangeLog
+  - Website
+  - Portal
+  - Documentation
+  - Blog
+  - Login
+  serves:
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: ludo.ai
+  role: website
+  relation: own
+- host: mcp.ludo.ai
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: ludo.ai
+  role: other
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

@@ -1,0 +1,6 @@
+# Report security vulnerabilities in ludo.ai, app.ludo.ai, api.ludo.ai
+# or mcp.ludo.ai to the address below.
+Contact: mailto:support@ludo.ai
+Expires: 2027-09-29T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://ludo.ai/.well-known/security.txt

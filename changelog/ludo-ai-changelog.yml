@@ -1,0 +1,41 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://ludo.ai/whats-new
+sources:
+- https://ludo.ai/whats-new
+entries:
+- breaking: false
+  highlights:
+  - 'Ludo now has a command line. ludo puts every Ludo generator in your terminal: sprites and spritesheet animations, images, 3D models with
+    rigging and animation, video, sound effects, music and voices.'
+  - npm install -g @ludoai/cli
+  - Every result is saved to ./ludo-output, and in terminals that can draw images, like iTerm2, Kitty, Ghostty and WezTerm, it shows up right
+    under your command.
+  date: '2026-09-28'
+- breaking: false
+  highlights:
+  - Hydra is the new default animation model in the Sprite Generator.
+  - It runs at 3 credits per second, for animations from 3 to 5 seconds.
+  - 'Every Hydra animation comes with audio: a sound track timed to the motion.'
+  date: '2026-09-21'
+- breaking: false
+  highlights:
+  - Your Ludo account can now ask for a second step when you sign in, so a password on its own is not the only thing between your projects and
+    somebody else.
+  - You can use an authenticator app, a passkey, or both together.
+  - Turning on your first factor gives you ten single-use recovery codes, shown exactly once.
+  date: '2026-09-01'
+- breaking: false
+  highlights:
+  - Every animation starts with a skeleton, and now any 3D model in your library can get one in a single click – no external software, no manual
+    weight‑painting.
+  - Pick a Joint naming convention and your bones come out named the way your engine or DCC tool expects.
+  - Rigging costs just 1 credit, and you can re‑rig to save a fresh variant without losing the original.
+  date: '2026-07-27'
+- breaking: false
+  highlights:
+  - Run low on credits mid‑project? Now you can top up credits anytime, with an optional auto top‑up feature.
+  date: '2026-07-17'
+note: The page does not specify a versioning scheme or a current version number; these fields are set to null.
+docs: https://ludo.ai/whats-new

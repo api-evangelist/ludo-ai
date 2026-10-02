@@ -1,0 +1,9 @@
+generated: '2026-10-02'
+method: searched
+source: https://registry.npmjs.org/@ludoai/cli
+packages:
+  - name: "@ludoai/cli"
+    registry: "npm"
+    official: true
+    version: "0.1.4"
+    published: "2024-03-15"

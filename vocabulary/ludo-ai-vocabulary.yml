@@ -1,0 +1,424 @@
+generated: '2026-10-02'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/ludo-ai-3d-models-api-openapi.yml
+- openapi/ludo-ai-animation-api-openapi.yml
+- openapi/ludo-ai-audio-api-openapi.yml
+- openapi/ludo-ai-images-api-openapi.yml
+- openapi/ludo-ai-openapi.json
+vocabulary:
+  name: Ludo.ai Domain Vocabulary
+  description: 'Terms declared by Ludo.ai''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-02'
+  terms:
+  - term: 3D Models
+    definition: Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-3d-models-api-openapi.yml
+  - term: Animation
+    definition: Create animated spritesheets from static sprites, transfer motion from videos or presets, and list available animation presets.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-animation-api-openapi.yml
+  - term: Audio
+    definition: Generate sound effects, background music, character voices, and text-to-speech audio for games.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-audio-api-openapi.yml
+  - term: Images
+    definition: Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-images-api-openapi.yml
+  - term: Results
+    definition: Retrieve previously generated assets using request IDs or browse recent API-generated content.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-results-api-openapi.yml
+  - term: Video
+    definition: Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic backgrounds.
+    tags:
+    - Resource Group
+    source: openapi/ludo-ai-video-api-openapi.yml
+  - term: Create3DModelRequest
+    definition: 'Object declared by the contract with fields: image, texture_type, texture_size, target_num_faces, high_detail_shape, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-3d-models-api-openapi.yml#/components/schemas/Create3DModelRequest
+  - term: Model3DResponse
+    definition: 'Object declared by the contract with fields: model_url, snapshots, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-3d-models-api-openapi.yml#/components/schemas/Model3DResponse
+  - term: Error
+    definition: 'Object declared by the contract with fields: error, code.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-3d-models-api-openapi.yml#/components/schemas/Error
+  - term: AnimationPreset
+    definition: 'Object declared by the contract with fields: id, name, category, description, duration, preview_url.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-animation-api-openapi.yml#/components/schemas/AnimationPreset
+  - term: TransferMotionRequest
+    definition: 'Object declared by the contract with fields: image, video, preset_id, direction, perspective, frames, frame_size, loop, crop,
+      margin_ratio, margin_ratio_mode, gif. (3 more)'
+    tags:
+    - Object
+    source: openapi/ludo-ai-animation-api-openapi.yml#/components/schemas/TransferMotionRequest
+  - term: AnimationResponse
+    definition: 'Object declared by the contract with fields: spritesheet_url, video_url, gif_url, individual_frame_urls, spritesheet_with_background_url,
+      individual_frame_with_background_urls, num_frames, num_cols, num_rows, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-animation-api-openapi.yml#/components/schemas/AnimationResponse
+  - term: AnimationPresetsResponse
+    definition: 'Object declared by the contract with fields: animations, perspectives, directions.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-animation-api-openapi.yml#/components/schemas/AnimationPresetsResponse
+  - term: AnimateSpriteRequest
+    definition: 'Object declared by the contract with fields: initial_image, motion_prompt, image_type, frames, frame_size, loop, model, duration,
+      final_image, gif, individual_frames, spritesheet_with_background. (1 more)'
+    tags:
+    - Object
+    source: openapi/ludo-ai-animation-api-openapi.yml#/components/schemas/AnimateSpriteRequest
+  - term: CreateVoiceRequest
+    definition: 'Object declared by the contract with fields: voice_description, text, type, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateVoiceRequest
+  - term: CreateMusicRequest
+    definition: 'Object declared by the contract with fields: description, lyrics, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateMusicRequest
+  - term: AudioResponse
+    definition: 'Object declared by the contract with fields: url, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/AudioResponse
+  - term: CreateSoundEffectRequest
+    definition: 'Object declared by the contract with fields: description, duration, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSoundEffectRequest
+  - term: CreateSpeechRequest
+    definition: 'Object declared by the contract with fields: text, sample, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSpeechRequest
+  - term: CreateSpeechPresetRequest
+    definition: 'Object declared by the contract with fields: text, voice_preset_id, emotion, language, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSpeechPresetRequest
+  - term: ImageResponse
+    definition: 'Object declared by the contract with fields: images, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/ImageResponse
+  - term: EditImageRequest
+    definition: 'Object declared by the contract with fields: image, prompt, reference_image, n, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/EditImageRequest
+  - term: GenerateWithStyleRequest
+    definition: 'Object declared by the contract with fields: style_image, prompt, image_type, n, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/GenerateWithStyleRequest
+  - term: RemoveBackgroundRequest
+    definition: 'Object declared by the contract with fields: image, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/RemoveBackgroundRequest
+  - term: GeneratePoseRequest
+    definition: 'Object declared by the contract with fields: image, pose, description, n, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/GeneratePoseRequest
+  - term: CreateImageRequest
+    definition: 'Object declared by the contract with fields: prompt, image_type, art_style, perspective, aspect_ratio, n, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/CreateImageRequest
+  - term: PoseResponse
+    definition: 'Object declared by the contract with fields: images, request_id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-images-api-openapi.yml#/components/schemas/PoseResponse
+  - term: ErrorResponse
+    definition: 'Object declared by the contract with fields: message, metadata, error_payload, intent.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ErrorResponse
+  - term: GenerateImagePayload
+    definition: Payload for generating an image from text prompt
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateImagePayload
+  - term: ImageResult
+    definition: 'Object declared by the contract with fields: url, request_id, created_at.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ImageResult
+  - term: PublicJob
+    definition: 'Object declared by the contract with fields: id, task_type, status, request_id, created_at, finished_at, credits_charged, result,
+      error, poll_after_ms.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/PublicJob
+  - term: GenerateWithStylePayload
+    definition: Payload for generating new content while maintaining the visual style of a reference image
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateWithStylePayload
+  - term: EditImagePayload
+    definition: Payload for editing an existing image based on text instructions
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/EditImagePayload
+  - term: AnimateSpritePayload
+    definition: Payload for generating an animated spritesheet from a static image. Input images can either be provided in base64 or URL. If the
+      image was generated using Ludo, ideally it should be generated using the "sprite", "sprite-vfx" or "ui_asset" type.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AnimateSpritePayload
+  - term: SpriteResult
+    definition: 'Object declared by the contract with fields: spritesheet_url, video_url, audio_url, gif_url, individual_frame_urls, num_frames,
+      num_cols, num_rows, spritesheet_with_background_url, individual_frame_with_background_urls, duration, request_id. (1 more)'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/SpriteResult
+  - term: AnimateSpriteKeyframesPayload
+    definition: Payload for generating an animated spritesheet that interpolates through up to three fixed keyframes (initial / middle / final).
+      Runs on hydra (default), forge or forge-pixel - the models supporting a middle keyframe. Input images can be provided in base64 or URL.
+      At least one of initial_image or middle_image must be provided.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AnimateSpriteKeyframesPayload
+  - term: GeneratePosePayload
+    definition: Payload for generating a new pose for an existing sprite
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GeneratePosePayload
+  - term: PoseResult
+    definition: Result of a pose generation
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/PoseResult
+  - term: RotateSpritePayload
+    definition: Payload for rotating the camera view of an existing sprite
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/RotateSpritePayload
+  - term: RotateSpriteResult
+    definition: Result of a sprite camera rotation
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/RotateSpriteResult
+  - term: TransferMotionPayload
+    definition: Payload for transferring motion from a video onto a static sprite image, producing an animated spritesheet.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/TransferMotionPayload
+  - term: DocumentationResponse
+    definition: 'Object declared by the contract with fields: models, docs, unmatched_sections, available_sections.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/DocumentationResponse
+  - term: DocumentationSearchResponse
+    definition: 'Object declared by the contract with fields: results, message.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/DocumentationSearchResponse
+  - term: EditSpritesheetPayloadPublic
+    definition: Payload for editing a previously generated spritesheet. edit_mode selects the operation - prompt-driven edit (default), outpaint,
+      or loop fixing.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/EditSpritesheetPayloadPublic
+  - term: RotateSpritesheetPayload
+    definition: Payload for re-rendering a previously generated sprite animation from a new view.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/RotateSpritesheetPayload
+  - term: CreateSpriteAudioPayload
+    definition: Payload for generating audio for a previously generated spritesheet animation.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/CreateSpriteAudioPayload
+  - term: AudioResult
+    definition: 'Object declared by the contract with fields: url, type, duration, request_id, created_at.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AudioResult
+  - term: GenerateVideoPayloadPublic
+    definition: Payload for generating a video from a source image and motion prompt
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateVideoPayloadPublic
+  - term: VideoResult
+    definition: 'Object declared by the contract with fields: url, duration, has_audio, request_id, created_at.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/VideoResult
+  - term: ReferencesToVideoPayloadPublic
+    definition: Payload for generating a video from 1-5 reference images and a text prompt.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ReferencesToVideoPayloadPublic
+  - term: EditVideoPayloadPublic
+    definition: Payload for editing a previously generated video with a text prompt and optional reference images.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/EditVideoPayloadPublic
+  - term: UpscaleVideoPayloadPublic
+    definition: Payload for upscaling a previously generated video to twice its resolution.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/UpscaleVideoPayloadPublic
+  - term: RemoveBackgroundPayload
+    definition: Payload for removing the background of an image
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/RemoveBackgroundPayload
+  - term: Create3DModelPayload
+    definition: 'Object declared by the contract with fields: image, back_image, target_num_faces, texture_size, texture_type, request_id, async.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Create3DModelPayload
+  - term: Model3DResult
+    definition: 'Object declared by the contract with fields: model_url, snapshots.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Model3DResult
+  - term: Rig3DModelPayload
+    definition: 'Object declared by the contract with fields: model, rig_type, joint_naming, request_id, async.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Rig3DModelPayload
+  - term: Rig3DModelResult
+    definition: 'Object declared by the contract with fields: model_url, rigged.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Rig3DModelResult
+  - term: Animate3DModelPayload
+    definition: 'Object declared by the contract with fields: model, prompt, mode, num_variants, loop, augment_prompt, request_id, async.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Animate3DModelPayload
+  - term: AnimationCandidates
+    definition: 'Object declared by the contract with fields: animations.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AnimationCandidates
+  - term: Animate3DPresetModelPayload
+    definition: 'Object declared by the contract with fields: model, preset_id, crop_loop, in_place, request_id, async.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/Animate3DPresetModelPayload
+  - term: GenerateSoundEffectPayload
+    definition: Payload for generating a sound effect from a text description
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateSoundEffectPayload
+  - term: GenerateAmbiancePayload
+    definition: Payload for generating a seamless looping ambiance soundscape from a text description
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateAmbiancePayload
+  - term: GenerateMusicPayload
+    definition: Payload for generating music from a text description
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateMusicPayload
+  - term: GenerateAudioTransformPayload
+    definition: Payload for remixing an audio sample (sound effect, ambiance or music) into a variation guided by a text prompt
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateAudioTransformPayload
+  - term: GenerateVoicePayload
+    definition: Payload for generating a voice sample from a character description
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateVoicePayload
+  - term: GenerateSpeechPayload
+    definition: Payload for text-to-speech generation using voice cloning
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateSpeechPayload
+  - term: GenerateSpeechPresetPayload
+    definition: Payload for text-to-speech generation using a voice preset
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerateSpeechPresetPayload
+  - term: GenerationList
+    definition: 'Object declared by the contract with fields: items, page, page_size, has_more.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/GenerationList
+  - term: ThreeDModelResult
+    definition: 'Object declared by the contract with fields: model_url, snapshots, request_id, created_at.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ThreeDModelResult
+  - term: CreateUploadPayload
+    definition: Payload for starting a file upload.
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/CreateUploadPayload
+  - term: UploadSession
+    definition: 'Object declared by the contract with fields: upload_url, file_url, mime_type, size.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/UploadSession
+  - term: AccountInfo
+    definition: 'Object declared by the contract with fields: credits, plan, auto_topup, billing_url.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AccountInfo
+  - term: OkResponse
+    definition: 'Object declared by the contract with fields: ok.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/OkResponse
+  - term: ApiFeedbackPayload
+    definition: 'Object declared by the contract with fields: category, message, operation, job_id, agent.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ApiFeedbackPayload
+  - term: ApiFeedbackReceipt
+    definition: 'Object declared by the contract with fields: ok, id.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ApiFeedbackReceipt
+  - term: PublicJobError
+    definition: 'Object declared by the contract with fields: status, message.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/PublicJobError
+  - term: ModelLineup
+    definition: Which models to use. Present on the table of contents only (no `doc` parameter).
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/ModelLineup
+  - term: DocumentationEntry
+    definition: 'Object declared by the contract with fields: id, label, sections.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/DocumentationEntry
+  - term: DocumentationSearchResult
+    definition: 'Object declared by the contract with fields: doc, label, section, relevance, content.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/DocumentationSearchResult
+  - term: AnimationPresetPublic
+    definition: 'Object declared by the contract with fields: id, name, category, description, duration, preview_url, clip_url.'
+    tags:
+    - Object
+    source: openapi/ludo-ai-openapi.json#/components/schemas/AnimationPresetPublic

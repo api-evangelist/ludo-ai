@@ -1,0 +1,24 @@
+generated: '2026-10-02'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/ludo-ai-openapi.json
+skills:
+- file: skills/ludo-ai-animate-sprite.md
+  name: ludo-ai-animate-sprite
+  api: openapi/ludo-ai-openapi.json
+  operations:
+  - animateSprite
+  - listAnimationPresets
+  - getSpriteResults
+- file: skills/ludo-ai-create-and-fetch-video.md
+  name: ludo-ai-create-and-fetch-video
+  api: openapi/ludo-ai-openapi.json
+  operations:
+  - createVideo
+  - getVideoResults
+- file: skills/ludo-ai-generate-and-edit-image.md
+  name: ludo-ai-generate-and-edit-image
+  api: openapi/ludo-ai-images-api-openapi.yml
+  operations:
+  - createImage
+  - editImage

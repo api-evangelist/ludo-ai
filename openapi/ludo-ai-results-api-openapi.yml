@@ -128,12 +128,12 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SpriteResultsResponse:
+    Model3DResultsResponse:
       type: object
       properties:
         results:
           type: array
-          description: Array of recent API-generated spritesheet results.
+          description: Array of recent API-generated 3D model results.
           items:
             type: object
             properties:
@@ -143,7 +143,32 @@ components:
               created_at:
                 type: string
                 format: date-time
-                description: Timestamp when the spritesheet was generated.
+                description: Timestamp when the 3D model was generated.
+    AudioResultsResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Array of recent API-generated audio results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the audio was generated.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
     ImageResultsResponse:
       type: object
       properties:
@@ -164,15 +189,22 @@ components:
                 type: string
                 format: date-time
                 description: Timestamp when the image was generated.
-    Error:
+    SpriteResultsResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
+        results:
+          type: array
+          description: Array of recent API-generated spritesheet results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the spritesheet was generated.
     VideoResultsResponse:
       type: object
       properties:
@@ -193,38 +225,6 @@ components:
                 type: string
                 format: date-time
                 description: Timestamp when the video was generated.
-    AudioResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated audio results.
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the audio was generated.
-    Model3DResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated 3D model results.
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the 3D model was generated.
   parameters:
     RequestIdQuery:
       name: request_id

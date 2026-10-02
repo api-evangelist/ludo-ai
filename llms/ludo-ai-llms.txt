@@ -1,0 +1,79 @@
+# Ludo.ai
+
+> Ludo.ai generates production-ready game assets with AI: sprites and animated sprite sheets, pixel art, icons, UI, backgrounds, textures, 3D models with rigging and animation, sound effects, music, voices and video. It also helps plan games, from idea generation to a full game design document. Use it from the web app, the Ludo CLI, the MCP server, the REST API or the Unity plugin, all on one account and one set of credits.
+
+- Web app and sign-up: https://app.ludo.ai
+- The CLI, MCP server, REST API and Unity plugin are included on the Pro and Studio plans. The web app works on every plan.
+- API, MCP and CLI calls always draw credits, including actions that are unlimited in the web app on Pro.
+
+## Developers
+
+- [Developers hub](https://ludo.ai/developers): every way to build with Ludo, and what a generation costs
+- [Ludo CLI](https://ludo.ai/developers/cli): `npm install -g @ludoai/cli`, then `ludo login`. The recommended way to give coding agents (Claude Code, Codex, Cursor) access to Ludo: short help pages, local files passed by path, results saved to disk
+- [MCP server](https://ludo.ai/developers/mcp): remote MCP endpoint `https://mcp.ludo.ai/mcp` for AI assistants that cannot run shell commands
+- [REST API](https://ludo.ai/developers/api): base URL `https://api.ludo.ai/api`, header `Authorization: ApiKey YOUR_API_KEY` (create keys under API Keys in the web app). Generation endpoints are asynchronous: they return `202` with a job id, poll `GET /assets/jobs/{id}`
+- [API reference](https://api.ludo.ai/api-documentation): every endpoint, parameter, model and credit cost
+- [OpenAPI spec (JSON)](https://api.ludo.ai/api-documentation/openapi.json): machine-readable OpenAPI 3 description of the public API
+- [Unity plugin](https://ludo.ai/developers/unity): generate assets from inside the Unity editor
+- [API and MCP guide](https://ludo.ai/docs/api-mcp): setup and usage notes
+
+## Features
+
+- [Sprite Generator](https://ludo.ai/features/sprite-generator): character sprites from a prompt or reference image, animated into packed sprite sheets; pixel art, 8-direction sprites, motion transfer from video
+- [Image Generator](https://ludo.ai/features/image-generator): 2D game art in a chosen style: backgrounds, icons, UI, portraits, card art, textures, with transparent PNG export
+- [3D Generator](https://ludo.ai/features/3d-generator): text or image to textured 3D models (GLB), auto-rigging and animation
+- [Audio Generator](https://ludo.ai/features/audio-generator): sound effects, looping music, ambiances, character voices and narration
+- [Video Generator](https://ludo.ai/features/video-generator): animate a still image into a short MP4 clip with a motion prompt
+- [Game Ideator](https://ludo.ai/features/game-ideator): turn keywords, genres or games you admire into game ideas with concept art
+- [Project](https://ludo.ai/features/project): AI-assisted game design document editor
+- [Ask Ludo](https://ludo.ai/features/assistant): conversational assistant for brainstorming, research and asset generation
+- [Tutorial Generation](https://ludo.ai/features/tutorial-generation): a step-by-step development guide for your game in the engine you choose
+
+## Docs
+
+- [Documentation home](https://ludo.ai/docs)
+- [Sprite Generator guide](https://ludo.ai/docs/sprite-generator)
+- [Turn a character image into an animated sprite sheet](https://ludo.ai/docs/sprite-generator/image-to-sprite-sheet)
+- [Make and animate pixel art sprites](https://ludo.ai/docs/sprite-generator/pixel-art-sprites)
+- [Make an 8-direction sprite sheet](https://ludo.ai/docs/sprite-generator/8-direction-sprites)
+- [Make a walk cycle for a 2D character](https://ludo.ai/docs/sprite-generator/walk-cycle)
+- [Make a tileset for a 2D game](https://ludo.ai/docs/sprite-generator/tilesets)
+- [Make VFX sprites](https://ludo.ai/docs/sprite-generator/vfx-sprite-sheets)
+- [Import sprite sheets into Unity, Godot, GameMaker, RPG Maker and Phaser](https://ludo.ai/docs/sprite-generator/export-to-unity-godot-gamemaker)
+- [Image Generator guide](https://ludo.ai/docs/image-generator)
+- [Keep a consistent art style across assets](https://ludo.ai/docs/image-generator/consistent-style)
+- [Game backgrounds and parallax layers](https://ludo.ai/docs/image-generator/game-backgrounds)
+- [Game icons and UI elements](https://ludo.ai/docs/image-generator/icons-and-ui)
+- [Seamless textures](https://ludo.ai/docs/image-generator/seamless-textures)
+- [Character portraits](https://ludo.ai/docs/image-generator/character-portraits)
+- [Card art](https://ludo.ai/docs/image-generator/card-art)
+- [3D Generator guide](https://ludo.ai/docs/3d-generator)
+- [Turn a 2D character image into a 3D model](https://ludo.ai/docs/3d-generator/image-to-3d-character)
+- [Auto-rig and animate a 3D character](https://ludo.ai/docs/3d-generator/rig-and-animate)
+- [Import a rigged GLB into Godot, Unity, Blender and Unreal](https://ludo.ai/docs/3d-generator/export-to-unity-godot-unreal)
+- [Audio Generator guide](https://ludo.ai/docs/audio-generator)
+- [Generate sound effects for a game](https://ludo.ai/docs/audio-generator/sound-effects)
+- [Video Generator guide](https://ludo.ai/docs/video-generator)
+- [Account and billing](https://ludo.ai/docs/account)
+- [FAQ](https://ludo.ai/docs/faq)
+
+## Pricing
+
+- [Pricing](https://ludo.ai/pricing): Indie, Pro, Studio and Enterprise plans, billed monthly or annually. Credits pay for generation; top-ups are available on every paid plan
+- [Generation costs](https://ludo.ai/developers#credits): what each API, MCP and CLI generation costs in credits
+
+## Company
+
+- [What's New](https://ludo.ai/whats-new): product changelog
+- [Case studies](https://ludo.ai/case-studies): games made with Ludo
+- [Press kit](https://ludo.ai/press-kit)
+- [Contact](https://ludo.ai/contact)
+- [Privacy policy](https://ludo.ai/privacy-policies)
+- [Terms of Service and EULA](https://ludo.ai/terms-of-service)
+
+## Optional
+
+- [Blog](https://ludo.ai/blog)
+- [Animation presets](https://ludo.ai/tools/animation-presets): the motion library the sprite animator draws from
+- [Ludo MCP server source](https://github.com/Ludo-AI/ludo-mcp)
+- [Ludo Unity plugin source](https://github.com/Ludo-AI/ludo-unity-plugin)

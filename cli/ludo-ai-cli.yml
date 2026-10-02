@@ -1,0 +1,56 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://ludo.ai/developers/cli
+sources:
+- https://ludo.ai/developers/cli
+- https://ludo.ai/tools/animation-presets
+install:
+- method: npm global install
+  command: npm install -g @ludoai/cli
+- method: run without installing
+  command: npx @ludoai/cli
+commands:
+- group: login/logout
+  commands:
+  - ludo login
+  - ludo logout
+- group: project initialization
+  commands:
+  - ludo init
+- group: image generation
+  commands:
+  - ludo image create
+- group: sprite generation & animation
+  commands:
+  - ludo sprite animate
+  - ludo preview
+- group: model generation & rigging
+  commands:
+  - ludo model create
+  - ludo model rig
+- group: audio generation
+  commands:
+  - ludo audio sound-effect
+- group: asset management
+  commands:
+  - ludo assets
+  - ludo assets redo
+- group: batch processing
+  commands:
+  - ludo batch
+- group: skill/agent integration
+  commands:
+  - ludo skill install
+  - ludo agent-help
+- group: feedback & updates
+  commands:
+  - ludo feedback
+  - ludo update
+- group: credit management
+  commands:
+  - ludo spend
+  - ludo dry-run
+  - ludo max-credits
+binary: ludo
+docs: https://ludo.ai/developers/cli

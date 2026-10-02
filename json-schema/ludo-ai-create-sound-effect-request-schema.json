@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-sound-effect-request-schema.json",
+  "title": "CreateSoundEffectRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSoundEffectRequest",
+  "type": "object",
+  "required": [
+    "description"
+  ],
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Text description of the sound effect to generate such as laser gun firing, footsteps on gravel, or coin pickup."
+    },
+    "duration": {
+      "type": "number",
+      "description": "Duration in seconds from 0 to 10. Use 0 for automatic duration.",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

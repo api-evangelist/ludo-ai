@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-image-response-schema.json",
+  "title": "ImageResponse",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-images-api-openapi.yml#/components/schemas/ImageResponse",
+  "type": "object",
+  "properties": {
+    "images": {
+      "type": "array",
+      "description": "Array of generated image objects.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the generated image. Expires after 7 days."
+          }
+        }
+      }
+    },
+    "request_id": {
+      "type": "string",
+      "description": "The request ID if one was provided."
+    }
+  }
+}

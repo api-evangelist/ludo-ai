@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-music-request-schema.json",
+  "title": "CreateMusicRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateMusicRequest",
+  "type": "object",
+  "required": [
+    "description"
+  ],
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Text description of the music to generate such as epic orchestral battle theme, calm piano melody, or 8-bit chiptune."
+    },
+    "lyrics": {
+      "type": "string",
+      "description": "Optional lyrics for vocal tracks."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

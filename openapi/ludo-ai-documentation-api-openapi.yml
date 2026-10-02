@@ -1,0 +1,340 @@
+openapi: 3.2.0
+info:
+  title: Ludo Ai Documentation API
+  version: 0.9.10
+  x-logo:
+    url: /static/logo-small.png
+    altText: Logo
+  x-refined-note:
+  - x-model-lineup differs across the merged source definitions and was not carried
+  description: 'Operations tagged Documentation across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+tags:
+- name: Documentation
+paths:
+  /docs:
+    get:
+      description: 'Browse or read Ludo''s own documentation in full - how to choose a sprite animation mode, when to use Generate Before / Generate After, how margins behave, which model suits a job, and each generator''s known limitations. To answer a specific question, call searchDocs first: it returns just the sections that match. Use getDocs to see what documentation exists, or to read a whole document or named sections. This is the same documentation the Ludo web app shows its users, so it occasionally describes buttons rather than parameters; the substance applies to the API and MCP surfaces just the same. To browse, call it with NO parameters to get a table of contents - every document with its id, label and section titles, and no bodies - then call it again with `doc` (and optionally `sections`) to read only what you need. Fetching a whole document can return tens of thousands of characters, so prefer naming the sections, using titles copied from the table of contents. Section titles match ignoring case, spacing and punctuation: when only some requested titles exist you receive those sections plus `unmatched_sections` and `available_sections`, and when none exist (or `doc` is unknown) the call returns 400 listing the valid values so you can retry once. This is a free discovery endpoint: it does not charge credits and does not queue a job. Requires an API key (user scope).'
+      tags:
+      - Documentation
+      operationId: getDocs
+      security:
+      - ApiKey: []
+      parameters:
+      - name: doc
+        in: query
+        description: Which document to read, by id (the table of contents returned by the no-parameter call lists them). Omit to receive the table of contents.
+        required: false
+        schema:
+          type: string
+          enum:
+          - assistant
+          - game-ideator
+          - image-generator
+          - project
+          - account
+          - faq
+          - 3d-generator
+          - video-generator
+          - sprite-generator
+          - audio-generator
+          - api-mcp
+          - game-asset-generation
+      - name: sections
+        in: query
+        description: Section titles to return from `doc`, copied from the table of contents (an array of titles; over plain REST, a comma-separated string, where a title that itself contains a comma is still matched whole). Matching ignores case, spacing and punctuation; titles that match nothing are reported back in `unmatched_sections` rather than guessed at. Only valid together with `doc`. Omit to return every section of the document.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentationResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Documentation temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X GET \"https://api.ludo.ai/api/docs\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/docs\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/docs\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: Get docs
+      x-summary-source: derived
+    servers:
+    - url: /api
+  /docs/search:
+    get:
+      description: 'Search Ludo''s own documentation with a plain-language question and get back only the few sections that answer it - the fastest way to learn how a feature is meant to be used before you generate with it (how to pick a sprite animation mode or model, how margins behave, what something costs, known limitations). Start here rather than reading whole documents. Each result carries `doc` and `section`, which you can pass straight to getDocs to re-read that section, and the section''s full markdown `content`. Results are best first; weak matches are left out, so an empty `results` list means the documentation does not cover the question - rephrase it, or call getDocs with no parameters to browse the table of contents. This is the same documentation the Ludo web app shows its users, so it occasionally describes buttons rather than parameters; the substance applies to the API and MCP surfaces just the same. Returns up to `n` sections (default 3, max 10). If it answers 503 the search backend is briefly unavailable: call getDocs instead rather than retrying in a loop. This is a free discovery endpoint: it does not charge credits and does not queue a job. Requires an API key (user scope).'
+      tags:
+      - Documentation
+      operationId: searchDocs
+      security:
+      - ApiKey: []
+      parameters:
+      - name: query
+        in: query
+        description: What you want to know, in plain language, e.g. "how do I keep a sprite animation's colors consistent" or "what does a 3D model cost".
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 500
+      - name: n
+        in: query
+        description: Maximum number of sections to return. Defaults to 3.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentationSearchResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Documentation search temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X GET \"https://api.ludo.ai/api/docs/search\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/docs/search\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/docs/search\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: Search docs
+      x-summary-source: derived
+    servers:
+    - url: /api
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+              example: payment
+            client_secret:
+              type: string
+    ModelLineup:
+      type: object
+      description: Which models to use. Present on the table of contents only (no `doc` parameter).
+      properties:
+        current:
+          $ref: '#/components/schemas/CurrentModelsByAction'
+        legacy:
+          type: array
+          description: 'Legacy models: still accepted for existing integrations but scheduled for removal. Do not use them for new work.'
+          items:
+            $ref: '#/components/schemas/LegacyModel'
+    DocumentationSearchResult:
+      type: object
+      properties:
+        doc:
+          type: string
+          description: Document id, e.g. sprite-generator - pass it to getDocs as `doc`
+        label:
+          type: string
+          description: Human-readable document name, e.g. Sprite Generator
+        section:
+          type: string
+          description: Section title - pass it to getDocs in `sections`
+        relevance:
+          type: number
+          format: float
+          description: Match score 0-1; only results at or above 0.6 are returned
+        content:
+          type: string
+          description: Full markdown body of the section, as getDocs would return it. Request and response schemas for each tool are in the tool definitions, not in these sections.
+    LegacyModel:
+      type: object
+      properties:
+        codename:
+          type: string
+        name:
+          type: string
+        legacy_since:
+          type: string
+          description: Date (YYYY-MM-DD) the model became legacy.
+        features:
+          type: array
+          description: Credit actions the model still accepts; empty once fully retired.
+          items:
+            type: string
+    CurrentModelsByAction:
+      type: object
+      description: Per credit action, the current model codenames in preference order. Pick from these for new work.
+      properties:
+        ANIMATE_SPRITE:
+          type: array
+          items:
+            type: string
+        TRANSFER_SPRITE_MOTION:
+          type: array
+          items:
+            type: string
+        EDIT_SPRITESHEET:
+          type: array
+          items:
+            type: string
+        GENERATE_VIDEO:
+          type: array
+          items:
+            type: string
+        REFERENCES_TO_VIDEO:
+          type: array
+          items:
+            type: string
+        VIDEO_EDIT:
+          type: array
+          items:
+            type: string
+    DocumentationResponse:
+      type: object
+      properties:
+        models:
+          $ref: '#/components/schemas/ModelLineup'
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentationEntry'
+        unmatched_sections:
+          type: array
+          description: Requested section titles that matched no section of `doc`. Present only when some, but not all, requested titles matched.
+          items:
+            type: string
+        available_sections:
+          type: array
+          description: Every section title of `doc`, for correcting the titles in `unmatched_sections`. Present only alongside `unmatched_sections`.
+          items:
+            type: string
+    DocumentationSearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          description: Matching documentation sections, best first. Empty when nothing matches closely.
+          items:
+            $ref: '#/components/schemas/DocumentationSearchResult'
+        message:
+          type: string
+          description: 'Present only when `results` is empty: what to try next.'
+    DocumentationEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Stable document id, e.g. sprite-generator - pass it back as the `doc` parameter
+        label:
+          type: string
+          description: Human-readable document name, e.g. Sprite Generator
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentationSection'
+    DocumentationSection:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+    CurrentModelsByAction_2:
+      type: object
+      description: Per credit action, the current model codenames in preference order. Pick from these for new work.
+      properties:
+        ANIMATE_SPRITE:
+          type: array
+          items:
+            type: string
+        TRANSFER_SPRITE_MOTION:
+          type: array
+          items:
+            type: string
+        EDIT_SPRITESHEET:
+          type: array
+          items:
+            type: string
+        NEW_VIEW_SPRITESHEET:
+          type: array
+          items:
+            type: string
+        GENERATE_VIDEO:
+          type: array
+          items:
+            type: string
+        REFERENCES_TO_VIDEO:
+          type: array
+          items:
+            type: string
+        VIDEO_EDIT:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+x-refined-from:
+- ludo-ai-rest-api-openapi.yml
+- ludo-ai-openapi.json

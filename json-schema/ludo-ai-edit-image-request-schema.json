@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-edit-image-request-schema.json",
+  "title": "EditImageRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-images-api-openapi.yml#/components/schemas/EditImageRequest",
+  "type": "object",
+  "required": [
+    "image",
+    "prompt"
+  ],
+  "properties": {
+    "image": {
+      "type": "string",
+      "description": "URL or base64-encoded image to edit."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Description of changes to apply to the image."
+    },
+    "reference_image": {
+      "type": "string",
+      "description": "URL or base64-encoded reference image for style or content guidance."
+    },
+    "n": {
+      "type": "integer",
+      "description": "Number of edited variations to generate.",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

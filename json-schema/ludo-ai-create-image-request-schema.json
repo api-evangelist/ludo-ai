@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-image-request-schema.json",
+  "title": "CreateImageRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-images-api-openapi.yml#/components/schemas/CreateImageRequest",
+  "type": "object",
+  "required": [
+    "prompt",
+    "image_type"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Detailed description of the image to generate."
+    },
+    "image_type": {
+      "type": "string",
+      "description": "The type of game asset to generate.",
+      "enum": [
+        "sprite",
+        "icon",
+        "screenshot",
+        "art",
+        "asset",
+        "sprite-vfx",
+        "ui_asset",
+        "fixed_background",
+        "texture",
+        "3d",
+        "generic"
+      ]
+    },
+    "art_style": {
+      "type": "string",
+      "description": "The art style for the generated image.",
+      "enum": [
+        "Pixel Art (16-Bit)",
+        "Pixel Art (8-Bit)",
+        "Low Poly",
+        "Cartoonish",
+        "Stylized 3D",
+        "Flat Design",
+        "Anime/Manga",
+        "Voxel Art"
+      ]
+    },
+    "perspective": {
+      "type": "string",
+      "description": "The camera perspective for the generated image.",
+      "enum": [
+        "Side-Scroll",
+        "Top-Down",
+        "Isometric",
+        "First-Person",
+        "Third-Person",
+        "2.5D"
+      ]
+    },
+    "aspect_ratio": {
+      "type": "string",
+      "description": "The aspect ratio for the generated image.",
+      "default": "default",
+      "enum": [
+        "default",
+        "ar_1_1",
+        "ar_4_3",
+        "ar_16_9",
+        "ar_9_16"
+      ]
+    },
+    "n": {
+      "type": "integer",
+      "description": "Number of image variations to generate.",
+      "minimum": 1,
+      "maximum": 8,
+      "default": 1
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

@@ -1,0 +1,68 @@
+generated: '2026-10-02'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/ludo-ai-3d-models-api-openapi.yml
+- openapi/ludo-ai-animation-api-openapi.yml
+- openapi/ludo-ai-audio-api-openapi.yml
+- openapi/ludo-ai-images-api-openapi.yml
+- openapi/ludo-ai-openapi.json
+- openapi/ludo-ai-results-api-openapi.yml
+- openapi/ludo-ai-video-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ErrorResponse
+coverage:
+  operations: 64
+  statuses_declared: 7
+problems:
+- status: 400
+  title: Bad Request
+  description: Error
+  operations: 57
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 401
+  title: Unauthorized
+  description: Missing or invalid API key
+  operations: 20
+  media_types:
+  - application/json
+  schema: Error
+- status: 403
+  title: Forbidden
+  description: Invalid API key
+  operations: 1
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 404
+  title: Not Found
+  description: No such job for this API key
+  operations: 2
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 409
+  title: Conflict
+  description: Job is not in a cancelable state (e.g. already running)
+  operations: 1
+  media_types:
+  - application/json
+  schema: ErrorResponse
+- status: 429
+  title: Too Many Requests
+  description: Rate limit exceeded or insufficient credits
+  operations: 1
+  media_types:
+  - application/json
+  schema: Error
+- status: 503
+  title: Service Unavailable
+  description: Documentation temporarily unavailable
+  operations: 2
+  media_types:
+  - application/json
+  schema: ErrorResponse

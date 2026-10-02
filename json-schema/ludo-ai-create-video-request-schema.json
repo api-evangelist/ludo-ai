@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-video-request-schema.json",
+  "title": "CreateVideoRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-video-api-openapi.yml#/components/schemas/CreateVideoRequest",
+  "type": "object",
+  "required": [
+    "image",
+    "prompt"
+  ],
+  "properties": {
+    "image": {
+      "type": "string",
+      "description": "URL or base64-encoded starting frame image."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Motion description for the video such as camera zooms in or character walks forward."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Video duration in seconds. Credit cost varies by duration.",
+      "enum": [
+        3,
+        5,
+        8,
+        10
+      ],
+      "default": 5
+    },
+    "model": {
+      "type": "string",
+      "description": "Video generation model to use.",
+      "enum": [
+        "standard",
+        "new"
+      ],
+      "default": "standard"
+    },
+    "final_image": {
+      "type": "string",
+      "description": "URL or base64-encoded ending frame for interpolation."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

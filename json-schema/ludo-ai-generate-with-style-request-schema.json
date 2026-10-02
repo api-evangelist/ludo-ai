@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-generate-with-style-request-schema.json",
+  "title": "GenerateWithStyleRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-images-api-openapi.yml#/components/schemas/GenerateWithStyleRequest",
+  "type": "object",
+  "required": [
+    "style_image",
+    "prompt",
+    "image_type"
+  ],
+  "properties": {
+    "style_image": {
+      "type": "string",
+      "description": "URL or base64-encoded reference image for style matching."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Description of what to generate while maintaining the reference style."
+    },
+    "image_type": {
+      "type": "string",
+      "description": "The type of game asset to generate.",
+      "enum": [
+        "sprite",
+        "icon",
+        "screenshot",
+        "art",
+        "asset",
+        "sprite-vfx",
+        "ui_asset",
+        "fixed_background",
+        "texture",
+        "3d",
+        "generic"
+      ]
+    },
+    "n": {
+      "type": "integer",
+      "description": "Number of image variations to generate.",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 1
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

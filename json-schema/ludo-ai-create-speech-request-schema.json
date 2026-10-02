@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-speech-request-schema.json",
+  "title": "CreateSpeechRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSpeechRequest",
+  "type": "object",
+  "required": [
+    "text",
+    "sample"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Text to speak using the cloned voice.",
+      "maxLength": 1000
+    },
+    "sample": {
+      "type": "string",
+      "description": "URL or base64-encoded audio sample for voice cloning."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

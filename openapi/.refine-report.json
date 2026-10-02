@@ -1,9 +1,8 @@
 {
   "provider": "ludo-ai",
   "sources": [
-    "_original/ludo-ai-rest-api-openapi.yml"
-  ],
-  "outputs": [
+    "_original/ludo-ai-rest-api-openapi.yml",
+    "ludo-ai-openapi.json",
     "ludo-ai-3d-models-api-openapi.yml",
     "ludo-ai-animation-api-openapi.yml",
     "ludo-ai-audio-api-openapi.yml",
@@ -11,20 +10,70 @@
     "ludo-ai-results-api-openapi.yml",
     "ludo-ai-video-api-openapi.yml"
   ],
-  "archived": [],
+  "outputs": [
+    "ludo-ai-3d-models-api-openapi.yml",
+    "ludo-ai-account-api-openapi.yml",
+    "ludo-ai-audio-api-openapi.yml",
+    "ludo-ai-authentication-api-openapi.yml",
+    "ludo-ai-documentation-api-openapi.yml",
+    "ludo-ai-files-api-openapi.yml",
+    "ludo-ai-generations-api-openapi.yml",
+    "ludo-ai-images-api-openapi.yml",
+    "ludo-ai-jobs-api-openapi.yml",
+    "ludo-ai-spritesheets-api-openapi.yml",
+    "ludo-ai-videos-api-openapi.yml",
+    "ludo-ai-animation-api-openapi.yml",
+    "ludo-ai-results-api-openapi.yml",
+    "ludo-ai-video-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/ludo-ai-openapi.json"
+  ],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "ludo-ai-3d-models-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /3d-models/create post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ludo-ai-animation-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /animation-presets get, /sprites/animate post, /sprites/transfer-motion post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ludo-ai-audio-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /audio/sound-effects post); its other 4 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ludo-ai-images-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /images/create post, /images/edit post, /images/generate-pose post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ludo-ai-results-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /results/3d-models get, /results/audio get, /results/images get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ludo-ai-video-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /videos/create post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "ludo-ai-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "ludo-ai-rest-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: 3D Models",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Account",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Audio",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Documentation",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Files",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Generations",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Images",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Jobs",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Spritesheets",
+    "ludo-ai-rest-api-openapi.yml: declared missing tag: Videos",
+    "ludo-ai-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "ludo-ai-openapi.json: declared missing tag: 3D Models",
+    "ludo-ai-openapi.json: declared missing tag: Account",
+    "ludo-ai-openapi.json: declared missing tag: Audio",
+    "ludo-ai-openapi.json: declared missing tag: Documentation",
+    "ludo-ai-openapi.json: declared missing tag: Files",
+    "ludo-ai-openapi.json: declared missing tag: Generations",
+    "ludo-ai-openapi.json: declared missing tag: Images",
+    "ludo-ai-openapi.json: declared missing tag: Jobs",
+    "ludo-ai-openapi.json: declared missing tag: Spritesheets",
+    "ludo-ai-openapi.json: declared missing tag: Videos",
+    "tag '3D Models' spans 3 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json, ludo-ai-3d-models-api-openapi.yml): per-path servers applied",
+    "tag 'Account' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Audio' spans 3 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json, ludo-ai-audio-api-openapi.yml): per-path servers applied",
+    "tag 'Authentication' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Documentation' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Files' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Generations' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Images' spans 3 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json, ludo-ai-images-api-openapi.yml): per-path servers applied",
+    "tag 'Jobs' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Spritesheets' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "tag 'Videos' spans 2 source specs (ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json): per-path servers applied",
+    "apis.yml register: written (+10 apis, 16 total)"
   ],
-  "skipped": [
-    "ludo-ai-3d-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ludo-ai-animation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ludo-ai-audio-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ludo-ai-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ludo-ai-results-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ludo-ai-video-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

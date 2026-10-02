@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-create-speech-preset-request-schema.json",
+  "title": "CreateSpeechPresetRequest",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-audio-api-openapi.yml#/components/schemas/CreateSpeechPresetRequest",
+  "type": "object",
+  "required": [
+    "text",
+    "voice_preset_id"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "Text to speak using the preset voice.",
+      "maxLength": 1000
+    },
+    "voice_preset_id": {
+      "type": "string",
+      "description": "ID of the preset voice character to use.",
+      "enum": [
+        "Serious woman",
+        "Wise woman",
+        "Calm woman",
+        "Patient man",
+        "Determined man",
+        "Deep voice man",
+        "Teen boy",
+        "Sweet girl"
+      ]
+    },
+    "emotion": {
+      "type": "string",
+      "description": "Emotion to apply to the speech delivery.",
+      "enum": [
+        "Default",
+        "Happy",
+        "Sad",
+        "Angry",
+        "Fearful",
+        "Surprised",
+        "Neutral"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "description": "Language for the speech output.",
+      "enum": [
+        "auto",
+        "English",
+        "Spanish",
+        "French",
+        "German",
+        "Japanese",
+        "Korean"
+      ]
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Client-provided ID to retrieve results later via the results endpoint."
+    }
+  }
+}

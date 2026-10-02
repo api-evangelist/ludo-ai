@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-generate-image-payload-schema.json",
+  "title": "GenerateImagePayload",
+  "description": "Payload for generating an image from text prompt",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-openapi.json#/components/schemas/GenerateImagePayload",
+  "type": "object",
+  "required": [
+    "image_type",
+    "prompt"
+  ],
+  "properties": {
+    "image_type": {
+      "type": "string",
+      "description": "What kind of image to generate.",
+      "enum": [
+        "generic",
+        "screenshot",
+        "art",
+        "asset",
+        "sprite",
+        "sprite-vfx",
+        "sprite-tiling-horizontal",
+        "sprite-tiling-vertical",
+        "icon",
+        "logo",
+        "ui_asset",
+        "fixed_background",
+        "side_scrolling_background",
+        "vertical_scrolling_background",
+        "parallax_layer",
+        "texture",
+        "tile",
+        "item-icon",
+        "portrait",
+        "card-art",
+        "splash",
+        "3d"
+      ]
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Text description of the image to generate. The more detailed the prompt, the more accurate the image will be."
+    },
+    "art_style": {
+      "type": "string",
+      "description": "Visual art style for the sprite (e.g., \"Pixel Art\", \"Cartoonish\", \"Realistic\").",
+      "enum": [
+        "Any style",
+        "Cel-Shaded",
+        "Inked Painterly",
+        "Illustration",
+        "Western Cartoon",
+        "Anime/Manga",
+        "Chibi",
+        "8-Bit",
+        "16-Bit",
+        "32-Bit",
+        "Hi-Bit",
+        "Retro 2D",
+        "Hand-Painted",
+        "Digital Painting",
+        "Comic Book",
+        "Block Print",
+        "Sketch",
+        "Watercolor",
+        "Stylized 3D",
+        "Pixar Style",
+        "Low Poly",
+        "Photorealistic 3D",
+        "Voxel Art",
+        "Retro 3D",
+        "Flat Design",
+        "Minimalist",
+        "Silhouette",
+        "Noir",
+        "Neon",
+        "Glitch Art",
+        "Claymation",
+        "Paper Craft",
+        "Textile"
+      ]
+    },
+    "perspective": {
+      "type": "string",
+      "description": "Camera angle/view for the sprite (e.g., \"Side view\", \"Front view\", \"Isometric\").",
+      "enum": [
+        "Any perspective",
+        "Side-Scroll",
+        "Isometric",
+        "High Angle",
+        "Top-Down",
+        "2.5D",
+        "First-Person",
+        "Third-Person",
+        "Over-the-Shoulder",
+        "Free Camera"
+      ]
+    },
+    "aspect_ratio": {
+      "type": "string",
+      "description": "Aspect ratio of the output image.",
+      "enum": [
+        "default",
+        "ar_1_1",
+        "ar_4_3",
+        "ar_16_9",
+        "ar_19_9",
+        "ar_3_4",
+        "ar_9_16",
+        "ar_9_19"
+      ]
+    },
+    "n": {
+      "type": "integer",
+      "format": "integer",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 8,
+      "description": "Number of image variations to generate"
+    },
+    "augment_prompt": {
+      "type": "boolean",
+      "default": true,
+      "description": "Rewrites your prompt behind the scenes into the form the model works best with. Leave it on (the default). Turning it off does not give you more control - it usually gives worse results. Do not disable it unless you really know what you are doing and have tested your prompts extensively."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
+    },
+    "async": {
+      "type": "boolean",
+      "default": true,
+      "description": "Defaults to true: the call returns 202 immediately with a job id to poll with getApiJob. Set false for a synchronous response (deprecated but supported): the call then blocks until the result is ready."
+    }
+  }
+}

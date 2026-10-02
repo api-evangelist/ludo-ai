@@ -1,0 +1,11 @@
+generated: '2026-10-02'
+method: probed
+source:
+  - url: https://ludo.ai/developers/mcp
+    status: 200
+    content_type: text/html
+deployment:
+  mode: remote
+  endpoint: https://mcp.ludo.ai/mcp
+  auth: api-key
+  verified: probed

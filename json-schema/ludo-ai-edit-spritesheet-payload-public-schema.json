@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json",
+  "title": "EditSpritesheetPayloadPublic",
+  "description": "Payload for editing a previously generated spritesheet. edit_mode selects the operation - prompt-driven edit (default), outpaint, or loop fixing.",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-openapi.json#/components/schemas/EditSpritesheetPayloadPublic",
+  "type": "object",
+  "required": [
+    "spritesheet_url"
+  ],
+  "properties": {
+    "spritesheet_url": {
+      "type": "string",
+      "description": "URL of a spritesheet you generated in the last 7 days (returned by animateSprite, transferMotion, or a previous edit as spritesheet_url). External URLs are not accepted. Edit the original animation rather than a previous edit's result: every edit re-renders the whole animation, so colors and detail drift further with each pass. If an edit did not work, retry from the original instead of editing on top."
+    },
+    "edit_mode": {
+      "type": "string",
+      "description": "Edit operation to perform.",
+      "enum": [
+        "prompt",
+        "outpaint",
+        "fix_loop"
+      ],
+      "default": "prompt"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Edit instruction. Required for edit_mode \"prompt\", optional for \"outpaint\", not accepted for \"fix_loop\". Focus it on a single change and keep it short (under about 50 words); run a second edit for more."
+    },
+    "images": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional reference images (up to 5), each a URL or base64, to guide the edit. Two, at most three, work best: more references reduce the model's ability to use any of them correctly."
+    },
+    "duration": {
+      "type": "number",
+      "format": "float",
+      "description": "Duration in seconds. Available values depend on the model:\n- hydra: 3, 3.5, 4, 4.5, 5\n- forge: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5\n- forge-pixel: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5"
+    },
+    "model": {
+      "type": "string",
+      "description": "Model to use. Available models:\n- \"hydra\" (Hydra): 3 credits/s, min charge 9 credits · Most capable all-around model, generates audio\n- \"forge\" (Forge): 2 credits/s, min charge 4 credits · Sharper detail, simpler motion. Best for simple body shapes and short actions; may need a few tries\n- \"forge-pixel\" (Forge Pixel): 2 credits/s, min charge 4 credits · Best for low-res pixel art animations",
+      "enum": [
+        "hydra",
+        "forge",
+        "forge-pixel"
+      ],
+      "default": "hydra"
+    },
+    "crop": {
+      "type": "boolean",
+      "description": "Crop sprite frames to fit content (omit to keep the source spritesheet's setting). Results in smaller spritesheets but inconsistent frame sizes across different animations."
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Trim the animation at the beginning or end to create a seamless loop."
+    },
+    "frames": {
+      "type": "number",
+      "format": "integer",
+      "description": "Number of frames in the output spritesheet. Omit to keep the source spritesheet's frame count. Allow about one second of duration per 16 frames - above that the model may not be able to produce them all.",
+      "enum": [
+        4,
+        9,
+        16,
+        25,
+        36,
+        49,
+        64
+      ]
+    },
+    "frame_size": {
+      "type": "number",
+      "format": "integer",
+      "description": "Size of each frame in pixels (width and height). 0 is for maximum resolution. Omit to keep the source spritesheet's frame size.",
+      "enum": [
+        32,
+        64,
+        96,
+        128,
+        192,
+        256,
+        384,
+        0
+      ]
+    },
+    "gif": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, generates an animated GIF from the spritesheet and returns it in gif_url. Disabled by default to reduce response time."
+    },
+    "individual_frames": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, extracts each frame from the spritesheet as an individual image and returns the URLs in individual_frame_urls."
+    },
+    "spritesheet_with_background": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, also returns the spritesheet with background intact (before background removal). The with-background spritesheet URL will be in spritesheet_with_background_url."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
+    },
+    "async": {
+      "type": "boolean",
+      "default": true,
+      "description": "Defaults to true: the call returns 202 immediately with a job id to poll with getApiJob. Set false for a synchronous response (deprecated but supported): the call then blocks until the result is ready."
+    }
+  }
+}

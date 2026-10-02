@@ -1,0 +1,38 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.ludo.ai/api",
+      "service-desc": [
+        {
+          "href": "https://api.ludo.ai/api-documentation/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://api.ludo.ai/api-documentation",
+          "type": "text/html"
+        },
+        {
+          "href": "https://ludo.ai/developers/api",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://ludo.ai/llms.txt",
+          "type": "text/plain"
+        }
+      ]
+    },
+    {
+      "anchor": "https://mcp.ludo.ai/mcp",
+      "service-doc": [
+        {
+          "href": "https://ludo.ai/developers/mcp",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

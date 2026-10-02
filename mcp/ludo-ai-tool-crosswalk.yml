@@ -1,0 +1,21 @@
+generated: '2026-10-02'
+method: derived
+source:
+  - url: https://api.ludo.ai/api-documentation/openapi.json
+crosswalk:
+  - tool: createImage
+    rest:
+      - createImage
+    confidence: high
+  - tool: generateWithStyle
+    rest:
+      - generateWithStyle
+    confidence: high
+  - tool: editImage
+    rest:
+      - editImage
+    confidence: high
+  - tool: removeBackground
+    rest:
+      - removeBackground
+    confidence: high

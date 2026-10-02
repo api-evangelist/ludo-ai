@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-transfer-motion-payload-schema.json",
+  "title": "TransferMotionPayload",
+  "description": "Payload for transferring motion from a video onto a static sprite image, producing an animated spritesheet.",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-openapi.json#/components/schemas/TransferMotionPayload",
+  "type": "object",
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "image": {
+      "type": "string",
+      "description": "The static sprite to animate, as a URL or base64 image. Ideally an image generated with the \"sprite\", \"sprite-vfx\" or \"ui_asset\" image type."
+    },
+    "video": {
+      "type": "string",
+      "description": "URL of the video to use as motion source - the `video_url` of a spritesheet from animateSprite, or your own clip. Videos up to 4 seconds work best. Either `video` or `preset_id` + `perspective` + `direction` must be provided; when both are sent the video is used. A video more than twice as long as `duration` gets heavily compressed and the motion turns rushed - trim it to the part you want, or raise `duration`."
+    },
+    "preset_id": {
+      "type": "string",
+      "description": "ID of an animation preset to use instead of a video URL. Use listAnimationPresets to list available presets. When using a preset, `perspective` and `direction` are required."
+    },
+    "direction": {
+      "type": "string",
+      "description": "Direction for the animation preset. When using a preset, `direction` is required.",
+      "enum": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ]
+    },
+    "perspective": {
+      "type": "string",
+      "description": "Camera perspective of the preset clip, by id (the `perspectives` list of listAnimationPresets, the same set for every preset): high = tactical steep top-down, horizon = side view at eye level, isometric = diagonal top-down with depth, low = hero low angle, top = directly overhead. Required when using a preset. Unrelated to the `perspective` of createImage, which is a free-text art direction.",
+      "enum": [
+        "high",
+        "horizon",
+        "isometric",
+        "low",
+        "top"
+      ]
+    },
+    "frames": {
+      "type": "number",
+      "format": "integer",
+      "description": "Maximum number of frames in the output spritesheet. Allow about one second of duration per 16 frames - above that the model may not be able to produce them all (64 frames needs a duration of at least 4). The result can have fewer frames when the duration is short or bad frames were removed.",
+      "default": 36,
+      "enum": [
+        4,
+        9,
+        16,
+        25,
+        36,
+        49,
+        64
+      ]
+    },
+    "frame_size": {
+      "type": "number",
+      "format": "integer",
+      "description": "Size of each frame in pixels (width and height). 0 is maximum resolution. Exporting larger than the input image adds no detail: do not pick a size above the input's own resolution, and 0 gains nothing on inputs under 512 px. True Size is not available here: the image is not the first frame of the result, so there is nothing to align to.",
+      "default": 0,
+      "enum": [
+        32,
+        64,
+        96,
+        128,
+        192,
+        256,
+        384,
+        0
+      ]
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Trim the animation at the beginning or end to create a seamless loop."
+    },
+    "crop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Crop sprite frames to fit content. Results in smaller spritesheets but inconsistent frame sizes across different animations."
+    },
+    "margin_ratio": {
+      "type": "number",
+      "format": "float",
+      "description": "Deprecated: prefer margin_ratio_horizontal / margin_ratio_vertical. Amount of padding around the sprite as a ratio (0.0 to 1.0). Sets both axes to this value. A per-axis value, when also given, overrides this for that axis. Defaults to 0.15 when no margin value is given at all.",
+      "deprecated": true
+    },
+    "margin_ratio_horizontal": {
+      "type": "number",
+      "format": "float",
+      "description": "Horizontal padding around the sprite as a ratio (0.0 to 1.0). Every bit of margin is resolution taken from the sprite, so keep it as tight as the motion allows - about 0.15 - and go higher only for motion that extends sideways (sword slashes, punches) or if the sprite gets cut off. Overrides the legacy margin_ratio on this axis."
+    },
+    "margin_ratio_vertical": {
+      "type": "number",
+      "format": "float",
+      "description": "Vertical padding around the sprite as a ratio (0.0 to 1.0). Every bit of margin is resolution taken from the sprite, so keep it as tight as the motion allows - about 0.15 - and go higher only for motion that extends up or down (jumps) or if the sprite gets cut off. Overrides the legacy margin_ratio on this axis."
+    },
+    "margin_ratio_mode": {
+      "type": "string",
+      "description": "How the sprite is framed for generation. Defaults to \"manual\" (0.15 on each axis when no margin value is given); transfer motion has no \"auto\". The model always generates on a canvas of the same size, so any margin is canvas the sprite does not fill: the more margin, the lower the resolution and detail of the sprite. Keep the margins tight - about 0.15 - and raise only the axis the motion needs. \"none\" animates the image exactly as framed, so it must already have suitable margins (not touching the edges, not mostly empty space); an off-center sprite can give unpredictable results. Sending \"none\" together with a margin value fails with HTTP 400 (the value would be ignored).",
+      "enum": [
+        "manual",
+        "none"
+      ],
+      "default": "manual"
+    },
+    "gif": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, generates an animated GIF from the spritesheet and returns it in gif_url. Disabled by default to reduce response time."
+    },
+    "individual_frames": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, extracts each frame from the spritesheet as an individual image and returns the URLs in individual_frame_urls."
+    },
+    "spritesheet_with_background": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, also returns the spritesheet with background intact (before background removal). Useful for manually fixing background removal issues. The with-background spritesheet URL will be in spritesheet_with_background_url."
+    },
+    "model": {
+      "type": "string",
+      "description": "Model to use. Available models:\n- \"hydra\" (Hydra): 3 credits/s, min charge 9 credits · Most capable all-around model, generates audio\n- \"forge\" (Forge): 2 credits/s, min charge 4 credits · Sharper detail, simpler motion. Best for simple body shapes and short actions; may need a few tries\n- \"forge-pixel\" (Forge Pixel): 2 credits/s, min charge 4 credits · Best for low-res pixel art animations\n- \"tango\" (Tango): 4 credits/s, min charge 4 credits · LEGACY - scheduled for removal, do not use for new work\nModels marked LEGACY still work for existing integrations but will be removed; pick a current model for anything new.\nforge is tuned for the motion presets (preset_id) and often fails to follow your own video - use hydra for custom footage. forge-pixel expects real pixel art - a perfect pixel grid at its natural resolution.",
+      "enum": [
+        "hydra",
+        "forge",
+        "forge-pixel",
+        "tango"
+      ],
+      "default": "hydra"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "Optional extra instructions for the motion transfer (e.g. \"keep the cape still\"), added to the model's own prompt."
+    },
+    "duration": {
+      "type": "number",
+      "format": "float",
+      "default": 1.5,
+      "description": "Duration in seconds. If the reference video is longer, it will be compressed to this duration. Available values depend on the model:\n- hydra: 3, 3.5, 4, 4.5, 5\n- forge: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5\n- forge-pixel: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5\n- tango: 1, 1.5, 2, 2.5, 3, 3.5, 4"
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
+    },
+    "async": {
+      "type": "boolean",
+      "default": true,
+      "description": "Defaults to true: the call returns 202 immediately with a job id to poll with getApiJob. Set false for a synchronous response (deprecated but supported): the call then blocks until the result is ready."
+    }
+  }
+}

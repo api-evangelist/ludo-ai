@@ -102,185 +102,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AnimationPreset:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the animation preset.
-        name:
-          type: string
-          description: Human-readable name of the animation preset.
-        category:
-          type: string
-          description: Category grouping for the preset.
-        description:
-          type: string
-          description: Description of the animation motion.
-        duration:
-          type: number
-          description: Duration of the preset animation in seconds.
-        preview_url:
-          type: string
-          format: uri
-          description: URL to preview the animation preset.
-    TransferMotionRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          description: URL or base64-encoded sprite image to apply motion to.
-        video:
-          type: string
-          description: URL of the video to use as motion source. Videos up to 4 seconds produce better results. Either video or preset_id with perspective and direction must be provided.
-        preset_id:
-          type: string
-          description: ID of an animation preset to use instead of a video URL. When using a preset, perspective and direction are required.
-        direction:
-          type: string
-          description: Direction for the animation preset. Required when using a preset.
-          enum:
-          - N
-          - NE
-          - E
-          - SE
-          - S
-          - SW
-          - W
-          - NW
-        perspective:
-          type: string
-          description: Perspective ID to use with the animation preset. Required when using a preset.
-        frames:
-          type: integer
-          description: Number of frames in the output spritesheet.
-        frame_size:
-          type: integer
-          description: Size of each frame in pixels.
-        loop:
-          type: boolean
-          description: Whether to trim the animation for seamless looping.
-        crop:
-          type: boolean
-          description: Whether to crop frames to fit content.
-        margin_ratio:
-          type: number
-          description: Padding around the sprite as a ratio from 0.0 to 1.0.
-          minimum: 0.0
-          maximum: 1.0
-        margin_ratio_mode:
-          type: string
-          description: Mode for margin ratio application.
-          enum:
-          - manual
-          - none
-          default: manual
-        gif:
-          type: boolean
-          description: Whether to also generate an animated GIF.
-          default: false
-        individual_frames:
-          type: boolean
-          description: Whether to extract and return individual frame images.
-          default: false
-        spritesheet_with_background:
-          type: boolean
-          description: Whether to also return the spritesheet with background intact before background removal.
-          default: false
-        request_id:
-          type: string
-          description: Client-provided ID to retrieve results later via the results endpoint.
-    AnimationResponse:
-      type: object
-      properties:
-        spritesheet_url:
-          type: string
-          format: uri
-          description: URL of the generated spritesheet image. Expires after 7 days.
-        video_url:
-          type: string
-          format: uri
-          description: URL of the animation as a video file. Expires after 7 days.
-        gif_url:
-          type: string
-          format: uri
-          description: URL of the animated GIF if gif was set to true. Expires after 7 days.
-        individual_frame_urls:
-          type: array
-          description: Array of individual frame image URLs if individual_frames was set to true.
-          items:
-            type: string
-            format: uri
-        spritesheet_with_background_url:
-          type: string
-          format: uri
-          description: URL of the spritesheet with background intact if spritesheet_with_background was set to true.
-        individual_frame_with_background_urls:
-          type: array
-          description: Array of individual frame URLs with background intact.
-          items:
-            type: string
-            format: uri
-        num_frames:
-          type: integer
-          description: Total number of frames in the spritesheet.
-        num_cols:
-          type: integer
-          description: Number of columns in the spritesheet grid.
-        num_rows:
-          type: integer
-          description: Number of rows in the spritesheet grid.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
-    AnimationPresetsResponse:
-      type: object
-      properties:
-        animations:
-          type: array
-          description: Array of available animation presets.
-          items:
-            $ref: '#/components/schemas/AnimationPreset'
-        perspectives:
-          type: array
-          description: Array of available perspectives. All animations support all perspectives.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Perspective identifier.
-              name:
-                type: string
-                description: Human-readable perspective name.
-              description:
-                type: string
-                description: Description of the perspective.
-        directions:
-          type: array
-          description: Available directions for animation presets. All animations support all directions.
-          items:
-            type: string
-            enum:
-            - N
-            - NE
-            - E
-            - SE
-            - S
-            - SW
-            - W
-            - NW
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
     AnimateSpriteRequest:
       type: object
       required:
@@ -353,6 +174,185 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
+    TransferMotionRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: URL or base64-encoded sprite image to apply motion to.
+        video:
+          type: string
+          description: URL of the video to use as motion source. Videos up to 4 seconds produce better results. Either video or preset_id with perspective and direction must be provided.
+        preset_id:
+          type: string
+          description: ID of an animation preset to use instead of a video URL. When using a preset, perspective and direction are required.
+        direction:
+          type: string
+          description: Direction for the animation preset. Required when using a preset.
+          enum:
+          - N
+          - NE
+          - E
+          - SE
+          - S
+          - SW
+          - W
+          - NW
+        perspective:
+          type: string
+          description: Perspective ID to use with the animation preset. Required when using a preset.
+        frames:
+          type: integer
+          description: Number of frames in the output spritesheet.
+        frame_size:
+          type: integer
+          description: Size of each frame in pixels.
+        loop:
+          type: boolean
+          description: Whether to trim the animation for seamless looping.
+        crop:
+          type: boolean
+          description: Whether to crop frames to fit content.
+        margin_ratio:
+          type: number
+          description: Padding around the sprite as a ratio from 0.0 to 1.0.
+          minimum: 0.0
+          maximum: 1.0
+        margin_ratio_mode:
+          type: string
+          description: Mode for margin ratio application.
+          enum:
+          - manual
+          - none
+          default: manual
+        gif:
+          type: boolean
+          description: Whether to also generate an animated GIF.
+          default: false
+        individual_frames:
+          type: boolean
+          description: Whether to extract and return individual frame images.
+          default: false
+        spritesheet_with_background:
+          type: boolean
+          description: Whether to also return the spritesheet with background intact before background removal.
+          default: false
+        request_id:
+          type: string
+          description: Client-provided ID to retrieve results later via the results endpoint.
+    AnimationPreset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the animation preset.
+        name:
+          type: string
+          description: Human-readable name of the animation preset.
+        category:
+          type: string
+          description: Category grouping for the preset.
+        description:
+          type: string
+          description: Description of the animation motion.
+        duration:
+          type: number
+          description: Duration of the preset animation in seconds.
+        preview_url:
+          type: string
+          format: uri
+          description: URL to preview the animation preset.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    AnimationPresetsResponse:
+      type: object
+      properties:
+        animations:
+          type: array
+          description: Array of available animation presets.
+          items:
+            $ref: '#/components/schemas/AnimationPreset'
+        perspectives:
+          type: array
+          description: Array of available perspectives. All animations support all perspectives.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Perspective identifier.
+              name:
+                type: string
+                description: Human-readable perspective name.
+              description:
+                type: string
+                description: Description of the perspective.
+        directions:
+          type: array
+          description: Available directions for animation presets. All animations support all directions.
+          items:
+            type: string
+            enum:
+            - N
+            - NE
+            - E
+            - SE
+            - S
+            - SW
+            - W
+            - NW
+    AnimationResponse:
+      type: object
+      properties:
+        spritesheet_url:
+          type: string
+          format: uri
+          description: URL of the generated spritesheet image. Expires after 7 days.
+        video_url:
+          type: string
+          format: uri
+          description: URL of the animation as a video file. Expires after 7 days.
+        gif_url:
+          type: string
+          format: uri
+          description: URL of the animated GIF if gif was set to true. Expires after 7 days.
+        individual_frame_urls:
+          type: array
+          description: Array of individual frame image URLs if individual_frames was set to true.
+          items:
+            type: string
+            format: uri
+        spritesheet_with_background_url:
+          type: string
+          format: uri
+          description: URL of the spritesheet with background intact if spritesheet_with_background was set to true.
+        individual_frame_with_background_urls:
+          type: array
+          description: Array of individual frame URLs with background intact.
+          items:
+            type: string
+            format: uri
+        num_frames:
+          type: integer
+          description: Total number of frames in the spritesheet.
+        num_cols:
+          type: integer
+          description: Number of columns in the spritesheet grid.
+        num_rows:
+          type: integer
+          description: Number of rows in the spritesheet grid.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-video-results-response-schema.json",
+  "title": "VideoResultsResponse",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-results-api-openapi.yml#/components/schemas/VideoResultsResponse",
+  "type": "object",
+  "properties": {
+    "results": {
+      "type": "array",
+      "description": "Array of recent API-generated video results.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the generated video."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "The client-provided request ID."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the video was generated."
+          }
+        }
+      }
+    }
+  }
+}

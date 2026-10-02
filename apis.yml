@@ -1,7 +1,11 @@
 aid: ludo-ai
+
 url: https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml
+
 name: Ludo.ai
+
 type: Index
+
 deliveryModel:
   model: saas
   license_evidence:
@@ -18,6 +22,7 @@ deliveryModel:
   - repository-not-product
   generated: '2026-09-25'
   method: derived
+
 accessModel:
   pricing: paid
   onboarding: unknown
@@ -32,20 +37,114 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ludo-ai.png
+
 tags:
-  - Artificial Intelligence
-  - Asset Generation
-  - Game Design
-  - Game Development
-description: >-
-  Ludo.ai is a game design hub that uses artificial intelligence to help developers generate production-ready game
-  assets including images, 3D models, audio, and animations. The platform entered beta for its Model Context Protocol
-  (MCP) integration, exposing its asset generation suite as a headless API that enables vibe coding where developers can
-  trigger asset creation directly from AI assistants like Claude or Cursor.
+- Artificial Intelligence
+- Asset Generation
+- Game Design
+- Game Development
+- Game Asset Generation
+- AI Art
+- Sprite Sheets
+- Video Assets - Artificial Intelligence - Asset Generation - Game Design - Game Development
+
+description: Ludo.ai is a game design hub that uses artificial intelligence to help developers generate production-ready game assets including
+  images, 3D models, audio, and animations. The platform entered beta for its Model Context Protocol (MCP) integration, exposing its asset generation
+  suite as a headless API that enables vibe coding where developers can trigger asset creation directly from AI assistants like Claude or Cursor.
+
 created: '2026-03-24'
+
 modified: '2026-05-19'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Security
+  url: security/ludo-ai-vulnerability-disclosure.yml
+- type: ToolCrosswalk
+  url: mcp/ludo-ai-tool-crosswalk.yml
+- type: VulnerabilityDisclosure
+  url: security/ludo-ai-vulnerability-disclosure.yml
+- type: FinOps
+  url: finops/ludo-ai-finops.yml
+- type: RateLimits
+  url: rate-limits/ludo-ai-rate-limits.yml
+- type: Plans
+  url: plans/ludo-ai-plans-pricing.yml
+- type: Spectral
+  url: rules/ludo-ai-rules.yml
+- type: Spectral
+  url: rules/ludo-ai-jsonschema-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/ludo-ai-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/ludo-ai-data-model.yml
+- type: CLI
+  url: cli/ludo-ai-cli.yml
+- type: ChangeLog
+  url: changelog/ludo-ai-changelog.yml
+- type: ErrorCatalog
+  url: errors/ludo-ai-problem-types.yml
+- type: Conformance
+  url: conformance/ludo-ai-conformance.yml
+- type: LLMsTxt
+  url: llms/ludo-ai-llms.txt
+- type: SecurityTxt
+  url: well-known/ludo-ai-security.txt
+- type: WellKnown
+  url: well-known/ludo-ai-well-known.yml
+- type: Hosts
+  url: hosts/ludo-ai-hosts.yml
+- type: Vendors
+  url: vendors/ludo-ai-vendors.yml
+- type: SDKs
+  url: packages/ludo-ai-packages.yml
+- type: Packages
+  url: packages/ludo-ai-packages.yml
+- type: PrivacyPolicy
+  url: https://ludo.ai/privacy-policies
+- type: Pricing
+  url: https://ludo.ai/pricing
+- type: ChangeLog
+  url: https://ludo.ai/whats-new
+- type: APIReference
+  url: https://api.ludo.ai/api-documentation/openapi.json
+- type: AgenticAccess
+  url: agentic-access/ludo-ai-agentic-access.yml
+- type: DomainSecurity
+  url: security/ludo-ai-domain-security.yml
+- type: Authentication
+  url: authentication/ludo-ai-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ludoai
+- type: JSONLD
+  url: json-ld/ludo-ai-context.jsonld
+- type: JSONSchema
+  url: json-schema/ludo-ai-game-asset-schema.json
+- type: Website
+  url: https://ludo.ai/
+- type: Portal
+  url: https://ludo.ai/developers
+- type: Documentation
+  url: https://ludo.ai/docs
+- type: Blog
+  url: https://ludo.ai/blog/introducing-ludo-ai-api-mcp-integration
+- type: GitHubOrganization
+  url: https://github.com/Ludo-AI
+- type: Login
+  url: https://ludo.ai/
+- name: MCP Server
+  url: https://github.com/Ludo-AI/ludo-mcp
+  type: MCPServer
+
 apis:
 - aid: ludo-ai:mcp-server
   name: Ludo.ai MCP Server
@@ -87,7 +186,7 @@ apis:
   - Plugin
   - Unity
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.example.com
+  baseURL: https://api.ludo.ai/api
   humanURL: https://github.com/Ludo-AI/ludo-unity-plugin
   properties:
   - url: https://github.com/Ludo-AI/ludo-unity-plugin
@@ -98,38 +197,11 @@ apis:
     creation, audio production, and animation tools without leaving the editor. The plugin connects to
     the Ludo.ai API to deliver generated assets directly into Unity projects, streamlining the game development
     workflow.
-- aid: ludo-ai:ludo-ai-3d-models-api
-  name: Ludo.ai 3D Models API
-  description: >-
-    Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
-  tags:
-  - 3D Models
-  properties:
-  - type: OpenAPI
-    url: openapi/ludo-ai-3d-models-api-openapi.yml
-  - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
-- aid: ludo-ai:ludo-ai-animation-api
-  name: Ludo.ai Animation API
-  description: >-
-    Create animated spritesheets from static sprites, transfer motion from videos or presets, and list
-    available animation presets.
-  humanURL: https://ludo.ai/api-mcp-integration
-  baseURL: https://api.ludo.ai/api/
-  tags:
-  - Animation
-  properties:
-  - type: OpenAPI
-    url: openapi/ludo-ai-animation-api-openapi.yml
-  - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
 - aid: ludo-ai:ludo-ai-audio-api
   name: Ludo.ai Audio API
   description: >-
     Generate sound effects, background music, character voices, and text-to-speech audio for games.
-  humanURL: https://ludo.ai/api-mcp-integration
+  humanURL: https://ludo.ai/developers
   baseURL: https://api.ludo.ai/api/
   tags:
   - Audio
@@ -137,13 +209,25 @@ apis:
   - type: OpenAPI
     url: openapi/ludo-ai-audio-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-speech-preset-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-voice-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-sound-effect-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-music-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-speech-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-audio-response-schema.json
 - aid: ludo-ai:ludo-ai-images-api
   name: Ludo.ai Images API
   description: >-
     Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and
     backgrounds.
-  humanURL: https://ludo.ai/api-mcp-integration
+  humanURL: https://ludo.ai/developers
   baseURL: https://api.ludo.ai/api/
   tags:
   - Image
@@ -153,12 +237,24 @@ apis:
   - type: OpenAPI
     url: openapi/ludo-ai-images-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-create-image-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-with-style-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-pose-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-image-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-pose-response-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-image-response-schema.json
 - aid: ludo-ai:ludo-ai-results-api
   name: Ludo.ai Results API
   description: >-
     Retrieve previously generated assets using request IDs or browse recent API-generated content.
-  humanURL: https://ludo.ai/api-mcp-integration
+  humanURL: https://ludo.ai/developers
   baseURL: https://api.ludo.ai/api/
   tags:
   - Results
@@ -166,13 +262,23 @@ apis:
   - type: OpenAPI
     url: openapi/ludo-ai-results-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-image-results-response-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-video-results-response-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-sprite-results-response-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-model3-dresults-response-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-audio-results-response-schema.json
 - aid: ludo-ai:ludo-ai-video-api
   name: Ludo.ai Video API
   description: >-
     Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic
     backgrounds.
-  humanURL: https://ludo.ai/api-mcp-integration
+  humanURL: https://ludo.ai/developers
   baseURL: https://api.ludo.ai/api/
   tags:
   - Video
@@ -180,74 +286,281 @@ apis:
   - type: OpenAPI
     url: openapi/ludo-ai-video-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/api-mcp-integration
-common:
-  - type: AgenticAccess
-    url: agentic-access/ludo-ai-agentic-access.yml
-  - type: DomainSecurity
-    url: security/ludo-ai-domain-security.yml
-  - type: Authentication
-    url: authentication/ludo-ai-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/ludoai
-  - type: JSONLD
-    url: json-ld/ludo-ai-context.jsonld
+    url: https://ludo.ai/developers
   - type: JSONSchema
-    url: json-schema/ludo-ai-game-asset-schema.json
-  - type: Website
-    url: https://ludo.ai/
-  - type: Portal
-    url: https://ludo.ai/api-mcp-integration
+    url: json-schema/ludo-ai-create-video-request-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-video-response-schema.json
+- aid: ludo-ai:ludo-ai-3d-models-api
+  name: Ludo.ai 3D Models API
+  description: The 3D Models API from Ludo.ai — 6 operation(s) for 3d models.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - 3D Models
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-3d-models-api-openapi.yml
   - type: Documentation
-    url: https://ludo.ai/docs
-  - type: Blog
-    url: https://ludo.ai/blog/introducing-ludo-ai-api-mcp-integration
-  - type: GitHubOrganization
-    url: https://github.com/Ludo-AI
-  - type: Login
-    url: https://ludo.ai/
-  - name: MCP Server
-    url: https://github.com/Ludo-AI/ludo-mcp
-    type: MCPServer
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-account-api
+  name: Ludo.ai Account API
+  description: The Account API from Ludo.ai — 3 operation(s) for account.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-account-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-animation-api
+  name: Ludo.ai Animation API
+  description: >-
+    Create animated spritesheets from static sprites, transfer motion from videos or presets, and list
+    available animation presets.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Animation
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-animation-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-authentication-api
+  name: Ludo.ai Authentication API
+  description: The Authentication API from Ludo.ai — 1 operation(s) for authentication.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-documentation-api
+  name: Ludo.ai Documentation API
+  description: The Documentation API from Ludo.ai — 2 operation(s) for documentation.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Documentation
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-documentation-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-files-api
+  name: Ludo.ai Files API
+  description: The Files API from Ludo.ai — 1 operation(s) for files.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-files-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-generations-api
+  name: Ludo.ai Generations API
+  description: The Generations API from Ludo.ai — 1 operation(s) for generations.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Generations
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-generations-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-jobs-api
+  name: Ludo.ai Jobs API
+  description: The Jobs API from Ludo.ai — 2 operation(s) for jobs.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-spritesheets-api
+  name: Ludo.ai Spritesheets API
+  description: The Spritesheets API from Ludo.ai — 10 operation(s) for spritesheets.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Spritesheets
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-spritesheets-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-videos-api
+  name: Ludo.ai Videos API
+  description: The Videos API from Ludo.ai — 5 operation(s) for videos.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Videos
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-videos-api-openapi.yml
+  - type: Documentation
+    url: https://ludo.ai/developers
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-transfer-motion-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-video-payload-public-schema.json
+  - type: JSONSchema
+    url: json-schema/ludo-ai-generate-image-payload-schema.json
 x-correction-request:
   requested: '2026-10-02'
   source:
   - https://github.com/api-evangelist/ludo-ai/pull/1
-  request: >-
-    Submitted by Miguel Duarte (Ludo; npm maintainer of @ludoai/cli as miguel@ludo.ai).
-    Verified live 2026-10-02. CONTRACT: the previous openapi/_original (20 operations,
-    POST /images/create, /sprites/animate, GET /results/images ...) did not match the live
-    API -- invented paths return 404/405 while real ones return 403 unauthenticated. It has
-    been replaced with Ludo's own published spec fetched byte-verbatim from
-    https://api.ludo.ai/api-documentation/openapi.json (OpenAPI 3.0.0, info.version 0.9.10,
-    42 paths / 43 operations, sha256 672ed3e3...; also advertised as service-desc in
-    https://ludo.ai/.well-known/api-catalog). Its servers url is relative ('/api'), resolving to
-    https://api.ludo.ai/api. RE-PROFILE: re-run refine + split from that _original (Ludo's own
-    tags incl. Account and Documentation groups), drop the fabricated per-API splits, Postman and
-    OpenCollection collections and agentic-access derived from the old spec, and regenerate them.
-    AUTH: header is Authorization (not Authentication), value 'ApiKey <key>' -- spec
-    securitySchemes.ApiKey. LIMITS (spec info.description): 50 queued/running API generations per
-    account (429), job-status 150 req / 5 min per key, docs search 60 / 5 min and 1000 / day, docs
-    read 150 / 5 min. PRICING (ludo.ai/pricing): Pro $420/yr ($35/mo annual, saves $180 => $50
-    monthly), Studio $3,600/yr ($300/mo annual, saves $600 => $350 monthly); Indie 1 concurrent
-    job, Pro 2; API/MCP/CLI access from Pro; Auto Top-up and extra credits (250-10,000) on all paid
-    plans; 'save up to 30%' annual. Studio '5 concurrent' NOT found on the pricing page -- leave
-    unstated. POINTERS to add (all 200): APIReference https://api.ludo.ai/api-documentation;
-    OpenAPI https://api.ludo.ai/api-documentation/openapi.json; Portal https://ludo.ai/developers;
-    GettingStarted https://ludo.ai/developers/api; CLI https://ludo.ai/developers/cli (npm
-    @ludoai/cli, repo github.com/Ludo-AI/ludo-cli); MCPServer https://ludo.ai/developers/mcp
-    (https://mcp.ludo.ai/mcp answers initialize, serverInfo ludoai 0.9.10); Unity
-    https://ludo.ai/developers/unity; Pricing https://ludo.ai/pricing; ChangeLog
-    https://ludo.ai/whats-new; TermsOfService https://ludo.ai/terms-of-service (redirects to a
-    PDF); PrivacyPolicy https://ludo.ai/privacy-policies; SecurityTxt
-    https://ludo.ai/.well-known/security.txt; WellKnown https://ludo.ai/.well-known/api-catalog
-    (RFC 9727 linkset); LLMsTxt https://ludo.ai/llms.txt; Support https://ludo.ai/contact; Blog
-    https://ludo.ai/blog. Replace the dead/moved /api-mcp-integration and /docs/api-mcp humanURLs
-    with the /developers pages, and the Unity plugin baseURL placeholder https://api.example.com
-    with https://api.ludo.ai/api. NOT TAKEN: the PR's apis.yml, provenance, plans, rate-limits,
-    finops, authentication and split specs as files (pipeline-generated; regenerate from the
-    verified facts above), and its _original copy (taken from the live URL instead; the PR copy
-    had since drifted from the live file in 13 paths).
+  request: 'Submitted by Miguel Duarte (Ludo; npm maintainer of @ludoai/cli as miguel@ludo.ai). Verified live 2026-10-02. CONTRACT: the previous
+    openapi/_original (20 operations, POST /images/create, /sprites/animate, GET /results/images ...) did not match the live API -- invented paths
+    return 404/405 while real ones return 403 unauthenticated. It has been replaced with Ludo''s own published spec fetched byte-verbatim from
+    https://api.ludo.ai/api-documentation/openapi.json (OpenAPI 3.0.0, info.version 0.9.10, 42 paths / 43 operations, sha256 672ed3e3...; also
+    advertised as service-desc in https://ludo.ai/.well-known/api-catalog). Its servers url is relative (''/api''), resolving to https://api.ludo.ai/api.
+    RE-PROFILE: re-run refine + split from that _original (Ludo''s own tags incl. Account and Documentation groups), drop the fabricated per-API
+    splits, Postman and OpenCollection collections and agentic-access derived from the old spec, and regenerate them. AUTH: header is Authorization
+    (not Authentication), value ''ApiKey <key>'' -- spec securitySchemes.ApiKey. LIMITS (spec info.description): 50 queued/running API generations
+    per account (429), job-status 150 req / 5 min per key, docs search 60 / 5 min and 1000 / day, docs read 150 / 5 min. PRICING (ludo.ai/pricing):
+    Pro $420/yr ($35/mo annual, saves $180 => $50 monthly), Studio $3,600/yr ($300/mo annual, saves $600 => $350 monthly); Indie 1 concurrent
+    job, Pro 2; API/MCP/CLI access from Pro; Auto Top-up and extra credits (250-10,000) on all paid plans; ''save up to 30%'' annual. Studio ''5
+    concurrent'' NOT found on the pricing page -- leave unstated. POINTERS to add (all 200): APIReference https://api.ludo.ai/api-documentation;
+    OpenAPI https://api.ludo.ai/api-documentation/openapi.json; Portal https://ludo.ai/developers; GettingStarted https://ludo.ai/developers/api;
+    CLI https://ludo.ai/developers/cli (npm @ludoai/cli, repo github.com/Ludo-AI/ludo-cli); MCPServer https://ludo.ai/developers/mcp (https://mcp.ludo.ai/mcp
+    answers initialize, serverInfo ludoai 0.9.10); Unity https://ludo.ai/developers/unity; Pricing https://ludo.ai/pricing; ChangeLog https://ludo.ai/whats-new;
+    TermsOfService https://ludo.ai/terms-of-service (redirects to a PDF); PrivacyPolicy https://ludo.ai/privacy-policies; SecurityTxt https://ludo.ai/.well-known/security.txt;
+    WellKnown https://ludo.ai/.well-known/api-catalog (RFC 9727 linkset); LLMsTxt https://ludo.ai/llms.txt; Support https://ludo.ai/contact; Blog
+    https://ludo.ai/blog. Replace the dead/moved /api-mcp-integration and /docs/api-mcp humanURLs with the /developers pages, and the Unity plugin
+    baseURL placeholder https://api.example.com with https://api.ludo.ai/api. NOT TAKEN: the PR''s apis.yml, provenance, plans, rate-limits, finops,
+    authentication and split specs as files (pipeline-generated; regenerate from the verified facts above), and its _original copy (taken from
+    the live URL instead; the PR copy had since drifted from the live file in 13 paths).'
+x-enrichment:
+  date: '2026-10-02'
+  status: enriched
+  artifacts_added: 49
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

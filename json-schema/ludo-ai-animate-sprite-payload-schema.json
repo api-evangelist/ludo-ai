@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ludo-ai/main/json-schema/ludo-ai-animate-sprite-payload-schema.json",
+  "title": "AnimateSpritePayload",
+  "description": "Payload for generating an animated spritesheet from a static image. Input images can either be provided in base64 or URL. If the image was generated using Ludo, ideally it should be generated using the \"sprite\", \"sprite-vfx\" or \"ui_asset\" type.",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/ludo-ai-openapi.json#/components/schemas/AnimateSpritePayload",
+  "type": "object",
+  "required": [
+    "motion_prompt",
+    "initial_image"
+  ],
+  "properties": {
+    "motion_prompt": {
+      "type": "string",
+      "description": "Text description of the desired animation, e.g. \"walking\", \"idle breathing\", \"attack slash\", \"casting a fireball with both hands\". Describe exactly and unambiguously what the character should do. Specific or complex actions are fine; there is no need to simplify them. Do not over-describe, though: too much detail can harm the animation, and an action the model already knows should be named, not decomposed into its steps (\"walking\", never \"move the left foot forward, then the right foot\"). Do not restate what initial_image already shows (the character, its appearance and equipment, the art style, the background, the lighting, the camera), and leave frame count and timing to the frames and duration fields. Negative phrasing (\"no background\", \"do not move the camera\", \"without a weapon\") works only on hydra. On forge, forge-pixel and the legacy models it backfires: naming something you do not want makes it more likely to appear, so \"without a weapon\" tends to produce a weapon. On those models never phrase anything negatively; state only what should happen, and control everything else through the image and the other fields. Keep it well under 100 words: in longer prompts details start competing and some get dropped."
+    },
+    "initial_image": {
+      "type": "string",
+      "description": "The url OR base64 of the starting frame image to animate. This is the base sprite that will be brought to life."
+    },
+    "final_image": {
+      "type": "string",
+      "description": "The url OR base64 of ending frame image. When provided, the animation will interpolate between the initial and final frames."
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Trim the animation at the beginning or end to create a seamless loop. Not guaranteed to produce a perfect loop."
+    },
+    "crop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Crop sprite frames to fit content. Results in smaller spritesheets but inconsistent frame sizes across different animations."
+    },
+    "frames": {
+      "type": "number",
+      "format": "integer",
+      "description": "Maximum number of frames in the output spritesheet. Allow about one second of duration per 16 frames - above that the model may not be able to produce them all (64 frames needs a duration of at least 4). The result can have fewer frames when the duration is short or bad frames were removed.",
+      "default": 36,
+      "enum": [
+        4,
+        9,
+        16,
+        25,
+        36,
+        49,
+        64
+      ]
+    },
+    "frame_size": {
+      "type": "number",
+      "format": "integer",
+      "description": "Size of each frame in pixels (width and height). It sizes the exported frames only - it does not change how the sprite is generated. 0 is maximum resolution. -1 is AI 1.5x upscaling. -9 is True Size: frames keep the size and position of the input frame, untrimmed, so the spritesheet lines up exactly with the input image - use it (not margin_ratio_mode \"none\") whenever the output must align with your input; it works with any margin mode. Exporting larger than the input image adds no detail: do not pick a size above the input's own resolution, and 0 or -1 gain nothing on inputs under 512 px.",
+      "default": 0,
+      "enum": [
+        32,
+        64,
+        96,
+        128,
+        192,
+        256,
+        384,
+        0,
+        -1,
+        -9
+      ]
+    },
+    "margin_ratio": {
+      "type": "number",
+      "format": "float",
+      "description": "Deprecated: prefer margin_ratio_horizontal / margin_ratio_vertical. Amount of padding around the sprite as a ratio (0.0 to 1.0). Sets both axes to this value. A per-axis value, when also given, overrides this for that axis. Supplying any margin value selects margin_ratio_mode \"manual\" unless margin_ratio_mode is set explicitly.",
+      "deprecated": true
+    },
+    "margin_ratio_horizontal": {
+      "type": "number",
+      "format": "float",
+      "description": "Horizontal padding around the sprite as a ratio (0.0 to 1.0). Every bit of margin is resolution taken from the sprite, so keep it as tight as the motion allows - about 0.15 - and go higher only for motion that extends sideways (sword slashes, punches) or if the sprite gets cut off. Supplying a value selects margin_ratio_mode \"manual\" unless margin_ratio_mode is set explicitly; overrides the legacy margin_ratio on this axis."
+    },
+    "margin_ratio_vertical": {
+      "type": "number",
+      "format": "float",
+      "description": "Vertical padding around the sprite as a ratio (0.0 to 1.0). Every bit of margin is resolution taken from the sprite, so keep it as tight as the motion allows - about 0.15 - and go higher only for motion that extends up or down (jumps) or if the sprite gets cut off. Supplying a value selects margin_ratio_mode \"manual\" unless margin_ratio_mode is set explicitly; overrides the legacy margin_ratio on this axis."
+    },
+    "margin_ratio_mode": {
+      "type": "string",
+      "description": "How the sprite is framed for generation. The model always generates on a canvas of the same size, so any margin is canvas the sprite does not fill: the more margin, the lower the resolution and detail of the sprite. \"auto\" (default, recommended) trims and centers the sprite and picks a margin suited to the motion. \"manual\" uses margin_ratio_horizontal / margin_ratio_vertical; keep them as tight as the motion allows (about 0.15) and raise only the axis the motion needs. \"none\" animates the input exactly as framed, with no trimming and no margin added, so the input must already have suitable margins: a sprite touching the edges gets its limbs, weapons and effects cut off as soon as it moves, and an image that is mostly empty space yields a small, low-detail sprite. \"none\" is the way to keep a deliberately off-center sprite (e.g. a character at the left edge firing a beam to the right), but results can be unpredictable. Do not use \"none\" to make the spritesheet line up with the input image - use frame_size -9 (True Size) for that; it works with any margin mode. Rules: omit margin_ratio_mode and send margin_ratio_horizontal / margin_ratio_vertical to get \"manual\" automatically; \"manual\" with no margin value fails with HTTP 400; \"auto\" or \"none\" sent together with a margin value fails with HTTP 400 (the value would be ignored).",
+      "enum": [
+        "auto",
+        "manual",
+        "none"
+      ],
+      "default": "auto"
+    },
+    "image_type": {
+      "type": "string",
+      "description": "Type of sprite being animated. Affects generation parameters and styling. Tiling types (horizontal / vertical tiles, scrolling backgrounds, parallax layers, textures) stay seamless only on forge and forge-pixel, and only if the input image itself already wraps seamlessly on that axis; otherwise the animation shows a visible seam when tiled.",
+      "default": "sprite",
+      "enum": [
+        "sprite",
+        "sprite-vfx",
+        "item-icon",
+        "ui_asset",
+        "logo",
+        "sprite-tiling-horizontal",
+        "sprite-tiling-vertical",
+        "parallax_layer",
+        "tile",
+        "texture",
+        "portrait",
+        "card-art"
+      ]
+    },
+    "model": {
+      "type": "string",
+      "description": "Model to use. Available models:\n- \"hydra\" (Hydra): 3 credits/s, min charge 9 credits · Most capable all-around model, generates audio\n- \"forge\" (Forge): 1.5 credits/s, min charge 4 credits · Sharper detail, simpler motion. Best for simple body shapes and short actions; may need a few tries\n- \"forge-pixel\" (Forge Pixel): 1.5 credits/s, min charge 4 credits · Best for low-res pixel art animations\n- \"blitz\" (Blitz): 1.9 credits/s, min charge 4 credits · LEGACY - scheduled for removal, do not use for new work\n- \"eagle\" (Eagle): 2.6 credits/s, min charge 4 credits · LEGACY - scheduled for removal, do not use for new work\n- \"eagle-audio\" (Eagle with Audio): 3.1 credits/s, min charge 4 credits · LEGACY - scheduled for removal, do not use for new work\nLegacy aliases: \"standard\" → blitz.\nModels marked LEGACY still work for existing integrations but will be removed; pick a current model for anything new.\nforge-pixel expects real pixel art - a perfect pixel grid at its natural resolution; for other art use hydra or forge. Tiling image types stay seamless only on forge and forge-pixel.",
+      "enum": [
+        "hydra",
+        "forge",
+        "forge-pixel",
+        "blitz",
+        "standard",
+        "eagle",
+        "eagle-audio"
+      ],
+      "default": "hydra"
+    },
+    "duration": {
+      "type": "number",
+      "format": "float",
+      "default": 3,
+      "description": "Duration in seconds. Available values depend on the model:\n- hydra: 3, 3.5, 4, 4.5, 5\n- forge: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5\n- forge-pixel: 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5\n- blitz: 1.2, 1.5, 2, 2.5, 3, 3.5, 4\n- eagle: 1, 2, 3, 4\n- eagle-audio: 1, 2, 3, 4"
+    },
+    "augment_prompt": {
+      "type": "boolean",
+      "default": true,
+      "description": "Rewrites your prompt behind the scenes into the form the model works best with. Leave it on (the default). Turning it off does not give you more control - it usually gives worse results. Do not disable it unless you really know what you are doing and have tested your prompts extensively."
+    },
+    "gif": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, generates an animated GIF from the spritesheet and returns it in gif_url. Disabled by default to reduce response time."
+    },
+    "individual_frames": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, extracts each frame from the spritesheet as an individual image and returns the URLs in individual_frame_urls."
+    },
+    "spritesheet_with_background": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, also returns the spritesheet with background intact (before background removal). Useful for manually fixing background removal issues. The with-background spritesheet URL will be in spritesheet_with_background_url."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
+    },
+    "async": {
+      "type": "boolean",
+      "default": true,
+      "description": "Defaults to true: the call returns 202 immediately with a job id to poll with getApiJob. Set false for a synchronous response (deprecated but supported): the call then blocks until the result is ready."
+    }
+  }
+}

@@ -48,6 +48,14 @@ tags:
 - Game Asset Generation
 - AI Art
 - Sprite Sheets
+tags_raw:
+- Artificial Intelligence
+- Asset Generation
+- Game Design
+- Game Development
+- Game Asset Generation
+- AI Art
+- Sprite Sheets
 - Video Assets - Artificial Intelligence - Asset Generation - Game Design - Game Development
 
 description: Ludo.ai is a game design hub that uses artificial intelligence to help developers generate production-ready game assets including
@@ -419,6 +427,8 @@ apis:
   humanURL: https://ludo.ai/docs/api-mcp
   baseURL: https://mcp.ludo.ai/mcp
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -467,6 +477,8 @@ apis:
   humanURL: https://ludo.ai/docs/api-mcp
   baseURL: https://mcp.ludo.ai/mcp
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -491,6 +503,8 @@ apis:
   humanURL: https://ludo.ai/docs/api-mcp
   baseURL: https://mcp.ludo.ai/mcp
   tags:
+  - Sprite Sheets
+  tags_raw:
   - Spritesheets
   properties:
   - type: OpenAPI
@@ -515,6 +529,8 @@ apis:
   humanURL: https://ludo.ai/docs/api-mcp
   baseURL: https://mcp.ludo.ai/mcp
   tags:
+  - Video
+  tags_raw:
   - Videos
   properties:
   - type: OpenAPI

@@ -14,7 +14,7 @@ edges:
     registered_name: ai.ludo/game-assets
     register_id: ai.ludo/game-assets
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   mcp_registry:
     servers:
     - ai.ludo/game-assets

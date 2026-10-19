@@ -1,0 +1,2240 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Team API
+servers:
+- url: /api
+tags:
+- name: Team
+paths:
+  /teams:
+    post:
+      summary: 'Adds a team. (Roles: user)'
+      tags:
+      - Team
+      operationId: addTeam
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+        required: true
+    get:
+      summary: 'Gets a user''s teams. (Roles: user)'
+      tags:
+      - Team
+      operationId: getTeams
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teams/{id}:
+    patch:
+      summary: 'Renames a team. Only the team owner can do this. (Roles: user)'
+      tags:
+      - Team
+      operationId: updateTeam
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Not the team owner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamPayload'
+        required: true
+  /teams/{id}/join:
+    get:
+      summary: 'Joins a team. (Roles: user)'
+      tags:
+      - Team
+      operationId: joinTeam
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teams/{id}/invite/{email}:
+    get:
+      summary: 'Invite email to team. (Roles: user)'
+      tags:
+      - Team
+      operationId: inviteToTeam
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: 'Remove invitation to team. (Roles: user)'
+      tags:
+      - Team
+      operationId: removeInvite
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teams/{id}/users:
+    get:
+      summary: 'Get team users. (Roles: user)'
+      tags:
+      - Team
+      operationId: getTeamUsers
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamUserInfo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teams/{id}/users/{userId}:
+    delete:
+      summary: 'Remove team user. (Roles: user)'
+      tags:
+      - Team
+      operationId: removeTeamUser
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /teams/{id}/shared:
+    get:
+      summary: 'Gets a team''s shared content. (Roles: user)'
+      tags:
+      - Team
+      operationId: getSharedItems
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedItem'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /slack/share/{team}/{project}:
+    post:
+      summary: 'Shares a resource to slack (Roles: user)'
+      tags:
+      - Team
+      operationId: shareToSlack
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: team
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharePayload'
+        required: true
+  /slack/auth/url/{team}:
+    get:
+      summary: 'Gets the Slack auth url for the user (Roles: user)'
+      tags:
+      - Team
+      operationId: getSlackAuthUrl
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: team
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /slack/auth/code/{code}/team/{team}:
+    get:
+      summary: 'Completes the Slack authentication (Roles: user)'
+      tags:
+      - Team
+      operationId: completeSlackAuth
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: team
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /slack/remove/{team}:
+    get:
+      summary: 'Removes the Slack authentication (Roles: user)'
+      tags:
+      - Team
+      operationId: removeSlackAuth
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: team
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SubscriptionStats:
+      type: object
+      properties:
+        revenue_year:
+          type: number
+          format: float
+        revenue_12months:
+          type: number
+          format: float
+        revenue_total:
+          type: number
+          format: float
+        plan_name:
+          type: string
+        plan_interval:
+          type: string
+        is_customer:
+          type: boolean
+        became_customer_date:
+          type: integer
+          format: int64
+    PaymentPlanMetadata:
+      type: object
+      properties:
+        projects:
+          type: string
+        description:
+          type: string
+        seats:
+          type: string
+        favorites:
+          type: string
+        team:
+          type: string
+        amount_text:
+          type: string
+        credits:
+          type: string
+        premium:
+          type: string
+        magic_link:
+          type: string
+        api:
+          type: string
+        queue_concurrency:
+          type: string
+        rate_limits:
+          type: string
+    GeneratedVideo:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        original_prompt:
+          type: string
+        prompt:
+          type: string
+        url:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        seed:
+          type: integer
+          format: int64
+        duration:
+          type: number
+          format: float
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated the video, e.g. eagle. Absent on videos created before it was recorded.
+        pixel_grid:
+          type:
+          - array
+          - 'null'
+          description: Pixel-art grid dimensions [width, height] detected/used by the generation, or null. Reported by pixel-art-aware models (forge-pixel); must always be persisted with the video.
+          items:
+            type: integer
+            format: int32
+        reference_url:
+          type: string
+          description: Motion clip the animation was driven by (motion transfer presets), as reported by the ML. Absent on videos saved before it was recorded.
+        crop_and_center_image:
+          type: boolean
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+    VoicePreset:
+      type: object
+      properties:
+        id:
+          type: string
+        language:
+          type: string
+        emotion:
+          type: string
+    PurchaseIp:
+      type: object
+      properties:
+        ip:
+          type: string
+        date:
+          type: integer
+          format: int64
+          description: Unix epoch seconds when this IP was captured at a purchase action
+    Spritesheet:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        duration:
+          type: number
+          format: float
+        billed_duration:
+          type: number
+          format: float
+          description: 'Seconds the generation was billed for: the length of the video Prometheus generated, never more than the duration the user requested. `duration` is the sheet''s loop-trimmed length as Prometheus reports it and is usually shorter.'
+        start_timestamp:
+          type: number
+          format: integer
+        end_timestamp:
+          type: number
+          format: integer
+        num_frames:
+          type: number
+          format: integer
+        num_cols:
+          type: number
+          format: integer
+          description: Columns in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        num_rows:
+          type: number
+          format: integer
+          description: Rows in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        max_num_frames:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: integer
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        bad_loop:
+          type: boolean
+        out_of_frame:
+          type: boolean
+        crop:
+          type: boolean
+        original_prompt:
+          type: string
+        motion_prompt:
+          type: string
+        prompt:
+          type: string
+        seed:
+          type: number
+          format: integer
+        sprite_sheet:
+          $ref: '#/components/schemas/PILImage'
+        sprite_sheet_b64:
+          type: string
+        sprite_sheet_raw_b64:
+          type: string
+        sprite_sheet_watermarked_b64:
+          type: string
+          description: URL of the watermarked variant of sprite_sheet_b64 (object key = clean key + "_wm"). Present only when generated by a free user; served IN PLACE of sprite_sheet_b64 to free viewers. sprite_sheet_b64 itself always stays the clean asset.
+        sprite_sheet_raw_watermarked_b64:
+          type: string
+          description: Watermarked variant of sprite_sheet_raw_b64 (see sprite_sheet_watermarked_b64).
+        watermarked:
+          type: boolean
+          readOnly: true
+          description: Response-only. True when the served sprite_sheet_b64 is the watermarked variant (free viewer). Never persisted - stripped from inbound bodies.
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        preview_video_b64:
+          type: string
+        first_frame_b64:
+          type: string
+        last_frame_b64:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated (or last re-rendered) the animation, e.g. blitz, forge, tango. Absent on sheets created before it was recorded.
+        is_edited:
+          type: boolean
+          description: True when this spritesheet was produced by an edit (prompt, outpaint, or fix_loop) - the whole animation was re-rendered, so frames may drift from the original.
+        generation_mode:
+          type: string
+          description: How the ML produced the animation, as reported by it (e.g. image, edit, motion_transfer). Absent on sheets saved before it was recorded.
+        pixel_art_filter:
+          type: string
+          description: Pixel-art filter the ML applied, as reported by it. Absent on sheets saved before it was recorded.
+        degraded:
+          type: boolean
+          description: 'Degraded flag as reported by the ML for this render. Absent when the ML did not report a boolean, and on sheets saved before it was recorded. Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        label:
+          type: string
+        preview_scale:
+          type: number
+          format: float
+        pack_alignment:
+          $ref: '#/components/schemas/PackAlignment'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a sheet rendered from a 3D model (generation_mode render_3d) was rendered: style, settings, view, animation and model. Absent on every other sheet.'
+    SharePayload:
+      type: object
+      properties:
+        text:
+          $ref: '#/components/schemas/GeneratedText'
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        game:
+          $ref: '#/components/schemas/Game'
+        gdd_pdf:
+          type: string
+        gdd:
+          $ref: '#/components/schemas/GDD3'
+    MarketingConsent:
+      type: object
+      properties:
+        granted:
+          type: boolean
+        date:
+          type: integer
+          format: int64
+        source:
+          type: string
+    SharedItem:
+      type: object
+      properties:
+        _id:
+          type: string
+        date:
+          type: integer
+          format: int64
+        team_id:
+          type: string
+        project_id:
+          type: string
+        user_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - game
+          - image
+          - generated_game
+        game_id:
+          type: string
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        image:
+          $ref: '#/components/schemas/GameImage'
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    GDDElement:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        title:
+          type: string
+        sub_title:
+          type: string
+        text:
+          type: string
+        mod_date:
+          type: integer
+          format: int64
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDMedia'
+        loading:
+          type: integer
+          format: int64
+        pending:
+          type: boolean
+        collapsed:
+          type: boolean
+        country:
+          type: string
+    Annotation:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        label:
+          type: string
+        text:
+          type: string
+        label_probs:
+          type: object
+          properties:
+            feature:
+              type: number
+              format: float
+            junk:
+              type: number
+              format: float
+            mechanic:
+              type: number
+              format: float
+            theme:
+              type: number
+              format: float
+    GDDMedia:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - image
+          - three_d_asset
+          - video
+          - spritesheet
+          - game_id
+          - audio
+        uploaded:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+        placeholder:
+          $ref: '#/components/schemas/GDDPlaceholder'
+        game_id:
+          type: string
+        loading:
+          type: boolean
+    GeneratedAudio:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        original_prompt:
+          type: string
+        original_text:
+          type: string
+        prompt:
+          type: string
+        text:
+          type: string
+        sample_url:
+          type: string
+        seed:
+          type: integer
+          format: int64
+        type:
+          type: string
+        loop:
+          type: boolean
+        duration:
+          type: number
+          format: float
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        model:
+          type: string
+          description: Voice model of a speech-preset generation (blackbird when unset).
+        delivery:
+          type: string
+          description: Delivery note the speech was generated with.
+        image:
+          $ref: '#/components/schemas/GameImage'
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        collection_method:
+          type: string
+        cancel_at_period_end:
+          type: boolean
+        canceled_at:
+          type: integer
+          format: int64
+        cancel_at:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        current_period_end:
+          type: integer
+          format: int64
+        current_period_start:
+          type: integer
+          format: int64
+        customer:
+          type: string
+        days_until_due:
+          type: integer
+          format: int64
+        ended_at:
+          type: integer
+          format: int64
+        plan:
+          $ref: '#/components/schemas/PaymentPlan'
+        quantity:
+          type: integer
+          format: int64
+        start_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        tax_percent:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        trial_start:
+          type: integer
+          format: int64
+        billing_cycle_anchor:
+          type: integer
+          format: int64
+        latest_invoice:
+          type: string
+        from_team:
+          type: boolean
+        pause_collection:
+          $ref: '#/components/schemas/SubscriptionPauseCollection'
+        resume_requires_payment:
+          type: boolean
+          description: Present (true) only while the subscription is paused and at least one billing cycle was skipped (voided) during the pause, meaning a resume will immediately charge the full plan price for a fresh cycle.
+        ended_immediately:
+          type: boolean
+          description: 'Present (true) only on an unsubscribe response when the cancel landed after a new period started but before its renewal was charged: the subscription was ended at once and the renewal discarded, instead of running (and billing) until the end of that new period.'
+        pause_started_at:
+          type: integer
+          format: int64
+          description: 'When the current pause was REQUESTED. Stripe records only where a pause ends (pause_collection.resumes_at), so this is stamped into subscription metadata by pauseSubscription. Audit only: the ceiling and the mid-pause email are measured from pause_billing_from, and fall back to this only when that is absent. Absent on pauses that began before the extension feature shipped.'
+        pause_billing_from:
+          type: integer
+          format: int64
+          description: 'When collection actually stops, i.e. the current_period_end that was current at the moment of pausing, and the anchor the six-month extension ceiling and the mid-pause midpoint are measured from. Must be stamped at pause time: with pause_collection.behavior "void" Stripe keeps advancing the billing cycle through the pause, so current_period_end read later names a different period. Absent on pauses that began before the extension feature shipped, which are then capped from pause_started_at instead (stricter, by the length of the paid-through tail).'
+        pause_extended_at:
+          type: integer
+          format: int64
+          description: When the current pause was extended. Present at most once per pause; while it is present the Extend control must not be offered, because extendPause refuses a second extension.
+        pause_can_extend:
+          type: boolean
+          description: 'Present (true) only when extendPause would accept at least one more month right now: the pause is running, has not been extended, is not scheduled to cancel, and one more month still fits under the six-month ceiling measured from pause_billing_from (or pause_started_at). Gate the Extend control on this rather than on pause_extended_at alone, which would invite a subscriber already at the ceiling to extend and then refuse them. Absent on pauses with no anchor, where the server cannot tell from Stripe alone.'
+    StepValue:
+      type: object
+      properties:
+        step:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    UserWebauthnCredential:
+      type: object
+      properties:
+        credential_id:
+          type: string
+          description: base64url credential id returned by the authenticator.
+        public_key:
+          type: string
+          description: base64url COSE public key used to verify assertions.
+        counter:
+          type: integer
+          format: int64
+          description: Signature counter of the last accepted assertion (clone detection).
+        transports:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+          description: User-visible label for the passkey.
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    GeneratedGame:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        text_raw:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        description_raw:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        search_results:
+          $ref: '#/components/schemas/GenerationsSearchResult'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrometheusGameImage'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        blending:
+          type: array
+          items:
+            type: string
+        blended_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        platform:
+          type: string
+        perspective:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        sentence:
+          type: string
+        punchline:
+          type: string
+        art_style:
+          type: string
+        quality_score:
+          type: number
+          format: float
+        uniqueness_score:
+          type: number
+          format: float
+        final_score:
+          type: number
+          format: float
+        hints:
+          type: array
+          items:
+            type: string
+        request_id:
+          type: string
+        prompt:
+          type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        mechanics:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+        image_prompt:
+          type: string
+    GDDPlaceholder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+    LudoScoreBadge:
+      type: object
+      properties:
+        description:
+          type: string
+        icon_url:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    Questionnaire:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int64
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    PlotlyPlotData:
+      type: object
+      properties:
+        mode:
+          type: string
+    TeamUser:
+      type: object
+      properties:
+        user_id:
+          type: string
+        role:
+          enum:
+          - owner
+          - editor
+          type: string
+        subscription_id:
+          type: string
+    UserTotp:
+      type: object
+      properties:
+        secret_enc:
+          type: string
+          description: TOTP shared secret, encrypted at rest (encryptionUtils.encryptSecret).
+        confirmed:
+          type: boolean
+          description: True once the user proved possession of the secret with a code. An unconfirmed enrolment does not count as 2FA being enabled.
+        last_timestep:
+          type: integer
+          format: int64
+          description: 'Timestep of the last accepted code. Anti-replay: a code whose timestep is not greater than this is rejected.'
+        created_at:
+          type: string
+          format: date-time
+    MediaElement:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    Question:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        detail:
+          type: string
+          maxLength: 200
+    ThreeDAsset:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+        sprite3d_look:
+          type: object
+          description: 'The look saved for rendering this model as a sprite (3D to sprite), a Sprite3DLook, set through POST /games/sprite3d/look (which validates it). Carried through in-place rewrites of the model and onto a re-rig. Mixed rather than a $ref: a $ref here compiles to a subdocument array, which a dotted-path update writes as an array.'
+        animations:
+          type: array
+          description: Accepted text-driven animation clips attached to this 3D model. Hydrated onto the history entry when listing 3D generations so the frontend can render the clip selector / management modal. Clips are stored in the Animation3DClip collection, not embedded.
+          items:
+            $ref: '#/components/schemas/Animation3DClip'
+    User:
+      type: object
+      required:
+      - _id
+      - email
+      - role
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        teams:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        stripped_email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum:
+          - user
+        stripe_id:
+          type: string
+        selected_project:
+          type: string
+        number_generations:
+          type: integer
+          format: int64
+        registration_date:
+          type: integer
+          format: int64
+        signup_source:
+          type: string
+        whats_new_date:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        tax:
+          $ref: '#/components/schemas/Tax'
+        address:
+          $ref: '#/components/schemas/Address'
+        tutorials_closed:
+          type: array
+          items:
+            type: string
+        missions_completed:
+          type: array
+          items:
+            type: string
+        credits:
+          $ref: '#/components/schemas/GenerationCreditsInfo'
+        auto_topup:
+          $ref: '#/components/schemas/AutoTopupSettings'
+        country:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        welcome_form:
+          type: boolean
+        paywall:
+          type: boolean
+        video_generator:
+          type: boolean
+        subscription_stats:
+          $ref: '#/components/schemas/SubscriptionStats'
+        date_whats_new:
+          type: integer
+          format: int64
+        api_key:
+          type: string
+        cookie_consent:
+          type: boolean
+        double_optin_sent:
+          type: boolean
+        brevo_contact:
+          type: boolean
+        credits_exhausted_at:
+          type: integer
+          format: int64
+        credits_exhausted_synced_at:
+          type: integer
+          format: int64
+        credits_low_notified_at:
+          type: integer
+          format: int64
+        first_generation_at:
+          type: integer
+          format: int64
+        first_generation_synced_at:
+          type: integer
+          format: int64
+        risk_hold:
+          type: boolean
+        marketing_consent:
+          $ref: '#/components/schemas/MarketingConsent'
+        fbp:
+          type: string
+        fbc:
+          type: string
+        fbclid:
+          type: string
+        rdt_cid:
+          type: string
+        last_login_ip:
+          type: string
+          description: IP address of last login
+        purchase_ips:
+          type: array
+          description: Capped history of client IPs captured at purchase actions (subscribe, checkout, card/payment confirmation, renewal). Used as chargeback evidence to tie a disputed transaction to the rightful cardholder.
+          items:
+            $ref: '#/components/schemas/PurchaseIp'
+        preferred_content_type:
+          type: string
+        questionnaire:
+          $ref: '#/components/schemas/Questionnaire'
+        rate_limits_override:
+          type: integer
+          format: int64
+        referral_code:
+          type: string
+        referred_by:
+          type: string
+          description: User ID of the referrer
+        referral_credited:
+          type: boolean
+          description: Whether referral bonus credits have been issued for this user
+        subscriber_welcome_sent_at:
+          type: integer
+          format: int64
+        referral_announce_sent_at:
+          type: integer
+          format: int64
+        discord_link_id:
+          type: string
+          description: Opaque uuid shown on the user's Discord profile as their Ludo connection. Rotatable. Never the user id.
+        discord_user_id:
+          type: string
+          description: Discord snowflake of the linked account.
+        discord_linked_at:
+          type: string
+          format: date-time
+          description: When the Discord account was last linked.
+        totp:
+          $ref: '#/components/schemas/UserTotp'
+        webauthn_credentials:
+          type: array
+          description: Registered passkeys (WebAuthn credentials) for this user.
+          items:
+            $ref: '#/components/schemas/UserWebauthnCredential'
+        recovery_codes:
+          type: array
+          description: Single-use 2FA recovery codes, stored hashed. Regenerating replaces the whole array.
+          items:
+            $ref: '#/components/schemas/UserRecoveryCode'
+        sessions_version:
+          type: integer
+          default: 0
+          description: Bumped whenever every existing session must be invalidated (2FA enable/disable, password change). Tokens carry it as the `sv` claim and are rejected when it no longer matches.
+    PaymentPlan:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        statement_descriptor:
+          type: string
+        trial_period_days:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        interval:
+          type: string
+        interval_count:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        active:
+          type: boolean
+        billing_scheme:
+          type: string
+        product:
+          type: string
+        name:
+          type: string
+        usage_type:
+          type: string
+        nickname:
+          type: string
+        amount_off:
+          type: integer
+          format: int64
+        percent_off:
+          type: integer
+          format: int64
+        metadata:
+          $ref: '#/components/schemas/PaymentPlanMetadata'
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+    GenerationCreditsInfo:
+      type: object
+      properties:
+        current:
+          type: number
+          format: float
+        max:
+          type: number
+          format: float
+        reset_date:
+          type: integer
+          format: int64
+        extra:
+          type: number
+          format: float
+        total:
+          type: number
+          format: float
+        paused:
+          type: boolean
+        has_tier_logic:
+          type: boolean
+        uses_team_credits:
+          type: boolean
+        credits_upfront:
+          type: boolean
+        grace_until:
+          type: integer
+          format: int64
+          description: If set, the user's subscription ended and their remaining credits stay spendable until this unix timestamp (30-day grace period)
+        grace_reason:
+          type: string
+          description: Stripe cancellation_details.reason at termination (e.g. cancellation_requested, payment_failed)
+    Tax:
+      type: object
+      properties:
+        value:
+          type: string
+        type:
+          type: string
+    UserRecoveryCode:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: bcrypt hash of the recovery code; the plaintext is shown once.
+        used_at:
+          type: string
+          format: date-time
+          description: When the code was redeemed. Unset while the code is still usable.
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    AutoTopupSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        threshold:
+          type: number
+          format: float
+          description: When available credits (max + extra - current) drop below this, an automatic top-up is attempted
+        credits:
+          type: integer
+          format: int64
+          description: Fixed credit amount to buy on each automatic top-up (TOPUP bracket pricing)
+        armed:
+          type: boolean
+          description: 'Hysteresis latch: true while the balance is above the threshold; consumed (set false) by the single attempt per below-threshold episode'
+    UpdateTeamPayload:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 60
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        id:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        short_description:
+          type: string
+        short_description_clean:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        description_clean:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        user_rating_count:
+          type: integer
+          format: int64
+        user_rating:
+          type: number
+          format: float
+        developers:
+          type: array
+          items:
+            type: string
+        urls:
+          type: array
+          items:
+            type: string
+        release_date:
+          type: integer
+          format: int64
+        update_date:
+          type: integer
+          format: int64
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaElement'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        url:
+          type: array
+          items:
+            type: string
+        actual_genres:
+          type: array
+          items:
+            type: string
+        predicted_genres:
+          type: array
+          items:
+            type: string
+        augmented_genres:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        price:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        game_modes:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        advisory_rating:
+          type: string
+    GDD3:
+      type: object
+      properties:
+        project_id:
+          type: string
+        title:
+          type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDElement'
+        icon:
+          $ref: '#/components/schemas/GDDMedia'
+        header:
+          $ref: '#/components/schemas/GDDMedia'
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        country:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        aspect_ratio:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    GeneratedText:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        context_keywords:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        image_prompt:
+          type: string
+        final_score:
+          type: number
+          format: float
+    LudoScoreMetric:
+      type: object
+      properties:
+        _max_similarity:
+          type: number
+          format: double
+        _min_similarity:
+          type: number
+          format: double
+        description:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        score:
+          type: number
+          format: double
+        supporting_games_title:
+          type: string
+        supporting_games:
+          type: array
+          items:
+            type: string
+        core_metric:
+          type: boolean
+        plotly_plot:
+          $ref: '#/components/schemas/PlotlyPlot'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    LoginPayload:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+        registered:
+          type: boolean
+        magic_link_sent:
+          type: boolean
+        magic_link_message:
+          type: string
+        two_factor_required:
+          type: boolean
+          description: Credentials were accepted but the account has 2FA enabled, so no token is issued. Exchange the challenge_ticket for a full payload via /auth/2fa/verify.
+        challenge_ticket:
+          type: string
+          description: Single-use, short-lived ticket identifying the pending 2FA challenge.
+        two_factor_methods:
+          type: array
+          description: Second factors the user can present for this challenge.
+          items:
+            type: string
+    TeamInvitation:
+      type: object
+      properties:
+        email:
+          type: string
+        role:
+          enum:
+          - editor
+          type: string
+    PackAlignment:
+      type: object
+      properties:
+        description:
+          type: string
+        sizeHeightPx:
+          type: number
+          format: float
+        groundOffset:
+          type: number
+          format: float
+        horizontalOffset:
+          type: number
+          format: float
+    LudoScoreInsight:
+      type: object
+      properties:
+        tag:
+          type: string
+        text:
+          type: string
+    PlotlyPlot:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlotlyPlotData'
+        layout:
+          $ref: '#/components/schemas/PlotlyPlotData'
+    SubscriptionPauseCollection:
+      type: object
+      properties:
+        behavior:
+          type: string
+        resumes_at:
+          type: integer
+          format: int64
+    PrometheusGameImage:
+      type: object
+      properties:
+        game_id:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: string
+        origin:
+          type: string
+        similarity:
+          type: number
+          format: float
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+        value2:
+          type: string
+    GenerationsSearchResult:
+      type: object
+      properties:
+        similar_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimilarGame'
+    TeamUserInfo:
+      type: object
+      properties:
+        user_id:
+          type: string
+        role:
+          enum:
+          - owner
+          - editor
+          type: string
+        email:
+          type: string
+        subscription_id:
+          type: string
+        subscription_status:
+          type: string
+    Animation3DClip:
+      type: object
+      required:
+      - _id
+      - user_id
+      - model_asset_id
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id (the GenerationHistory _id, which for three_d_asset equals image.id).
+        clip_name:
+          type: string
+        prompt:
+          type: string
+        preset_id:
+          type: string
+          description: Set when the clip came from the preset library (retargeting) rather than a text prompt.
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+        seed:
+          type: integer
+        glb_url:
+          type: string
+          description: Uploaded animation-only GLB (skeleton + one clip, no mesh). May be gzip-compressed like model GLBs.
+        preview_url:
+          type: string
+          description: Uploaded mp4 preview of the clip playing on the model.
+        accepted:
+          type: boolean
+          description: Whether this clip is baked into the model's downloadable full GLB. Every generated clip is persisted (so the frontend never loses them); `accepted` is the separate opt-in that controls download inclusion.
+        motion:
+          type: number
+          format: float
+        fit_rmse:
+          type: number
+          format: float
+        date:
+          type: integer
+          format: int64
+        deleted:
+          type: boolean
+    Team:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        subscription_id:
+          type: string
+        owner_id:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamUser'
+        invitations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamInvitation'
+        slack_token:
+          type: boolean
+    LudoScore:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreMetric'
+        params:
+          type: string
+        score_text:
+          type: string
+        score_unit:
+          type: string
+        score:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+        country:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        badge:
+          $ref: '#/components/schemas/LudoScoreBadge'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    SimilarGame:
+      type: object
+      properties:
+        id:
+          type: string
+        similarity:
+          type: number
+          format: float
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

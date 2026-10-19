@@ -1,0 +1,370 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai CLI API
+servers:
+- url: /api
+tags:
+- name: CLI
+paths:
+  /cli/auth/start:
+    post:
+      summary: 'Starts a ludo CLI browser login (Roles: none, user)'
+      tags:
+      - CLI
+      operationId: startCliAuth
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CliAuthStart'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliAuthStartPayload'
+  /cli/events:
+    post:
+      summary: 'Records ludo CLI usage events (Roles: none, user)'
+      description: 'Anonymous-by-default usage telemetry from the ludo CLI: one event per command, keyed by a random install id, plus the account when the CLI sends its API key. Never carries flag values, prompts, paths or file contents. Stored in UserTracking as `cli:`.'
+      tags:
+      - CLI
+      operationId: recordCliEvents
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliEventsPayload'
+        required: true
+  /cli/auth/token:
+    post:
+      summary: 'Polls a ludo CLI browser login; returns the CLI key once approved (Roles: none…'
+      tags:
+      - CLI
+      operationId: pollCliAuth
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CliAuthPoll'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliAuthPollPayload'
+        required: true
+  /cli/auth/requests/{user_code}:
+    get:
+      summary: 'Returns a pending ludo CLI login request for the approval page (Roles: user)'
+      tags:
+      - CLI
+      operationId: getCliAuthRequest
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: user_code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CliAuthRequest'
+        '404':
+          description: Unknown or expired code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cli/auth/requests/{user_code}/approve:
+    post:
+      summary: 'Approves a ludo CLI login request, minting a CLI key for it (Roles: user)'
+      tags:
+      - CLI
+      operationId: approveCliAuthRequest
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: user_code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CliAuthApproved'
+        '402':
+          description: The plan has no API access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Unknown or expired code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Already approved or denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cli/auth/requests/{user_code}/deny:
+    post:
+      summary: 'Denies a ludo CLI login request (Roles: user)'
+      tags:
+      - CLI
+      operationId: denyCliAuthRequest
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: user_code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '404':
+          description: Unknown or expired code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CliAuthPoll:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - pending
+          - approved
+          - denied
+          - expired
+        api_key:
+          type: string
+          description: The CLI key, returned once on the first poll after approval.
+    CliAuthStart:
+      type: object
+      properties:
+        device_code:
+          type: string
+          description: Secret the CLI polls with. Never shown to the user.
+        user_code:
+          type: string
+          description: Short code the user checks on the approval page, e.g. WDJB-MJHT.
+        verification_url:
+          type: string
+        verification_url_complete:
+          type: string
+        expires_in:
+          type: integer
+          description: Seconds until the codes expire.
+        interval:
+          type: integer
+          description: Seconds to wait between polls.
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+    CliEventsPayload:
+      type: object
+      required:
+      - install_id
+      - events
+      properties:
+        install_id:
+          type: string
+          minLength: 8
+          maxLength: 64
+        events:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            $ref: '#/components/schemas/CliEvent'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    CliAuthStartPayload:
+      type: object
+      properties:
+        platform:
+          type: string
+          maxLength: 32
+          description: The CLI's OS (darwin, linux, win32), shown on the approval page.
+        client_version:
+          type: string
+          maxLength: 32
+    CliAuthRequest:
+      type: object
+      properties:
+        user_code:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - approved
+          - denied
+        platform:
+          type: string
+        client_version:
+          type: string
+        requested_at:
+          type: integer
+          format: int64
+        requester_ip:
+          type: string
+        same_ip:
+          type: boolean
+          description: Whether the CLI asked from the same IP address as this browser.
+        api_access:
+          type: boolean
+          description: Whether the signed-in user's plan includes API access right now.
+        plan_name:
+          type: string
+    CliAuthApproved:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        name:
+          type: string
+    CliAuthPollPayload:
+      type: object
+      required:
+      - device_code
+      properties:
+        device_code:
+          type: string
+          maxLength: 128
+    CliEvent:
+      type: object
+      required:
+      - command
+      properties:
+        command:
+          type: string
+          maxLength: 64
+        at:
+          type: integer
+          format: int64
+          description: When the command ran (unix seconds); defaults to now.
+        props:
+          type: object
+          description: Command facts (exit code, duration, flag names, versions, agent…); sanitized server-side.
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

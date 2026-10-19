@@ -1,0 +1,264 @@
+openapi: 3.2.0
+info:
+  title: Ludo Ai Jobs API
+  version: 0.9.10
+  x-logo:
+    url: /static/logo-small.png
+    altText: Logo
+  x-refined-note:
+  - x-model-lineup differs across the merged source definitions and was not carried
+  description: 'Operations tagged Jobs across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+tags:
+- name: Jobs
+paths:
+  /assets/jobs:
+    get:
+      description: List the generation jobs you started through the API or MCP, most recent first. Web-app jobs are not included. This is a free read-only lookup (no credits, no generation). Filter with a comma-separated status list; limit defaults to 50 and is capped at 100. Requires an API key (user scope).
+      tags:
+      - Jobs
+      operationId: listApiJobs
+      security:
+      - ApiKey: []
+      parameters:
+      - name: status
+        in: query
+        description: Comma-separated statuses to include (queued, running, succeeded, failed, canceled). Defaults to all.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of jobs to return. Defaults to 50, capped at 100.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicJob'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X GET \"https://api.ludo.ai/api/assets/jobs\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/jobs\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: List api jobs
+      x-summary-source: derived
+    servers:
+    - url: /api
+  /assets/jobs/{id}:
+    get:
+      description: 'Fetch one job you started through the API or MCP. Statuses: queued, running (both non-terminal - the response carries poll_after_ms, wait at least that long before asking again), then succeeded (read `result`), failed (read `error`: {code, subcode, message, retriable}; the held credits are refunded) or canceled. Generations typically finish within a few minutes; a job still queued after 15 minutes can be cancelled and resubmitted. Better still, pass wait= (up to 60) to long-poll: the request is held until the job reaches a terminal state, so one call replaces a polling loop. Once status is succeeded, `result` holds exactly what the synchronous form of the operation named by task_type would have returned. This is a free read-only lookup (no credits). Requires an API key (user scope).'
+      tags:
+      - Jobs
+      operationId: getApiJob
+      x-mcp-description: 'Poll the status of a generation job started by any tool. Every generation tool returns `{id, status}`; call getApiJob with that id until status is `succeeded` (then read `result`, shaped exactly like the tool''s documented output) or `failed` (read `error`). Poll every few seconds, or pass `wait: 30` to long-poll - the call is held up to 30 seconds (max 60) and returns as soon as the job finishes.'
+      security:
+      - ApiKey: []
+      parameters:
+      - name: id
+        in: path
+        description: The job id returned by a generation call (its `id` in the 202 response).
+        required: true
+        schema:
+          type: string
+      - name: wait
+        in: query
+        description: Seconds to long-poll for a terminal state (0-60). Defaults to 0 (return immediately).
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No such job for this API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X GET \"https://api.ludo.ai/api/assets/jobs/{id}\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs/{id}\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/jobs/{id}\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: Get api job
+      x-summary-source: derived
+    delete:
+      description: Cancel a queued job you started through the API or MCP; the credits held for it are refunded. Jobs that are already running cannot be canceled (409). Returns the canceled job. This is free (no credits). Requires an API key (user scope).
+      tags:
+      - Jobs
+      operationId: cancelApiJob
+      security:
+      - ApiKey: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicJob'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No such job for this API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Job is not in a cancelable state (e.g. already running)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: Shell
+        label: cURL
+        source: "curl -X DELETE \"https://api.ludo.ai/api/assets/jobs/{id}\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
+      - lang: JavaScript
+        label: JavaScript
+        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs/{id}\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
+      - lang: Python
+        label: Python
+        source: "import requests\n\nresponse = requests.delete(\n    \"https://api.ludo.ai/api/assets/jobs/{id}\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
+      summary: Cancel api job
+      x-summary-source: derived
+    servers:
+    - url: /api
+components:
+  schemas:
+    PublicJob:
+      type: object
+      required:
+      - id
+      - task_type
+      - status
+      - created_at
+      properties:
+        id:
+          type: string
+        task_type:
+          type: string
+          description: 'The public operationId that created this job (e.g. createImage). Determines the shape of `result`: it is exactly the 200 response body documented for that operation.'
+        status:
+          type: string
+          enum:
+          - queued
+          - running
+          - succeeded
+          - failed
+          - canceled
+          example: queued
+        request_id:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+          description: Unix ms
+        finished_at:
+          type: integer
+          format: int64
+        credits_charged:
+          type: number
+          format: float
+          description: Credits this job cost you. Charged at enqueue; reported as 0 once a job fails or is canceled, since the charge is refunded.
+        result:
+          type: object
+          description: Present only when status is succeeded. Same shape as the synchronous response of the operation named by task_type.
+        error:
+          $ref: '#/components/schemas/PublicJobError'
+        poll_after_ms:
+          type: integer
+          format: int32
+          description: 'Present while the job is queued or running: wait at least this many milliseconds before polling again. Prefer GET /assets/jobs/{id}?wait=30 (long-poll) over tight loops.'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+              example: payment
+            client_secret:
+              type: string
+    PublicJobError:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+x-refined-from:
+- ludo-ai-rest-api-openapi.yml
+- ludo-ai-openapi.json

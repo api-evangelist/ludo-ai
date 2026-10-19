@@ -1,0 +1,1238 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Payments API
+servers:
+- url: /api
+tags:
+- name: Payments
+paths:
+  /payment/checkout:
+    post:
+      summary: 'Proceeds to the Stripe Checkout page. (Roles: user, none)'
+      tags:
+      - Payments
+      operationId: goToCheckout
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeCheckoutPayload'
+        required: true
+  /payment/checkout-session:
+    post:
+      summary: 'Creates a Stripe Checkout session for subscription. (Roles: user)'
+      tags:
+      - Payments
+      operationId: checkoutSession
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionPayload'
+        required: true
+  /payment/billing:
+    get:
+      summary: 'Proceeds to the Stripe Billing portal. (Roles: user)'
+      tags:
+      - Payments
+      operationId: goToBillingPortal
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: flow
+        in: query
+        description: 'Where in the portal to land. Omitted: the portal home (subscription, cards, invoice history). payment_methods: straight to adding/updating a payment method.'
+        required: false
+        schema:
+          type: string
+          enum:
+          - payment_methods
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/plans:
+    get:
+      summary: 'Gets available payment plans (Roles: user, none)'
+      tags:
+      - Payments
+      operationId: getPaymentPlans
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentPlan'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/subscribe/{planId}:
+    post:
+      summary: 'Subscribes to a payment plan (Roles: user)'
+      tags:
+      - Payments
+      operationId: subscribe
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: planId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/confirm/setup-intent:
+    post:
+      summary: 'Confirms a setup intent (Roles: user)'
+      tags:
+      - Payments
+      operationId: confirmSetupIntent
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCard'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /payment/confirm/payment-intent:
+    post:
+      summary: 'Confirms a payment intent (Roles: user)'
+      tags:
+      - Payments
+      operationId: confirmPaymentIntent
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /payment/subscription/renew-credits:
+    get:
+      summary: 'Renews credits immediately for active subscribers (Roles: user)'
+      tags:
+      - Payments
+      operationId: renewCredits
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/topup:
+    post:
+      summary: 'Purchases extra credits via slider top-up (Roles: user)'
+      tags:
+      - Payments
+      operationId: purchaseTopup
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopupResult'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopupPayload'
+        required: true
+  /payment/topup/config:
+    get:
+      summary: 'Returns slider top-up pricing brackets (Roles: user, none)'
+      description: 'Public, like /payment/plans: ludo.ai/pricing reads it at build time so the advertised top-up prices come from the same brackets the charge uses.'
+      tags:
+      - Payments
+      operationId: getTopupConfig
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopupConfig'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/topup/auto:
+    get:
+      summary: 'Returns the user''s auto top-up settings (Roles: user)'
+      tags:
+      - Payments
+      operationId: getAutoTopup
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoTopupSettings'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: 'Updates the user''s auto top-up settings (Roles: user)'
+      tags:
+      - Payments
+      operationId: setAutoTopup
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutoTopupSettings'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoTopupPayload'
+        required: true
+  /payment/subscription/pause:
+    post:
+      summary: 'Pauses subscription for specified duration (Roles: user)'
+      tags:
+      - Payments
+      operationId: pauseSubscription
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PauseSubscriptionRequest'
+        required: true
+  /payment/subscription/pause/extend:
+    post:
+      summary: 'Extends a running pause, once, up to six months total (Roles: user)'
+      tags:
+      - Payments
+      operationId: extendPause
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtendPauseRequest'
+        required: true
+  /payment/subscription/unpause:
+    post:
+      summary: 'Resumes paused subscription immediately (Roles: user)'
+      tags:
+      - Payments
+      operationId: unpauseSubscription
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/subscription/reactivate:
+    post:
+      summary: 'Reverses a scheduled cancellation (Roles: user)'
+      tags:
+      - Payments
+      operationId: reactivateSubscription
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/credit-card/default:
+    post:
+      summary: 'Sets a default credit card (Roles: user)'
+      tags:
+      - Payments
+      operationId: makeCardDefault
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /payment/credit-card:
+    post:
+      summary: 'Adds a credit card (Roles: user)'
+      tags:
+      - Payments
+      operationId: addCreditCard
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+    get:
+      summary: 'Gets the user''s credit card (Roles: user)'
+      tags:
+      - Payments
+      operationId: getCreditCards
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: 'Removes a credit card (Roles: user)'
+      tags:
+      - Payments
+      operationId: removeCreditCard
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /payment/invoices:
+    get:
+      summary: 'Gets the user''s invoices (Roles: user)'
+      tags:
+      - Payments
+      operationId: getInvoices
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/subscription/retry-payment:
+    get:
+      summary: 'Retries the failed payment for a subscription (Roles: user)'
+      tags:
+      - Payments
+      operationId: retryPayment
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/subscription:
+    get:
+      summary: 'Gets the user''s subscription (Roles: user)'
+      tags:
+      - Payments
+      operationId: getSubscription
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: 'Unsubscribes (Roles: user)'
+      tags:
+      - Payments
+      operationId: unsubscribe
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/promo:
+    get:
+      summary: 'Gets the active promo code (Roles: user)'
+      tags:
+      - Payments
+      operationId: getPromoCode
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coupon'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /payment/promo/{code}:
+    get:
+      summary: 'Adds a promo code (Roles: user)'
+      tags:
+      - Payments
+      operationId: addPromoCode
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /stripe-event:
+    post:
+      tags:
+      - Payments
+      operationId: receiveStripeEvent
+      summary: 'Receives a stripe event (Role: none)'
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StripeEvent'
+        required: true
+components:
+  schemas:
+    PaymentPlanMetadata:
+      type: object
+      properties:
+        projects:
+          type: string
+        description:
+          type: string
+        seats:
+          type: string
+        favorites:
+          type: string
+        team:
+          type: string
+        amount_text:
+          type: string
+        credits:
+          type: string
+        premium:
+          type: string
+        magic_link:
+          type: string
+        api:
+          type: string
+        queue_concurrency:
+          type: string
+        rate_limits:
+          type: string
+    AutoTopupPayload:
+      type: object
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+        threshold:
+          type: number
+          format: float
+        credits:
+          type: integer
+          format: int64
+    TopupConfig:
+      type: object
+      properties:
+        currency:
+          type: string
+        min_credits:
+          type: integer
+          format: int64
+        max_credits:
+          type: integer
+          format: int64
+        step_credits:
+          type: integer
+          format: int64
+        brackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopupBracket'
+    StripeEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: number
+          format: float
+        livemode:
+          type: boolean
+        type:
+          type: string
+        object:
+          type: string
+        pending_webhooks:
+          type: number
+          format: float
+        api_version:
+          type: string
+        data:
+          type: object
+        request:
+          type: object
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: integer
+          format: integer
+        total:
+          type: number
+          format: integer
+        currency:
+          type: string
+        customer:
+          type: string
+        description:
+          type: string
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLine'
+        number:
+          type: string
+        amount_due:
+          type: number
+          format: integer
+        amount_paid:
+          type: number
+          format: integer
+        amount_remaining:
+          type: number
+          format: integer
+        collection_method:
+          type: string
+        hosted_invoice_url:
+          type: string
+        invoice_pdf:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/CouponMetadata'
+        period_start:
+          type: number
+          format: integer
+        period_end:
+          type: number
+          format: integer
+        subscription:
+          type: string
+        subtotal:
+          type: number
+          format: integer
+        status:
+          type: string
+        created:
+          type: number
+          format: integer
+        attempted:
+          type: boolean
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoicePayment'
+    TopupBracket:
+      type: object
+      properties:
+        credits:
+          type: integer
+          format: int64
+        cents:
+          type: integer
+          format: int64
+    TopupResult:
+      type: object
+      properties:
+        invoice_id:
+          type: string
+        credits:
+          type: integer
+          format: int64
+        amount_cents:
+          type: integer
+          format: int64
+        status:
+          type: string
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        collection_method:
+          type: string
+        cancel_at_period_end:
+          type: boolean
+        canceled_at:
+          type: integer
+          format: int64
+        cancel_at:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        current_period_end:
+          type: integer
+          format: int64
+        current_period_start:
+          type: integer
+          format: int64
+        customer:
+          type: string
+        days_until_due:
+          type: integer
+          format: int64
+        ended_at:
+          type: integer
+          format: int64
+        plan:
+          $ref: '#/components/schemas/PaymentPlan'
+        quantity:
+          type: integer
+          format: int64
+        start_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        tax_percent:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        trial_start:
+          type: integer
+          format: int64
+        billing_cycle_anchor:
+          type: integer
+          format: int64
+        latest_invoice:
+          type: string
+        from_team:
+          type: boolean
+        pause_collection:
+          $ref: '#/components/schemas/SubscriptionPauseCollection'
+        resume_requires_payment:
+          type: boolean
+          description: Present (true) only while the subscription is paused and at least one billing cycle was skipped (voided) during the pause, meaning a resume will immediately charge the full plan price for a fresh cycle.
+        ended_immediately:
+          type: boolean
+          description: 'Present (true) only on an unsubscribe response when the cancel landed after a new period started but before its renewal was charged: the subscription was ended at once and the renewal discarded, instead of running (and billing) until the end of that new period.'
+        pause_started_at:
+          type: integer
+          format: int64
+          description: 'When the current pause was REQUESTED. Stripe records only where a pause ends (pause_collection.resumes_at), so this is stamped into subscription metadata by pauseSubscription. Audit only: the ceiling and the mid-pause email are measured from pause_billing_from, and fall back to this only when that is absent. Absent on pauses that began before the extension feature shipped.'
+        pause_billing_from:
+          type: integer
+          format: int64
+          description: 'When collection actually stops, i.e. the current_period_end that was current at the moment of pausing, and the anchor the six-month extension ceiling and the mid-pause midpoint are measured from. Must be stamped at pause time: with pause_collection.behavior "void" Stripe keeps advancing the billing cycle through the pause, so current_period_end read later names a different period. Absent on pauses that began before the extension feature shipped, which are then capped from pause_started_at instead (stricter, by the length of the paid-through tail).'
+        pause_extended_at:
+          type: integer
+          format: int64
+          description: When the current pause was extended. Present at most once per pause; while it is present the Extend control must not be offered, because extendPause refuses a second extension.
+        pause_can_extend:
+          type: boolean
+          description: 'Present (true) only when extendPause would accept at least one more month right now: the pause is running, has not been extended, is not scheduled to cancel, and one more month still fits under the six-month ceiling measured from pause_billing_from (or pause_started_at). Gate the Extend control on this rather than on pause_extended_at alone, which would invite a subscriber already at the ceiling to extend and then refuse them. Absent on pauses with no anchor, where the server cannot tell from Stripe alone.'
+    PauseSubscriptionRequest:
+      type: object
+      required:
+      - pauseDurationMonths
+      properties:
+        pauseDurationMonths:
+          type: integer
+          format: int64
+          description: Duration to pause subscription in months (e.g., 1, 2, or 3)
+    Coupon:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        valid:
+          type: boolean
+        amount_off:
+          type: number
+          format: float
+        percent_off:
+          type: number
+          format: float
+        applies_to:
+          type: array
+          items:
+            type: string
+    ExtendPauseRequest:
+      type: object
+      required:
+      - extraMonths
+      properties:
+        extraMonths:
+          type: integer
+          format: int64
+          description: Extra months to add to a running pause (1, 2 or 3). Refused if the resulting resume date would put the pause past six months from the day it started, or if this pause has already been extended once.
+    CheckoutSessionPayload:
+      type: object
+      required:
+      - planId
+      properties:
+        planId:
+          type: string
+    InvoicePayment:
+      type: object
+      properties:
+        amount_paid:
+          type: number
+          format: integer
+        status:
+          type: string
+        charge:
+          type: string
+        payment_intent:
+          type: string
+    InvoiceLine:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        amount:
+          type: number
+          format: integer
+        currency:
+          type: string
+        description:
+          type: string
+        discountable:
+          type: boolean
+        type:
+          type: string
+    StripeCheckoutPayload:
+      type: object
+      required:
+      - name
+      - email
+      - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    CreditCard:
+      type: object
+      properties:
+        id:
+          type: string
+        brand:
+          type: string
+        country:
+          type: string
+        exp_month:
+          type: integer
+          format: int64
+        exp_year:
+          type: integer
+          format: int64
+        last4:
+          type: string
+        fingerprint:
+          type: string
+        funding:
+          type: string
+        default:
+          type: boolean
+    TopupPayload:
+      type: object
+      required:
+      - credits
+      properties:
+        credits:
+          type: integer
+          format: int64
+          description: Number of credits to purchase (server computes the price from TOPUP brackets)
+    PaymentPlan:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        statement_descriptor:
+          type: string
+        trial_period_days:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        interval:
+          type: string
+        interval_count:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        active:
+          type: boolean
+        billing_scheme:
+          type: string
+        product:
+          type: string
+        name:
+          type: string
+        usage_type:
+          type: string
+        nickname:
+          type: string
+        amount_off:
+          type: integer
+          format: int64
+        percent_off:
+          type: integer
+          format: int64
+        metadata:
+          $ref: '#/components/schemas/PaymentPlanMetadata'
+    AutoTopupSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        threshold:
+          type: number
+          format: float
+          description: When available credits (max + extra - current) drop below this, an automatic top-up is attempted
+        credits:
+          type: integer
+          format: int64
+          description: Fixed credit amount to buy on each automatic top-up (TOPUP bracket pricing)
+        armed:
+          type: boolean
+          description: 'Hysteresis latch: true while the balance is above the threshold; consumed (set false) by the single attempt per below-threshold episode'
+    CouponMetadata:
+      type: object
+      properties:
+        description:
+          type: string
+        summary:
+          type: string
+    SubscriptionPauseCollection:
+      type: object
+      properties:
+        behavior:
+          type: string
+        resumes_at:
+          type: integer
+          format: int64
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+        value2:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

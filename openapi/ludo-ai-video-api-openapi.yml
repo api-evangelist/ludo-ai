@@ -59,16 +59,6 @@ components:
         code:
           type: string
           description: Machine-readable error code.
-    VideoResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the generated video file. Expires after 7 days.
-        request_id:
-          type: string
-          description: The request ID if one was provided.
     CreateVideoRequest:
       type: object
       required:
@@ -103,6 +93,16 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
+    VideoResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the generated video file. Expires after 7 days.
+        request_id:
+          type: string
+          description: The request ID if one was provided.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

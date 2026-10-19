@@ -128,6 +128,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
     Model3DResultsResponse:
       type: object
       properties:
@@ -160,15 +169,22 @@ components:
                 type: string
                 format: date-time
                 description: Timestamp when the audio was generated.
-    Error:
+    SpriteResultsResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
+        results:
+          type: array
+          description: Array of recent API-generated spritesheet results.
+          items:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The client-provided request ID.
+              created_at:
+                type: string
+                format: date-time
+                description: Timestamp when the spritesheet was generated.
     ImageResultsResponse:
       type: object
       properties:
@@ -189,22 +205,6 @@ components:
                 type: string
                 format: date-time
                 description: Timestamp when the image was generated.
-    SpriteResultsResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          description: Array of recent API-generated spritesheet results.
-          items:
-            type: object
-            properties:
-              request_id:
-                type: string
-                description: The client-provided request ID.
-              created_at:
-                type: string
-                format: date-time
-                description: Timestamp when the spritesheet was generated.
     VideoResultsResponse:
       type: object
       properties:

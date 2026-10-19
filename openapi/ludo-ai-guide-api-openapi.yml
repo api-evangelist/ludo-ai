@@ -1,0 +1,211 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Guide API
+servers:
+- url: /api
+tags:
+- name: Guide
+paths:
+  /guide/project/{projectId}:
+    get:
+      summary: 'Gets the current guide content for a project (Roles: user)'
+      tags:
+      - Guide
+      operationId: getProjectGuideContent
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GuideContent'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /guide/content:
+    post:
+      summary: 'Gets guide content for a game concept (Roles: user)'
+      tags:
+      - Guide
+      operationId: getGuideContent
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: regenerate
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuideContent'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuideContentPayload'
+        required: true
+components:
+  schemas:
+    GuideContentPayload:
+      type: object
+      required:
+      - game_concept_id
+      - action
+      - skill_level
+      - engine
+      properties:
+        game_concept_id:
+          type: string
+        action:
+          type: string
+          enum:
+          - VIEW_TOPICS
+          - SELECT_TOPIC
+          - VIEW_SUBTOPIC
+        skill_level:
+          type: string
+          enum:
+          - novice
+          - expert
+        engine:
+          type: string
+        prompt:
+          type: string
+        current_topic_id:
+          type: string
+        current_subtopic_id:
+          type: string
+        current_path:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    GuideContent:
+      type: object
+      required:
+      - action
+      - content_json
+      - skill_level
+      properties:
+        _id:
+          type: string
+        project_id:
+          type: string
+        skill_level:
+          type: string
+        engine:
+          type: string
+        prompt:
+          type: string
+        action:
+          type: string
+          enum:
+          - VIEW_TOPICS
+          - VIEW_SUBTOPIC
+        content_json:
+          type: string
+          description: Stringified JSON of the content
+        date:
+          type: integer
+        date_last_view:
+          type: integer
+        topic_id:
+          type: string
+        topic_title:
+          type: string
+        subtopic_id:
+          type: string
+        subtopic_title:
+          type: string
+        total_steps:
+          type: integer
+        current_step:
+          type: integer
+        next_step:
+          $ref: '#/components/schemas/GuideStep'
+        previous_step:
+          $ref: '#/components/schemas/GuideStep'
+    GuideStep:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

@@ -1,0 +1,4658 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Misc API
+servers:
+- url: /api
+tags:
+- name: Misc
+paths:
+  /generation-history/{type}:
+    get:
+      summary: 'Get user''s generation history by type (Roles: user)'
+      tags:
+      - Misc
+      operationId: getGenerationHistory
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: type
+        in: path
+        required: true
+        description: Type of generation history to retrieve
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        description: 'Number of items per page (default: 20, max: 100)'
+        schema:
+          type: number
+      - name: pageNumber
+        in: query
+        required: false
+        description: 'Page number (1-based, default: 1)'
+        schema:
+          type: number
+      - name: search
+        in: query
+        required: false
+        description: Free-text search; whitespace-separated terms are AND-ed over tags, prompts, user inputs (hints), art style, perspective, and label
+        schema:
+          type: string
+      - name: tags
+        in: query
+        required: false
+        description: Labels picked deliberately (as opposed to typed). Each must match the item's tags EXACTLY, and they AND with each other and with `search`. Unlike `search`, this never matches prompts or other text, so picking a label narrows the list to the items actually carrying it. Values are normalized the same way stored tags are, so either "two-handed" or "Two Handed" works.
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: outputsOnly
+        in: query
+        required: false
+        description: When true, return only items that have a finished generated output for this type (drops image-only/intermediate items). Applied before pagination so number_pages reflects the filtered count. Combines with search as AND. No-op for types without outputs (audio, generated_image).
+        schema:
+          type: boolean
+          default: false
+      - name: dateFrom
+        in: query
+        required: false
+        description: Inclusive lower bound (unix seconds) on the item's creation date. Combines with search/outputsOnly as AND; applied before pagination so number_pages reflects the filtered count.
+        schema:
+          type: number
+      - name: dateTo
+        in: query
+        required: false
+        description: Inclusive upper bound (unix seconds) on the item's creation date. Callers pass end-of-day to keep a single-day range inclusive.
+        schema:
+          type: number
+      - name: source
+        in: query
+        required: false
+        description: 'Which surface the items were generated from: web (default, studio generations only), api (public API/MCP generations only - these expire 7 days after creation unless kept), or all.'
+        schema:
+          type: string
+          enum:
+          - web
+          - api
+          - all
+          default: web
+      - name: renderedFrom
+        in: query
+        required: false
+        description: 'Spritesheets and generated images only: the history id of a 3D model (three_d_asset), to list only the sheets or stills rendered from it (3D to sprite). Combines with the other filters as AND, before pagination. Ignored for other types.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationHistoryResults'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /generation-history/{type}/tags:
+    get:
+      summary: 'Get distinct tags (with counts) for a generation-history type (Roles: user)'
+      tags:
+      - Misc
+      operationId: getGenerationHistoryTags
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: type
+        in: path
+        required: true
+        description: Type of generation history
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: 'Which surface the items were generated from: web (default), api, or all.'
+        schema:
+          type: string
+          enum:
+          - web
+          - api
+          - all
+          default: web
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationHistoryTags'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /generation-history:
+    post:
+      summary: 'Updates a user''s generation history (Roles: user)'
+      tags:
+      - Misc
+      operationId: updateGenerationHistory
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationHistory'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerationHistory'
+        required: true
+    delete:
+      summary: 'Removes a user''s generation history (Roles: user)'
+      tags:
+      - Misc
+      operationId: removeGenerationHistory
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationHistory'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: string
+        required: true
+  /generation-history/keep:
+    post:
+      summary: 'Promote an API-generated history item to a permanent web asset (Roles: user)'
+      description: 'API/MCP generations expire 7 days after creation (their files live under the api/ storage prefix, which is lifecycle-pruned). Keeping an item copies its files out of the api/ prefix, rewrites the stored URLs, and clears the api flag - after which it behaves exactly like a studio generation: permanent, visible in the default library view, and usable in projects.'
+      tags:
+      - Misc
+      operationId: keepGenerationHistory
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationHistory'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: string
+                  description: GenerationHistory id of the API-generated item to keep
+        required: true
+  /chat/gdd/{id}:
+    post:
+      summary: 'Chat with a GDD(Roles: user)'
+      tags:
+      - Misc
+      operationId: chatGdd
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+        required: true
+  /chat/gdd/{id}/conversations:
+    get:
+      summary: Lists the caller's stored GDD chat conversations for a project, newest first…
+      tags:
+      - Misc
+      operationId: listGddConversations
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GddConversationSummary'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Creates or wholly replaces one of the caller's GDD chat conversations (Roles…
+      tags:
+      - Misc
+      operationId: saveGddConversation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GddConversation'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveGddConversationRequest'
+        required: true
+  /chat/gdd/{id}/conversations/{conversationId}:
+    get:
+      summary: 'Gets one of the caller''s GDD chat conversations (Roles: user)'
+      tags:
+      - Misc
+      operationId: getGddConversation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GddConversation'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Deletes one of the caller's GDD chat conversations and returns the remaining…
+      tags:
+      - Misc
+      operationId: deleteGddConversation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: conversationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GddConversationSummary'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /chat/assistant:
+    post:
+      summary: 'Chat with the Ludo assistant (Roles: user)'
+      tags:
+      - Misc
+      operationId: chatAssistant
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantMessage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantRequest'
+        required: true
+  /chat/help:
+    post:
+      summary: 'Chat with the Ludo assistant -- focused on docs (Roles: user)'
+      tags:
+      - Misc
+      operationId: chatHelp
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantMessage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantRequest'
+        required: true
+  /chat/assistant/logs:
+    get:
+      summary: 'Gets the chat logs with the Ludo assistant (Roles: user)'
+      tags:
+      - Misc
+      operationId: getChatAssistantLogs
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantLog'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Persists updates to an existing assistant conversation, e.g.
+      tags:
+      - Misc
+      operationId: saveChatAssistantConversation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantLog'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveAssistantConversationRequest'
+        required: true
+  /chat/assistant/archive:
+    get:
+      summary: 'Gets the Ludo assistant chat archives (Roles: user)'
+      tags:
+      - Misc
+      operationId: getChatAssistantArchives
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssistantLog'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /chat/assistant/archive/{id}:
+    delete:
+      summary: 'Removes an archive and returns the current archives (Roles: user)'
+      tags:
+      - Misc
+      operationId: removeChatAssistantArchive
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssistantLog'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cron/{type}:
+    get:
+      summary: 'Runs a cronjob (Roles: none)'
+      tags:
+      - Misc
+      operationId: runCron
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /showcase:
+    get:
+      summary: 'Gets items for a showcase gallery (Roles: none)'
+      tags:
+      - Misc
+      operationId: getShowcaseGallery
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowcaseGallery'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /showcase/unity:
+    get:
+      summary: 'Gets items for a showcase gallery in unity (Roles: none)'
+      tags:
+      - Misc
+      operationId: getShowcaseGalleryUnity
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowcaseGallery'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /feedback:
+    post:
+      summary: 'Submits user feedback (Roles: user)'
+      tags:
+      - Misc
+      operationId: submitFeedback
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFeedback'
+        required: true
+  /health-check:
+    get:
+      summary: 'Checks if the service is running (Roles: user, none)'
+      tags:
+      - Misc
+      operationId: healthCheck
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /credits/costs:
+    get:
+      summary: 'Gets all credit costs for platform features (Roles: none)'
+      tags:
+      - Misc
+      operationId: getCreditCosts
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCosts'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /service-notice:
+    get:
+      summary: 'Gets the live service notice for the web app, if any (Roles: user, none)'
+      tags:
+      - Misc
+      operationId: getServiceNotice
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNoticeResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /initial-payload:
+    get:
+      summary: 'Gets the user the inital data necessary to use the platform (Roles: user)'
+      tags:
+      - Misc
+      operationId: getInitialPayload
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - in: query
+        name: projects
+        required: false
+        description: 'summary: each project carries a small `summary` (title, icon, last edit, vault element id, asset ids) in place of its gdd3. The web app asks for it; the whole document comes from GET /project/{projectId}.'
+        schema:
+          type: string
+          enum:
+          - full
+          - summary
+          default: full
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRefreshPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /images/{id}:
+    get:
+      summary: 'Gets an image (Roles: user)'
+      tags:
+      - Misc
+      operationId: getImage
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/gif:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Error
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/gif:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/webp:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /images/upload:
+    post:
+      summary: 'Uploads user images (Roles: user)'
+      tags:
+      - Misc
+      operationId: uploadImage
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadFilesPayload'
+        required: true
+  /images/remove-background:
+    post:
+      summary: 'Removes the background of an image (Roles: user)'
+      tags:
+      - Misc
+      operationId: removeImageBackground
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: crop
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameImage'
+        required: true
+  /images/original/{filename}:
+    get:
+      summary: 'Gets an original image (Roles: user)'
+      tags:
+      - Misc
+      operationId: getOriginalImage
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/gif:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Error
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/gif:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /images/proxy:
+    post:
+      summary: 'Proxies an image (Roles: user)'
+      tags:
+      - Misc
+      operationId: proxyImage
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/gif:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Error
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            image/gif:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameImage'
+        required: true
+  /project/{projectId}:
+    delete:
+      summary: 'Archives the project (Roles: user)'
+      tags:
+      - Misc
+      operationId: archiveProject
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: 'Gets a project (Roles: user)'
+      tags:
+      - Misc
+      operationId: getProject
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /favorites:
+    get:
+      summary: 'Gets all of the user''s active favorites (Roles: user)'
+      tags:
+      - Misc
+      operationId: getAllActiveFavorites
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favorite'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/gdd3/history:
+    get:
+      summary: 'Gets GDD3 version history (Roles: user)'
+      tags:
+      - Misc
+      operationId: getGDD3History
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: 'Number of history entries to return (default: 50)'
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GDD3Version'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/restore:
+    get:
+      summary: 'Restores GDD3 to specific version (Roles: user)'
+      tags:
+      - Misc
+      operationId: restoreGddVersion
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: query
+        required: true
+        description: Version to restore to
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/restore/preview:
+    get:
+      summary: 'Previews GDD3 state if restored to specific version (Roles: user)'
+      tags:
+      - Misc
+      operationId: previewGddVersionRestore
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: query
+        required: true
+        description: Version to preview restoration to
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/generation/cancel:
+    get:
+      summary: 'Cancels GDD3 generation and clears loading states (Roles: user)'
+      tags:
+      - Misc
+      operationId: cancelGdd3Generation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/favorite:
+    post:
+      summary: 'Adds a favorite item (unified endpoint) (Roles: user)'
+      tags:
+      - Misc
+      operationId: addFavorite
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFavoritePayload'
+        required: true
+  /favorites/{id}:
+    delete:
+      summary: 'Removes a favorite (Roles: user)'
+      tags:
+      - Misc
+      operationId: removeFavorite
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-concept/import:
+    post:
+      summary: 'Imports a game concept from a PDF (Roles: user)'
+      tags:
+      - Misc
+      operationId: importGameConceptPDF
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: The uploaded file data
+                  format: binary
+              required:
+              - file
+  /game-concept/import/text:
+    post:
+      summary: 'Imports a game concept from text (Roles: user)'
+      tags:
+      - Misc
+      operationId: importGameConceptText
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GDD3'
+        required: true
+  /game-concept/import/{id}:
+    post:
+      summary: 'Imports a game concept from an existing game (Roles: user)'
+      tags:
+      - Misc
+      operationId: importGameConceptGame
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /projects:
+    get:
+      summary: 'Gets the user projects (Roles: user)'
+      tags:
+      - Misc
+      operationId: getProjects
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - in: query
+        name: projects
+        required: false
+        description: 'summary: each project carries a small `summary` (title, icon, last edit, vault element id, asset ids) in place of its gdd3. The web app asks for it; the whole document comes from GET /project/{projectId}.'
+        schema:
+          type: string
+          enum:
+          - full
+          - summary
+          default: full
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: 'Add a project (Roles: user)'
+      tags:
+      - Misc
+      operationId: addProject
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+components:
+  schemas:
+    FlatRateCost:
+      type: object
+      description: Variable cost billed at a fixed per-second rate, independent of model.
+      properties:
+        feature_id:
+          type: string
+        description:
+          type: string
+        credits_per_second:
+          type: number
+          format: float
+    GeneratedVideo:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        original_prompt:
+          type: string
+        prompt:
+          type: string
+        url:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        seed:
+          type: integer
+          format: int64
+        duration:
+          type: number
+          format: float
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated the video, e.g. eagle. Absent on videos created before it was recorded.
+        pixel_grid:
+          type:
+          - array
+          - 'null'
+          description: Pixel-art grid dimensions [width, height] detected/used by the generation, or null. Reported by pixel-art-aware models (forge-pixel); must always be persisted with the video.
+          items:
+            type: integer
+            format: int32
+        reference_url:
+          type: string
+          description: Motion clip the animation was driven by (motion transfer presets), as reported by the ML. Absent on videos saved before it was recorded.
+        crop_and_center_image:
+          type: boolean
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+    UserRefreshPayload:
+      type: object
+      properties:
+        login_payload:
+          $ref: '#/components/schemas/LoginPayload'
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        genres:
+          type: array
+          items:
+            type: string
+        generationStyles:
+          type: array
+          items:
+            type: string
+        generationStylesDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratorOption'
+        generationTypes:
+          type: array
+          items:
+            type: string
+        generationTypesStandalone:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratorOption'
+        generationTypes3d:
+          type: array
+          items:
+            type: string
+        generationTypesSprite:
+          type: array
+          items:
+            type: string
+        generationTypesNoBg:
+          type: array
+          items:
+            type: string
+        componentGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComponentGroup'
+        componentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComponentInfo'
+        gddPacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDPack'
+        colors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColorFilter'
+        styles:
+          type: array
+          items:
+            type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        perspectives:
+          type: array
+          items:
+            type: string
+        perspectivesDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratorOption'
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+        health:
+          type: boolean
+        credits:
+          $ref: '#/components/schemas/GenerationCreditsInfo'
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentPlan'
+        documentation:
+          type: array
+          items:
+            $ref: '#/components/schemas/Documentation'
+        whats_new:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhatsNew'
+        generation_steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationStep'
+        credit_costs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditFeature'
+        voice_presets:
+          $ref: '#/components/schemas/VoicePresetList'
+        audio_limits:
+          $ref: '#/components/schemas/AudioLimits'
+    GDDPack:
+      type: object
+      properties:
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDPackComponent'
+        description:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+    ModelDurationCost:
+      type: object
+      description: A valid duration for a model with its pre-computed credit cost.
+      properties:
+        duration:
+          type: number
+          format: float
+        cost:
+          type: number
+          format: float
+    ComponentInfo:
+      type: object
+      properties:
+        description:
+          type: string
+        group:
+          type: string
+        hide:
+          type: boolean
+        images_by_default:
+          type: boolean
+        multiple_allowed:
+          type: string
+        section:
+          type: string
+        label:
+          type: string
+        followups:
+          type: boolean
+        gameElements:
+          type: boolean
+        chat:
+          type: boolean
+        related:
+          type: array
+          items:
+            type: string
+    VoicePresetList:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        emotions:
+          type: array
+          items:
+            type: string
+        delivery:
+          type: boolean
+          description: Whether this voice model takes a delivery note.
+        model:
+          type: string
+          description: The voice model these presets belong to, to send back with speech-preset generations. Unset means the default model.
+    ImageTo3DCost:
+      type: object
+      description: 'Image-to-3D models offered in this environment. Each is a flat price per generation, billed as its own credit action (feature_id): its cost is that entry of features.'
+      properties:
+        feature_id:
+          type: string
+        default_model:
+          type: string
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageTo3DCostModel'
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    GDDElement:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        title:
+          type: string
+        sub_title:
+          type: string
+        text:
+          type: string
+        mod_date:
+          type: integer
+          format: int64
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDMedia'
+        loading:
+          type: integer
+          format: int64
+        pending:
+          type: boolean
+        collapsed:
+          type: boolean
+        country:
+          type: string
+    Project:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        team_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        date:
+          type: integer
+          format: int64
+        date_updated:
+          type: integer
+          format: int64
+        archived:
+          type: boolean
+        genres:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        gdd2:
+          $ref: '#/components/schemas/GDD'
+        gdd3:
+          $ref: '#/components/schemas/GDD3'
+    GDDSectionValue:
+      type: object
+      properties:
+        text:
+          type: string
+        country:
+          type: string
+        title:
+          type: string
+        layout:
+          type: string
+        imageType:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreeDAsset'
+        games:
+          type: array
+          items:
+            type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDComment'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    GDD3Version:
+      type: object
+      required:
+      - project_id
+      - version
+      - timestamp
+      - user_id
+      - command
+      properties:
+        _id:
+          type: string
+        project_id:
+          type: string
+        version:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        user_id:
+          type: string
+        command:
+          type: string
+          enum:
+          - element:create
+          - element:update
+          - element:delete
+          - element:reorder
+          - title:update
+          - summary:update
+          - field:update
+        element_id:
+          type: string
+        old_value:
+          type: string
+        new_value:
+          type: string
+        after_id:
+          type: string
+        undone:
+          type: boolean
+        description:
+          type: string
+    PricingModel:
+      type: object
+      description: Per-model pricing configuration with durations and pre-computed costs.
+      properties:
+        codename:
+          type: string
+          description: Canonical model identifier used by the API (e.g. "blitz").
+        name:
+          type: string
+          description: User-facing display name (e.g. "Blitz").
+        description:
+          type: string
+          description: Short free-form description. Optional; may be empty.
+        aliases:
+          type: array
+          description: Legacy identifiers that resolve to this codename (e.g. "standard" → "blitz").
+          items:
+            type: string
+        legacy:
+          type: boolean
+          description: True if this model is superseded and should be shown in a "legacy models" group in UIs.
+        features:
+          type: array
+          description: Credit actions this model is available for (e.g. ["GENERATE_VIDEO", "ANIMATE_SPRITE"]).
+          items:
+            type: string
+        credits_per_second:
+          type: number
+          format: float
+        min_charge:
+          type: number
+          format: float
+          description: Minimum credit charge regardless of duration. Null when not enforced.
+        durations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelDurationCost'
+    GeneratedGame:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        text_raw:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        description_raw:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        search_results:
+          $ref: '#/components/schemas/GenerationsSearchResult'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrometheusGameImage'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        blending:
+          type: array
+          items:
+            type: string
+        blended_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        platform:
+          type: string
+        perspective:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        sentence:
+          type: string
+        punchline:
+          type: string
+        art_style:
+          type: string
+        quality_score:
+          type: number
+          format: float
+        uniqueness_score:
+          type: number
+          format: float
+        final_score:
+          type: number
+          format: float
+        hints:
+          type: array
+          items:
+            type: string
+        request_id:
+          type: string
+        prompt:
+          type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        mechanics:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+        image_prompt:
+          type: string
+    TeamUser:
+      type: object
+      properties:
+        user_id:
+          type: string
+        role:
+          enum:
+          - owner
+          - editor
+          type: string
+        subscription_id:
+          type: string
+    UserTotp:
+      type: object
+      properties:
+        secret_enc:
+          type: string
+          description: TOTP shared secret, encrypted at rest (encryptionUtils.encryptSecret).
+        confirmed:
+          type: boolean
+          description: True once the user proved possession of the secret with a code. An unconfirmed enrolment does not count as 2FA being enabled.
+        last_timestep:
+          type: integer
+          format: int64
+          description: 'Timestep of the last accepted code. Anti-replay: a code whose timestep is not greater than this is rejected.'
+        created_at:
+          type: string
+          format: date-time
+    AssistantReference:
+      type: object
+      properties:
+        _word_count:
+          type: integer
+          format: int64
+        content:
+          type: string
+        id:
+          type: string
+        new:
+          type: boolean
+        relevance:
+          type: number
+          format: float
+        retrieved_motive:
+          type: string
+        retrieved_timestamp:
+          type: integer
+          format: int64
+        title:
+          type: string
+        display_title:
+          type: string
+        type:
+          type: string
+        type_title:
+          type: string
+        top_chart:
+          $ref: '#/components/schemas/AssistantReferenceTopCharts'
+        trends:
+          $ref: '#/components/schemas/AssistantReferenceTrends'
+        help:
+          $ref: '#/components/schemas/AssistantReferenceHelp'
+        game:
+          $ref: '#/components/schemas/AssistantReferenceGame'
+        function_call:
+          $ref: '#/components/schemas/AssistantFunctionCall'
+    AssistantFollowUp:
+      type: object
+      properties:
+        text:
+          type: string
+        type:
+          type: string
+    MapBaseImage:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+        opacity:
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        x:
+          type: number
+          format: float
+        y:
+          type: number
+          format: float
+        image:
+          $ref: '#/components/schemas/GameImage'
+    FeedbackReply:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int64
+        text:
+          type: string
+        to:
+          type: string
+    AssistantReferenceTopCharts:
+      type: object
+      properties:
+        country:
+          type: string
+        genre:
+          type: string
+        source:
+          type: string
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    GeneratedText:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        context_keywords:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        image_prompt:
+          type: string
+        final_score:
+          type: number
+          format: float
+    ServiceNoticeResponse:
+      type: object
+      properties:
+        notice:
+          type:
+          - object
+          - 'null'
+          properties:
+            id:
+              type: string
+            level:
+              type: string
+            message:
+              type: string
+            url:
+              type: string
+    PackAlignment:
+      type: object
+      properties:
+        description:
+          type: string
+        sizeHeightPx:
+          type: number
+          format: float
+        groundOffset:
+          type: number
+          format: float
+        horizontalOffset:
+          type: number
+          format: float
+    PrometheusGameImage:
+      type: object
+      properties:
+        game_id:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: string
+        origin:
+          type: string
+        similarity:
+          type: number
+          format: float
+    GDDComment:
+      type: object
+      properties:
+        _id:
+          type: string
+        author_id:
+          type: string
+        author_email:
+          type: string
+        date:
+          type: integer
+          format: int64
+        text:
+          type: string
+        section:
+          type: string
+        archived:
+          type: boolean
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDComment'
+    Team:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        subscription_id:
+          type: string
+        owner_id:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamUser'
+        invitations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamInvitation'
+        slack_token:
+          type: boolean
+    GddConversationSummary:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        date:
+          type: number
+          format: integer
+        date_created:
+          type: number
+          format: integer
+        message_count:
+          type: number
+          format: integer
+        preview:
+          type: string
+    PlayableAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        description:
+          type: string
+        alias:
+          type: string
+    ComponentGroup:
+      type: object
+      properties:
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComponentInfo'
+        description:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+    ColorFilter:
+      type: object
+      properties:
+        name:
+          type: string
+        rgb:
+          type: array
+          items:
+            type: integer
+    MarketingConsent:
+      type: object
+      properties:
+        granted:
+          type: boolean
+        date:
+          type: integer
+          format: int64
+        source:
+          type: string
+    WhatsNew:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: integer
+          format: int64
+        title:
+          type: string
+        hqTitle:
+          type: string
+        hqThumb:
+          type: string
+        hqText:
+          type: string
+        toolLabel:
+          type: string
+        toolUrl:
+          type: string
+        youtubeUrl:
+          type: string
+    SpriteCost:
+      type: object
+      properties:
+        feature_id:
+          type: string
+        description:
+          type: string
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingModel'
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    CreditCosts:
+      type: object
+      description: All credit costs for platform features
+      properties:
+        plans:
+          $ref: '#/components/schemas/PlanInfo'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditFeature'
+        variable_costs:
+          $ref: '#/components/schemas/VariableCosts'
+    Questionnaire:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int64
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    AssistantLog:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        date:
+          type: number
+          format: integer
+        title:
+          type: string
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMessage'
+    GDDPackComponent:
+      type: object
+      properties:
+        n:
+          type: integer
+          format: int64
+        type:
+          type: string
+        title:
+          type: string
+    ThreeDAsset:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+        sprite3d_look:
+          type: object
+          description: 'The look saved for rendering this model as a sprite (3D to sprite), a Sprite3DLook, set through POST /games/sprite3d/look (which validates it). Carried through in-place rewrites of the model and onto a re-rig. Mixed rather than a $ref: a $ref here compiles to a subdocument array, which a dotted-path update writes as an array.'
+        animations:
+          type: array
+          description: Accepted text-driven animation clips attached to this 3D model. Hydrated onto the history entry when listing 3D generations so the frontend can render the clip selector / management modal. Clips are stored in the Animation3DClip collection, not embedded.
+          items:
+            $ref: '#/components/schemas/Animation3DClip'
+    AssistantMessage:
+      type: object
+      required:
+      - role
+      properties:
+        text:
+          type: string
+        role:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        followups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantFollowUp'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedVideo'
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Spritesheet'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantReference'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantLink'
+        function_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantFunctionCall'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreeDAsset'
+        game_ideas:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+    PaymentPlan:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        statement_descriptor:
+          type: string
+        trial_period_days:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        interval:
+          type: string
+        interval_count:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        active:
+          type: boolean
+        billing_scheme:
+          type: string
+        product:
+          type: string
+        name:
+          type: string
+        usage_type:
+          type: string
+        nickname:
+          type: string
+        amount_off:
+          type: integer
+          format: int64
+        percent_off:
+          type: integer
+          format: int64
+        metadata:
+          $ref: '#/components/schemas/PaymentPlanMetadata'
+    GenerationCreditsInfo:
+      type: object
+      properties:
+        current:
+          type: number
+          format: float
+        max:
+          type: number
+          format: float
+        reset_date:
+          type: integer
+          format: int64
+        extra:
+          type: number
+          format: float
+        total:
+          type: number
+          format: float
+        paused:
+          type: boolean
+        has_tier_logic:
+          type: boolean
+        uses_team_credits:
+          type: boolean
+        credits_upfront:
+          type: boolean
+        grace_until:
+          type: integer
+          format: int64
+          description: If set, the user's subscription ended and their remaining credits stay spendable until this unix timestamp (30-day grace period)
+        grace_reason:
+          type: string
+          description: Stripe cancellation_details.reason at termination (e.g. cancellation_requested, payment_failed)
+    UserRecoveryCode:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: bcrypt hash of the recovery code; the plaintext is shown once.
+        used_at:
+          type: string
+          format: date-time
+          description: When the code was redeemed. Unset while the code is still usable.
+    SaveAssistantConversationRequest:
+      type: object
+      required:
+      - conversation_id
+      - message_history
+      properties:
+        conversation_id:
+          type: string
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMessage'
+    ShowcaseGallery:
+      type: object
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreeDAsset'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        ideas:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedVideo'
+        spritesheets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Spritesheet'
+        concepts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        playables:
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedPlayable'
+    Tax:
+      type: object
+      properties:
+        value:
+          type: string
+        type:
+          type: string
+    AssistantReferenceGame:
+      type: object
+      properties:
+        game_id:
+          type: string
+    Favorite:
+      type: object
+      properties:
+        _id:
+          type: string
+        date:
+          type: integer
+          format: int64
+        project_id:
+          type: string
+        user_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - game
+          - image
+          - generated_game
+          - text
+          - mechanic
+          - feature
+          - three_d_asset
+          - video
+          - spritesheet
+          - audio
+        payload_id:
+          type: string
+        text:
+          $ref: '#/components/schemas/GeneratedText'
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+    GDDSection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        date:
+          type: integer
+          format: int64
+        loading:
+          type: integer
+          format: int64
+        pending:
+          type: boolean
+        value:
+          $ref: '#/components/schemas/GDDSectionValue'
+    SubscriptionPauseCollection:
+      type: object
+      properties:
+        behavior:
+          type: string
+        resumes_at:
+          type: integer
+          format: int64
+    ChatRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        conversation_id:
+          type: string
+        request_id:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        selected_element:
+          type: string
+        is_regeneration:
+          type: boolean
+        ludo_score:
+          $ref: '#/components/schemas/LudoScore'
+        ludo_score_metric:
+          type: string
+        guide_page:
+          type: string
+        persist:
+          type: boolean
+          description: When true, the conversation is stored server-side under conversation_id (required then) for the calling user and project.
+    MediaElement:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+    SimilarGame:
+      type: object
+      properties:
+        id:
+          type: string
+        similarity:
+          type: number
+          format: float
+    SubscriptionStats:
+      type: object
+      properties:
+        revenue_year:
+          type: number
+          format: float
+        revenue_12months:
+          type: number
+          format: float
+        revenue_total:
+          type: number
+          format: float
+        plan_name:
+          type: string
+        plan_interval:
+          type: string
+        is_customer:
+          type: boolean
+        became_customer_date:
+          type: integer
+          format: int64
+    AssistantLink:
+      type: object
+      properties:
+        page:
+          type: string
+        text:
+          type: string
+    PaymentPlanMetadata:
+      type: object
+      properties:
+        projects:
+          type: string
+        description:
+          type: string
+        seats:
+          type: string
+        favorites:
+          type: string
+        team:
+          type: string
+        amount_text:
+          type: string
+        credits:
+          type: string
+        premium:
+          type: string
+        magic_link:
+          type: string
+        api:
+          type: string
+        queue_concurrency:
+          type: string
+        rate_limits:
+          type: string
+    PlanInfo:
+      type: object
+      properties:
+        indie:
+          type: string
+          description: How credits work for Indie plan
+        pro_studio:
+          type: string
+          description: How credits work for Pro/Studio plans
+    Spritesheet:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        duration:
+          type: number
+          format: float
+        billed_duration:
+          type: number
+          format: float
+          description: 'Seconds the generation was billed for: the length of the video Prometheus generated, never more than the duration the user requested. `duration` is the sheet''s loop-trimmed length as Prometheus reports it and is usually shorter.'
+        start_timestamp:
+          type: number
+          format: integer
+        end_timestamp:
+          type: number
+          format: integer
+        num_frames:
+          type: number
+          format: integer
+        num_cols:
+          type: number
+          format: integer
+          description: Columns in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        num_rows:
+          type: number
+          format: integer
+          description: Rows in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        max_num_frames:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: integer
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        bad_loop:
+          type: boolean
+        out_of_frame:
+          type: boolean
+        crop:
+          type: boolean
+        original_prompt:
+          type: string
+        motion_prompt:
+          type: string
+        prompt:
+          type: string
+        seed:
+          type: number
+          format: integer
+        sprite_sheet:
+          $ref: '#/components/schemas/PILImage'
+        sprite_sheet_b64:
+          type: string
+        sprite_sheet_raw_b64:
+          type: string
+        sprite_sheet_watermarked_b64:
+          type: string
+          description: URL of the watermarked variant of sprite_sheet_b64 (object key = clean key + "_wm"). Present only when generated by a free user; served IN PLACE of sprite_sheet_b64 to free viewers. sprite_sheet_b64 itself always stays the clean asset.
+        sprite_sheet_raw_watermarked_b64:
+          type: string
+          description: Watermarked variant of sprite_sheet_raw_b64 (see sprite_sheet_watermarked_b64).
+        watermarked:
+          type: boolean
+          readOnly: true
+          description: Response-only. True when the served sprite_sheet_b64 is the watermarked variant (free viewer). Never persisted - stripped from inbound bodies.
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        preview_video_b64:
+          type: string
+        first_frame_b64:
+          type: string
+        last_frame_b64:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated (or last re-rendered) the animation, e.g. blitz, forge, tango. Absent on sheets created before it was recorded.
+        is_edited:
+          type: boolean
+          description: True when this spritesheet was produced by an edit (prompt, outpaint, or fix_loop) - the whole animation was re-rendered, so frames may drift from the original.
+        generation_mode:
+          type: string
+          description: How the ML produced the animation, as reported by it (e.g. image, edit, motion_transfer). Absent on sheets saved before it was recorded.
+        pixel_art_filter:
+          type: string
+          description: Pixel-art filter the ML applied, as reported by it. Absent on sheets saved before it was recorded.
+        degraded:
+          type: boolean
+          description: 'Degraded flag as reported by the ML for this render. Absent when the ML did not report a boolean, and on sheets saved before it was recorded. Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        label:
+          type: string
+        preview_scale:
+          type: number
+          format: float
+        pack_alignment:
+          $ref: '#/components/schemas/PackAlignment'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a sheet rendered from a 3D model (generation_mode render_3d) was rendered: style, settings, view, animation and model. Absent on every other sheet.'
+    SharedPlayable:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        engine:
+          type: string
+          enum:
+          - phaser
+          - threejs
+          - pixijs
+        title:
+          type: string
+        summary:
+          type: string
+        how_to_play:
+          type: string
+        code:
+          type: string
+        compiled_code:
+          type: string
+        date:
+          type: integer
+          format: int64
+        remixes:
+          type: integer
+          format: int64
+        views:
+          type: integer
+          format: int64
+        allow_public:
+          type: boolean
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableAsset'
+        template:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+    GddConversation:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        project_id:
+          type: string
+        title:
+          type: string
+        date:
+          type: number
+          format: integer
+        date_created:
+          type: number
+          format: integer
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+    AssistantRequest:
+      type: object
+      required:
+      - request_id
+      properties:
+        message:
+          type: string
+        conversation_id:
+          type: string
+        request_id:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantMessage'
+        platform:
+          type: string
+        genre:
+          type: string
+        is_regeneration:
+          type: boolean
+        page:
+          type: string
+        image_result:
+          $ref: '#/components/schemas/GameImage'
+        sprite_result:
+          $ref: '#/components/schemas/Spritesheet'
+        video_result:
+          $ref: '#/components/schemas/GeneratedVideo'
+        audio_result:
+          $ref: '#/components/schemas/GeneratedAudio'
+        asset_result:
+          $ref: '#/components/schemas/AssetGeneration'
+        asset_and_image_result:
+          $ref: '#/components/schemas/ThreeDAsset'
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    MapLayer:
+      type: object
+      properties:
+        base_image:
+          $ref: '#/components/schemas/MapBaseImage'
+        id:
+          type: string
+        meta:
+          type: object
+        name:
+          type: string
+        order:
+          type: number
+          format: integer
+        visible:
+          type: boolean
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapSprite'
+    GenerationInput:
+      type: object
+      properties:
+        field:
+          type: string
+        kind:
+          type: string
+          enum:
+          - image
+          - video
+          - audio
+          - model
+        url:
+          type: string
+        id:
+          type: string
+    AssistantReferenceTrends:
+      type: object
+      properties:
+        category:
+          type: string
+        country:
+          type: string
+        source:
+          type: string
+        sorting:
+          type: string
+        genre:
+          type: string
+    GeneratedAudio:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        original_prompt:
+          type: string
+        original_text:
+          type: string
+        prompt:
+          type: string
+        text:
+          type: string
+        sample_url:
+          type: string
+        seed:
+          type: integer
+          format: int64
+        type:
+          type: string
+        loop:
+          type: boolean
+        duration:
+          type: number
+          format: float
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        model:
+          type: string
+          description: Voice model of a speech-preset generation (blackbird when unset).
+        delivery:
+          type: string
+          description: Delivery note the speech was generated with.
+        image:
+          $ref: '#/components/schemas/GameImage'
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        collection_method:
+          type: string
+        cancel_at_period_end:
+          type: boolean
+        canceled_at:
+          type: integer
+          format: int64
+        cancel_at:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        current_period_end:
+          type: integer
+          format: int64
+        current_period_start:
+          type: integer
+          format: int64
+        customer:
+          type: string
+        days_until_due:
+          type: integer
+          format: int64
+        ended_at:
+          type: integer
+          format: int64
+        plan:
+          $ref: '#/components/schemas/PaymentPlan'
+        quantity:
+          type: integer
+          format: int64
+        start_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        tax_percent:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        trial_start:
+          type: integer
+          format: int64
+        billing_cycle_anchor:
+          type: integer
+          format: int64
+        latest_invoice:
+          type: string
+        from_team:
+          type: boolean
+        pause_collection:
+          $ref: '#/components/schemas/SubscriptionPauseCollection'
+        resume_requires_payment:
+          type: boolean
+          description: Present (true) only while the subscription is paused and at least one billing cycle was skipped (voided) during the pause, meaning a resume will immediately charge the full plan price for a fresh cycle.
+        ended_immediately:
+          type: boolean
+          description: 'Present (true) only on an unsubscribe response when the cancel landed after a new period started but before its renewal was charged: the subscription was ended at once and the renewal discarded, instead of running (and billing) until the end of that new period.'
+        pause_started_at:
+          type: integer
+          format: int64
+          description: 'When the current pause was REQUESTED. Stripe records only where a pause ends (pause_collection.resumes_at), so this is stamped into subscription metadata by pauseSubscription. Audit only: the ceiling and the mid-pause email are measured from pause_billing_from, and fall back to this only when that is absent. Absent on pauses that began before the extension feature shipped.'
+        pause_billing_from:
+          type: integer
+          format: int64
+          description: 'When collection actually stops, i.e. the current_period_end that was current at the moment of pausing, and the anchor the six-month extension ceiling and the mid-pause midpoint are measured from. Must be stamped at pause time: with pause_collection.behavior "void" Stripe keeps advancing the billing cycle through the pause, so current_period_end read later names a different period. Absent on pauses that began before the extension feature shipped, which are then capped from pause_started_at instead (stricter, by the length of the paid-through tail).'
+        pause_extended_at:
+          type: integer
+          format: int64
+          description: When the current pause was extended. Present at most once per pause; while it is present the Extend control must not be offered, because extendPause refuses a second extension.
+        pause_can_extend:
+          type: boolean
+          description: 'Present (true) only when extendPause would accept at least one more month right now: the pause is running, has not been extended, is not scheduled to cancel, and one more month still fits under the six-month ceiling measured from pause_billing_from (or pause_started_at). Gate the Extend control on this rather than on pause_extended_at alone, which would invite a subscriber already at the ceiling to extend and then refuse them. Absent on pauses with no anchor, where the server cannot tell from Stripe alone.'
+    StepValue:
+      type: object
+      properties:
+        step:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    UserWebauthnCredential:
+      type: object
+      properties:
+        credential_id:
+          type: string
+          description: base64url credential id returned by the authenticator.
+        public_key:
+          type: string
+          description: base64url COSE public key used to verify assertions.
+        counter:
+          type: integer
+          format: int64
+          description: Signature counter of the last accepted assertion (clone detection).
+        transports:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+          description: User-visible label for the passkey.
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+    MapSprite:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+        id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        layer:
+          type: number
+          format: integer
+        meta:
+          type: object
+        opacity:
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        x:
+          type: number
+          format: float
+        y:
+          type: number
+          format: float
+    ChatCostExample:
+      type: object
+      properties:
+        description:
+          type: string
+        assets:
+          type: number
+          format: float
+        images:
+          type: number
+          format: float
+        ideas:
+          type: number
+          format: float
+        indie_cost:
+          type: number
+          format: float
+        pro_studio_cost:
+          type: string
+    FeatureCategory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    Documentation:
+      type: object
+      properties:
+        index:
+          type: string
+        label:
+          type: string
+        section:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentationSection'
+    GDDPlaceholder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    PlotlyPlotData:
+      type: object
+      properties:
+        mode:
+          type: string
+    GenerationStep:
+      type: object
+      properties:
+        allow_input:
+          type: boolean
+        fixed_options:
+          type: boolean
+        description:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    Question:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        detail:
+          type: string
+          maxLength: 200
+    AudioLimits:
+      type: object
+      description: Per audio_type text limits and extra fields of the web audio generator.
+      properties:
+        human-voice:
+          $ref: '#/components/schemas/AudioModeLimits'
+        non-human-voice:
+          $ref: '#/components/schemas/AudioModeLimits'
+        speech:
+          $ref: '#/components/schemas/AudioModeLimits'
+        speech-preset:
+          $ref: '#/components/schemas/AudioModeLimits'
+    CreditFeature:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/FeatureCategory'
+        indie_cost:
+          type: string
+          description: Cost for Indie plan (number or "Unlimited")
+        pro_studio_cost:
+          type: string
+          description: Cost for Pro/Studio plans (number or "Unlimited")
+        variable:
+          type: boolean
+        tooltip:
+          type: string
+          description: Optional tooltip explaining cost calculation
+    AutoTopupSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        threshold:
+          type: number
+          format: float
+          description: When available credits (max + extra - current) drop below this, an automatic top-up is attempted
+        credits:
+          type: integer
+          format: int64
+          description: Fixed credit amount to buy on each automatic top-up (TOPUP bracket pricing)
+        armed:
+          type: boolean
+          description: 'Hysteresis latch: true while the balance is above the threshold; consumed (set false) by the single attempt per below-threshold episode'
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        id:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        short_description:
+          type: string
+        short_description_clean:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        description_clean:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        user_rating_count:
+          type: integer
+          format: int64
+        user_rating:
+          type: number
+          format: float
+        developers:
+          type: array
+          items:
+            type: string
+        urls:
+          type: array
+          items:
+            type: string
+        release_date:
+          type: integer
+          format: int64
+        update_date:
+          type: integer
+          format: int64
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaElement'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        url:
+          type: array
+          items:
+            type: string
+        actual_genres:
+          type: array
+          items:
+            type: string
+        predicted_genres:
+          type: array
+          items:
+            type: string
+        augmented_genres:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        price:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        game_modes:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        advisory_rating:
+          type: string
+    LoginPayload:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+        registered:
+          type: boolean
+        magic_link_sent:
+          type: boolean
+        magic_link_message:
+          type: string
+        two_factor_required:
+          type: boolean
+          description: Credentials were accepted but the account has 2FA enabled, so no token is issued. Exchange the challenge_ticket for a full payload via /auth/2fa/verify.
+        challenge_ticket:
+          type: string
+          description: Single-use, short-lived ticket identifying the pending 2FA challenge.
+        two_factor_methods:
+          type: array
+          description: Second factors the user can present for this challenge.
+          items:
+            type: string
+    LudoScoreMetric:
+      type: object
+      properties:
+        _max_similarity:
+          type: number
+          format: double
+        _min_similarity:
+          type: number
+          format: double
+        description:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        score:
+          type: number
+          format: double
+        supporting_games_title:
+          type: string
+        supporting_games:
+          type: array
+          items:
+            type: string
+        core_metric:
+          type: boolean
+        plotly_plot:
+          $ref: '#/components/schemas/PlotlyPlot'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    DocumentationSection:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+    PlotlyPlot:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlotlyPlotData'
+        layout:
+          $ref: '#/components/schemas/PlotlyPlotData'
+    GenerationHistory:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        type:
+          type: string
+          enum:
+          - generated_image
+          - generated_game
+          - three_d_asset
+          - video
+          - spritesheet
+          - audio
+          - map
+        generated_image:
+          $ref: '#/components/schemas/GameImage'
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+        map:
+          $ref: '#/components/schemas/GeneratedMap'
+        date:
+          type: integer
+          format: int64
+        api:
+          type: boolean
+        source:
+          type: string
+          enum:
+          - web
+          - api
+          - mcp
+          - cli
+          default: web
+        request_id:
+          type: string
+        deleted:
+          type: boolean
+        help_requested_at:
+          type: integer
+          format: int64
+        help_message:
+          type: string
+        job_id:
+          type: string
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationInput'
+    GenerationsSearchResult:
+      type: object
+      properties:
+        similar_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimilarGame'
+    GenerationHistoryResults:
+      type: object
+      properties:
+        number_pages:
+          type: integer
+          format: int64
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationHistory'
+    LudoScore:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreMetric'
+        params:
+          type: string
+        score_text:
+          type: string
+        score_unit:
+          type: string
+        score:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+        country:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        badge:
+          $ref: '#/components/schemas/LudoScoreBadge'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    GenerationHistoryTags:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationHistoryTag'
+    GDD:
+      type: object
+      properties:
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        aspect_ratio:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDSection'
+    VariableCosts:
+      type: object
+      properties:
+        video:
+          $ref: '#/components/schemas/VideoCost'
+        sprite:
+          $ref: '#/components/schemas/SpriteCost'
+        edit_spritesheet:
+          $ref: '#/components/schemas/SpriteCost'
+          description: Per-action pricing for spritesheet editing. models is limited to the models that support the action; credits_per_second / durations reflect the action-specific rate.
+        references_to_video:
+          $ref: '#/components/schemas/VideoCost'
+          description: Per-action pricing for video-from-references.
+        video_edit:
+          $ref: '#/components/schemas/VideoCost'
+          description: Per-action pricing for video editing.
+        upscale_video:
+          $ref: '#/components/schemas/FlatRateCost'
+          description: Flat per-second pricing for 2x video upscaling (model-independent).
+        image_to_3d:
+          $ref: '#/components/schemas/ImageTo3DCost'
+        chat:
+          $ref: '#/components/schemas/ChatCost'
+    VoicePreset:
+      type: object
+      properties:
+        id:
+          type: string
+        language:
+          type: string
+        emotion:
+          type: string
+    PurchaseIp:
+      type: object
+      properties:
+        ip:
+          type: string
+        date:
+          type: integer
+          format: int64
+          description: Unix epoch seconds when this IP was captured at a purchase action
+    ImageTo3DCostModel:
+      type: object
+      properties:
+        codename:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        feature_id:
+          type: string
+        back_view:
+          type: boolean
+          description: Whether the model takes the optional back view.
+        retexture:
+          type: boolean
+          description: Whether Texture Generation runs on this model.
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    UploadFilesPayload:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+        mimes:
+          type: array
+          items:
+            type: string
+        compress:
+          type: boolean
+    UserFeedback:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        type:
+          type: string
+        text:
+          type: string
+        category:
+          type: string
+        operation:
+          type: string
+        job_id:
+          type: string
+        job_ids:
+          type: array
+          items:
+            type: string
+        generation_ids:
+          type: array
+          items:
+            type: string
+        preserved_files:
+          type: array
+          items:
+            type: string
+        agent:
+          type: string
+        source:
+          type: string
+        client:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        date:
+          type: integer
+          format: int64
+        addressed_at:
+          type: integer
+          format: int64
+        addressed_note:
+          type: string
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackReply'
+        issue_id:
+          type: string
+        reply_draft:
+          type: string
+    Annotation:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        label:
+          type: string
+        text:
+          type: string
+        label_probs:
+          type: object
+          properties:
+            feature:
+              type: number
+              format: float
+            junk:
+              type: number
+              format: float
+            mechanic:
+              type: number
+              format: float
+            theme:
+              type: number
+              format: float
+    GDDMedia:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - image
+          - three_d_asset
+          - video
+          - spritesheet
+          - game_id
+          - audio
+        uploaded:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+        placeholder:
+          $ref: '#/components/schemas/GDDPlaceholder'
+        game_id:
+          type: string
+        loading:
+          type: boolean
+    EditorState:
+      type: object
+      properties:
+        grid_snapping:
+          type: boolean
+        viewport_x:
+          type: number
+          format: float
+        viewport_y:
+          type: number
+          format: float
+        viewport_zoom:
+          type: number
+          format: float
+        show_grid:
+          type: boolean
+        grid_color:
+          type: string
+        grid_opacity:
+          type: number
+          format: float
+    AddFavoritePayload:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - video
+          - spritesheet
+          - three_d_asset
+          - game
+          - generated_game
+          - image
+          - audio
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        game:
+          type: string
+        generated_game:
+          $ref: '#/components/schemas/GeneratedGame'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+    LudoScoreBadge:
+      type: object
+      properties:
+        description:
+          type: string
+        icon_url:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    GenerationHistoryTag:
+      type: object
+      properties:
+        tag:
+          type: string
+        count:
+          type: integer
+    AudioModeLimits:
+      type: object
+      properties:
+        text_max_chars:
+          type: integer
+        delivery_max_chars:
+          type: integer
+          description: Set where the mode takes a delivery note (for speech-preset, only with a model whose presets have delivery true).
+        image:
+          type: boolean
+          description: Whether the mode takes a character image.
+    VideoCost:
+      type: object
+      properties:
+        feature_id:
+          type: string
+        description:
+          type: string
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingModel'
+    ChatCost:
+      type: object
+      properties:
+        feature_id:
+          type: string
+        description:
+          type: string
+        indie_base_cost:
+          type: number
+          format: float
+        pro_studio_base_cost:
+          type: string
+        formula:
+          type: string
+        examples:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCostExample'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    AssistantFunctionCall:
+      type: object
+      properties:
+        args:
+          type: object
+        name:
+          type: string
+    User:
+      type: object
+      required:
+      - _id
+      - email
+      - role
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        teams:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        stripped_email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum:
+          - user
+        stripe_id:
+          type: string
+        selected_project:
+          type: string
+        number_generations:
+          type: integer
+          format: int64
+        registration_date:
+          type: integer
+          format: int64
+        signup_source:
+          type: string
+        whats_new_date:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        tax:
+          $ref: '#/components/schemas/Tax'
+        address:
+          $ref: '#/components/schemas/Address'
+        tutorials_closed:
+          type: array
+          items:
+            type: string
+        missions_completed:
+          type: array
+          items:
+            type: string
+        credits:
+          $ref: '#/components/schemas/GenerationCreditsInfo'
+        auto_topup:
+          $ref: '#/components/schemas/AutoTopupSettings'
+        country:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        welcome_form:
+          type: boolean
+        paywall:
+          type: boolean
+        video_generator:
+          type: boolean
+        subscription_stats:
+          $ref: '#/components/schemas/SubscriptionStats'
+        date_whats_new:
+          type: integer
+          format: int64
+        api_key:
+          type: string
+        cookie_consent:
+          type: boolean
+        double_optin_sent:
+          type: boolean
+        brevo_contact:
+          type: boolean
+        credits_exhausted_at:
+          type: integer
+          format: int64
+        credits_exhausted_synced_at:
+          type: integer
+          format: int64
+        credits_low_notified_at:
+          type: integer
+          format: int64
+        first_generation_at:
+          type: integer
+          format: int64
+        first_generation_synced_at:
+          type: integer
+          format: int64
+        risk_hold:
+          type: boolean
+        marketing_consent:
+          $ref: '#/components/schemas/MarketingConsent'
+        fbp:
+          type: string
+        fbc:
+          type: string
+        fbclid:
+          type: string
+        rdt_cid:
+          type: string
+        last_login_ip:
+          type: string
+          description: IP address of last login
+        purchase_ips:
+          type: array
+          description: Capped history of client IPs captured at purchase actions (subscribe, checkout, card/payment confirmation, renewal). Used as chargeback evidence to tie a disputed transaction to the rightful cardholder.
+          items:
+            $ref: '#/components/schemas/PurchaseIp'
+        preferred_content_type:
+          type: string
+        questionnaire:
+          $ref: '#/components/schemas/Questionnaire'
+        rate_limits_override:
+          type: integer
+          format: int64
+        referral_code:
+          type: string
+        referred_by:
+          type: string
+          description: User ID of the referrer
+        referral_credited:
+          type: boolean
+          description: Whether referral bonus credits have been issued for this user
+        subscriber_welcome_sent_at:
+          type: integer
+          format: int64
+        referral_announce_sent_at:
+          type: integer
+          format: int64
+        discord_link_id:
+          type: string
+          description: Opaque uuid shown on the user's Discord profile as their Ludo connection. Rotatable. Never the user id.
+        discord_user_id:
+          type: string
+          description: Discord snowflake of the linked account.
+        discord_linked_at:
+          type: string
+          format: date-time
+          description: When the Discord account was last linked.
+        totp:
+          $ref: '#/components/schemas/UserTotp'
+        webauthn_credentials:
+          type: array
+          description: Registered passkeys (WebAuthn credentials) for this user.
+          items:
+            $ref: '#/components/schemas/UserWebauthnCredential'
+        recovery_codes:
+          type: array
+          description: Single-use 2FA recovery codes, stored hashed. Regenerating replaces the whole array.
+          items:
+            $ref: '#/components/schemas/UserRecoveryCode'
+        sessions_version:
+          type: integer
+          default: 0
+          description: Bumped whenever every existing session must be invalidated (2FA enable/disable, password change). Tokens carry it as the `sv` claim and are rejected when it no longer matches.
+    AssistantReferenceHelp:
+      type: object
+      properties:
+        flotiq_index:
+          type: string
+        flotiq_label:
+          type: string
+        doc_index:
+          type: integer
+          format: int64
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+    SaveGddConversationRequest:
+      type: object
+      required:
+      - conversation_id
+      - message_history
+      properties:
+        conversation_id:
+          type: string
+        title:
+          type: string
+        message_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+    GeneratedMap:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        art_style:
+          type: string
+        description:
+          type: string
+        editor_state:
+          $ref: '#/components/schemas/EditorState'
+        grid_size:
+          type: number
+          format: integer
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapLayer'
+        name:
+          type: string
+        perspective:
+          type: string
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapSprite'
+    GeneratorOption:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+    GDD3:
+      type: object
+      properties:
+        project_id:
+          type: string
+        title:
+          type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDElement'
+        icon:
+          $ref: '#/components/schemas/GDDMedia'
+        header:
+          $ref: '#/components/schemas/GDDMedia'
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        country:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        aspect_ratio:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    TeamInvitation:
+      type: object
+      properties:
+        email:
+          type: string
+        role:
+          enum:
+          - editor
+          type: string
+    LudoScoreInsight:
+      type: object
+      properties:
+        tag:
+          type: string
+        text:
+          type: string
+    Animation3DClip:
+      type: object
+      required:
+      - _id
+      - user_id
+      - model_asset_id
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id (the GenerationHistory _id, which for three_d_asset equals image.id).
+        clip_name:
+          type: string
+        prompt:
+          type: string
+        preset_id:
+          type: string
+          description: Set when the clip came from the preset library (retargeting) rather than a text prompt.
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+        seed:
+          type: integer
+        glb_url:
+          type: string
+          description: Uploaded animation-only GLB (skeleton + one clip, no mesh). May be gzip-compressed like model GLBs.
+        preview_url:
+          type: string
+          description: Uploaded mp4 preview of the clip playing on the model.
+        accepted:
+          type: boolean
+          description: Whether this clip is baked into the model's downloadable full GLB. Every generated clip is persisted (so the frontend never loses them); `accepted` is the separate opt-in that controls download inclusion.
+        motion:
+          type: number
+          format: float
+        fit_rmse:
+          type: number
+          format: float
+        date:
+          type: integer
+          format: int64
+        deleted:
+          type: boolean
+    ChatMessage:
+      type: object
+      required:
+      - role
+      properties:
+        text:
+          type: string
+        role:
+          type: string
+        timestamp:
+          type: number
+          format: integer
+        followups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantFollowUp'
+        selected_element:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedVideo'
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Spritesheet'
+        function_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssistantFunctionCall'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreeDAsset'
+        game_ideas:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

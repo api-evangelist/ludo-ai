@@ -1,13 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Ludo Ai Jobs API
   version: 0.9.10
-  x-logo:
-    url: /static/logo-small.png
-    altText: Logo
-  x-refined-note:
-  - x-model-lineup differs across the merged source definitions and was not carried
-  description: 'Operations tagged Jobs across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+  title: Ludo.ai Jobs API
 servers:
 - url: /api
 tags:
@@ -21,6 +15,8 @@ paths:
       operationId: listApiJobs
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       parameters:
       - name: status
         in: query
@@ -50,20 +46,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X GET \"https://api.ludo.ai/api/assets/jobs\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/jobs\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: List api jobs
       x-summary-source: derived
-    servers:
-    - url: /api
   /assets/jobs/{id}:
     get:
       description: 'Fetch one job you started through the API or MCP. Statuses: queued, running (both non-terminal - the response carries poll_after_ms, wait at least that long before asking again), then succeeded (read `result`), failed (read `error`: {code, subcode, message, retriable}; the held credits are refunded) or canceled. Generations typically finish within a few minutes; a job still queued after 15 minutes can be cancelled and resubmitted. Better still, pass wait= (up to 60) to long-poll: the request is held until the job reaches a terminal state, so one call replaces a polling loop. Once status is succeeded, `result` holds exactly what the synchronous form of the operation named by task_type would have returned. This is a free read-only lookup (no credits). Requires an API key (user scope).'
@@ -73,6 +57,8 @@ paths:
       x-mcp-description: 'Poll the status of a generation job started by any tool. Every generation tool returns `{id, status}`; call getApiJob with that id until status is `succeeded` (then read `result`, shaped exactly like the tool''s documented output) or `failed` (read `error`). Poll every few seconds, or pass `wait: 30` to long-poll - the call is held up to 30 seconds (max 60) and returns as soon as the job finishes.'
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       parameters:
       - name: id
         in: path
@@ -106,16 +92,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X GET \"https://api.ludo.ai/api/assets/jobs/{id}\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs/{id}\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/jobs/{id}\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: Get api job
       x-summary-source: derived
     delete:
@@ -125,6 +101,8 @@ paths:
       operationId: cancelApiJob
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       parameters:
       - name: id
         in: path
@@ -156,22 +134,3093 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X DELETE \"https://api.ludo.ai/api/assets/jobs/{id}\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/jobs/{id}\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.delete(\n    \"https://api.ludo.ai/api/assets/jobs/{id}\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: Cancel api job
       x-summary-source: derived
-    servers:
-    - url: /api
+  /jobs:
+    get:
+      summary: 'List the user''s active generation jobs (Roles: user)'
+      tags:
+      - Jobs
+      operationId: listJobs
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: status
+        in: query
+        required: false
+        description: Comma-separated statuses to include. Defaults to queued,running,failed.
+        schema:
+          type: string
+      - name: includeAcknowledged
+        in: query
+        required: false
+        description: Include jobs the user has dismissed. Defaults to false.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenerationJob'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /jobs/dismiss-all:
+    post:
+      summary: Dismiss all the user's terminal-state jobs (failed/canceled/succeeded).
+      tags:
+      - Jobs
+      operationId: dismissAllJobs
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statuses:
+                  type: array
+                  items:
+                    type: string
+                  description: Statuses to dismiss. Defaults to [failed,canceled,succeeded].
+  /jobs/{id}:
+    delete:
+      summary: 'Cancel a queued job. Running jobs cannot be canceled. (Roles: user)'
+      tags:
+      - Jobs
+      operationId: cancelJob
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Job is not in a cancelable state (e.g. already running)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /jobs/{id}/dismiss:
+    post:
+      summary: Dismiss a terminal-state job (failed/canceled/succeeded) so it stops appearing…
+      tags:
+      - Jobs
+      operationId: dismissJob
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Job is not in a terminal state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /jobs/{id}/retry:
+    post:
+      summary: Retry a failed job.
+      tags:
+      - Jobs
+      operationId: retryJob
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Job is not in a retryable state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /jobs/generate-images:
+    post:
+      summary: 'Enqueue an image generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateImagesQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-3d-images:
+    post:
+      summary: 'Enqueue a 3D image generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generate3DImagesQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-refined-3d-images:
+    post:
+      summary: 'Enqueue a refined 3D image generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateRefined3DImagesQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Refined3DPayload'
+        required: true
+  /jobs/rig-model:
+    post:
+      summary: 'Enqueue a 3D model rigging job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: rigModelQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict - model has existing animations that must be deleted before re-rigging
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RigModelPayload'
+        required: true
+  /jobs/animate-3d:
+    post:
+      summary: 'Enqueue a text-driven 3D animation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: animate3DQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Animate3DPayload'
+        required: true
+  /jobs/animate-3d-preset:
+    post:
+      summary: 'Enqueue a 3D animation-preset retargeting job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: animate3DPresetQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Animate3DPresetPayload'
+        required: true
+  /jobs/generate-images-inpainting:
+    post:
+      summary: 'Enqueue an image inpainting job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateImagesInpaintingQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-video:
+    post:
+      summary: 'Enqueue a video generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateVideoQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVideoPayload'
+        required: true
+  /jobs/generate-video-first-frame:
+    post:
+      summary: 'Enqueue a video first-frame generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateVideoFirstFrameQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-audio:
+    post:
+      summary: 'Enqueue an audio generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateAudioQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAudioPayload'
+        required: true
+  /jobs/generate-image-to-spritesheet:
+    post:
+      summary: 'Enqueue an image-to-spritesheet job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateImageToSpritesheetQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-sprite:
+    post:
+      summary: 'Enqueue a sprite generation job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateSpriteQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /jobs/generate-spritesheet-motion-transfer:
+    post:
+      summary: 'Enqueue a spritesheet motion transfer job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateSpritesheetMotionTransferQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSpritesheetMotionTransferPayload'
+        required: true
+  /jobs/render-sprite-3d:
+    post:
+      summary: 'Enqueue a 3D-to-sprite render: each view asked for (directions) as its own…'
+      tags:
+      - Jobs
+      operationId: renderSprite3DQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenderSprite3DPayload'
+        required: true
+  /jobs/render-sprite-3d-still:
+    post:
+      summary: 'Enqueue 3D-to-sprite stills: the model as it is, one large styled image per…'
+      tags:
+      - Jobs
+      operationId: renderSprite3DStillQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenderSprite3DStillPayload'
+        required: true
+  /jobs/generate-spritesheet-new-view:
+    post:
+      summary: 'Enqueue a spritesheet new-view job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: generateSpritesheetNewViewQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSpritesheetNewViewPayload'
+        required: true
+  /jobs/generate-edit-spritesheet:
+    post:
+      summary: 'Enqueue a spritesheet-edit job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: editSpritesheetQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditSpritesheetPayload'
+        required: true
+  /jobs/generate-references-to-video:
+    post:
+      summary: 'Enqueue a references-to-video job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: referencesToVideoQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferencesToVideoPayload'
+        required: true
+  /jobs/generate-video-edit:
+    post:
+      summary: 'Enqueue a video-edit job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: videoEditQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoEditPayload'
+        required: true
+  /jobs/generate-upscale-video:
+    post:
+      summary: Enqueue a video-upscale (2x) job. Only for videos below 960x960 pixels.
+      tags:
+      - Jobs
+      operationId: upscaleVideoQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Insufficient credits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpscaleVideoPayload'
+        required: true
+  /jobs/test-wait:
+    post:
+      summary: Enqueue a no-op test job that sleeps for a random duration.
+      tags:
+      - Jobs
+      operationId: testWaitQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Test task type disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobTestWaitPayload'
+        required: true
+  /jobs/remove-image-background:
+    post:
+      summary: 'Enqueue a background-removal job (Roles: user)'
+      tags:
+      - Jobs
+      operationId: removeImageBackgroundQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueRemoveImageBackgroundPayload'
+        required: true
+  /jobs/upscale-image:
+    post:
+      summary: Enqueue an image upscale (up to 4x, capped at 2048px; the image must be below…
+      tags:
+      - Jobs
+      operationId: upscaleImageQueued
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAcceptedResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueueUpscaleImagePayload'
+        required: true
 components:
   schemas:
+    GenerateVideoPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        duration:
+          type: number
+          format: float
+        model:
+          type: string
+    GeneratedVideo:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        original_prompt:
+          type: string
+        prompt:
+          type: string
+        url:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        seed:
+          type: integer
+          format: int64
+        duration:
+          type: number
+          format: float
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated the video, e.g. eagle. Absent on videos created before it was recorded.
+        pixel_grid:
+          type:
+          - array
+          - 'null'
+          description: Pixel-art grid dimensions [width, height] detected/used by the generation, or null. Reported by pixel-art-aware models (forge-pixel); must always be persisted with the video.
+          items:
+            type: integer
+            format: int32
+        reference_url:
+          type: string
+          description: Motion clip the animation was driven by (motion transfer presets), as reported by the ML. Absent on videos saved before it was recorded.
+        crop_and_center_image:
+          type: boolean
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+    VoicePreset:
+      type: object
+      properties:
+        id:
+          type: string
+        language:
+          type: string
+        emotion:
+          type: string
+    QueueUpscaleImagePayload:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          $ref: '#/components/schemas/GameImage'
+        request_id:
+          type: string
+    Spritesheet:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        duration:
+          type: number
+          format: float
+        billed_duration:
+          type: number
+          format: float
+          description: 'Seconds the generation was billed for: the length of the video Prometheus generated, never more than the duration the user requested. `duration` is the sheet''s loop-trimmed length as Prometheus reports it and is usually shorter.'
+        start_timestamp:
+          type: number
+          format: integer
+        end_timestamp:
+          type: number
+          format: integer
+        num_frames:
+          type: number
+          format: integer
+        num_cols:
+          type: number
+          format: integer
+          description: Columns in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        num_rows:
+          type: number
+          format: integer
+          description: Rows in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        max_num_frames:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: integer
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        bad_loop:
+          type: boolean
+        out_of_frame:
+          type: boolean
+        crop:
+          type: boolean
+        original_prompt:
+          type: string
+        motion_prompt:
+          type: string
+        prompt:
+          type: string
+        seed:
+          type: number
+          format: integer
+        sprite_sheet:
+          $ref: '#/components/schemas/PILImage'
+        sprite_sheet_b64:
+          type: string
+        sprite_sheet_raw_b64:
+          type: string
+        sprite_sheet_watermarked_b64:
+          type: string
+          description: URL of the watermarked variant of sprite_sheet_b64 (object key = clean key + "_wm"). Present only when generated by a free user; served IN PLACE of sprite_sheet_b64 to free viewers. sprite_sheet_b64 itself always stays the clean asset.
+        sprite_sheet_raw_watermarked_b64:
+          type: string
+          description: Watermarked variant of sprite_sheet_raw_b64 (see sprite_sheet_watermarked_b64).
+        watermarked:
+          type: boolean
+          readOnly: true
+          description: Response-only. True when the served sprite_sheet_b64 is the watermarked variant (free viewer). Never persisted - stripped from inbound bodies.
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        preview_video_b64:
+          type: string
+        first_frame_b64:
+          type: string
+        last_frame_b64:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated (or last re-rendered) the animation, e.g. blitz, forge, tango. Absent on sheets created before it was recorded.
+        is_edited:
+          type: boolean
+          description: True when this spritesheet was produced by an edit (prompt, outpaint, or fix_loop) - the whole animation was re-rendered, so frames may drift from the original.
+        generation_mode:
+          type: string
+          description: How the ML produced the animation, as reported by it (e.g. image, edit, motion_transfer). Absent on sheets saved before it was recorded.
+        pixel_art_filter:
+          type: string
+          description: Pixel-art filter the ML applied, as reported by it. Absent on sheets saved before it was recorded.
+        degraded:
+          type: boolean
+          description: 'Degraded flag as reported by the ML for this render. Absent when the ML did not report a boolean, and on sheets saved before it was recorded. Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        label:
+          type: string
+        preview_scale:
+          type: number
+          format: float
+        pack_alignment:
+          $ref: '#/components/schemas/PackAlignment'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a sheet rendered from a 3D model (generation_mode render_3d) was rendered: style, settings, view, animation and model. Absent on every other sheet.'
+    GenerateFilters:
+      type: object
+      properties:
+        n:
+          type: integer
+          format: int64
+        platforms:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        creative_mode:
+          type: boolean
+        duration:
+          type: number
+          format: float
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    JobAcceptedResponse:
+      type: object
+      required:
+      - jobId
+      - status
+      properties:
+        jobId:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - running
+          - succeeded
+          - failed
+          - canceled
+        queue_position:
+          type: integer
+          format: int32
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    GDDElement:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        title:
+          type: string
+        sub_title:
+          type: string
+        text:
+          type: string
+        mod_date:
+          type: integer
+          format: int64
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDMedia'
+        loading:
+          type: integer
+          format: int64
+        pending:
+          type: boolean
+        collapsed:
+          type: boolean
+        country:
+          type: string
+    Annotation:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        label:
+          type: string
+        text:
+          type: string
+        label_probs:
+          type: object
+          properties:
+            feature:
+              type: number
+              format: float
+            junk:
+              type: number
+              format: float
+            mechanic:
+              type: number
+              format: float
+            theme:
+              type: number
+              format: float
+    GDDMedia:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - image
+          - three_d_asset
+          - video
+          - spritesheet
+          - game_id
+          - audio
+        uploaded:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+        placeholder:
+          $ref: '#/components/schemas/GDDPlaceholder'
+        game_id:
+          type: string
+        loading:
+          type: boolean
+    GeneratedAudio:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        original_prompt:
+          type: string
+        original_text:
+          type: string
+        prompt:
+          type: string
+        text:
+          type: string
+        sample_url:
+          type: string
+        seed:
+          type: integer
+          format: int64
+        type:
+          type: string
+        loop:
+          type: boolean
+        duration:
+          type: number
+          format: float
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        model:
+          type: string
+          description: Voice model of a speech-preset generation (blackbird when unset).
+        delivery:
+          type: string
+          description: Delivery note the speech was generated with.
+        image:
+          $ref: '#/components/schemas/GameImage'
+    StepValue:
+      type: object
+      properties:
+        step:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    QueueRemoveImageBackgroundPayload:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          $ref: '#/components/schemas/GameImage'
+        crop:
+          type: boolean
+    RenderSprite3DStillPayload:
+      type: object
+      required:
+      - perspective
+      - style_id
+      properties:
+        request_id:
+          type: string
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of an uploaded GLB. Provide this OR generated_model.
+        user_model_file_type:
+          type: string
+          enum:
+          - glb
+        perspective:
+          type: string
+          enum:
+          - horizon
+          - low
+          - isometric
+          - high
+          - top
+        directions:
+          type: array
+          minItems: 1
+          maxItems: 8
+          uniqueItems: true
+          description: Where the camera stands around a character facing S, each view at most once. One still per view, in this order, rendered together on the same frame, scale and floor, so the views line up.
+          items:
+            type: string
+            enum:
+            - S
+            - SW
+            - W
+            - NW
+            - N
+            - NE
+            - E
+            - SE
+        style_id:
+          type: string
+          description: id of a style from /utils/sprite3d-styles
+        style_version:
+          type: integer
+          description: Version of the style; omit for its current one.
+        style_params:
+          type: object
+          description: Overrides of the style's settings, by name, each one of its listed choices (or true/false, or a colour for a colour setting).
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    GeneratedGame:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        text_raw:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        description_raw:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        search_results:
+          $ref: '#/components/schemas/GenerationsSearchResult'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrometheusGameImage'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        blending:
+          type: array
+          items:
+            type: string
+        blended_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        platform:
+          type: string
+        perspective:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        sentence:
+          type: string
+        punchline:
+          type: string
+        art_style:
+          type: string
+        quality_score:
+          type: number
+          format: float
+        uniqueness_score:
+          type: number
+          format: float
+        final_score:
+          type: number
+          format: float
+        hints:
+          type: array
+          items:
+            type: string
+        request_id:
+          type: string
+        prompt:
+          type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        mechanics:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+        image_prompt:
+          type: string
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    LudoScoreBadge:
+      type: object
+      properties:
+        description:
+          type: string
+        icon_url:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    GDDPlaceholder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+    JobTestWaitPayload:
+      type: object
+      description: Payload for the load-test queue endpoint. The worker sleeps for a random duration in [min_ms, max_ms) instead of calling Prometheus.
+      properties:
+        min_ms:
+          type: integer
+          format: int32
+          description: Minimum sleep in milliseconds. Defaults to 10000 (10s).
+        max_ms:
+          type: integer
+          format: int32
+          description: Maximum sleep in milliseconds (exclusive). Defaults to 120000 (2min).
+        request_id:
+          type: string
+          description: Optional idempotency key, same semantics as the real queue endpoints.
+    Animate3DPresetPayload:
+      type: object
+      required:
+      - preset_id
+      properties:
+        request_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id the resulting clip belongs to.
+        preset_id:
+          type: string
+          description: id of an animation preset (see /utils/animation-presets).
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of an already-rigged GLB to retarget onto.
+        user_model_file_type:
+          type: string
+        crop_loop:
+          type: boolean
+          description: Trim the animation to the span that loops seamlessly. Omit to follow the preset's own loop flag (cyclic motions loop, one-shots keep their full arc). Ignored when no clean loop exists in the motion.
+        in_place:
+          type: boolean
+          description: Remove the animation's net travel so the character moves on the spot and the engine drives locomotion. Omit to follow crop_loop.
+    PlotlyPlotData:
+      type: object
+      properties:
+        mode:
+          type: string
+    PublicJobError:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Animate3DPayload:
+      type: object
+      required:
+      - prompt
+      properties:
+        request_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id the resulting candidate clips belong to.
+        prompt:
+          type: string
+        augment_prompt:
+          type: boolean
+          default: true
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of an already-rigged GLB to animate.
+        user_model_file_type:
+          type: string
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+          default: rot_trans
+        num_variants:
+          type: integer
+          default: 4
+          minimum: 1
+          maximum: 8
+        loop:
+          type: boolean
+          default: true
+          description: 'Return to the initial pose: each clip plays forward then mirrors back to the rest pose for a seamless loop. Best for one-way motions (crouch, punch, wave); reads oddly for cyclic gaits like walking.'
+    Refined3DPayload:
+      type: object
+      properties:
+        art_style:
+          type: string
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        mesh_strength:
+          type: number
+          format: float
+        texture_strength:
+          type: number
+          format: float
+        n:
+          type: integer
+        prompt:
+          type: string
+        request_id:
+          type: string
+        user_model:
+          type: string
+        user_model_file_type:
+          type: string
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    VideoEditPayload:
+      type: object
+      description: Payload for editing a video from a text prompt and optional reference images.
+      required:
+      - prompt
+      - video
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        images:
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/GameImage'
+        duration:
+          type: number
+          format: float
+          default: 5
+        model:
+          type: string
+          description: Backing model.
+          enum:
+          - griffin-hd
+          - eagle
+          - forge
+          - forge-pixel
+          default: griffin-hd
+    JobError:
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+          - network
+          - prometheus_5xx
+          - prometheus_4xx
+          - validation
+          - timeout
+          - unknown
+        subcode:
+          type: string
+        message:
+          type: string
+        retriable:
+          type: boolean
+    GenerateSpritesheetMotionTransferPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        video:
+          type: string
+        num_frames:
+          type: number
+          format: integer
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        crop:
+          type: boolean
+          default: true
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+          enum:
+          - manual
+          - none
+          default: manual
+        model:
+          type: string
+          enum:
+          - hydra
+          - tango
+          - forge
+          - forge-pixel
+          default: hydra
+        prompt:
+          type: string
+          description: Optional extra instructions for the motion transfer, added to the model's own prompt.
+        duration:
+          type: number
+          format: float
+          default: 1.5
+          description: Animation length in seconds. Available values depend on the model - see /credits/costs (per-model lists are auto-generated into the public API docs).
+        pixel_art_filter:
+          type: boolean
+        spritesheet_with_background:
+          type: boolean
+    GenerateAudioPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        audio_type:
+          type: string
+          enum:
+          - sfx
+          - ambiance
+          - music
+          - audio-transform
+          - human-voice
+          - non-human-voice
+          - speech
+          - speech-preset
+        prompt:
+          type: string
+        text:
+          type: string
+        duration:
+          type: number
+          format: float
+        modification_strength:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: For audio-transform, controls how strongly the source sample is modified. 0 keeps it close to the original, 1 transforms it fully.
+        loop:
+          type: boolean
+        n:
+          type: integer
+          format: integer
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        sample:
+          $ref: '#/components/schemas/GeneratedAudio'
+        model:
+          type: string
+          enum:
+          - blackbird
+          - canary
+          description: Voice model for speech-preset. blackbird takes an emotion, canary a delivery note; each has its own presets.
+        delivery:
+          type: string
+          description: For speech and speech-preset (canary), how the line is said, e.g. "angry, shouting".
+        image:
+          $ref: '#/components/schemas/GameImage'
+          description: For human-voice and non-human-voice, the speaking character; the voice is designed from it and the prompt becomes optional.
+    GenerationJob:
+      type: object
+      required:
+      - _id
+      - user_id
+      - task_type
+      - status
+      - created_at
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        task_type:
+          type: string
+          enum:
+          - generate_images
+          - generate_3d_images
+          - generate_refined_3d_images
+          - rig_3d_model
+          - animate_3d_model
+          - animate_3d_preset
+          - generate_images_inpainting
+          - generate_video
+          - generate_video_first_frame
+          - generate_audio
+          - generate_image_to_spritesheet
+          - generate_video_to_spritesheet
+          - generate_sprite
+          - generate_spritesheet_motion_transfer
+          - generate_spritesheet_new_view
+          - render_sprite_3d
+          - render_sprite_3d_still
+          - generate_edit_spritesheet
+          - generate_references_to_video
+          - generate_video_edit
+          - generate_upscale_video
+          - remove_image_background
+          - upscale_image
+          - test_wait
+          - api_create_image
+          - api_generate_with_style
+          - api_edit_image
+          - api_edit_image_mask
+          - api_generate_pose
+          - api_rotate_sprite
+          - api_remove_background
+          - api_upscale_image
+          - api_animate_sprite
+          - api_animate_sprite_keyframes
+          - api_transfer_motion
+          - api_edit_spritesheet
+          - api_rotate_spritesheet
+          - api_adjust_spritesheet
+          - api_create_sprite_audio
+          - api_create_video
+          - api_create_video_from_references
+          - api_edit_video
+          - api_upscale_video
+          - api_create_3d_model
+          - api_create_3d_model_image
+          - api_rig_model
+          - api_animate_3d_model
+          - api_animate_3d_model_preset
+          - api_render_sprite_3d
+          - api_render_sprite_3d_still
+          - api_create_sound_effect
+          - api_create_ambiance
+          - api_create_music
+          - api_create_audio_transform
+          - api_create_voice
+          - api_create_speech
+          - api_create_speech_preset
+        status:
+          type: string
+          enum:
+          - queued
+          - running
+          - succeeded
+          - failed
+          - canceled
+        origin:
+          type: string
+          enum:
+          - web
+          - api
+          - mcp
+          - cli
+          default: web
+        payload:
+          type: object
+        result:
+          type: object
+        error:
+          $ref: '#/components/schemas/JobError'
+        request_id:
+          type: string
+        history_id:
+          type: string
+        worker_id:
+          type: string
+        attempts:
+          type: integer
+          format: int32
+        credits_charged:
+          type: number
+          format: float
+        credit_pool_id:
+          type: string
+        credit_feature:
+          type: string
+        credit_tier:
+          type: string
+        created_at:
+          type: integer
+          format: int64
+        started_at:
+          type: integer
+          format: int64
+        finished_at:
+          type: integer
+          format: int64
+        heartbeat_at:
+          type: integer
+          format: int64
+        acknowledged_at:
+          type: integer
+          format: int64
+        description:
+          type: string
+          description: 'User-facing label derived from the payload at enqueue time (e.g. ''Sound effect: laser zap''). Frontend uses this in the queue panel.'
+        expire_at:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    ThreeDAsset:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+        sprite3d_look:
+          type: object
+          description: 'The look saved for rendering this model as a sprite (3D to sprite), a Sprite3DLook, set through POST /games/sprite3d/look (which validates it). Carried through in-place rewrites of the model and onto a re-rig. Mixed rather than a $ref: a $ref here compiles to a subdocument array, which a dotted-path update writes as an array.'
+        animations:
+          type: array
+          description: Accepted text-driven animation clips attached to this 3D model. Hydrated onto the history entry when listing 3D generations so the frontend can render the clip selector / management modal. Clips are stored in the Animation3DClip collection, not embedded.
+          items:
+            $ref: '#/components/schemas/Animation3DClip'
+    ReferencesToVideoPayload:
+      type: object
+      description: Payload for generating a video from 1-5 reference images and a text prompt.
+      required:
+      - prompt
+      - images
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        images:
+          type: array
+          minItems: 1
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/GameImage'
+        duration:
+          type: number
+          format: float
+          default: 5
+        model:
+          type: string
+          description: Backing model.
+          enum:
+          - griffin
+          - griffin-hd
+          - eagle
+          - eagle-audio
+          - forge
+          - forge-pixel
+          default: griffin
+        aspect_ratio:
+          type: string
+          description: Output aspect ratio. "default" lets the model choose.
+          enum:
+          - default
+          - ar_1_1
+          - ar_16_9
+          - ar_9_16
+          - ar_4_3
+          - ar_3_4
+          - ar_21_9
+          default: default
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    EditSpritesheetPayload:
+      type: object
+      description: Payload for editing a spritesheet's video. edit_mode selects the operation - prompt-driven edit (default), outpaint, loop fixing, or improve (Hydra's post-processing pass, finer detail, on a sheet generated with hydra only; the result is recorded as hydra-plus).
+      required:
+      - spritesheet
+      properties:
+        request_id:
+          type: string
+        edit_mode:
+          type: string
+          description: Edit operation to perform.
+          enum:
+          - prompt
+          - outpaint
+          - fix_loop
+          - improve
+          default: prompt
+        prompt:
+          type: string
+          description: Edit instruction. Required for edit_mode "prompt", optional for "outpaint", not accepted for "fix_loop" or "improve".
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        images:
+          type: array
+          maxItems: 5
+          items:
+            $ref: '#/components/schemas/GameImage'
+        duration:
+          type: number
+          format: float
+          default: 3
+        model:
+          type: string
+          description: Backing model.
+          enum:
+          - hydra
+          - forge
+          - forge-pixel
+          default: forge
+        crop:
+          type: boolean
+        loop:
+          type: boolean
+          default: true
+        num_frames:
+          type: number
+          format: integer
+        target_frame_size:
+          type: number
+          format: integer
+        spritesheet_with_background:
+          type: boolean
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        id:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        short_description:
+          type: string
+        short_description_clean:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        description_clean:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        user_rating_count:
+          type: integer
+          format: int64
+        user_rating:
+          type: number
+          format: float
+        developers:
+          type: array
+          items:
+            type: string
+        urls:
+          type: array
+          items:
+            type: string
+        release_date:
+          type: integer
+          format: int64
+        update_date:
+          type: integer
+          format: int64
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaElement'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        url:
+          type: array
+          items:
+            type: string
+        actual_genres:
+          type: array
+          items:
+            type: string
+        predicted_genres:
+          type: array
+          items:
+            type: string
+        augmented_genres:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        price:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        game_modes:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        advisory_rating:
+          type: string
+    LudoScore:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreMetric'
+        params:
+          type: string
+        score_text:
+          type: string
+        score_unit:
+          type: string
+        score:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+        country:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        badge:
+          $ref: '#/components/schemas/LudoScoreBadge'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    GDD3:
+      type: object
+      properties:
+        project_id:
+          type: string
+        title:
+          type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDElement'
+        icon:
+          $ref: '#/components/schemas/GDDMedia'
+        header:
+          $ref: '#/components/schemas/GDDMedia'
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        country:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        aspect_ratio:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    GeneratedText:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        context_keywords:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        image_prompt:
+          type: string
+        final_score:
+          type: number
+          format: float
+    LudoScoreMetric:
+      type: object
+      properties:
+        _max_similarity:
+          type: number
+          format: double
+        _min_similarity:
+          type: number
+          format: double
+        description:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        score:
+          type: number
+          format: double
+        supporting_games_title:
+          type: string
+        supporting_games:
+          type: array
+          items:
+            type: string
+        core_metric:
+          type: boolean
+        plotly_plot:
+          $ref: '#/components/schemas/PlotlyPlot'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    GenerateNewPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        model:
+          type: string
+        descriptions:
+          type: array
+          items:
+            type: string
+        game_ids:
+          type: array
+          items:
+            type: string
+        search_images:
+          type: integer
+        image_type:
+          type: string
+        context:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        generations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+        hints:
+          type: array
+          items:
+            type: string
+        gdds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDD3'
+        context_gdd:
+          $ref: '#/components/schemas/GDD3'
+        project_id:
+          type: string
+        filters:
+          $ref: '#/components/schemas/GenerateFilters'
+        previous_generations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+        initial_game_image:
+          $ref: '#/components/schemas/GameImage'
+        initial_generated_image:
+          $ref: '#/components/schemas/GameImage'
+        initial_image_file:
+          $ref: '#/components/schemas/GameImage'
+        back_image_file:
+          $ref: '#/components/schemas/GameImage'
+          description: Optional back view (180 degrees) of the subject in initial_image_file, for image-to-3D (force_3d). Prop only; hero takes the front image alone.
+        middle_image_file:
+          $ref: '#/components/schemas/GameImage'
+        final_image_file:
+          $ref: '#/components/schemas/GameImage'
+        additional_input_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        mask_image:
+          type: string
+        strength:
+          type: number
+          format: float
+        aspect_ratio:
+          type: string
+        preserve_color:
+          type: boolean
+        preserve_composition:
+          type: boolean
+        preserve_details:
+          type: boolean
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        loop:
+          type: boolean
+        crop:
+          type: boolean
+          default: true
+        frames:
+          type: number
+          format: integer
+        frame_size:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+        duration:
+          type: number
+          format: float
+        force:
+          type: boolean
+          description: 3D images with an initial_image_file - always redraw it as a 3D render, even when it is already a cut-out (by default a cut-out is used as is and any other image only has its background removed).
+        prompt:
+          type: string
+          maxLength: 1000
+          description: 3D images with an initial_image_file - instructions for redrawing it as a 3D render, e.g. "keep the sword in the right hand". Implies force.
+    PackAlignment:
+      type: object
+      properties:
+        description:
+          type: string
+        sizeHeightPx:
+          type: number
+          format: float
+        groundOffset:
+          type: number
+          format: float
+        horizontalOffset:
+          type: number
+          format: float
+    UpscaleVideoPayload:
+      type: object
+      description: Payload for upscaling a previously generated video 2x. Both dimensions must be under 960 pixels (griffin 480p output qualifies; griffin-hd 720p output does not, except square). Billed per second of video (see /credits/costs).
+      required:
+      - video
+      properties:
+        request_id:
+          type: string
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+    ThreeDModelInput:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+    LudoScoreInsight:
+      type: object
+      properties:
+        tag:
+          type: string
+        text:
+          type: string
+    PlotlyPlot:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlotlyPlotData'
+        layout:
+          $ref: '#/components/schemas/PlotlyPlotData'
+    GenerateSpritesheetNewViewPayload:
+      type: object
+      description: Payload for re-rendering an existing spritesheet's animation from a new view. The source spritesheet supplies the motion and timing; `image` is the character as it must appear in the new view.
+      required:
+      - spritesheet
+      - image
+      properties:
+        request_id:
+          type: string
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        prompt:
+          type: string
+          description: 'Optional instructions: the character''s facing in the new view ("its back to the camera"), where the action goes ("the kick goes to the left of the frame"), or anything else about the motion.'
+        duration:
+          type: number
+          format: float
+          minimum: 1
+          maximum: 5
+          description: Seconds of the source animation to re-render (a longer one is sped up to fit). Defaults to the source's own length, capped at 5.
+        model:
+          type: string
+          enum:
+          - hydra
+          - hydra-plus
+          default: hydra
+        loop:
+          type: boolean
+        crop:
+          type: boolean
+          default: true
+        num_frames:
+          type: number
+          format: integer
+        target_frame_size:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+          enum:
+          - auto
+          - manual
+          - none
+        match_color_palette:
+          type: boolean
+        use_pixel_grid:
+          type: boolean
+        spritesheet_with_background:
+          type: boolean
+    RigModelPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id whose model this rig replaces in place (image.id for generated, synthetic id for uploads). Ignored when as_new_asset is true.
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of a user-uploaded GLB to rig.
+        user_model_file_type:
+          type: string
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          default: general
+          description: 'Which skeleton to build. general (default) lets the model choose; humanoid/game bias toward anime-style and classic game-character rigs. The humanoid_template options pin a standard humanoid skeleton with named joints: humanoid_template (22 joints) or humanoid_template_hands (52, five fingers per hand). Only for two-armed, two-legged characters.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          default: smpl
+          description: Bone naming convention for the joints we can identify. Purely a relabel - the skeleton is identical. Joints outside the humanoid template keep their generic names.
+        render_video:
+          type: boolean
+          default: true
+        as_new_asset:
+          type: boolean
+          default: false
+          description: Re-rig - save the rigged result as a new 3D asset entry instead of overwriting the source, preserving the original model and its saved animations.
+    GenerationsSearchResult:
+      type: object
+      properties:
+        similar_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimilarGame'
+    PrometheusGameImage:
+      type: object
+      properties:
+        game_id:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: string
+        origin:
+          type: string
+        similarity:
+          type: number
+          format: float
+    Animation3DClip:
+      type: object
+      required:
+      - _id
+      - user_id
+      - model_asset_id
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id (the GenerationHistory _id, which for three_d_asset equals image.id).
+        clip_name:
+          type: string
+        prompt:
+          type: string
+        preset_id:
+          type: string
+          description: Set when the clip came from the preset library (retargeting) rather than a text prompt.
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+        seed:
+          type: integer
+        glb_url:
+          type: string
+          description: Uploaded animation-only GLB (skeleton + one clip, no mesh). May be gzip-compressed like model GLBs.
+        preview_url:
+          type: string
+          description: Uploaded mp4 preview of the clip playing on the model.
+        accepted:
+          type: boolean
+          description: Whether this clip is baked into the model's downloadable full GLB. Every generated clip is persisted (so the frontend never loses them); `accepted` is the separate opt-in that controls download inclusion.
+        motion:
+          type: number
+          format: float
+        fit_rmse:
+          type: number
+          format: float
+        date:
+          type: integer
+          format: int64
+        deleted:
+          type: boolean
+    SimilarGame:
+      type: object
+      properties:
+        id:
+          type: string
+        similarity:
+          type: number
+          format: float
+    RenderSprite3DPayload:
+      type: object
+      required:
+      - perspective
+      - style_id
+      properties:
+        request_id:
+          type: string
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of an uploaded GLB (rigged, to animate it). Provide this OR generated_model.
+        user_model_file_type:
+          type: string
+          enum:
+          - glb
+        animation_clip_id:
+          type: string
+          description: One of the model's saved animations (an Animation3DClip id) to render.
+        preset_id:
+          type: string
+          description: An animation preset (/utils/animation-presets) the ML retargets onto the rigged model and renders.
+        crop_loop:
+          type: boolean
+          description: With preset_id, trim the preset to the span that loops seamlessly. Omit to follow the preset's own loop flag.
+        model_animation:
+          type: string
+          description: Name of an animation the model file itself carries. With no animation at all the model renders as a still.
+        perspective:
+          type: string
+          enum:
+          - horizon
+          - low
+          - isometric
+          - high
+          - top
+        directions:
+          type: array
+          minItems: 1
+          maxItems: 8
+          uniqueItems: true
+          description: Where the camera stands around a character facing S, each view at most once. One result per view, in this order, rendered together on the same frame, scale and floor, so the views line up.
+          items:
+            type: string
+            enum:
+            - S
+            - SW
+            - W
+            - NW
+            - N
+            - NE
+            - E
+            - SE
+        direction:
+          type: string
+          description: 'Deprecated: one view. Use directions.'
+          enum:
+          - S
+          - SW
+          - W
+          - NW
+          - N
+          - NE
+          - E
+          - SE
+        style_id:
+          type: string
+          description: id of a style from /utils/sprite3d-styles
+        style_version:
+          type: integer
+          description: Version of the style; omit for its current one.
+        style_params:
+          type: object
+          description: Overrides of the style's settings, by name, each one of its listed choices (or true/false, or a colour for a colour setting).
+        keep_horizontal_travel:
+          type: boolean
+          description: Keep the animation's ground travel (the character moves across the frame). Off by default.
+        keep_vertical_travel:
+          type: boolean
+          description: Keep the animation's vertical root motion (jumps, bobbing). On by default.
+        target_frame_size:
+          type: integer
+          minimum: 32
+          maximum: 640
+          description: Sprite size in px (the frame's longer side); default 256.
+        num_frames:
+          type: integer
+          minimum: 4
+          maximum: 100
+          description: Frames per sheet, sampled over the clip (fewer when the clip has fewer keyframes; a still gives one). Default 16.
+        loop:
+          type: boolean
+          description: Sample the clip as a seamless loop. Omit to follow the animation's own loop flag.
+    MediaElement:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
     PublicJob:
       type: object
       required:
@@ -193,7 +3242,6 @@ components:
           - succeeded
           - failed
           - canceled
-          example: queued
         request_id:
           type: string
         created_at:
@@ -216,37 +3264,6 @@ components:
           type: integer
           format: int32
           description: 'Present while the job is queued or running: wait at least this many milliseconds before polling again. Prefer GET /assets/jobs/{id}?wait=30 (long-poll) over tight loops.'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        metadata:
-          type: string
-        error_payload:
-          type: string
-        intent:
-          type: object
-          description: Stripe intent details sent with 3D Secure (406) errors
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              enum:
-              - payment
-              - setup
-              example: payment
-            client_secret:
-              type: string
-    PublicJobError:
-      type: object
-      properties:
-        status:
-          type: integer
-          format: int32
-        message:
-          type: string
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -259,6 +3276,18 @@ components:
         The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
 
         '
-x-refined-from:
-- ludo-ai-rest-api-openapi.yml
-- ludo-ai-openapi.json
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

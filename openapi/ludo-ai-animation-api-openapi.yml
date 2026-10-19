@@ -102,6 +102,37 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+        code:
+          type: string
+          description: Machine-readable error code.
+    AnimationPreset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the animation preset.
+        name:
+          type: string
+          description: Human-readable name of the animation preset.
+        category:
+          type: string
+          description: Category grouping for the preset.
+        description:
+          type: string
+          description: Description of the animation motion.
+        duration:
+          type: number
+          description: Duration of the preset animation in seconds.
+        preview_url:
+          type: string
+          format: uri
+          description: URL to preview the animation preset.
     AnimateSpriteRequest:
       type: object
       required:
@@ -242,74 +273,6 @@ components:
         request_id:
           type: string
           description: Client-provided ID to retrieve results later via the results endpoint.
-    AnimationPreset:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the animation preset.
-        name:
-          type: string
-          description: Human-readable name of the animation preset.
-        category:
-          type: string
-          description: Category grouping for the preset.
-        description:
-          type: string
-          description: Description of the animation motion.
-        duration:
-          type: number
-          description: Duration of the preset animation in seconds.
-        preview_url:
-          type: string
-          format: uri
-          description: URL to preview the animation preset.
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message describing what went wrong.
-        code:
-          type: string
-          description: Machine-readable error code.
-    AnimationPresetsResponse:
-      type: object
-      properties:
-        animations:
-          type: array
-          description: Array of available animation presets.
-          items:
-            $ref: '#/components/schemas/AnimationPreset'
-        perspectives:
-          type: array
-          description: Array of available perspectives. All animations support all perspectives.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Perspective identifier.
-              name:
-                type: string
-                description: Human-readable perspective name.
-              description:
-                type: string
-                description: Description of the perspective.
-        directions:
-          type: array
-          description: Available directions for animation presets. All animations support all directions.
-          items:
-            type: string
-            enum:
-            - N
-            - NE
-            - E
-            - SE
-            - S
-            - SW
-            - W
-            - NW
     AnimationResponse:
       type: object
       properties:
@@ -353,6 +316,43 @@ components:
         request_id:
           type: string
           description: The request ID if one was provided.
+    AnimationPresetsResponse:
+      type: object
+      properties:
+        animations:
+          type: array
+          description: Array of available animation presets.
+          items:
+            $ref: '#/components/schemas/AnimationPreset'
+        perspectives:
+          type: array
+          description: Array of available perspectives. All animations support all perspectives.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Perspective identifier.
+              name:
+                type: string
+                description: Human-readable perspective name.
+              description:
+                type: string
+                description: Description of the perspective.
+        directions:
+          type: array
+          description: Available directions for animation presets. All animations support all directions.
+          items:
+            type: string
+            enum:
+            - N
+            - NE
+            - E
+            - SE
+            - S
+            - SW
+            - W
+            - NW
   securitySchemes:
     apiKeyAuth:
       type: apiKey

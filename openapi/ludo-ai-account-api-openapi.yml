@@ -1,13 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Ludo Ai Account API
   version: 0.9.10
-  x-logo:
-    url: /static/logo-small.png
-    altText: Logo
-  x-refined-note:
-  - x-model-lineup differs across the merged source definitions and was not carried
-  description: 'Operations tagged Account across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+  title: Ludo.ai Account API
 servers:
 - url: /api
 tags:
@@ -21,6 +15,8 @@ paths:
       operationId: getAccount
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       responses:
         '200':
           description: Success
@@ -34,20 +30,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X GET \"https://api.ludo.ai/api/assets/account\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/account\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/assets/account\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: Get account
       x-summary-source: derived
-    servers:
-    - url: /api
   /assets/cli-key:
     delete:
       description: Revoke the key making this call, when it was created by a browser login. Other API keys are managed in the web app. Free. Requires an API key (user scope).
@@ -57,6 +41,8 @@ paths:
       x-mcp-exclude: true
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       responses:
         '200':
           description: Success
@@ -70,34 +56,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X DELETE \"https://api.ludo.ai/api/assets/cli-key\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/cli-key\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.delete(\n    \"https://api.ludo.ai/api/assets/cli-key\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: Revoke current cli key
       x-summary-source: derived
-    servers:
-    - url: /api
   /assets/feedback:
     post:
-      description: 'Report a problem with the Ludo API itself to the Ludo team. Use it ONLY for API bugs (an error, a failed or stuck job, a crash, a response that does not match this documentation) and API limitations (a parameter, operation or format you needed that the API does not support, and that you could not work around). NEVER use it to report model limitations or the quality of a result: an image, sprite, animation, 3D model, video or sound that looks wrong, ignores part of the prompt, has artifacts or is not what you wanted is not an API bug. Do not report those; retry with a different prompt, model or settings instead. Describe what you were trying to do and what went wrong, and name the operation (and job_id, when there is one) it relates to. Do not include personal data, secrets or file contents. Send one report per issue, and if you are an agent, tell the user what you sent. Free (no credits). Requires an API key (user scope).'
+      description: 'Report a problem with the Ludo API itself to the Ludo team. Use it ONLY for API bugs (an error, a failed or stuck job, a crash, a response that does not match this documentation) and API limitations (a parameter, operation or format you needed that the API does not support, and that you could not work around). NEVER use it to report model limitations or the quality of a result: an image, sprite, animation, 3D model, video or sound that looks wrong, ignores part of the prompt, has artifacts or is not what you wanted is not an API bug. Do not report those; retry with a different prompt, model or settings instead. Before reporting a limitation, call searchDocs with what you tried: if the docs already describe it as a known limitation, do not report it. Describe what you were trying to do and what went wrong, and name the operation it relates to. Always send the id of every job the report is about, in job_ids (up to 10): we look at those jobs'' inputs and outputs, and a report about a result we cannot find cannot be investigated. Do not include personal data, secrets or file contents. Send one report per issue, and if you are an agent, tell the user what you sent. Free (no credits). Requires an API key (user scope).'
       tags:
       - Account
       operationId: submitApiFeedback
       security:
       - ApiKey: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiFeedbackPayload'
-        required: true
+      x-security-scopes:
+      - user
       responses:
         '200':
           description: Success
@@ -111,22 +81,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X POST \"https://api.ludo.ai/api/assets/feedback\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"category\":\"limitation\",\"message\":\"string\"}'"
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/assets/feedback\", {\n  method: \"POST\",\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\",\n    \"Content-Type\": \"application/json\"\n  },\n  body: JSON.stringify({\n    \"category\": \"limitation\",\n    \"message\": \"string\"\n  })\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.post(\n    \"https://api.ludo.ai/api/assets/feedback\",\n    headers={\n        \"Authorization\": \"ApiKey YOUR_API_KEY\",\n        \"Content-Type\": \"application/json\"\n    },\n    json={\n      \"category\": \"limitation\",\n      \"message\": \"string\"\n    }\n)\n\nprint(response.json())"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiFeedbackPayload'
+        required: true
       summary: Submit api feedback
       x-summary-source: derived
-    servers:
-    - url: /api
 components:
   schemas:
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+    ApiFeedbackPayload:
+      type: object
+      required:
+      - category
+      - message
+      properties:
+        category:
+          type: string
+          enum:
+          - limitation
+          - bug
+          - feature_request
+          - praise
+          - other
+          description: 'bug - the API errored, a job failed or got stuck, or a response did not match the documentation; limitation - the API does not support a parameter, operation or format you needed; feature_request - a new API capability you would like; praise - something that worked well; other - any other API issue. Generated content that looks wrong or does not match the prompt is a model limitation, not a bug: do not report it. A limitation the docs already describe (check with searchDocs) is known: do not report it.'
+        message:
+          type: string
+          minLength: 1
+          maxLength: 4000
+          description: What you were trying to do, what happened, and what would have helped.
+        operation:
+          type: string
+          maxLength: 100
+          description: The operation the feedback is about, e.g. animateSprite.
+        job_id:
+          type: string
+          maxLength: 64
+          description: The id of the job the feedback is about. Same as a one-item job_ids.
+        job_ids:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 64
+          description: 'The ids of the jobs the feedback is about (returned by each generation call; also in getApiJob and listApiJobs). Send them whenever a job is involved: every job that shows the problem, plus the one that worked if you are comparing.'
+        agent:
+          type: string
+          maxLength: 100
+          description: The agent or app sending it, e.g. Claude Code.
+    ApiFeedbackReceipt:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        id:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -147,54 +162,8 @@ components:
               enum:
               - payment
               - setup
-              example: payment
             client_secret:
               type: string
-    ApiFeedbackPayload:
-      type: object
-      required:
-      - category
-      - message
-      properties:
-        category:
-          type: string
-          enum:
-          - limitation
-          - bug
-          - feature_request
-          - praise
-          - other
-          description: 'bug - the API errored, a job failed or got stuck, or a response did not match the documentation; limitation - the API does not support a parameter, operation or format you needed; feature_request - a new API capability you would like; praise - something that worked well; other - any other API issue. Generated content that looks wrong or does not match the prompt is a model limitation, not a bug: do not report it.'
-          example: limitation
-        message:
-          type: string
-          minLength: 1
-          maxLength: 4000
-          description: What you were trying to do, what happened, and what would have helped.
-        operation:
-          type: string
-          maxLength: 100
-          description: The operation the feedback is about, e.g. animateSprite.
-        job_id:
-          type: string
-          maxLength: 64
-          description: The job the feedback is about, when there is one.
-        agent:
-          type: string
-          maxLength: 100
-          description: The agent or app sending it, e.g. Claude Code.
-    ApiFeedbackReceipt:
-      type: object
-      properties:
-        ok:
-          type: boolean
-        id:
-          type: string
-    OkResponse:
-      type: object
-      properties:
-        ok:
-          type: boolean
     AccountInfo:
       type: object
       properties:
@@ -253,7 +222,6 @@ components:
         billing_url:
           type: string
           description: Web page to buy credits, change plan or change auto top-up.
-          example: <url>
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -266,6 +234,18 @@ components:
         The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
 
         '
-x-refined-from:
-- ludo-ai-rest-api-openapi.yml
-- ludo-ai-openapi.json
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

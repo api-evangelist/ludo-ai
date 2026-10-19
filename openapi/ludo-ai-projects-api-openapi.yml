@@ -1,0 +1,1088 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Projects API
+servers:
+- url: /api
+tags:
+- name: Projects
+paths:
+  /project/playables:
+    get:
+      summary: 'Gets the user''s playables (Roles: user)'
+      tags:
+      - Projects
+      operationId: getPlayables
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playable-templates:
+    get:
+      summary: 'Gets playable templates (Roles: user)'
+      tags:
+      - Projects
+      operationId: getPlayableTemplates
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedPlayable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playables/{id}/remix:
+    get:
+      summary: 'Remixes a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: remixPlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playables/{id}/share:
+    get:
+      summary: 'Shares a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: getSharedPlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedPlayable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: 'Shares a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: sharePlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: allowPublic
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedPlayable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playable'
+        required: true
+  /project/playables/showcase:
+    get:
+      summary: 'Gets all shared playables (Roles: user)'
+      tags:
+      - Projects
+      operationId: getPlayablesShowcase
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedPlayable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playables/{id}:
+    post:
+      summary: 'Generates or iterates on a Playable prototype (Roles: user)'
+      tags:
+      - Projects
+      operationId: promptPlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: streamingKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: disableAssets
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayableRequest'
+        required: true
+    put:
+      summary: 'Saves a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: savePlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playable'
+        required: true
+    delete:
+      summary: 'Removes a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: removePlayable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playables/{id}/revert-code/{messageIndex}:
+    post:
+      summary: 'Reverts the code to a previous version (Roles: user)'
+      tags:
+      - Projects
+      operationId: revertPlayableCode
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: messageIndex
+        in: path
+        required: true
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/playables/{id}/image:
+    post:
+      summary: 'Adds an image to a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: updatePlayableIcon
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameImage'
+        required: true
+  /project/playables/{id}/title:
+    post:
+      summary: 'Updates the title of a playable (Roles: user)'
+      tags:
+      - Projects
+      operationId: updatePlayableTitle
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playable'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /project/{projectId}/generate-code:
+    get:
+      summary: 'Generates code for the project (Roles: user)'
+      tags:
+      - Projects
+      operationId: generateProjectCode
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: streamingKey
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectCode'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /project/{projectId}/generate-code/prompt:
+    post:
+      summary: 'Generates script for the project with a prompt (Roles: user)'
+      tags:
+      - Projects
+      operationId: generateScriptPrompt
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scriptId
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCode'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /project/{projectId}/code:
+    get:
+      summary: 'Gets the project''s code (Roles: user)'
+      tags:
+      - Projects
+      operationId: getProjectCode
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectCode'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PlayableChatMessage:
+      type: object
+      properties:
+        sender:
+          type: string
+        text:
+          type: string
+        diff:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        history_index:
+          type: integer
+          format: int64
+        followups:
+          type: array
+          items:
+            type: string
+    PlayableRequest:
+      type: object
+      required:
+      - action
+      - prompt
+      properties:
+        action:
+          type: string
+          enum:
+          - GENERATE_INITIAL
+          - ITERATE
+        engine:
+          type: string
+          enum:
+          - phaser
+          - threejs
+          - pixijs
+        prompt:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        disable_assets:
+          type: boolean
+        perspective:
+          type: string
+        art_style:
+          type: string
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    PlayableAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        description:
+          type: string
+        alias:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    ThreeDAsset:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+        sprite3d_look:
+          type: object
+          description: 'The look saved for rendering this model as a sprite (3D to sprite), a Sprite3DLook, set through POST /games/sprite3d/look (which validates it). Carried through in-place rewrites of the model and onto a re-rig. Mixed rather than a $ref: a $ref here compiles to a subdocument array, which a dotted-path update writes as an array.'
+        animations:
+          type: array
+          description: Accepted text-driven animation clips attached to this 3D model. Hydrated onto the history entry when listing 3D generations so the frontend can render the clip selector / management modal. Clips are stored in the Animation3DClip collection, not embedded.
+          items:
+            $ref: '#/components/schemas/Animation3DClip'
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+        value2:
+          type: string
+    SharedPlayable:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        engine:
+          type: string
+          enum:
+          - phaser
+          - threejs
+          - pixijs
+        title:
+          type: string
+        summary:
+          type: string
+        how_to_play:
+          type: string
+        code:
+          type: string
+        compiled_code:
+          type: string
+        date:
+          type: integer
+          format: int64
+        remixes:
+          type: integer
+          format: int64
+        views:
+          type: integer
+          format: int64
+        allow_public:
+          type: boolean
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableAsset'
+        template:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    Animation3DClip:
+      type: object
+      required:
+      - _id
+      - user_id
+      - model_asset_id
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id (the GenerationHistory _id, which for three_d_asset equals image.id).
+        clip_name:
+          type: string
+        prompt:
+          type: string
+        preset_id:
+          type: string
+          description: Set when the clip came from the preset library (retargeting) rather than a text prompt.
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+        seed:
+          type: integer
+        glb_url:
+          type: string
+          description: Uploaded animation-only GLB (skeleton + one clip, no mesh). May be gzip-compressed like model GLBs.
+        preview_url:
+          type: string
+          description: Uploaded mp4 preview of the clip playing on the model.
+        accepted:
+          type: boolean
+          description: Whether this clip is baked into the model's downloadable full GLB. Every generated clip is persisted (so the frontend never loses them); `accepted` is the separate opt-in that controls download inclusion.
+        motion:
+          type: number
+          format: float
+        fit_rmse:
+          type: number
+          format: float
+        date:
+          type: integer
+          format: int64
+        deleted:
+          type: boolean
+    ProjectCode:
+      type: object
+      properties:
+        _id:
+          type: string
+        project_id:
+          type: string
+        date:
+          type: number
+          format: integer
+        name:
+          type: string
+        filename:
+          type: string
+        overview:
+          type: string
+        main_functions:
+          type: string
+        explanation:
+          type: string
+        implementation_details:
+          type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        script:
+          type: string
+        loading:
+          type: boolean
+        packages:
+          type: array
+          items:
+            type: string
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    Playable:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        engine:
+          type: string
+          enum:
+          - phaser
+          - threejs
+          - pixijs
+        title:
+          type: string
+        summary:
+          type: string
+        original_prompt:
+          type: string
+        how_to_play:
+          type: string
+        code:
+          type: string
+        compiled_code:
+          type: string
+        chat_history:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableChatMessage'
+        last_modified:
+          type: integer
+          format: int64
+        code_history:
+          type: string
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayableAsset'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        art_style:
+          type: string
+        perspective:
+          type: string
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

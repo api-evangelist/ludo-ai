@@ -1,18 +1,892 @@
 openapi: 3.2.0
 info:
-  title: Ludo Ai Authentication API
   version: 0.9.10
-  x-logo:
-    url: /static/logo-small.png
-    altText: Logo
-  x-refined-note:
-  - x-model-lineup differs across the merged source definitions and was not carried
-  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: ludo-ai-rest-api-openapi.yml, ludo-ai-openapi.json. Each path carries the servers of the definition it was published in.'
+  title: Ludo.ai Authentication API
 servers:
 - url: /api
 tags:
 - name: Authentication
 paths:
+  /register/{email}:
+    get:
+      summary: 'Validates the email for the registration process. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: startRegistration
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: captcha_token
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /register:
+    post:
+      summary: 'Registers a user. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: register
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationPayload'
+        required: true
+  /check-email:
+    post:
+      summary: 'Checks if an email is valid for registration. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: checkEmailValid
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /register-paywall2:
+    post:
+      summary: 'Registers a user with a subscription. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: registerPaywall2
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationPaywall2Payload'
+        required: true
+  /register-paywall3:
+    post:
+      summary: 'Registers a user without a subscription. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: registerPaywall3
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationPaywall3Payload'
+        required: true
+  /register-paywall/session/success:
+    post:
+      summary: 'Registers a user from a stripe checkout session. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: successPaywallSession
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginPayload'
+        required: true
+  /register-paywall/team:
+    post:
+      summary: 'Registers a user and joins a team. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: registerPaywallTeam
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationPaywallTeamPayload'
+        required: true
+  /login:
+    post:
+      summary: 'Allow a user to log in and receive a JWT Token. (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: login
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authentication'
+        description: Username and password data
+        required: true
+  /auth/verify-magic-link:
+    get:
+      summary: Verify magic link code and authenticate user
+      tags:
+      - Authentication
+      operationId: verifyMagicLink
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      parameters:
+      - name: code
+        in: query
+        description: Magic link verification code
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /discord/link-start:
+    post:
+      summary: Starts the Discord account link flow and returns the OAuth url
+      tags:
+      - Authentication
+      operationId: startDiscordLink
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscordLinkStartResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Discord linking is not configured on this environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /auth/facebook:
+    post:
+      summary: 'Authenticates with facebook (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: authenticateFacebook
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      parameters:
+      - name: register
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        description: Facebook access token
+        required: true
+  /auth/google:
+    post:
+      summary: 'Authenticates with google (Roles: user, none)'
+      tags:
+      - Authentication
+      operationId: authenticateGoogle
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      parameters:
+      - name: register
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        description: Google access token
+        required: true
+  /auth/refresh-token:
+    get:
+      summary: 'Refreshes auth token (Roles: user)'
+      tags:
+      - Authentication
+      operationId: refreshToken
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /auth/referral:
+    get:
+      summary: 'Get referral info for the authenticated user (Roles: user)'
+      tags:
+      - Authentication
+      operationId: getReferralInfo
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /auth/forgot-password:
+    post:
+      summary: 'Send password recovery email (Roles: none)'
+      tags:
+      - Authentication
+      operationId: forgotPassword
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /auth/reset-password:
+    post:
+      summary: 'Sets a new password (Roles: none)'
+      tags:
+      - Authentication
+      operationId: resetPassword
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordPayload'
+        required: true
+  /auth/2fa/verify:
+    post:
+      summary: Exchange a 2FA challenge ticket plus one proof for a full login payload.
+      tags:
+      - Authentication
+      operationId: twoFactorVerify
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginPayload'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: The challenge ticket has expired or was already used
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorVerifyPayload'
+        required: true
+  /auth/2fa/webauthn/login-options:
+    post:
+      summary: WebAuthn request options for a login challenge (ticket) or a step-up (Bearer).
+      tags:
+      - Authentication
+      operationId: twoFactorWebauthnLoginOptions
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - none
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: The challenge ticket has expired or was already used
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorLoginOptionsPayload'
+  /auth/2fa/totp/setup:
+    post:
+      summary: Begin authenticator-app enrolment; returns the secret and a QR code.
+      tags:
+      - Authentication
+      operationId: twoFactorTotpSetup
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorSetupResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorStepUpPayload'
+  /auth/2fa/totp/confirm:
+    post:
+      summary: Confirm authenticator enrolment with a code; returns a fresh token and recovery…
+      tags:
+      - Authentication
+      operationId: twoFactorTotpConfirm
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorEnrollResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorTotpConfirmPayload'
+        required: true
+  /auth/2fa/webauthn/register-options:
+    post:
+      summary: 'WebAuthn creation options for enrolling a passkey. (Roles: user)'
+      tags:
+      - Authentication
+      description: 'Requires NO step-up proof, even on an account that already has 2FA: this call mutates nothing, and the only thing it exposes that the session cannot already read is excludeCredentials, whose ids GET /auth/2fa/status returns to the same session. The single proof for adding a passkey accompanies POST /auth/2fa/webauthn/register. Asking at both would cost two distinct proofs per passkey, since every proof type is single-use.'
+      operationId: twoFactorWebauthnRegisterOptions
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorStepUpPayload'
+  /auth/2fa/webauthn/register:
+    post:
+      summary: 'Finish passkey enrolment with the authenticator''s attestation. (Roles: user)'
+      tags:
+      - Authentication
+      description: 'The mutating half of the ceremony, and the ONLY place a step-up proof is required when adding a passkey to an account that already has 2FA: send exactly one of totp_code, recovery_code or webauthn_assertion alongside the attestation. First-time enrolment on an unprotected account needs no proof.'
+      operationId: twoFactorWebauthnRegister
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorRegisterResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorRegisterPayload'
+        required: true
+  /auth/2fa/disable:
+    post:
+      summary: 'Turn two-factor authentication off. Requires a step-up proof. (Roles: user)'
+      tags:
+      - Authentication
+      operationId: twoFactorDisable
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorDisableResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorStepUpPayload'
+  /auth/2fa/webauthn/{credentialId}:
+    delete:
+      summary: 'Remove a registered passkey. Requires a step-up proof. (Roles: user)'
+      tags:
+      - Authentication
+      operationId: twoFactorRemoveCredential
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: credentialId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorRemoveCredentialResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No such passkey on this account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorStepUpPayload'
+  /auth/2fa/recovery-codes:
+    post:
+      summary: 'Regenerate the ten recovery codes. Requires a step-up proof. (Roles: user)'
+      tags:
+      - Authentication
+      operationId: twoFactorRegenerateRecoveryCodes
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorRecoveryCodesResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many failed second-factor attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TwoFactorStepUpPayload'
+  /auth/2fa/status:
+    get:
+      summary: 'Current two-factor state for the authenticated user. (Roles: user)'
+      tags:
+      - Authentication
+      operationId: twoFactorStatus
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwoFactorStatusResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/info:
+    post:
+      summary: 'Updates the user info (Roles: user)'
+      tags:
+      - Authentication
+      operationId: updateUserInfo
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInfoPayload'
+        required: true
+    delete:
+      summary: 'Deletes the user (Roles: user)'
+      tags:
+      - Authentication
+      operationId: deleteUser
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/api-key:
+    get:
+      summary: 'Generates a new API key (Roles: user)'
+      tags:
+      - Authentication
+      operationId: generateApiKey
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /auth/validate-api-key:
     get:
       description: Validates an API key. Returns 200 if valid, 403 if invalid.
@@ -21,6 +895,8 @@ paths:
       operationId: validateApiKeyEndpoint
       security:
       - ApiKey: []
+      x-security-scopes:
+      - user
       responses:
         '200':
           description: Valid API key
@@ -30,22 +906,350 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-      x-codeSamples:
-      - lang: Shell
-        label: cURL
-        source: "curl -X GET \"https://api.ludo.ai/api/auth/validate-api-key\" \\\n  -H \"Authorization: ApiKey YOUR_API_KEY\""
-      - lang: JavaScript
-        label: JavaScript
-        source: "const response = await fetch(\"https://api.ludo.ai/api/auth/validate-api-key\", {\n  headers: {\n    \"Authorization\": \"ApiKey YOUR_API_KEY\"\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);"
-      - lang: Python
-        label: Python
-        source: "import requests\n\nresponse = requests.get(\n    \"https://api.ludo.ai/api/auth/validate-api-key\",\n    headers={\"Authorization\": \"ApiKey YOUR_API_KEY\"}\n)\n\nprint(response.json())"
       summary: Validate api key endpoint
       x-summary-source: derived
-    servers:
-    - url: /api
 components:
   schemas:
+    RegistrationPayload:
+      type: object
+      required:
+      - email
+      - password
+      - name
+      - code
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+        code:
+          type: string
+        captcha_token:
+          type: string
+    SubscriptionStats:
+      type: object
+      properties:
+        revenue_year:
+          type: number
+          format: float
+        revenue_12months:
+          type: number
+          format: float
+        revenue_total:
+          type: number
+          format: float
+        plan_name:
+          type: string
+        plan_interval:
+          type: string
+        is_customer:
+          type: boolean
+        became_customer_date:
+          type: integer
+          format: int64
+    PaymentPlanMetadata:
+      type: object
+      properties:
+        projects:
+          type: string
+        description:
+          type: string
+        seats:
+          type: string
+        favorites:
+          type: string
+        team:
+          type: string
+        amount_text:
+          type: string
+        credits:
+          type: string
+        premium:
+          type: string
+        magic_link:
+          type: string
+        api:
+          type: string
+        queue_concurrency:
+          type: string
+        rate_limits:
+          type: string
+    TwoFactorEnrollResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Fresh token. Enrolling revokes every existing session, so the client must adopt this one immediately or log itself out.
+        recovery_codes:
+          type: array
+          description: Shown exactly once. EMPTY when the account already had recovery codes (a second factor type was added) — render that as "your existing recovery codes still apply", never as an empty list of ten.
+          items:
+            type: string
+    PurchaseIp:
+      type: object
+      properties:
+        ip:
+          type: string
+        date:
+          type: integer
+          format: int64
+          description: Unix epoch seconds when this IP was captured at a purchase action
+    MarketingConsent:
+      type: object
+      properties:
+        granted:
+          type: boolean
+        date:
+          type: integer
+          format: int64
+        source:
+          type: string
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        collection_method:
+          type: string
+        cancel_at_period_end:
+          type: boolean
+        canceled_at:
+          type: integer
+          format: int64
+        cancel_at:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        current_period_end:
+          type: integer
+          format: int64
+        current_period_start:
+          type: integer
+          format: int64
+        customer:
+          type: string
+        days_until_due:
+          type: integer
+          format: int64
+        ended_at:
+          type: integer
+          format: int64
+        plan:
+          $ref: '#/components/schemas/PaymentPlan'
+        quantity:
+          type: integer
+          format: int64
+        start_date:
+          type: integer
+          format: int64
+        status:
+          type: string
+        tax_percent:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        trial_start:
+          type: integer
+          format: int64
+        billing_cycle_anchor:
+          type: integer
+          format: int64
+        latest_invoice:
+          type: string
+        from_team:
+          type: boolean
+        pause_collection:
+          $ref: '#/components/schemas/SubscriptionPauseCollection'
+        resume_requires_payment:
+          type: boolean
+          description: Present (true) only while the subscription is paused and at least one billing cycle was skipped (voided) during the pause, meaning a resume will immediately charge the full plan price for a fresh cycle.
+        ended_immediately:
+          type: boolean
+          description: 'Present (true) only on an unsubscribe response when the cancel landed after a new period started but before its renewal was charged: the subscription was ended at once and the renewal discarded, instead of running (and billing) until the end of that new period.'
+        pause_started_at:
+          type: integer
+          format: int64
+          description: 'When the current pause was REQUESTED. Stripe records only where a pause ends (pause_collection.resumes_at), so this is stamped into subscription metadata by pauseSubscription. Audit only: the ceiling and the mid-pause email are measured from pause_billing_from, and fall back to this only when that is absent. Absent on pauses that began before the extension feature shipped.'
+        pause_billing_from:
+          type: integer
+          format: int64
+          description: 'When collection actually stops, i.e. the current_period_end that was current at the moment of pausing, and the anchor the six-month extension ceiling and the mid-pause midpoint are measured from. Must be stamped at pause time: with pause_collection.behavior "void" Stripe keeps advancing the billing cycle through the pause, so current_period_end read later names a different period. Absent on pauses that began before the extension feature shipped, which are then capped from pause_started_at instead (stricter, by the length of the paid-through tail).'
+        pause_extended_at:
+          type: integer
+          format: int64
+          description: When the current pause was extended. Present at most once per pause; while it is present the Extend control must not be offered, because extendPause refuses a second extension.
+        pause_can_extend:
+          type: boolean
+          description: 'Present (true) only when extendPause would accept at least one more month right now: the pause is running, has not been extended, is not scheduled to cancel, and one more month still fits under the six-month ceiling measured from pause_billing_from (or pause_started_at). Gate the Extend control on this rather than on pause_extended_at alone, which would invite a subscriber already at the ceiling to extend and then refuse them. Absent on pauses with no anchor, where the server cannot tell from Stripe alone.'
+    UserWebauthnCredential:
+      type: object
+      properties:
+        credential_id:
+          type: string
+          description: base64url credential id returned by the authenticator.
+        public_key:
+          type: string
+          description: base64url COSE public key used to verify assertions.
+        counter:
+          type: integer
+          format: int64
+          description: Signature counter of the last accepted assertion (clone detection).
+        transports:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+          description: User-visible label for the passkey.
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+    Authentication:
+      type: object
+      required:
+      - email
+      - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    Questionnaire:
+      type: object
+      properties:
+        date:
+          type: integer
+          format: int64
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    TwoFactorLoginOptionsPayload:
+      type: object
+      properties:
+        challenge_ticket:
+          type: string
+          description: Present for a login challenge (there is no session yet). Omitted for a step-up ceremony, where the Bearer token identifies the user.
+    TwoFactorRecoveryCodesResponse:
+      type: object
+      properties:
+        recovery_codes:
+          type: array
+          items:
+            type: string
+    RegistrationPaywallTeamPayload:
+      type: object
+      required:
+      - password
+      - name
+      - team_id
+      - email
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        team_id:
+          type: string
+        email:
+          type: string
+        captcha_token:
+          type: string
+    UserTotp:
+      type: object
+      properties:
+        secret_enc:
+          type: string
+          description: TOTP shared secret, encrypted at rest (encryptionUtils.encryptSecret).
+        confirmed:
+          type: boolean
+          description: True once the user proved possession of the secret with a code. An unconfirmed enrolment does not count as 2FA being enabled.
+        last_timestep:
+          type: integer
+          format: int64
+          description: 'Timestep of the last accepted code. Anti-replay: a code whose timestep is not greater than this is rejected.'
+        created_at:
+          type: string
+          format: date-time
+    RegistrationPaywall2Payload:
+      type: object
+      required:
+      - name
+      - email
+      - password
+      - payment_token
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        payment_token:
+          type: string
+        captcha_token:
+          type: string
+    DiscordLinkStartResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Discord OAuth authorize url the browser should be sent to.
+    TwoFactorVerifyPayload:
+      type: object
+      required:
+      - challenge_ticket
+      properties:
+        challenge_ticket:
+          type: string
+          description: The ticket returned by the login endpoint that was challenged.
+        totp_code:
+          type: string
+        recovery_code:
+          type: string
+        webauthn_assertion:
+          type: object
+          description: The authenticator's response to the options from /auth/2fa/webauthn/login-options. Exactly one of totp_code, recovery_code or webauthn_assertion must be present.
+    TwoFactorRegisterResponse:
+      type: object
+      properties:
+        credential:
+          $ref: '#/components/schemas/TwoFactorPasskey'
+        recovery_codes:
+          type: array
+          description: Same exactly-once rule as TwoFactorEnrollResponse.
+          items:
+            type: string
+        token:
+          type: string
+          description: Present only when this passkey is what enabled 2FA.
+    Question:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        detail:
+          type: string
+          maxLength: 200
+    TwoFactorDisableResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Fresh token; disabling revokes every existing session.
     ErrorResponse:
       type: object
       properties:
@@ -66,9 +1270,516 @@ components:
               enum:
               - payment
               - setup
-              example: payment
             client_secret:
               type: string
+    RegistrationPaywall3Payload:
+      type: object
+      required:
+      - name
+      - email
+      - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        captcha_token:
+          type: string
+    UserRecoveryCode:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: bcrypt hash of the recovery code; the plaintext is shown once.
+        used_at:
+          type: string
+          format: date-time
+          description: When the code was redeemed. Unset while the code is still usable.
+    User:
+      type: object
+      required:
+      - _id
+      - email
+      - role
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        teams:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        stripped_email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum:
+          - user
+        stripe_id:
+          type: string
+        selected_project:
+          type: string
+        number_generations:
+          type: integer
+          format: int64
+        registration_date:
+          type: integer
+          format: int64
+        signup_source:
+          type: string
+        whats_new_date:
+          type: integer
+          format: int64
+        trial_end:
+          type: integer
+          format: int64
+        tax:
+          $ref: '#/components/schemas/Tax'
+        address:
+          $ref: '#/components/schemas/Address'
+        tutorials_closed:
+          type: array
+          items:
+            type: string
+        missions_completed:
+          type: array
+          items:
+            type: string
+        credits:
+          $ref: '#/components/schemas/GenerationCreditsInfo'
+        auto_topup:
+          $ref: '#/components/schemas/AutoTopupSettings'
+        country:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        welcome_form:
+          type: boolean
+        paywall:
+          type: boolean
+        video_generator:
+          type: boolean
+        subscription_stats:
+          $ref: '#/components/schemas/SubscriptionStats'
+        date_whats_new:
+          type: integer
+          format: int64
+        api_key:
+          type: string
+        cookie_consent:
+          type: boolean
+        double_optin_sent:
+          type: boolean
+        brevo_contact:
+          type: boolean
+        credits_exhausted_at:
+          type: integer
+          format: int64
+        credits_exhausted_synced_at:
+          type: integer
+          format: int64
+        credits_low_notified_at:
+          type: integer
+          format: int64
+        first_generation_at:
+          type: integer
+          format: int64
+        first_generation_synced_at:
+          type: integer
+          format: int64
+        risk_hold:
+          type: boolean
+        marketing_consent:
+          $ref: '#/components/schemas/MarketingConsent'
+        fbp:
+          type: string
+        fbc:
+          type: string
+        fbclid:
+          type: string
+        rdt_cid:
+          type: string
+        last_login_ip:
+          type: string
+          description: IP address of last login
+        purchase_ips:
+          type: array
+          description: Capped history of client IPs captured at purchase actions (subscribe, checkout, card/payment confirmation, renewal). Used as chargeback evidence to tie a disputed transaction to the rightful cardholder.
+          items:
+            $ref: '#/components/schemas/PurchaseIp'
+        preferred_content_type:
+          type: string
+        questionnaire:
+          $ref: '#/components/schemas/Questionnaire'
+        rate_limits_override:
+          type: integer
+          format: int64
+        referral_code:
+          type: string
+        referred_by:
+          type: string
+          description: User ID of the referrer
+        referral_credited:
+          type: boolean
+          description: Whether referral bonus credits have been issued for this user
+        subscriber_welcome_sent_at:
+          type: integer
+          format: int64
+        referral_announce_sent_at:
+          type: integer
+          format: int64
+        discord_link_id:
+          type: string
+          description: Opaque uuid shown on the user's Discord profile as their Ludo connection. Rotatable. Never the user id.
+        discord_user_id:
+          type: string
+          description: Discord snowflake of the linked account.
+        discord_linked_at:
+          type: string
+          format: date-time
+          description: When the Discord account was last linked.
+        totp:
+          $ref: '#/components/schemas/UserTotp'
+        webauthn_credentials:
+          type: array
+          description: Registered passkeys (WebAuthn credentials) for this user.
+          items:
+            $ref: '#/components/schemas/UserWebauthnCredential'
+        recovery_codes:
+          type: array
+          description: Single-use 2FA recovery codes, stored hashed. Regenerating replaces the whole array.
+          items:
+            $ref: '#/components/schemas/UserRecoveryCode'
+        sessions_version:
+          type: integer
+          default: 0
+          description: Bumped whenever every existing session must be invalidated (2FA enable/disable, password change). Tokens carry it as the `sv` claim and are rejected when it no longer matches.
+    PaymentPlan:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        description:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        statement_descriptor:
+          type: string
+        trial_period_days:
+          type: integer
+          format: int64
+        created:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        interval:
+          type: string
+        interval_count:
+          type: integer
+          format: int64
+        livemode:
+          type: boolean
+        active:
+          type: boolean
+        billing_scheme:
+          type: string
+        product:
+          type: string
+        name:
+          type: string
+        usage_type:
+          type: string
+        nickname:
+          type: string
+        amount_off:
+          type: integer
+          format: int64
+        percent_off:
+          type: integer
+          format: int64
+        metadata:
+          $ref: '#/components/schemas/PaymentPlanMetadata'
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+    GenerationCreditsInfo:
+      type: object
+      properties:
+        current:
+          type: number
+          format: float
+        max:
+          type: number
+          format: float
+        reset_date:
+          type: integer
+          format: int64
+        extra:
+          type: number
+          format: float
+        total:
+          type: number
+          format: float
+        paused:
+          type: boolean
+        has_tier_logic:
+          type: boolean
+        uses_team_credits:
+          type: boolean
+        credits_upfront:
+          type: boolean
+        grace_until:
+          type: integer
+          format: int64
+          description: If set, the user's subscription ended and their remaining credits stay spendable until this unix timestamp (30-day grace period)
+        grace_reason:
+          type: string
+          description: Stripe cancellation_details.reason at termination (e.g. cancellation_requested, payment_failed)
+    Tax:
+      type: object
+      properties:
+        value:
+          type: string
+        type:
+          type: string
+    TwoFactorStatusResponse:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        totp_confirmed:
+          type: boolean
+        passkeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/TwoFactorPasskey'
+        recovery_codes_remaining:
+          type: integer
+    TwoFactorRemoveCredentialResponse:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          description: True when this was the last passkey and no authenticator app was confirmed, so removing it turned two-factor authentication off entirely rather than leaving an unsatisfiable requirement.
+        token:
+          type: string
+          description: Present only when `disabled` is true.
+    TwoFactorPasskey:
+      type: object
+      properties:
+        credential_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+    TwoFactorStepUpPayload:
+      type: object
+      properties:
+        totp_code:
+          type: string
+        recovery_code:
+          type: string
+        webauthn_assertion:
+          type: object
+      description: A fresh second-factor proof for a change to the second factors themselves. Exactly one field; an empty body is answered with error_payload.code STEP_UP_REQUIRED.
+    ResetPasswordPayload:
+      type: object
+      properties:
+        code:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    AutoTopupSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        threshold:
+          type: number
+          format: float
+          description: When available credits (max + extra - current) drop below this, an automatic top-up is attempted
+        credits:
+          type: integer
+          format: int64
+          description: Fixed credit amount to buy on each automatic top-up (TOPUP bracket pricing)
+        armed:
+          type: boolean
+          description: 'Hysteresis latch: true while the balance is above the threshold; consumed (set false) by the single attempt per below-threshold episode'
+    TwoFactorRegisterPayload:
+      type: object
+      required:
+      - attestation
+      properties:
+        attestation:
+          type: object
+          description: The authenticator's response to the register-options challenge.
+        name:
+          type: string
+          description: User-visible label for the passkey. Defaults to "Passkey".
+        totp_code:
+          type: string
+        recovery_code:
+          type: string
+        webauthn_assertion:
+          type: object
+    LoginPayload:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+        registered:
+          type: boolean
+        magic_link_sent:
+          type: boolean
+        magic_link_message:
+          type: string
+        two_factor_required:
+          type: boolean
+          description: Credentials were accepted but the account has 2FA enabled, so no token is issued. Exchange the challenge_ticket for a full payload via /auth/2fa/verify.
+        challenge_ticket:
+          type: string
+          description: Single-use, short-lived ticket identifying the pending 2FA challenge.
+        two_factor_methods:
+          type: array
+          description: Second factors the user can present for this challenge.
+          items:
+            type: string
+    SubscriptionPauseCollection:
+      type: object
+      properties:
+        behavior:
+          type: string
+        resumes_at:
+          type: integer
+          format: int64
+    TwoFactorTotpConfirmPayload:
+      type: object
+      required:
+      - totp_code
+      properties:
+        totp_code:
+          type: string
+    UserInfoPayload:
+      type: object
+      properties:
+        name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        number_generations:
+          type: integer
+          format: int64
+        tax:
+          $ref: '#/components/schemas/Tax'
+        address:
+          $ref: '#/components/schemas/Address'
+        questionnaire:
+          $ref: '#/components/schemas/Questionnaire'
+        preferred_content_type:
+          type: string
+        tutorials_closed:
+          type: array
+          items:
+            type: string
+        missions_completed:
+          type: array
+          items:
+            type: string
+        selected_project:
+          type: string
+        password:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        whats_new_date:
+          type: integer
+          format: int64
+        welcome_form:
+          type: boolean
+        cookie_consent:
+          type: boolean
+        marketing_consent:
+          type: boolean
+        marketing_consent_source:
+          type: string
+        fbc:
+          type: string
+        fbp:
+          type: string
+        fbclid:
+          type: string
+        rdt_cid:
+          type: string
+        referral_code:
+          type: string
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+        value2:
+          type: string
+    TwoFactorSetupResponse:
+      type: object
+      properties:
+        otpauth_url:
+          type: string
+        qr_data_uri:
+          type: string
+        secret:
+          type: string
   securitySchemes:
     ApiKey:
       type: apiKey
@@ -81,6 +1792,18 @@ components:
         The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
 
         '
-x-refined-from:
-- ludo-ai-rest-api-openapi.yml
-- ludo-ai-openapi.json
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

@@ -1,0 +1,3091 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Gamestorming API
+servers:
+- url: /api
+tags:
+- name: Gamestorming
+paths:
+  /suggest/project/{id}/assets:
+    post:
+      summary: 'Suggests assets based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectAssets
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreeDAsset'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestPayload'
+        required: true
+  /suggest/project/{id}/videos:
+    post:
+      summary: 'Suggests videos based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectVideos
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedVideo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestPayload'
+        required: true
+  /suggest/project/{id}/audio:
+    post:
+      summary: 'Suggests audio based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectAudio
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedAudio'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestPayload'
+        required: true
+  /suggest/project/{id}/sections-to-add:
+    get:
+      summary: 'Suggests sections to add (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestSectionsToAdd
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: selected_element
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /suggest/project/{id}/generated-images:
+    post:
+      summary: 'Suggests generated images based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectGeneratedImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestPayload'
+        required: true
+  /suggest/project/{id}/text/{type}:
+    post:
+      summary: 'Suggests text based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectText
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedText'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /suggest/project/{id}/followup:
+    post:
+      summary: 'Suggests text based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectFollowUp
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedText'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestPayload'
+        required: true
+  /suggest/project/{id}/titles:
+    get:
+      summary: 'Suggests titles based on a project (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: suggestProjectTitles
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedText'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/generate/{generationId}:
+    delete:
+      summary: 'Cancels a game generation (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: cancelGeneration
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: generationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/generate/refined-3d-images:
+    post:
+      summary: 'Generate 3D model images based on existing models (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateRefined3DImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreeDAsset'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Refined3DPayload'
+        required: true
+  /games/generate/3d-images:
+    post:
+      summary: 'Generates image suitable for 3d models (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generate3DImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: force3D
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThreeDAsset'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/image-to-3d:
+    post:
+      summary: 'Generates 3D models from image (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: imageTo3D
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetGeneration'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageTo3DPayload'
+        required: true
+  /games/generate/download-3d:
+    post:
+      summary: 'Downloads a 3D model (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: export3D
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetGeneration'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Download3DPayload'
+        required: true
+  /games/generate/retopology:
+    post:
+      summary: 'Retopologizes a 3D model (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: retopology
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetGeneration'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetopologyPayload'
+        required: true
+  /games/animations:
+    get:
+      summary: 'Lists accepted animation clips for a 3D model (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: listAnimations
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: model_asset_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Animation3DClip'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/animations/accept:
+    post:
+      summary: 'Persists a chosen animation candidate against its 3D model (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: acceptAnimation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animation3DClip'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptAnimationPayload'
+        required: true
+  /games/animations/{id}:
+    delete:
+      summary: 'Deletes an accepted animation clip (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: deleteAnimation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/generate/images:
+    post:
+      summary: 'Generates images (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: skipGenerationHistory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/images-inpainting:
+    post:
+      summary: 'Generates images inpainting (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateImagesInpainting
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: skipGenerationHistory
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/align-images:
+    post:
+      summary: 'Aligns two images and returns alignment factors (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: alignImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlignImagesResult'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlignImagesPayload'
+        required: true
+  /games/generate/segmentation:
+    post:
+      summary: 'Segments an image into a mask (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: segmentImage
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentImagePayload'
+        required: true
+  /games/generate/videos:
+    post:
+      summary: 'Generates videos (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateVideo
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedVideo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVideoPayload'
+        required: true
+  /games/generate/videos/first-frame:
+    post:
+      summary: 'Generates a video''s first frame (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateVideoFirstFrame
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedVideo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/video-audio:
+    post:
+      summary: 'Generates video audio (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateVideoAudio
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedVideo'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateVideoAudioPayload'
+        required: true
+  /games/generate/audio:
+    post:
+      summary: 'Generates audio assets (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateAudio
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedAudio'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAudioPayload'
+        required: true
+  /games/generate/sprite-image:
+    post:
+      summary: 'Generates spritesheet from text (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateSprite
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Spritesheet'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/image-to-spritesheet:
+    post:
+      summary: 'Generates spritesheet from image (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateImageToSpritesheet
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spritesheet'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/video-to-spritesheet:
+    post:
+      summary: 'Generates spritesheet from video (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateVideoToSpritesheet
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spritesheet'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/spritesheet-to-audio:
+    post:
+      summary: 'Generates audio for spritesheet (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateSpritesheetToAudio
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spritesheet'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSpritesheetAudioPayload'
+        required: true
+  /games/generate/spritesheet-motion-transfer:
+    post:
+      summary: Generates spritesheet by transferring motion from video or spritesheet to image…
+      tags:
+      - Gamestorming
+      operationId: generateSpritesheetMotionTransfer
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spritesheet'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSpritesheetMotionTransferPayload'
+        required: true
+  /games/generate/render-model:
+    post:
+      summary: 'Renders 3D model to video (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: renderModel
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StringValue'
+        required: true
+  /games/generate/game-concept-header/images/{projectId}:
+    delete:
+      summary: 'Cancels request to generate images for the game concept header (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: cancelGameConceptHeaderImages
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/generate/game-concept-header/images-new/{projectId}:
+    post:
+      summary: 'Generates images for the game concept header (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateGameConceptHeaderImagesNew
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: extract
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/image-prompts:
+    post:
+      summary: 'Image prompts based on current trends (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: getImagePrompts
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: isVideo
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrendKeywords'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/images/generations:
+    post:
+      summary: 'Generates images for generations (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateImagesForGenerations
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameImage'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /games/generate/step-by-step:
+    post:
+      summary: 'Step by step game generator (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateStepByStep
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StepValue'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepByStepPayload'
+        required: true
+  /games/generate/ideas-from-steps:
+    post:
+      summary: 'Step by step game generator (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateIdeasFromSteps
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedGame'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepByStepPayload'
+        required: true
+  /games/generate/new:
+    post:
+      summary: 'Generates game ideas (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateNew
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeneratedGame'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /generate/new-map:
+    post:
+      summary: 'Generates new map (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateNewMap
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedMap'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewMapPayload'
+        required: true
+  /generate/map-tiles:
+    post:
+      summary: 'Generates map tiles (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateMapTiles
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedMap'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateMapTilesPayload'
+        required: true
+  /generate/inpaint-map:
+    post:
+      summary: 'Inpaints map elements (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateInpaintMap
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+  /generate/extract-map-element:
+    post:
+      summary: 'Extracts map element (Roles: user)'
+      tags:
+      - Gamestorming
+      operationId: generateExtractMapElement
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateNewPayload'
+        required: true
+components:
+  schemas:
+    GenerateNewMapPayload:
+      type: object
+      properties:
+        art_style:
+          type: string
+        perspective:
+          type: string
+        prompt:
+          type: string
+        request_id:
+          type: string
+        tile_size:
+          type: integer
+    GenerateVideoPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        duration:
+          type: number
+          format: float
+        model:
+          type: string
+    GeneratedVideo:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        original_prompt:
+          type: string
+        prompt:
+          type: string
+        url:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        seed:
+          type: integer
+          format: int64
+        duration:
+          type: number
+          format: float
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated the video, e.g. eagle. Absent on videos created before it was recorded.
+        pixel_grid:
+          type:
+          - array
+          - 'null'
+          description: Pixel-art grid dimensions [width, height] detected/used by the generation, or null. Reported by pixel-art-aware models (forge-pixel); must always be persisted with the video.
+          items:
+            type: integer
+            format: int32
+        reference_url:
+          type: string
+          description: Motion clip the animation was driven by (motion transfer presets), as reported by the ML. Absent on videos saved before it was recorded.
+        crop_and_center_image:
+          type: boolean
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+    VoicePreset:
+      type: object
+      properties:
+        id:
+          type: string
+        language:
+          type: string
+        emotion:
+          type: string
+    SegmentImagePayload:
+      type: object
+      properties:
+        image:
+          type: string
+        negative_points:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: integer
+        positive_points:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: integer
+    Spritesheet:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        duration:
+          type: number
+          format: float
+        billed_duration:
+          type: number
+          format: float
+          description: 'Seconds the generation was billed for: the length of the video Prometheus generated, never more than the duration the user requested. `duration` is the sheet''s loop-trimmed length as Prometheus reports it and is usually shorter.'
+        start_timestamp:
+          type: number
+          format: integer
+        end_timestamp:
+          type: number
+          format: integer
+        num_frames:
+          type: number
+          format: integer
+        num_cols:
+          type: number
+          format: integer
+          description: Columns in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        num_rows:
+          type: number
+          format: integer
+          description: Rows in the frame grid. Absent on legacy sheets, which use a square grid of ceil(sqrt(num_frames)) per side.
+        max_num_frames:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: integer
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        bad_loop:
+          type: boolean
+        out_of_frame:
+          type: boolean
+        crop:
+          type: boolean
+        original_prompt:
+          type: string
+        motion_prompt:
+          type: string
+        prompt:
+          type: string
+        seed:
+          type: number
+          format: integer
+        sprite_sheet:
+          $ref: '#/components/schemas/PILImage'
+        sprite_sheet_b64:
+          type: string
+        sprite_sheet_raw_b64:
+          type: string
+        sprite_sheet_watermarked_b64:
+          type: string
+          description: URL of the watermarked variant of sprite_sheet_b64 (object key = clean key + "_wm"). Present only when generated by a free user; served IN PLACE of sprite_sheet_b64 to free viewers. sprite_sheet_b64 itself always stays the clean asset.
+        sprite_sheet_raw_watermarked_b64:
+          type: string
+          description: Watermarked variant of sprite_sheet_raw_b64 (see sprite_sheet_watermarked_b64).
+        watermarked:
+          type: boolean
+          readOnly: true
+          description: Response-only. True when the served sprite_sheet_b64 is the watermarked variant (free viewer). Never persisted - stripped from inbound bodies.
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        preview_video_b64:
+          type: string
+        first_frame_b64:
+          type: string
+        last_frame_b64:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        middle_image:
+          $ref: '#/components/schemas/GameImage'
+        final_image:
+          $ref: '#/components/schemas/GameImage'
+        has_audio:
+          type: boolean
+        model:
+          type: string
+          description: Codename of the model that generated (or last re-rendered) the animation, e.g. blitz, forge, tango. Absent on sheets created before it was recorded.
+        is_edited:
+          type: boolean
+          description: True when this spritesheet was produced by an edit (prompt, outpaint, or fix_loop) - the whole animation was re-rendered, so frames may drift from the original.
+        generation_mode:
+          type: string
+          description: How the ML produced the animation, as reported by it (e.g. image, edit, motion_transfer). Absent on sheets saved before it was recorded.
+        pixel_art_filter:
+          type: string
+          description: Pixel-art filter the ML applied, as reported by it. Absent on sheets saved before it was recorded.
+        degraded:
+          type: boolean
+          description: 'Degraded flag as reported by the ML for this render. Absent when the ML did not report a boolean, and on sheets saved before it was recorded. Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        label:
+          type: string
+        preview_scale:
+          type: number
+          format: float
+        pack_alignment:
+          $ref: '#/components/schemas/PackAlignment'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a sheet rendered from a 3D model (generation_mode render_3d) was rendered: style, settings, view, animation and model. Absent on every other sheet.'
+    GenerateMapTilesPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        layer:
+          type: string
+        tile_coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: integer
+        map:
+          $ref: '#/components/schemas/GeneratedMap'
+    Download3DPayload:
+      type: object
+      properties:
+        fill_holes:
+          type: boolean
+        simplify:
+          type: number
+          format: float
+        format:
+          type: string
+        request_id:
+          type: string
+        asset_generation:
+          $ref: '#/components/schemas/AssetGeneration'
+    GenerateFilters:
+      type: object
+      properties:
+        n:
+          type: integer
+          format: int64
+        platforms:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        creative_mode:
+          type: boolean
+        duration:
+          type: number
+          format: float
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    GenerateVideoAudioPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+    MapLayer:
+      type: object
+      properties:
+        base_image:
+          $ref: '#/components/schemas/MapBaseImage'
+        id:
+          type: string
+        meta:
+          type: object
+        name:
+          type: string
+        order:
+          type: number
+          format: integer
+        visible:
+          type: boolean
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapSprite'
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    GDDElement:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        title:
+          type: string
+        sub_title:
+          type: string
+        text:
+          type: string
+        mod_date:
+          type: integer
+          format: int64
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDMedia'
+        loading:
+          type: integer
+          format: int64
+        pending:
+          type: boolean
+        collapsed:
+          type: boolean
+        country:
+          type: string
+    Annotation:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        label:
+          type: string
+        text:
+          type: string
+        label_probs:
+          type: object
+          properties:
+            feature:
+              type: number
+              format: float
+            junk:
+              type: number
+              format: float
+            mechanic:
+              type: number
+              format: float
+            theme:
+              type: number
+              format: float
+    SuggestPayload:
+      type: object
+      properties:
+        id:
+          type: string
+        image_type:
+          type: string
+        n:
+          type: integer
+        hints:
+          type: array
+          items:
+            type: string
+        selected_element:
+          type: string
+    GDDMedia:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - image
+          - three_d_asset
+          - video
+          - spritesheet
+          - game_id
+          - audio
+        uploaded:
+          type: boolean
+        image:
+          $ref: '#/components/schemas/GameImage'
+        three_d_asset:
+          $ref: '#/components/schemas/ThreeDAsset'
+        video:
+          $ref: '#/components/schemas/GeneratedVideo'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        audio:
+          $ref: '#/components/schemas/GeneratedAudio'
+        placeholder:
+          $ref: '#/components/schemas/GDDPlaceholder'
+        game_id:
+          type: string
+        loading:
+          type: boolean
+    GeneratedAudio:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        audio_b64:
+          type: string
+        original_prompt:
+          type: string
+        original_text:
+          type: string
+        prompt:
+          type: string
+        text:
+          type: string
+        sample_url:
+          type: string
+        seed:
+          type: integer
+          format: int64
+        type:
+          type: string
+        loop:
+          type: boolean
+        duration:
+          type: number
+          format: float
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        model:
+          type: string
+          description: Voice model of a speech-preset generation (blackbird when unset).
+        delivery:
+          type: string
+          description: Delivery note the speech was generated with.
+        image:
+          $ref: '#/components/schemas/GameImage'
+    StepValue:
+      type: object
+      properties:
+        step:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    EditorState:
+      type: object
+      properties:
+        grid_snapping:
+          type: boolean
+        viewport_x:
+          type: number
+          format: float
+        viewport_y:
+          type: number
+          format: float
+        viewport_zoom:
+          type: number
+          format: float
+        show_grid:
+          type: boolean
+        grid_color:
+          type: string
+        grid_opacity:
+          type: number
+          format: float
+    MapSprite:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+        id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        layer:
+          type: number
+          format: integer
+        meta:
+          type: object
+        opacity:
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        x:
+          type: number
+          format: float
+        y:
+          type: number
+          format: float
+    AcceptAnimationPayload:
+      type: object
+      required:
+      - id
+      - accepted
+      properties:
+        id:
+          type: string
+          description: The Animation3DClip id to toggle.
+        accepted:
+          type: boolean
+          description: Whether this clip is included when downloading the full GLB.
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    GeneratedGame:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        text_raw:
+          type: string
+        genres:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        description_raw:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        search_results:
+          $ref: '#/components/schemas/GenerationsSearchResult'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrometheusGameImage'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        blending:
+          type: array
+          items:
+            type: string
+        blended_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        platform:
+          type: string
+        perspective:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        sentence:
+          type: string
+        punchline:
+          type: string
+        art_style:
+          type: string
+        quality_score:
+          type: number
+          format: float
+        uniqueness_score:
+          type: number
+          format: float
+        final_score:
+          type: number
+          format: float
+        hints:
+          type: array
+          items:
+            type: string
+        request_id:
+          type: string
+        prompt:
+          type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        mechanics:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+        image_prompt:
+          type: string
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    LudoScoreBadge:
+      type: object
+      properties:
+        description:
+          type: string
+        icon_url:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    GDDPlaceholder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+    RetopologyPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        asset_generation:
+          $ref: '#/components/schemas/AssetGeneration'
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    Refined3DPayload:
+      type: object
+      properties:
+        art_style:
+          type: string
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        mesh_strength:
+          type: number
+          format: float
+        texture_strength:
+          type: number
+          format: float
+        n:
+          type: integer
+        prompt:
+          type: string
+        request_id:
+          type: string
+        user_model:
+          type: string
+        user_model_file_type:
+          type: string
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    PlotlyPlotData:
+      type: object
+      properties:
+        mode:
+          type: string
+    StepByStepPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        genre:
+          type: string
+        n:
+          type: integer
+          format: int64
+        platform:
+          type: string
+        step:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+    GenerateSpritesheetMotionTransferPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        video:
+          type: string
+        num_frames:
+          type: number
+          format: integer
+        target_frame_size:
+          type: number
+          format: integer
+        loop:
+          type: boolean
+        crop:
+          type: boolean
+          default: true
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+          enum:
+          - manual
+          - none
+          default: manual
+        model:
+          type: string
+          enum:
+          - hydra
+          - tango
+          - forge
+          - forge-pixel
+          default: hydra
+        prompt:
+          type: string
+          description: Optional extra instructions for the motion transfer, added to the model's own prompt.
+        duration:
+          type: number
+          format: float
+          default: 1.5
+          description: Animation length in seconds. Available values depend on the model - see /credits/costs (per-model lists are auto-generated into the public API docs).
+        pixel_art_filter:
+          type: boolean
+        spritesheet_with_background:
+          type: boolean
+    GenerateAudioPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        audio_type:
+          type: string
+          enum:
+          - sfx
+          - ambiance
+          - music
+          - audio-transform
+          - human-voice
+          - non-human-voice
+          - speech
+          - speech-preset
+        prompt:
+          type: string
+        text:
+          type: string
+        duration:
+          type: number
+          format: float
+        modification_strength:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: For audio-transform, controls how strongly the source sample is modified. 0 keeps it close to the original, 1 transforms it fully.
+        loop:
+          type: boolean
+        n:
+          type: integer
+          format: integer
+        voice_preset:
+          $ref: '#/components/schemas/VoicePreset'
+        sample:
+          $ref: '#/components/schemas/GeneratedAudio'
+        model:
+          type: string
+          enum:
+          - blackbird
+          - canary
+          description: Voice model for speech-preset. blackbird takes an emotion, canary a delivery note; each has its own presets.
+        delivery:
+          type: string
+          description: For speech and speech-preset (canary), how the line is said, e.g. "angry, shouting".
+        image:
+          $ref: '#/components/schemas/GameImage'
+          description: For human-voice and non-human-voice, the speaking character; the voice is designed from it and the prompt becomes optional.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    MapBaseImage:
+      type: object
+      properties:
+        height:
+          type: number
+          format: float
+        opacity:
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        x:
+          type: number
+          format: float
+        y:
+          type: number
+          format: float
+        image:
+          $ref: '#/components/schemas/GameImage'
+    ThreeDAsset:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+        sprite3d_look:
+          type: object
+          description: 'The look saved for rendering this model as a sprite (3D to sprite), a Sprite3DLook, set through POST /games/sprite3d/look (which validates it). Carried through in-place rewrites of the model and onto a re-rig. Mixed rather than a $ref: a $ref here compiles to a subdocument array, which a dotted-path update writes as an array.'
+        animations:
+          type: array
+          description: Accepted text-driven animation clips attached to this 3D model. Hydrated onto the history entry when listing 3D generations so the frontend can render the clip selector / management modal. Clips are stored in the Animation3DClip collection, not embedded.
+          items:
+            $ref: '#/components/schemas/Animation3DClip'
+    GeneratedMap:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        art_style:
+          type: string
+        description:
+          type: string
+        editor_state:
+          $ref: '#/components/schemas/EditorState'
+        grid_size:
+          type: number
+          format: integer
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapLayer'
+        name:
+          type: string
+        perspective:
+          type: string
+        sprites:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapSprite'
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        id:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        short_description:
+          type: string
+        short_description_clean:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        description_clean:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        user_rating_count:
+          type: integer
+          format: int64
+        user_rating:
+          type: number
+          format: float
+        developers:
+          type: array
+          items:
+            type: string
+        urls:
+          type: array
+          items:
+            type: string
+        release_date:
+          type: integer
+          format: int64
+        update_date:
+          type: integer
+          format: int64
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaElement'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        url:
+          type: array
+          items:
+            type: string
+        actual_genres:
+          type: array
+          items:
+            type: string
+        predicted_genres:
+          type: array
+          items:
+            type: string
+        augmented_genres:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        price:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        game_modes:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        advisory_rating:
+          type: string
+    AlignImagesPayload:
+      type: object
+      required:
+      - image1
+      - image2
+      properties:
+        image1:
+          $ref: '#/components/schemas/GameImage'
+        image2:
+          $ref: '#/components/schemas/GameImage'
+    GDD3:
+      type: object
+      properties:
+        project_id:
+          type: string
+        title:
+          type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDDElement'
+        icon:
+          $ref: '#/components/schemas/GDDMedia'
+        header:
+          $ref: '#/components/schemas/GDDMedia'
+        genres:
+          type: array
+          items:
+            type: string
+        platform:
+          type: string
+        country:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        aspect_ratio:
+          type: string
+        step_choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepValue'
+        score:
+          $ref: '#/components/schemas/LudoScore'
+    GeneratedText:
+      type: object
+      properties:
+        id:
+          type: string
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        context_keywords:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        image_prompt:
+          type: string
+        final_score:
+          type: number
+          format: float
+    LudoScoreMetric:
+      type: object
+      properties:
+        _max_similarity:
+          type: number
+          format: double
+        _min_similarity:
+          type: number
+          format: double
+        description:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        score:
+          type: number
+          format: double
+        supporting_games_title:
+          type: string
+        supporting_games:
+          type: array
+          items:
+            type: string
+        core_metric:
+          type: boolean
+        plotly_plot:
+          $ref: '#/components/schemas/PlotlyPlot'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    GenerateNewPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        model:
+          type: string
+        descriptions:
+          type: array
+          items:
+            type: string
+        game_ids:
+          type: array
+          items:
+            type: string
+        search_images:
+          type: integer
+        image_type:
+          type: string
+        context:
+          type: string
+        art_style:
+          type: string
+        perspective:
+          type: string
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedText'
+        generations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+        hints:
+          type: array
+          items:
+            type: string
+        gdds:
+          type: array
+          items:
+            $ref: '#/components/schemas/GDD3'
+        context_gdd:
+          $ref: '#/components/schemas/GDD3'
+        project_id:
+          type: string
+        filters:
+          $ref: '#/components/schemas/GenerateFilters'
+        previous_generations:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneratedGame'
+        initial_game_image:
+          $ref: '#/components/schemas/GameImage'
+        initial_generated_image:
+          $ref: '#/components/schemas/GameImage'
+        initial_image_file:
+          $ref: '#/components/schemas/GameImage'
+        back_image_file:
+          $ref: '#/components/schemas/GameImage'
+          description: Optional back view (180 degrees) of the subject in initial_image_file, for image-to-3D (force_3d). Prop only; hero takes the front image alone.
+        middle_image_file:
+          $ref: '#/components/schemas/GameImage'
+        final_image_file:
+          $ref: '#/components/schemas/GameImage'
+        additional_input_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        mask_image:
+          type: string
+        strength:
+          type: number
+          format: float
+        aspect_ratio:
+          type: string
+        preserve_color:
+          type: boolean
+        preserve_composition:
+          type: boolean
+        preserve_details:
+          type: boolean
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        loop:
+          type: boolean
+        crop:
+          type: boolean
+          default: true
+        frames:
+          type: number
+          format: integer
+        frame_size:
+          type: number
+          format: integer
+        margin_ratio:
+          type: number
+          format: float
+        margin_ratio_horizontal:
+          type: number
+          format: float
+        margin_ratio_vertical:
+          type: number
+          format: float
+        margin_ratio_mode:
+          type: string
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+        duration:
+          type: number
+          format: float
+        force:
+          type: boolean
+          description: 3D images with an initial_image_file - always redraw it as a 3D render, even when it is already a cut-out (by default a cut-out is used as is and any other image only has its background removed).
+        prompt:
+          type: string
+          maxLength: 1000
+          description: 3D images with an initial_image_file - instructions for redrawing it as a 3D render, e.g. "keep the sword in the right hand". Implies force.
+    PackAlignment:
+      type: object
+      properties:
+        description:
+          type: string
+        sizeHeightPx:
+          type: number
+          format: float
+        groundOffset:
+          type: number
+          format: float
+        horizontalOffset:
+          type: number
+          format: float
+    ThreeDModelInput:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+    AlignImagesResult:
+      type: object
+      properties:
+        dx:
+          type: number
+          format: integer
+        dy:
+          type: number
+          format: integer
+        scale:
+          type: number
+          format: float
+        confidence:
+          type: number
+          format: float
+    LudoScoreInsight:
+      type: object
+      properties:
+        tag:
+          type: string
+        text:
+          type: string
+    PlotlyPlot:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlotlyPlotData'
+        layout:
+          $ref: '#/components/schemas/PlotlyPlotData'
+    StringValue:
+      type: object
+      properties:
+        value:
+          type: string
+        value2:
+          type: string
+    ImageTo3DPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    GenerationsSearchResult:
+      type: object
+      properties:
+        similar_games:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimilarGame'
+    PrometheusGameImage:
+      type: object
+      properties:
+        game_id:
+          type: string
+        hash:
+          type: integer
+          format: int64
+        id:
+          type: string
+        origin:
+          type: string
+        similarity:
+          type: number
+          format: float
+    Animation3DClip:
+      type: object
+      required:
+      - _id
+      - user_id
+      - model_asset_id
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        model_asset_id:
+          type: string
+          description: Parent 3D asset id (the GenerationHistory _id, which for three_d_asset equals image.id).
+        clip_name:
+          type: string
+        prompt:
+          type: string
+        preset_id:
+          type: string
+          description: Set when the clip came from the preset library (retargeting) rather than a text prompt.
+        mode:
+          type: string
+          enum:
+          - rot_trans
+          - rot_only
+        seed:
+          type: integer
+        glb_url:
+          type: string
+          description: Uploaded animation-only GLB (skeleton + one clip, no mesh). May be gzip-compressed like model GLBs.
+        preview_url:
+          type: string
+          description: Uploaded mp4 preview of the clip playing on the model.
+        accepted:
+          type: boolean
+          description: Whether this clip is baked into the model's downloadable full GLB. Every generated clip is persisted (so the frontend never loses them); `accepted` is the separate opt-in that controls download inclusion.
+        motion:
+          type: number
+          format: float
+        fit_rmse:
+          type: number
+          format: float
+        date:
+          type: integer
+          format: int64
+        deleted:
+          type: boolean
+    SimilarGame:
+      type: object
+      properties:
+        id:
+          type: string
+        similarity:
+          type: number
+          format: float
+    LudoScore:
+      type: object
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreMetric'
+        params:
+          type: string
+        score_text:
+          type: string
+        score_unit:
+          type: string
+        score:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+        country:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+        badge:
+          $ref: '#/components/schemas/LudoScoreBadge'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/LudoScoreInsight'
+    MediaElement:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+    TrendKeywords:
+      type: object
+      properties:
+        keyword:
+          type: string
+        type:
+          type: string
+        weight:
+          type: number
+          format: double
+    GenerateSpritesheetAudioPayload:
+      type: object
+      properties:
+        request_id:
+          type: string
+        prompt:
+          type: string
+        spritesheet:
+          $ref: '#/components/schemas/Spritesheet'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

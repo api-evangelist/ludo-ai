@@ -1,12 +1,12 @@
 {
- "url": "https://api.ludo.ai/api-documentation/openapi.json",
- "requested_url": "https://api.ludo.ai/api-documentation/openapi.json",
+ "url": "https://api.ludo.ai/api-docs",
+ "final": "https://api.ludo.ai/api-docs",
  "status": 200,
  "content_type": "application/json; charset=utf-8",
- "bytes": 395149,
- "sha256": "ab10ca5b156e3126bedb2ab28b8c8a8a9fe11e9688a563328939afd2aa87cf36",
- "fetched_at": "2026-10-04",
+ "bytes": 455339,
+ "sha256": "ef16c08d7b069b96ac3284d18a36aafe84794dd4281bc648e9566524c80e4975",
+ "fetched_at": "2026-10-19",
  "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
  "match": "byte-identical",
- "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
 }

@@ -1,0 +1,1060 @@
+openapi: 3.2.0
+info:
+  version: 0.9.10
+  title: Ludo.ai Games API
+servers:
+- url: /api
+tags:
+- name: Games
+paths:
+  /games/{id}:
+    get:
+      summary: 'Get a game''s information (Roles: user)'
+      tags:
+      - Games
+      operationId: getGameInformation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/:
+    post:
+      summary: 'Get multiple games'' information (Roles: user)'
+      tags:
+      - Games
+      operationId: getGamesInformation
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameIds'
+        required: true
+  /search/games/title/{query}:
+    get:
+      summary: 'Searches a game based on title (Roles: user)'
+      tags:
+      - Games
+      operationId: searchGamesByTitle
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      parameters:
+      - name: query
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/genres:
+    get:
+      summary: 'Get all game genres (Roles: user, none)'
+      tags:
+      - Games
+      operationId: getGenres
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/generation-styles:
+    get:
+      summary: 'Get all generatiokn styles (Roles: user, none)'
+      tags:
+      - Games
+      operationId: getGenerationStyles
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/platforms:
+    get:
+      summary: 'Get all game platforms (Roles: user, none)'
+      tags:
+      - Games
+      operationId: getPlatforms
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/sprite-poses:
+    get:
+      summary: 'Get supported sprite poses (Roles: user, none)'
+      tags:
+      - Games
+      operationId: getSpritePoses
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpritePose'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/animation-presets:
+    get:
+      summary: 'Get animation presets (Roles: user, none)'
+      tags:
+      - Games
+      operationId: getAnimationPresets
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      - none
+      parameters:
+      - name: id
+        in: query
+        description: Animation preset ID. If provided, returns the full preset with perspectives. If omitted, returns summaries without perspectives.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnimationPreset'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Animation preset not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /utils/sprite3d-styles:
+    get:
+      summary: 'The styles a 3D model can be rendered into a sprite with (Roles: user)'
+      tags:
+      - Games
+      operationId: getSprite3DStyles
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sprite3DStyle'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/sprite3d/preview:
+    post:
+      summary: 'Preview a 3D model as a sprite in a style: a few frames of each view asked for…'
+      tags:
+      - Games
+      operationId: previewSprite3D
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sprite3DPreviewResult'
+        '204':
+          description: Cancelled (DELETE /games/generate/{request_id}) by a newer preview
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sprite3DPreviewPayload'
+        required: true
+  /games/sprite3d/look:
+    post:
+      summary: Save the look a 3D model renders as a sprite with (style, its settings, camera)…
+      tags:
+      - Games
+      operationId: saveSprite3DLook
+      security:
+      - Bearer: []
+      x-security-scopes:
+      - user
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sprite3DLook'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No such 3D model of the caller's
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sprite3DLookPayload'
+        required: true
+components:
+  schemas:
+    GameIds:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+    Sprite3DLookPayload:
+      type: object
+      required:
+      - model_id
+      properties:
+        model_id:
+          type: string
+          description: The 3D model's history id (its three_d_asset entry, keyed by image.id).
+        look:
+          $ref: '#/components/schemas/Sprite3DLook'
+        preview_video:
+          type: string
+          description: The preview of this look (the mp4 data uri /games/sprite3d/preview answered for its view), stored as the look's preview_url. Left out, the look has no preview.
+    Sprite3DStyle:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        family:
+          type: string
+        pixel:
+          type: boolean
+        url:
+          type: string
+          description: Picker thumbnail of the style at its defaults (192px webp).
+        version:
+          type: integer
+        versions:
+          type: array
+          items:
+            type: integer
+        settings:
+          type: array
+          items:
+            type: object
+        advanced_settings:
+          type: array
+          items:
+            type: object
+    GameImage:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        image_id:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        final_score:
+          type: number
+          format: float
+        nsfw_prob:
+          type: number
+          format: float
+        similarity:
+          type: number
+          format: float
+        width:
+          type: integer
+          format: int64
+        height:
+          type: integer
+          format: int64
+        game_id:
+          type: string
+        hosted_filename:
+          type: string
+        icon:
+          type: boolean
+        targetSize:
+          type: integer
+        seed:
+          type: integer
+        embedded:
+          type: boolean
+        analysed:
+          type: boolean
+        image:
+          type: string
+        image_type:
+          type: string
+        prompt:
+          type: string
+        motion_prompt:
+          type: string
+        request_id:
+          type: string
+        hints:
+          type: array
+          items:
+            type: string
+        selected_genres:
+          type: array
+          items:
+            type: string
+        selected_colors:
+          type: array
+          items:
+            type: string
+        selected_style:
+          type: string
+        selected_perspective:
+          type: string
+        is_safe:
+          type: boolean
+        platform:
+          type: string
+        loading:
+          type: boolean
+        original_hints:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        edit_mask:
+          type: string
+        edit_mode:
+          type: string
+        camera_rotation:
+          type: integer
+          minimum: -180
+          maximum: 180
+        camera_elevation:
+          type: integer
+          minimum: -30
+          maximum: 60
+        edit_mask_pil_image:
+          $ref: '#/components/schemas/PILImage'
+        pil_image:
+          $ref: '#/components/schemas/PILImage'
+        nsfw:
+          type: number
+          format: float
+        pose:
+          $ref: '#/components/schemas/SpritePose'
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+          description: 'How a still rendered from a 3D model (3D to sprite) was rendered: style, settings, view and model. Absent on every other image.'
+    Sprite3DPreviewPayload:
+      type: object
+      required:
+      - perspective
+      - style_id
+      properties:
+        request_id:
+          type: string
+        generated_model:
+          $ref: '#/components/schemas/ThreeDModelInput'
+        user_model:
+          type: string
+          description: URL of an uploaded GLB (rigged, to animate it). Provide this OR generated_model.
+        user_model_file_type:
+          type: string
+          enum:
+          - glb
+        animation_clip_id:
+          type: string
+          description: One of the model's saved animations (an Animation3DClip id) to render.
+        preset_id:
+          type: string
+          description: An animation preset (/utils/animation-presets) the ML retargets onto the rigged model and renders.
+        crop_loop:
+          type: boolean
+          description: With preset_id, trim the preset to the span that loops seamlessly. Omit to follow the preset's own loop flag.
+        model_animation:
+          type: string
+          description: Name of an animation the model file itself carries. With no animation at all the model renders as a still.
+        perspective:
+          type: string
+          enum:
+          - horizon
+          - low
+          - isometric
+          - high
+          - top
+        directions:
+          type: array
+          minItems: 1
+          maxItems: 8
+          uniqueItems: true
+          description: Where the camera stands around a character facing S, each view at most once. One result per view, in this order, rendered together on the same frame, scale and floor, so the views line up.
+          items:
+            type: string
+            enum:
+            - S
+            - SW
+            - W
+            - NW
+            - N
+            - NE
+            - E
+            - SE
+        direction:
+          type: string
+          description: 'Deprecated: one view. Use directions.'
+          enum:
+          - S
+          - SW
+          - W
+          - NW
+          - N
+          - NE
+          - E
+          - SE
+        style_id:
+          type: string
+          description: id of a style from /utils/sprite3d-styles
+        style_version:
+          type: integer
+          description: Version of the style; omit for its current one.
+        style_params:
+          type: object
+          description: Overrides of the style's settings, by name, each one of its listed choices (or true/false, or a colour for a colour setting).
+        keep_horizontal_travel:
+          type: boolean
+          description: Keep the animation's ground travel (the character moves across the frame). Off by default.
+        keep_vertical_travel:
+          type: boolean
+          description: Keep the animation's vertical root motion (jumps, bobbing). On by default.
+        target_frame_size:
+          type: integer
+          minimum: 32
+          maximum: 384
+          description: Sprite size in px; default 384.
+    PILImage:
+      type: object
+      properties:
+        format:
+          type: string
+        format_description:
+          type: string
+    SpritePose:
+      type: object
+      properties:
+        animation_prompt:
+          type: string
+          description: Animation description for the sprite pose
+        margin_ratio:
+          type: number
+          format: float
+          description: Margin ratio for the sprite animation
+        margin_ratio_mode:
+          type: string
+        name:
+          type: string
+          description: Name of the sprite pose
+        prompt:
+          type: string
+          description: Prompt description for the sprite pose
+    Annotation:
+      type: object
+      properties:
+        start:
+          type: integer
+          format: int64
+        end:
+          type: integer
+          format: int64
+        label:
+          type: string
+        text:
+          type: string
+        label_probs:
+          type: object
+          properties:
+            feature:
+              type: number
+              format: float
+            junk:
+              type: number
+              format: float
+            mechanic:
+              type: number
+              format: float
+            theme:
+              type: number
+              format: float
+    Sprite3DLook:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: The style's settings that differ from its defaults, by name.
+        perspective:
+          type: string
+          enum:
+          - horizon
+          - low
+          - isometric
+          - high
+          - top
+        direction:
+          type: string
+          description: Where the camera stands around a character facing S.
+          enum:
+          - S
+          - SW
+          - W
+          - NW
+          - N
+          - NE
+          - E
+          - SE
+        saved_at:
+          type: integer
+          description: When it was saved (unix seconds). Set by the server.
+        preview_url:
+          type: string
+          description: The look's preview (an mp4 of the saved view), shown in place of the model's turntable. Set by the server from Sprite3DLookPayload.preview_video.
+    Sprite3DRender:
+      type: object
+      properties:
+        style_id:
+          type: string
+        style_version:
+          type: integer
+        style_params:
+          type: object
+          description: Every setting of the style as rendered, by name.
+        params:
+          type: object
+          description: The renderer's own parameters (e.g. renderer, version).
+        perspective:
+          type: string
+        direction:
+          type: string
+        animation_name:
+          type: string
+        fps:
+          type: number
+          format: float
+        keep_horizontal_travel:
+          type: boolean
+        keep_vertical_travel:
+          type: boolean
+        pixel_block:
+          type: integer
+        generated_model:
+          type: object
+          description: The model that was rendered (its id, file urls and, from render, history_id - the three_d_asset history entry it came from).
+    AnimationPreset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the animation preset
+        name:
+          type: string
+          description: Name of the animation preset
+        category:
+          type: string
+          description: Category of the animation preset
+        description:
+          type: string
+          description: Description of the animation preset
+        duration:
+          type: number
+          format: float
+          description: Duration of the animation in seconds
+        preview_url:
+          type: string
+          description: URL to preview the animation
+        perspectives:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnimationPresetPerspective'
+    ThreeDGenerationParameters:
+      type: object
+      properties:
+        model:
+          type: string
+          description: 'Image-to-3D model (THREE_D_MODELS in credits.js): prop (default) or hero, which bills GENERATE_3D_MODEL_HERO. Ignored by the other 3D operations.'
+          enum:
+          - prop
+          - hero
+        rig:
+          type: boolean
+          description: 'Image-to-3D only: also rig the model (skeleton + skin weights) in the same call, as rig-model would. Bills RIG_3D_MODEL on top of the model when the model comes back rigged. Ignored by the other 3D operations.'
+        rig_type:
+          type: string
+          enum:
+          - general
+          - humanoid
+          - game
+          - humanoid_template
+          - humanoid_template_hands
+          description: 'The rig a model rigged in this call got. Always general: any other value sent is overridden (MediaGeneration.imageTo3D). Kept in the enum so an older client sending one is not refused, and so models rigged before the change keep their recorded type.'
+        joint_naming:
+          type: string
+          enum:
+          - smpl
+          - mixamo
+          - humanik
+          - unreal
+          - godot
+          - rigify
+          - vroid
+          description: With rig, the bone naming convention (as RigModelPayload.joint_naming).
+        target_num_faces:
+          type: integer
+          default: 50000
+        dynamic_simplification:
+          type: number
+          format: float
+          default: 0.15
+        remeshing:
+          type: string
+          default: conservative
+        texture_size:
+          type: integer
+          default: 2048
+        texture_type:
+          type: string
+          default: pbr
+        render_format:
+          type: string
+        render_video:
+          type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        metadata:
+          type: string
+        error_payload:
+          type: string
+        intent:
+          type: object
+          description: Stripe intent details sent with 3D Secure (406) errors
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              enum:
+              - payment
+              - setup
+            client_secret:
+              type: string
+    Sprite3DPreviewResult:
+      type: object
+      properties:
+        request_id:
+          type: string
+        direction:
+          type: string
+          description: The view this preview is of.
+        video:
+          type: string
+          description: The preview as an mp4 data uri (not stored).
+        width:
+          type: integer
+        height:
+          type: integer
+        num_frames:
+          type: integer
+        fps:
+          type: number
+          format: float
+        preview_scale:
+          type: number
+          format: float
+        render_3d:
+          $ref: '#/components/schemas/Sprite3DRender'
+    AssetGeneration:
+      type: object
+      properties:
+        id:
+          type: string
+        rigged:
+          type: boolean
+          description: True once the model carries a skeleton and skin weights (set by rig-model). Gates the animation flow and the re-rig guard.
+        animatable:
+          type: boolean
+          description: 'The ML''s humanoid check on the model''s rig, as reported with the model: true when it passed, false when it failed or there is no rig. Gates the animation presets (retargeting needs a humanoid). Absent when unknown: on models rigged before the ML saved the check, and whenever the ML reports null (Prometheus responses drop nulls). Never null: swagger-tools ignores x-nullable, so a null here fails request validation.'
+        seed:
+          type: integer
+        images_b64:
+          type: array
+          items:
+            type: string
+        params_encrypted:
+          type: string
+        request_id:
+          type: string
+        video_b64:
+          type: string
+        mesh_video_b64:
+          type: string
+        snapshots_b64:
+          type: array
+          items:
+            type: string
+        model_b64:
+          type: string
+        binary_data_b64:
+          type: string
+        voxels_b64:
+          type: string
+        mask_snapshots_b64:
+          type: array
+          items:
+            type: string
+        depth_snapshots_b64:
+          type: array
+          items:
+            type: string
+        normal_snapshots_b64:
+          type: array
+          items:
+            type: string
+        textured:
+          type: boolean
+          description: Whether the ML generated a texture for the model.
+        view_azimuths:
+          type: array
+          description: 'Camera azimuths, in degrees, of the input views the ML built the model from: [0] for a front view alone, [0, 180] with a back view.'
+          items:
+            type: number
+            format: float
+        generation_parameters:
+          $ref: '#/components/schemas/ThreeDGenerationParameters'
+    Game:
+      type: object
+      properties:
+        _id:
+          type: string
+        id:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        short_description:
+          type: string
+        short_description_clean:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        description_clean:
+          type: string
+        description_annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Annotation'
+        user_rating_count:
+          type: integer
+          format: int64
+        user_rating:
+          type: number
+          format: float
+        developers:
+          type: array
+          items:
+            type: string
+        urls:
+          type: array
+          items:
+            type: string
+        release_date:
+          type: integer
+          format: int64
+        update_date:
+          type: integer
+          format: int64
+        icon:
+          $ref: '#/components/schemas/GameImage'
+        header:
+          $ref: '#/components/schemas/GameImage'
+        videos:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaElement'
+        screenshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameImage'
+        url:
+          type: array
+          items:
+            type: string
+        actual_genres:
+          type: array
+          items:
+            type: string
+        predicted_genres:
+          type: array
+          items:
+            type: string
+        augmented_genres:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        price:
+          type: string
+        platforms:
+          type: array
+          items:
+            type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        game_modes:
+          type: array
+          items:
+            type: string
+        genres:
+          type: array
+          items:
+            type: string
+        advisory_rating:
+          type: string
+    ThreeDModelInput:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+        asset:
+          $ref: '#/components/schemas/AssetGeneration'
+        image:
+          $ref: '#/components/schemas/GameImage'
+        back_image:
+          $ref: '#/components/schemas/GameImage'
+          description: The optional back view (180 degrees) the model was generated from, next to `image`, the front view. Hosted url and dimensions only.
+    AnimationPresetPerspectiveDirections:
+      type: object
+      properties:
+        E:
+          type: string
+        N:
+          type: string
+        NE:
+          type: string
+        NW:
+          type: string
+        S:
+          type: string
+        SE:
+          type: string
+        SW:
+          type: string
+        W:
+          type: string
+    MediaElement:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+    AnimationPresetPerspective:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the perspective
+        name:
+          type: string
+          description: Name of the perspective
+        description:
+          type: string
+          description: Description of the perspective
+        directions:
+          description: Direction mappings with video URLs
+          $ref: '#/components/schemas/AnimationPresetPerspectiveDirections'
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid API Key token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        The following syntax must be used in the ''Authorization'' header: ApiKey xxxxxx.yyyyyyy.zzzzzz
+
+        '
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: 'For accessing the API a valid JWT token must be passed in all the queries in
+
+        the ''Authorization'' header.
+
+        A valid JWT token is generated by the API and retourned as answer of a call
+
+        to the route /login giving a valid user & password.
+
+        The following syntax must be used in the ''Authorization'' header: Bearer xxxxxx.yyyyyyy.zzzzzz
+
+        '

@@ -549,6 +549,96 @@ apis:
     url: json-schema/ludo-ai-generate-video-payload-public-schema.json
   - type: JSONSchema
     url: json-schema/ludo-ai-generate-image-payload-schema.json
+- aid: ludo-ai:ludo-ai-api-keys-api
+  name: Ludo.ai API Keys API
+  description: The API Keys API from Ludo.ai — 2 operation(s) for api keys.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-api-keys-api-openapi.yml
+- aid: ludo-ai:ludo-ai-cli-api
+  name: Ludo.ai CLI API
+  description: The CLI API from Ludo.ai — 6 operation(s) for cli.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - CLI
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-cli-api-openapi.yml
+- aid: ludo-ai:ludo-ai-games-api
+  name: Ludo.ai Games API
+  description: The Games API from Ludo.ai — 11 operation(s) for games.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Games
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-games-api-openapi.yml
+- aid: ludo-ai:ludo-ai-gamestorming-api
+  name: Ludo.ai Gamestorming API
+  description: The Gamestorming API from Ludo.ai — 42 operation(s) for gamestorming.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Gamestorming
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-gamestorming-api-openapi.yml
+- aid: ludo-ai:ludo-ai-guide-api
+  name: Ludo.ai Guide API
+  description: The Guide API from Ludo.ai — 2 operation(s) for guide.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Guide
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-guide-api-openapi.yml
+- aid: ludo-ai:ludo-ai-misc-api
+  name: Ludo.ai Misc API
+  description: The Misc API from Ludo.ai — 37 operation(s) for misc.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Misc
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-misc-api-openapi.yml
+- aid: ludo-ai:ludo-ai-payments-api
+  name: Ludo.ai Payments API
+  description: The Payments API from Ludo.ai — 23 operation(s) for payments.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-payments-api-openapi.yml
+- aid: ludo-ai:ludo-ai-projects-api
+  name: Ludo.ai Projects API
+  description: The Projects API from Ludo.ai — 12 operation(s) for projects.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-projects-api-openapi.yml
+- aid: ludo-ai:ludo-ai-team-api
+  name: Ludo.ai Team API
+  description: The Team API from Ludo.ai — 11 operation(s) for team.
+  humanURL: https://ludo.ai/docs/api-mcp
+  baseURL: https://mcp.ludo.ai/mcp
+  tags:
+  - Team
+  properties:
+  - type: OpenAPI
+    url: openapi/ludo-ai-team-api-openapi.yml
 x-correction-request:
   requested: '2026-10-02'
   source:

@@ -343,11 +343,6 @@
                   "maximum": 4,
                   "example": 1
                 },
-                "augment_prompt": {
-                  "type": "boolean",
-                  "description": "Rewrites your prompt behind the scenes into the form the model works best with. Leave it on (the default). Turning it off does not give you more control - it usually gives worse results. Do not disable it unless you really know what you are doing and have tested your prompts extensively. Default: true.",
-                  "example": true
-                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -497,6 +492,10 @@
                   "description": "When true, also returns the spritesheet with background intact (before background removal). Useful for manually fixing background removal issues. The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
                 },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. Defaults to true. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid."
+                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -643,6 +642,10 @@
                   "description": "When true, also returns the spritesheet with background intact (before background removal). Useful for manually fixing background removal issues. The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
                 },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. Defaults to true. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid."
+                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -721,11 +724,6 @@
                   "maximum": 4,
                   "example": 1
                 },
-                "augment_prompt": {
-                  "type": "boolean",
-                  "description": "Rewrites your prompt behind the scenes into the form the model works best with. Leave it on (the default). Turning it off does not give you more control - it usually gives worse results. Do not disable it unless you really know what you are doing and have tested your prompts extensively. Default: true.",
-                  "example": true
-                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -781,11 +779,6 @@
                   "minimum": 1,
                   "maximum": 4,
                   "example": 1
-                },
-                "augment_prompt": {
-                  "type": "boolean",
-                  "description": "Rewrites your prompt behind the scenes into the form the model works best with. Leave it on (the default). Turning it off does not give you more control - it usually gives worse results. Do not disable it unless you really know what you are doing and have tested your prompts extensively. Default: true.",
-                  "example": true
                 },
                 "request_id": {
                   "type": "string",
@@ -914,6 +907,10 @@
                   "type": "boolean",
                   "description": "When true, also returns the spritesheet with background intact (before background removal). Useful for manually fixing background removal issues. The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
+                },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. Defaults to true. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid."
                 },
                 "model": {
                   "type": "string",
@@ -1128,6 +1125,10 @@
                   "description": "When true, also returns the spritesheet with background intact (before background removal). The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
                 },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid. Unset keeps the source spritesheet's setting (true unless it was made with false)."
+                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -1227,6 +1228,10 @@
                   "description": "When true, also returns the spritesheet with background intact (before background removal). The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
                 },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid. Unset keeps the source spritesheet's setting (true unless it was made with false)."
+                },
                 "request_id": {
                   "type": "string",
                   "description": "Optional client-provided identifier, unique per request. Re-sending the same request_id returns the existing job instead of generating again. Also usable as the request_id filter of listGenerations."
@@ -1248,7 +1253,7 @@
           "destructiveHint": false,
           "idempotentHint": false
         },
-        "description": "Adjust Sprite Sheet: re-export a previously generated sprite animation with different sheet settings - frame count, frame size, loop trimming or whitespace cropping - without generating the animation again. Free (no credits). Pass the `spritesheet_url` you received from `animateSprite`, `animateSpriteKeyframes`, `transferMotion`, `editSpritesheet`, `rotateSpritesheet` or an earlier adjust - it must be a spritesheet you generated through the API within the last 7 days; arbitrary external images are not accepted. Omit a setting to keep the source's value. The animation itself is unchanged: this only re-cuts the same video into a new sheet, so use it to fix framing (for example an effect clipped by True Size: re-export with a fixed `frame_size` or 0), to change the frame count or size for your engine, to upscale it 1.5x (`frame_size` -1), or to turn loop trimming on or off. It cannot change the motion, margins or content - use editSpritesheet for that. The source is left as it is and the result is a new spritesheet with its own `spritesheet_url`. The job result is the same sprite result as animateSprite (`spritesheet_url`, `video_url`, grid fields, optional GIF and frame URLs, and the source's `audio_url` when it has one). Limited to 20 calls per 5 minutes, 120 an hour and 1000 a day. Pass an optional request_id to tag the result for later retrieval via listGenerations (type spritesheet). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).",
+        "description": "Adjust Sprite Sheet: re-export a previously generated sprite animation with different sheet settings - frame count, frame size, loop trimming or whitespace cropping - without generating the animation again. Free (no credits). Pass the `spritesheet_url` you received from `animateSprite`, `animateSpriteKeyframes`, `transferMotion`, `editSpritesheet`, `rotateSpritesheet` or an earlier adjust - it must be a spritesheet you generated through the API within the last 7 days; arbitrary external images are not accepted. Omit a setting to keep the source's value. The animation itself is unchanged: this only re-cuts the same video into a new sheet, so use it to fix framing (for example an effect clipped by True Size: re-export with a fixed `frame_size` or 0), to change the frame count or size for your engine, to upscale it 1.5x (`frame_size` -1), to turn loop trimming on or off, or to pack it as ordinary art when its detected pixel grid is wrong for the asset (`use_pixel_grid` false). It cannot change the motion, margins or content - use editSpritesheet for that. The source is left as it is and the result is a new spritesheet with its own `spritesheet_url`. The job result is the same sprite result as animateSprite (`spritesheet_url`, `video_url`, grid fields, optional GIF and frame URLs, and the source's `audio_url` when it has one). Limited to 20 calls per 5 minutes, 120 an hour and 1000 a day. Pass an optional request_id to tag the result for later retrieval via listGenerations (type spritesheet). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).",
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -1296,6 +1301,10 @@
                   "type": "boolean",
                   "description": "When true, also returns the spritesheet with background intact (before background removal). The with-background spritesheet URL will be in spritesheet_with_background_url. Default: false.",
                   "example": false
+                },
+                "use_pixel_grid": {
+                  "type": "boolean",
+                  "description": "Use the animation's pixel grid if one is detected. true: when Ludo detects a pixel grid with confidence, the sheet is packed on it (logical pixels, scaled up by whole blocks); when none is detected, this has no effect. false: always pack as ordinary art, for when the detected grid is wrong for your asset (for example a smooth sprite coming back as coarse blocks). Ignored for forge-pixel animations, which are always packed on their grid. Unset keeps the source spritesheet's setting (true unless it was made with false). Re-cutting with false fixes a sheet whose detected grid is wrong without generating it again."
                 },
                 "request_id": {
                   "type": "string",
@@ -2372,7 +2381,7 @@
                   "format": "float",
                   "minimum": 0,
                   "maximum": 10,
-                  "description": "Duration in seconds. Use 0 for automatic duration based on the description. Default: 0.",
+                  "description": "Duration in seconds, 0.5 to 10. Use 0 for automatic duration based on the description. Shorter requests are generated at 0.5 s. Default: 0.",
                   "example": 0
                 },
                 "loop": {

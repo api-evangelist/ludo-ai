@@ -11,19 +11,19 @@ deployment:
   verified: probed
 tool_quality:
   tool_count: 44
-  tokens_total: 41163
-  tokens_per_tool_median: 799
+  tokens_total: 41831
+  tokens_per_tool_median: 745
   heavy_tools:
   - name: animateSprite
-    tokens: 3674
+    tokens: 3816
   - name: animateSpriteKeyframes
-    tokens: 3302
+    tokens: 3444
   - name: transferMotion
-    tokens: 2681
+    tokens: 2823
   - name: editSpritesheet
-    tokens: 2036
+    tokens: 2196
   - name: rotateSpritesheet
-    tokens: 1628
+    tokens: 1788
   heavy_tool_count: 11
   params_total: 51
   params_undescribed: 9

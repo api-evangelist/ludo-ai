@@ -44,3 +44,671 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools:
+- name: validateApiKeyEndpoint
+  description: Validates an API key. Returns 200 if valid, 403 if invalid.
+- name: createImage
+  description: 'Generate game-art images from a text prompt alone, selecting an image_type (e.g. sprite)
+    and optionally art_style, perspective, and aspect_ratio. The job result is an array of image results,
+    each with a url; request n (1-8) to control how many variations come back. Because it generates purely
+    from text it takes no source image, so there is no upload size limit to trip. Credits are held when
+    the job is accepted and refunded if it fails or is cancelled; the charge scales with the number of
+    images produced. Use createImage to make new images from scratch; use generateWithStyle to match a
+    reference image''s art style, editImage to modify an existing image, and removeBackground to cut out
+    a subject. Pass an optional request_id to tag the results so you can retrieve them later via listGenerations
+    (type image). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: generateWithStyle
+  description: 'Generate new images that match the visual style of a reference image: supply a style_image
+    (URL or base64) plus a text prompt describing what to create and an optional image_type (defaults
+    to sprite). The job result is an array of image results, each with a url; request n (1-4) to control
+    the number of variations. The style_image is uploaded and validated, and an image larger than 15MB
+    is rejected with HTTP 400. Credits are held when the job is accepted and refunded if it fails or is
+    cancelled; the charge scales with the number of images produced. Use this instead of createImage when
+    style consistency with an existing asset matters; use editImage to alter the content of a specific
+    image rather than borrow its style, and removeBackground to isolate a subject. Pass an optional request_id
+    to tag the results so you can retrieve them later via listGenerations (type image). Async generation
+    job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: editImage
+  description: 'Modify an existing image according to text instructions: supply a source image (URL or
+    base64) and a prompt describing the changes (e.g. "add clouds", "warmer color scheme"), with an optional
+    reference_image for extra style or content guidance. To change only one area, pass a mask (white =
+    change, black = keep, the same size as the image): mask_mode "replace" (default) redraws that area
+    from the prompt, "erase" removes what is there. Without a mask the whole image is re-rendered. Never
+    ask for a transparent background in the prompt: it often comes back as a grey-and-white checkerboard
+    painted into the pixels, which removeBackground cannot remove. A sprite keeps its transparency without
+    being asked (see image_type). The job result is an array of image results, each with a url; request
+    n (1-4) to control the number of edited variations. Provided images are uploaded and validated, and
+    any image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted and
+    refunded if it fails or is cancelled; the charge scales with the number of images produced. Use editImage
+    to transform a specific existing image; use createImage to generate from text alone, generateWithStyle
+    to borrow a reference''s art style, and removeBackground for the dedicated background-removal case.
+    Pass an optional request_id to tag the results so you can retrieve them later via listGenerations
+    (type image). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result; 1 credit per result with a mask.'
+- name: animateSprite
+  description: 'Animate a static sprite into a spritesheet driven by a motion text prompt (image-to-spritesheet):
+    supply an initial_image (URL or base64) plus a motion_prompt like "walking" or "attack slash", and
+    optionally a final_image to interpolate between a start and end frame. Describe the motion exactly
+    and unambiguously, but do not over-describe it: an action the model already knows is one phrase, not
+    a sequence of steps, and the character, art style, background and camera come from the image, not
+    the prompt. For animations driven by up to three keyframes (including a middle frame), use animateSpriteKeyframes
+    instead. The job result is a single sprite result: `spritesheet_url` (the sheet image), `video_url`
+    (an mp4 of the animation - pass it as `video` to transferMotion or as `spritesheet_video_url` to createSpriteAudio;
+    editSpritesheet takes `spritesheet_url`), `num_frames`/`num_cols`/`num_rows` (the grid layout), and,
+    when requested, `gif_url`, `individual_frame_urls` and `spritesheet_with_background_url`. The hydra
+    and hydra-plus models also return `audio_url`, a sound effect for the animation - there is no need
+    to call createSpriteAudio afterwards; forge and forge-pixel produce no audio. The chosen model must
+    support sprite animation and the duration must be valid for it; incompatible model/duration combinations
+    return HTTP 400. Credits are held for the duration you requested when the job is accepted; the final
+    charge is rate × seconds of video generated (legacy models keep their minimum charge), never more
+    than for the duration you requested, and the difference (or everything, if the job fails or is cancelled)
+    is refunded. The returned sheet is then trimmed to its best loop and can run slightly shorter than
+    the video; that trim is not deducted. Choosing a tool: animateSprite (this one) when you can describe
+    the motion in text; transferMotion when you want an exact motion copied from a reference video or
+    one of the named presets from listAnimationPresets (e.g. a standard walk or attack cycle); generatePose
+    first when the source image is not yet in the pose the animation should start from. Omit `model` to
+    run on hydra (the default) - see the `model` field for the per-model rates. Pass an optional request_id
+    to tag the result so you can locate it later via listGenerations (type spritesheet). Async generation
+    job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Hydra 3/s (shortest duration 3s, so 9 credits minimum), Hydra+
+    4/s (shortest duration 3s, so 12 credits minimum), Forge 1.5/s, Forge Pixel 1.5/s, Blitz 1.9/s (min
+    charge 4 credits) [LEGACY], Eagle 2.6/s (min charge 4 credits) [LEGACY], Eagle with Audio 3.1/s (min
+    charge 4 credits) [LEGACY]; [LEGACY] models are scheduled for removal - do not use them for new work;
+    see this endpoint''s full pricing table in the API docs.'
+- name: animateSpriteKeyframes
+  description: 'Animate a sprite through up to three fixed keyframes - initial_image, middle_image and
+    final_image (each a URL or base64) - producing a spritesheet that interpolates through the provided
+    frames in order. At least one of initial_image or middle_image is required (a final_image alone has
+    nothing to anchor the animation); any keyframe may be omitted. The motion_prompt is optional here
+    - when omitted, the motion is derived purely from the keyframes. Runs on hydra (default; also returns
+    `audio_url`), hydra-plus (hydra with finer detail, also returns `audio_url`), forge, or forge-pixel
+    for pixel-art sprites - the models that support a middle keyframe; any other model returns HTTP 400.
+    For just a start and end frame, animateSprite with `final_image` does the same job. The job result
+    is the same sprite result as animateSprite (`spritesheet_url`, `video_url`, grid fields, optional
+    GIF and frame URLs, `audio_url` on hydra and hydra-plus). Credits are held for the duration you requested
+    when the job is accepted; the final charge is rate × seconds of video generated, never more than for
+    the duration you requested, and the difference (or everything, if the job fails or is cancelled) is
+    refunded. The returned sheet is then trimmed to its best loop and can run slightly shorter than the
+    video; that trim is not deducted. Use animateSprite instead for the classic single-image + text-prompt
+    animation. Pass an optional request_id to tag the result so you can locate it later via listGenerations
+    (type spritesheet). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit
+    contract: see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Hydra 3/s (shortest duration 3s, so 9 credits minimum), Hydra+
+    4/s (shortest duration 3s, so 12 credits minimum), Forge 1.5/s, Forge Pixel 1.5/s; see this endpoint''s
+    full pricing table in the API docs.'
+- name: generatePose
+  description: 'Re-pose an existing sprite into a new target pose while preserving the character, taking
+    a source image (URL or base64), a pose name (or "Other" with a free-text description), and an optional
+    n (1-4) for how many variations to produce. Only works with sprite image types (not icons, screenshots,
+    etc.). The job result is an array of pose results, each containing the generated image url, the pose
+    and description used, and a suggested motion_prompt tuned for that pose. Credits are held when the
+    job is accepted and refunded if it fails or is cancelled; the charge scales with the number of images
+    generated. This is typically the first step before animating: call generatePose to set the character''s
+    pose, then feed the result (and its suggested motion_prompt) into animateSprite for the best animation
+    quality; use rotateSprite instead when you want to change the camera angle rather than the pose. Pass
+    an optional request_id to tag the results so you can locate them later via listGenerations (type spritesheet).
+    Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the
+    server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: rotateSprite
+  description: 'Re-render an existing sprite from a different camera viewpoint while keeping the same
+    character and pose, taking a source image (URL or base64), a required camera_rotation azimuth (one
+    of 0, 45, 90, 135, 180, -135, -90, -45 degrees), an optional camera_elevation (0, 30, or 60 degrees;
+    omit to keep the current elevation), and an optional n (1-4) for the number of variations. Only works
+    with sprite image types (not icons, screenshots, etc.). The job result is an array of rotate-sprite
+    results, each with the generated image url and the camera_rotation and camera_elevation that were
+    applied. Credits are held when the job is accepted and refunded if it fails or is cancelled; the charge
+    scales with the number of images generated. Use this to produce alternate view angles of a character;
+    use generatePose instead to change the character''s pose rather than the camera, and animateSprite
+    or transferMotion to bring a sprite to life. Pass an optional request_id to tag the results so you
+    can retrieve them later via listGenerations (type spritesheet). Async generation job: returns `{id,
+    status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: transferMotion
+  description: 'Transfer motion from a reference video or a named animation preset onto a static sprite
+    image, producing an animated spritesheet that mimics the reference movement. Provide the sprite as
+    image (URL or base64) plus either a video URL or a preset_id together with perspective and direction
+    (all three from listAnimationPresets; if both video and preset_id are sent the video wins). The job
+    result is the same sprite result as animateSprite: `spritesheet_url`, `video_url`, grid fields, optional
+    GIF / frame / with-background URLs, and `audio_url` when the model is hydra. `duration` defaults to
+    1.5s where the chosen model offers it, otherwise to that model''s shortest (hydra, the default, starts
+    at 3s) - and a longer reference clip or preset is compressed to fit, so pass the preset''s own `duration`
+    (returned by listAnimationPresets) to keep its timing. It returns HTTP 400 if neither a video nor
+    a complete preset_id/perspective/direction triple is supplied, if the named preset, perspective, or
+    direction cannot be resolved, or if the model/duration combination is invalid. Credits are held for
+    the duration you requested when the job is accepted; the final charge is rate × seconds of video generated
+    (which follows the reference clip or preset; legacy models keep their minimum charge), never more
+    than for the duration you requested, and the difference (or everything, if the job fails or is cancelled)
+    is refunded. The returned sheet is then trimmed to its best loop and can run slightly shorter than
+    the video; that trim is not deducted. Use this when you have an existing motion clip or preset to
+    copy; prefer animateSprite to generate animation purely from a text prompt. Omit `model` to run on
+    hydra (the default - most capable, and returns audio); pick forge for a cheaper run on simple motion,
+    presets and matching poses; the `model` field lists rates. Pass an optional request_id to tag the
+    result so you can retrieve it later via listGenerations (type spritesheet). Async generation job:
+    returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Hydra 3/s, Forge 2/s, Forge Pixel 2/s, Tango 4/s (min charge
+    4 credits) [LEGACY]; [LEGACY] models are scheduled for removal - do not use them for new work; see
+    this endpoint''s full pricing table in the API docs.'
+- name: getDocs
+  description: 'Browse or read Ludo''s own documentation in full - how to choose a sprite animation mode,
+    when to use Generate Before / Generate After, how margins behave, which model suits a job, and each
+    generator''s known limitations. To answer a specific question, call searchDocs first: it returns just
+    the sections that match. Use getDocs to see what documentation exists, or to read a whole document
+    or named sections. This is the same documentation the Ludo web app shows its users, so it occasionally
+    describes buttons rather than parameters; the substance applies to the API and MCP surfaces just the
+    same. To browse, call it with NO parameters to get a table of contents - every document with its id,
+    label and section titles, and no bodies - then call it again with `doc` (and optionally `sections`)
+    to read only what you need. Fetching a whole document can return tens of thousands of characters,
+    so prefer naming the sections, using titles copied from the table of contents. Section titles match
+    ignoring case, spacing and punctuation: when only some requested titles exist you receive those sections
+    plus `unmatched_sections` and `available_sections`, and when none exist (or `doc` is unknown) the
+    call returns 400 listing the valid values so you can retry once. This is a free discovery endpoint:
+    it does not charge credits and does not queue a job.'
+- name: searchDocs
+  description: 'Search Ludo''s own documentation with a plain-language question and get back only the
+    few sections that answer it - the fastest way to learn how a feature is meant to be used before you
+    generate with it (how to pick a sprite animation mode or model, how margins behave, what something
+    costs, known limitations). Start here rather than reading whole documents. Each result carries `doc`
+    and `section`, which you can pass straight to getDocs to re-read that section, and the section''s
+    full markdown `content`. Results are best first; weak matches are left out, so an empty `results`
+    list means the documentation does not cover the question - rephrase it, or call getDocs with no parameters
+    to browse the table of contents. This is the same documentation the Ludo web app shows its users,
+    so it occasionally describes buttons rather than parameters; the substance applies to the API and
+    MCP surfaces just the same. Returns up to `n` sections (default 3, max 10). If it answers 503 the
+    search backend is briefly unavailable: call getDocs instead rather than retrying in a loop. This is
+    a free discovery endpoint: it does not charge credits and does not queue a job.'
+- name: listAnimationPresets
+  description: 'List the available animation presets along with their perspectives and the eight supported
+    compass directions (N, NE, E, SE, S, SW, W, NW). Synchronous GET with no request body: it returns
+    an animations array (each with id, name, category, description, duration, and preview_url), a deduplicated
+    perspectives array, and the directions list. This is a free discovery endpoint and does not charge
+    credits. Use it to obtain the preset_id, perspective, and direction values that transferMotion needs,
+    and to find motion preset names you can reference when animating; pair it with transferMotion (to
+    apply a preset onto a sprite), animateSprite (text-prompt animation), or animate3DModelPreset (apply
+    any preset by id to a rigged 3D model).'
+- name: editSpritesheet
+  description: 'Edit a previously generated spritesheet: re-prompt its underlying animation (edit_mode
+    "prompt"), extend the frame beyond its borders ("outpaint"), repair a bad loop ("fix_loop"), or re-render
+    it with finer detail ("improve": the extra pass hydra-plus runs when it generates, on a spritesheet
+    generated with hydra only - any other returns HTTP 400; a sheet generated on hydra-plus already has
+    it). Pass the `spritesheet_url` you received from `animateSprite`, `animateSpriteKeyframes`, `transferMotion`,
+    or an earlier edit - it must be a spritesheet you generated within the last 7 days; arbitrary external
+    images are not accepted. Omit `duration`, `frames`, `frame_size`, `crop` and `model` to keep the source
+    spritesheet''s values. A `prompt` is required for edit_mode "prompt", optional for "outpaint", and
+    not accepted for "fix_loop" or "improve"; optionally add up to 5 reference `images` (URL or base64)
+    to guide the edit. The job result is the same result shape as animateSprite (spritesheet URL, frame
+    layout, optional GIF or individual frames). Credits are held when the job is accepted; the final charge
+    is rate × seconds of video generated, never more than was held, and the difference (or everything,
+    if the job fails or is cancelled) is refunded. The returned sheet is then trimmed to its best loop
+    and can run slightly shorter than the video; that trim is not deducted. Prompt edits are priced per
+    model (credits/second × duration) and held for the duration you requested; "outpaint", "fix_loop"
+    and "improve" run a lighter pipeline in which `model` is ignored and are billed at a flat 1 credit
+    per second of output, held for and capped at the length of the source spritesheet''s video (`duration`
+    does not change their price). Outpaint decides the extra margin itself - there is no amount parameter.
+    The result carries the same fields as animateSprite (`spritesheet_url`, `video_url`, grid fields);
+    new audio is generated only by prompt edits on hydra: "fix_loop", "outpaint" and "improve" do not
+    regenerate it, and their result carries the source spritesheet''s `audio_url` when it had one. Pass
+    an optional `request_id` to tag the result for later retrieval via listGenerations (type spritesheet).
+    Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the
+    server instructions).
+
+
+    Credits: edit_mode "fix_loop" / "outpaint": flat 1 credit per second of output, capped at the source
+    spritesheet''s video length, no minimum, model ignored; edit_mode "improve" (hydra spritesheets only):
+    flat 1 credit per second of output, same terms; edit_mode "prompt": per model as listed - credits/s
+    × seconds, per model: Hydra 3/s, Forge 2/s, Forge Pixel 2/s; see this endpoint''s full pricing table
+    in the API docs.'
+- name: rotateSpritesheet
+  description: 'Re-render a previously generated sprite animation from a new view: the same motion and
+    timing, seen from a different angle (e.g. a front-facing walk cycle turned into the same walk seen
+    from the back). Pass the `spritesheet_url` you received from `animateSprite`, `animateSpriteKeyframes`,
+    `transferMotion`, `editSpritesheet` or an earlier call - it must be a spritesheet you generated within
+    the last 7 days; arbitrary external images are not accepted - and, as `image` (URL or base64), the
+    character exactly as it must appear in the new view: it becomes the first frame of the animation.
+    To produce that image, call rotateSprite on the animation''s first frame (or any image of the character)
+    and pick the view you want. An optional `final_image` fixes the last frame (it defaults to the first
+    frame, for cyclic or returning animations), and an optional `prompt` steers the result: the character''s
+    facing in the new view ("its back to the camera"), where the action goes ("the kick goes to the left
+    of the frame"), or anything else about the motion. Runs on hydra (default) or hydra-plus (finer detail).
+    The job result is the same sprite result as animateSprite (`spritesheet_url`, `video_url`, grid fields,
+    optional GIF and frame URLs). The animation covers the source''s own length (up to 5 seconds; a longer
+    source is sped up to fit), so omit `duration` unless you need to change that. Credits are held for
+    that length when the job is accepted, or for 3 seconds when it is shorter (a new view is a new generation,
+    and hydra generates at least 3 seconds); the final charge is the model''s rate × seconds of video
+    generated, never more than was held, and the difference (or everything, if the job fails or is cancelled)
+    is refunded. Pass an optional request_id to tag the result for later retrieval via listGenerations
+    (type spritesheet). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit
+    contract: see the server instructions).
+
+
+    Credits: Cost varies by model and duration (credits/second × duration).'
+- name: adjustSpritesheet
+  description: 'Adjust Sprite Sheet: re-export a previously generated sprite animation with different
+    sheet settings - frame count, frame size, loop trimming or whitespace cropping - without generating
+    the animation again. Free (no credits). Pass the `spritesheet_url` you received from `animateSprite`,
+    `animateSpriteKeyframes`, `transferMotion`, `editSpritesheet`, `rotateSpritesheet` or an earlier adjust
+    - it must be a spritesheet you generated through the API within the last 7 days; arbitrary external
+    images are not accepted. Omit a setting to keep the source''s value. The animation itself is unchanged:
+    this only re-cuts the same video into a new sheet, so use it to fix framing (for example an effect
+    clipped by True Size: re-export with a fixed `frame_size` or 0), to change the frame count or size
+    for your engine, to upscale it 1.5x (`frame_size` -1), or to turn loop trimming on or off. It cannot
+    change the motion, margins or content - use editSpritesheet for that. The source is left as it is
+    and the result is a new spritesheet with its own `spritesheet_url`. The job result is the same sprite
+    result as animateSprite (`spritesheet_url`, `video_url`, grid fields, optional GIF and frame URLs,
+    and the source''s `audio_url` when it has one). Limited to 20 calls per 5 minutes, 120 an hour and
+    1000 a day. Pass an optional request_id to tag the result for later retrieval via listGenerations
+    (type spritesheet). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit
+    contract: see the server instructions).'
+- name: createSpriteAudio
+  description: 'Generate a sound effect for a previously generated spritesheet animation. Pass, as `spritesheet_video_url`,
+    the `video_url` you received from `animateSprite`, `animateSpriteKeyframes`, `transferMotion`, or
+    `editSpritesheet` - it must belong to a spritesheet you generated within the last 7 days; arbitrary
+    external videos are not accepted. Spritesheets generated with the hydra model already come with `audio_url`,
+    so only call this for forge / forge-pixel output or to replace hydra''s sound. Optionally add a `prompt`
+    describing the sound you want. The job result is only the URL of the generated audio file, an MP3
+    or WAV (the URL''s extension, .mp3 or .wav, says which); no video is returned. The audio is also attached
+    to the spritesheet, so it appears as `audio_url` in listGenerations (type spritesheet), where the
+    spritesheet keeps the `request_id` it was generated with. Pass an optional `request_id` to make this
+    call idempotent and to find its job again; it must not be one you already used for another generation.
+    Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the
+    server instructions).
+
+
+    Credits: This endpoint consumes 3 credits per call.'
+- name: listDirectionalSpriteStyles
+  description: 'List the styles Directional Sprites can render a 3D model in, with the perspectives (camera
+    heights) and the eight directions they render from. Each style has an id (pass it as style_id), a
+    label, a description, a family, whether it is pixel art, a thumbnail_url of the style at its defaults,
+    its current version, and its settings: each setting has a name (the key in style_params), a kind (choice,
+    bool or color - a color setting also takes any colour), its options ({label, value}) and its default.
+    advanced_settings work the same way. Free discovery endpoint: it does not charge credits. Use it before
+    previewDirectionalSprites, createDirectionalSprites and createDirectionalStills.'
+- name: previewDirectionalSprites
+  description: 'Preview Directional Sprites: a few frames of a 3D model in a style, from each direction
+    asked for, to check a style before rendering. Takes the same model, animation, camera and style fields
+    as createDirectionalSprites. The response (synchronous, not a job) has one preview per direction,
+    in the order asked, each with `frame_urls` - the frames as images (4 for an animated model, 1 for
+    a still one) - and `render_3d`, the style and settings as rendered, which createDirectionalSprites
+    takes back as they are. Free (no credits), and nothing is saved to your generations; the frame images
+    are kept for 7 days. A preview takes several seconds. You run one preview at a time: starting another
+    while one is still running cancels the older one, which then answers 204 with no body. Preview one
+    or two directions while trying styles and render only once the look is right.'
+- name: createDirectionalSprites
+  description: 'Directional Sprites: render a 3D model into one spritesheet per direction, in a style.
+    Pass the GLB in `model` (URL or base64; rigged, to animate it - see create3DModel with rig, or rigModel)
+    and at most one animation: `animation_url` (the `glb_url` of an animation from animate3DModel or animate3DModelPreset,
+    made for this model), `preset_id` (a preset from listAnimationPresets, retargeted onto the model;
+    any rig type can take one, though retargeting does not succeed on every model, and when it does not
+    the call returns an error) or `model_animation` (the name of an animation the GLB itself carries).
+    With no animation each sheet is a single frame. `directions` are where the camera stands around a
+    character facing S (up to 8); every direction is rendered together, on the same frame size, scale
+    and floor, so the sheets line up. Pick the style with listDirectionalSpriteStyles (style_id, and style_params
+    for its settings) and check it with previewDirectionalSprites first. The job result is one sheet per
+    direction, in the order asked, each with its `spritesheet_url`, grid fields, fps and `render_3d`.
+    Credits are held for every direction when the job is accepted and charged for the sheets that come
+    back; a failed or cancelled job is refunded. Pass an optional request_id to tag the sheets for later
+    retrieval via listGenerations (type spritesheet). Async generation job: returns `{id, status}` - poll
+    `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 1 credit per direction (one sheet each).'
+- name: createDirectionalStills
+  description: 'Directional Sprites stills: render a 3D model as it is (no animation) into one large image
+    per direction, in a style, on a transparent background. Pass the GLB in `model` (URL or base64), the
+    `directions` (up to 8, rendered together so they line up) and the style (listDirectionalSpriteStyles).
+    Each still is a sprite image you can animate with animateSprite or edit with editImage. The job result
+    is one image per direction, in the order asked. Credits are held for every direction when the job
+    is accepted and charged for the images that come back; a failed or cancelled job is refunded. Pass
+    an optional request_id to tag the images for later retrieval via listGenerations (type image). Async
+    generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server
+    instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per direction (one image each).'
+- name: createVideo
+  description: 'Generate a short video clip from a source image and a motion text prompt (image-to-video);
+    a source `image` is required - to make a video from text alone, first createImage and animate that,
+    or use createVideoFromReferences with reference images. Griffin (default, 480p) and Griffin HD (720p)
+    both generate a soundtrack; no separate audio step is needed. The job result is the video URL and
+    its actual duration in seconds. Optionally pass `final_image` to interpolate between a start and end
+    frame. The chosen `model` and `duration` must be compatible (incompatible combinations return HTTP
+    400); see the `model` and `duration` fields for the values each model accepts. Credits are held when
+    the job is accepted; the final charge is rate × produced seconds, never more than for the duration
+    you requested, and the difference (or everything, if the job fails or is cancelled) is refunded. Pass
+    an optional `request_id` to tag the result so you can locate it later via listGenerations (type video).
+    Related tools: use `createImage` for static images, `animateSprite` for sprite-sheet animation, and
+    listGenerations (type video) to list videos you generated earlier. Async generation job: returns `{id,
+    status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Griffin 1.5/s (shortest duration 5s, so 7.5 credits minimum),
+    Griffin HD 2/s (shortest duration 5s, so 10 credits minimum), Blitz 1/s (shortest duration 2s, so
+    2 credits minimum) [LEGACY], Eagle 1.3/s [LEGACY], Eagle with Audio 1.8/s [LEGACY]; [LEGACY] models
+    are scheduled for removal - do not use them for new work; see this endpoint''s full pricing table
+    in the API docs.'
+- name: createVideoFromReferences
+  description: 'Generate a video from 1-5 reference images and a text prompt (references-to-video). Unlike
+    createVideo, which animates a single source image, this composes a new scene that borrows characters,
+    objects, and style from the reference images. Each image can be a URL or base64. Griffin (default,
+    480p) and Griffin HD (720p) generate a soundtrack; note the per-second rate here is higher than createVideo''s
+    for the same model. The job result is the video URL and its actual duration in seconds. Choose the
+    output shape with `aspect_ratio` ("default" lets the model decide). The chosen `model` and `duration`
+    must be compatible (incompatible combinations return HTTP 400). Credits are held when the job is accepted;
+    the final charge is rate × produced seconds, never more than for the duration you requested, and the
+    difference (or everything, if the job fails or is cancelled) is refunded. Pass an optional `request_id`
+    to tag the result so you can locate it later via listGenerations (type video). Related tools: `createVideo`
+    for image-to-video, `editVideo` to modify a generated video. Async generation job: returns `{id, status}`
+    - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Griffin 2.5/s (shortest duration 5s, so 12.5 credits minimum),
+    Griffin HD 4/s (shortest duration 5s, so 20 credits minimum), Eagle 1.5/s [LEGACY], Eagle with Audio
+    2/s [LEGACY]; [LEGACY] models are scheduled for removal - do not use them for new work; see this endpoint''s
+    full pricing table in the API docs.'
+- name: editVideo
+  description: 'Edit a previously generated video with a text prompt and optional reference images (video-to-video);
+    runs on griffin-hd (720p, with soundtrack) and the output keeps the source video''s duration unless
+    you pass one. Pass the video `url` you received from `createVideo`, `createVideoFromReferences`, or
+    an earlier edit - it must be a video you generated within the last 7 days; arbitrary external videos
+    are not accepted. Optionally add up to 5 reference `images` (URL or base64) to guide the edit. The
+    job result is the new video URL and its actual duration in seconds. Credits are held when the job
+    is accepted; the final charge is rate × produced seconds, never more than for the duration you requested,
+    and the difference (or everything, if the job fails or is cancelled) is refunded. Pass an optional
+    `request_id` to tag the result so you can locate it later via listGenerations (type video). Related
+    tools: `createVideo` to generate the source clip, `createVideoFromReferences` for reference-driven
+    generation. Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: credits/s × seconds, per model: Griffin HD 2/s, Eagle 2/s [LEGACY]; [LEGACY] models are scheduled
+    for removal - do not use them for new work; see this endpoint''s full pricing table in the API docs.'
+- name: upscaleVideo
+  description: 'Upscale a previously generated video to twice its resolution (2x). Pass the video `url`
+    you received from `createVideo`, `createVideoFromReferences`, or `editVideo` - it must be a video
+    you generated within the last 7 days; arbitrary external videos are not accepted. Both dimensions
+    of the source must be under 960 pixels: griffin (480p) output qualifies; griffin-hd (720p) output
+    does not, landscape or portrait (only a square 720x720 would) - generate on griffin if you intend
+    to upscale. A too-large source fails the job and the held credits are refunded. The job result is
+    the new video URL (2x width and height, same duration) and its duration in seconds. Billed per second
+    of video, independent of model; held when the job is accepted and refunded if it fails or is cancelled.
+    Pass an optional `request_id` to tag the result so you can locate it later via listGenerations (type
+    video). Related tools: `createVideo` for image-to-video, `editVideo` to modify a generated video.
+    Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the
+    server instructions).
+
+
+    Credits: 0.2 credits per second of video.'
+- name: removeBackground
+  description: 'Remove the background from a single image, returning the subject isolated on a transparent
+    background. Supply the source image (URL or base64); optionally set crop to trim the result to the
+    content, and creative_edit (default true) for higher-quality output that may not match the input pixel-for-pixel
+    - set it false when the subject must stay pixel-identical, e.g. an existing sprite you will animate.
+    The job result is a single image result with a url (not an array). The image is uploaded and validated,
+    and an image larger than 15MB is rejected with HTTP 400. Credits are held when the job is accepted
+    and refunded if it fails or is cancelled. Use removeBackground for this dedicated cutout task; editImage
+    can also remove backgrounds via a prompt but is better for broader edits, while createImage and generateWithStyle
+    produce new images rather than process an existing one. Pass an optional request_id to tag the result
+    so you can retrieve it later via listGenerations (type image). Async generation job: returns `{id,
+    status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: upscaleImage
+  description: 'Upscale an image: the same picture at a higher resolution, up to 4x, with the result capped
+    at 2048px on its longest side. The source image (URL or base64) must be below 2048px on its longest
+    side; a larger one is rejected with HTTP 400. The job result is a single image result with a url (not
+    an array). The image is uploaded and validated, and an image larger than 15MB is rejected with HTTP
+    400. Credits are held when the job is accepted and refunded if it fails or is cancelled. Use upscaleImage
+    to raise the resolution of an image you already have; createImage and editImage make new or changed
+    images instead. Pass an optional request_id to tag the result so you can retrieve it later via listGenerations
+    (type image). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: create3DModel
+  description: 'Convert a source image into a textured 3D model (image-to-3D). The job result is a downloadable
+    GLB model_url plus an array of snapshot image URLs rendered from different angles (handy for previews).
+    model picks the generator: prop (default) is low-cost and suits everyday props and environment pieces;
+    hero is far more detailed and accurate, for close-up assets, but slower and more expensive. image
+    is the front view; with prop, pass an optional back_image (the same subject seen from behind) so the
+    back of the model follows it instead of being invented - hero takes the front image only and rejects
+    a back_image with HTTP 400. The image is converted as it is: to make a character image for it first,
+    from a prompt or by redrawing your own image as a 3D render, use create3DModelImage. Accepts optional
+    mesh controls: target_num_faces (max triangle count, 1000-200000, default 50000), texture_size (1024
+    or 2048, default 2048), and texture_type ("pbr", "simple", or "none", default "pbr"). Pass rig true
+    to also rig the model in the same call, with the general rig (joint_naming as in rigModel), ready
+    for animate3DModelPreset or createDirectionalSprites; that adds the rigModel price, charged only when
+    the result comes back rigged. Credits are held when the job is accepted and refunded if it fails or
+    is cancelled. Pass an optional request_id to tag the result so you can locate it later via listGenerations
+    (type 3d). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 4 credits per call with model "prop" (default), 15 credits per call
+    with model "hero"; rig true adds 1 credit when the model comes back rigged.'
+- name: create3DModelImage
+  description: 'Make a character image ready to turn into a 3D model, the first step of Directional Sprites
+    on the web. Pass a prompt describing the character, your own image (URL or base64), or both. With
+    an image, it is redrawn as a 3D render, and the prompt becomes the changes to make (e.g. "add a red
+    cape and a sword"); leave the prompt out to keep the character as it is. A redraw is a new picture
+    each time, so call again for another try. The job result is a single image result with a url (not
+    an array): pass that url as create3DModel''s image. create3DModel itself converts the image it is
+    given as it is. A call with neither prompt nor image is rejected with HTTP 400, and an image larger
+    than 15MB too. Credits are held when the job is accepted and refunded if it fails or is cancelled.
+    Pass an optional request_id to tag the result so you can retrieve it later via listGenerations (type
+    image). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per result.'
+- name: rigModel
+  description: 'Rig a 3D model: generate a skeleton and skin weights for an existing GLB so it can be
+    animated. Accepts a URL or base64-encoded GLB in `model` (here `model` is the 3D asset file, not an
+    AI model name - rigging has no model choice). The job result is a downloadable `model_url` for the
+    rigged GLB. rig_type selects the skeleton prior - general (default, any asset), humanoid (anime-style
+    characters), game (classic game-character rigs), or the pinned humanoid templates for two-armed, two-legged
+    characters: humanoid_template (standard 22-joint skeleton with named joints) and humanoid_template_hands
+    (52 joints, five fingers per hand). Animation presets retarget onto any rig type, though not onto
+    every model. joint_naming relabels the identified joints to a convention - smpl (default), mixamo,
+    humanik, unreal, godot, rigify, or vroid - without changing the skeleton. Credits are held when the
+    job is accepted and refunded if it fails or is cancelled. Rigging is non-destructive to geometry but
+    replaces any prior skeleton, so animations made against an old rig no longer apply. Async generation
+    job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 1 credits per call.'
+- name: animate3DModel
+  description: 'Generate text-driven skeletal animations for an already-rigged 3D model. Pass the rigged
+    GLB in `model` (URL or base64; the 3D asset file, not an AI model name) and a motion `prompt` (e.g.
+    "walking", "swinging its axe"). The model must already have a skeleton - rig it first with rigModel
+    if not. The job result is num_variants candidate animations (default 4), each a standalone animation-only
+    GLB (skeleton + one clip, no mesh) in `glb_url` plus an mp4 `preview_url`, so you can pick the best
+    one and fuse it with your model in a game engine or three.js. mode selects the representation - rot_trans
+    (default, rotation plus translation per bone, most faithful) or rot_only (rotation only, easier to
+    retarget onto another skeleton in an engine). Animation quality is hit-or-miss, which is why multiple
+    candidates are returned. Credits are held once per call regardless of variant count and refunded if
+    the job fails or is cancelled. Async generation job: returns `{id, status}` - poll `getApiJob` (job
+    and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per call.'
+- name: animate3DModelPreset
+  description: 'Apply a curated animation preset to an already-rigged 3D model (retargeting). Pass the
+    rigged GLB in `model` (URL or base64; the 3D asset file, not an AI model name) and a `preset_id` from
+    the animation presets list (from listAnimationPresets; any preset id works). Any rig type can take
+    a preset, though retargeting does not succeed on every model: when it does not, the job fails. The
+    job result is one retargeted animation - a standalone animation-only GLB in `glb_url` plus an mp4
+    `preview_url` - in the same `animations` envelope as the animate endpoint. crop_loop trims the clip
+    to its seamlessly-looping span (omit to follow the preset''s own loop flag); in_place removes net
+    travel so the character moves on the spot, as game-engine locomotion expects (omit to keep the preset''s
+    own travel). Credits are held when the job is accepted and refunded if it fails or is cancelled. Async
+    generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server
+    instructions).
+
+
+    Credits: This endpoint consumes 0.5 credits per call.'
+- name: createSoundEffect
+  description: 'Produce a short sound effect (SFX) from a text description, such as "laser gun firing"
+    or "footsteps on gravel". The job result is a single audio result containing the URL of an MP3 or
+    WAV file (the URL''s extension, .mp3 or .wav, says which). The description field is required, duration
+    is capped at 10 seconds (0 means auto-pick based on the description), and you may set loop to true
+    for a seamlessly looping effect. Credits are held when the job is accepted and refunded if it fails
+    or is cancelled. Use this for short, discrete sounds; use createAmbiance for a continuous looping
+    background soundscape, createMusic for musical pieces, and createAudioTransform to remix an existing
+    audio sample. Pass an optional request_id to tag the result so you can locate it later via listGenerations
+    (type audio). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 2 credits per call.'
+- name: createAmbiance
+  description: 'Produce a looping background ambiance soundscape from a text description, such as "windy
+    forest at dusk" or "busy tavern interior". The job result is a single audio result containing the
+    URL of an MP3 or WAV file (the URL''s extension, .mp3 or .wav, says which). The description field
+    is required and duration is capped at 10 seconds (0 means auto-pick based on the description). Credits
+    are held when the job is accepted and refunded if it fails or is cancelled. Use this for continuous,
+    atmospheric background loops; use createSoundEffect for short discrete sound effects, createMusic
+    for musical pieces, and createAudioTransform to remix an existing audio sample. Pass an optional request_id
+    to tag the result so you can locate it later via listGenerations (type audio). Async generation job:
+    returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 2 credits per call.'
+- name: createMusic
+  description: 'Produce a piece of music from a text description, such as "epic orchestral battle theme"
+    or "calm piano melody", with optional lyrics. The job result is a single audio result containing the
+    URL of an MP3 or WAV file (the URL''s extension, .mp3 or .wav, says which). The description field
+    is required; duration must be one of the allowed values (0 means auto, otherwise multiples of 10 up
+    to 180 seconds) and out-of-range values return HTTP 400. Credits are held when the job is accepted
+    and refunded if it fails or is cancelled. Use this for songs and musical scores; use createSoundEffect
+    for short sound effects, createAmbiance for looping background soundscapes, and createAudioTransform
+    to remix an existing audio sample. Pass an optional request_id to tag the result so you can locate
+    it later via listGenerations (type audio). Async generation job: returns `{id, status}` - poll `getApiJob`
+    (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 3 credits per call.'
+- name: createAudioTransform
+  description: 'Remix an existing audio sample (a sound effect, ambiance, or music clip) into a variation
+    guided by a text prompt, for example turning a track into an 80s synthwave or metal version. Both
+    the sample and the prompt are required; the sample is uploaded as a URL or base64 audio and must be
+    at most 15MB or the call returns HTTP 400, and duration must be one of the allowed values (0 means
+    match the source, otherwise multiples of 10 up to 180 seconds). The job result is a single audio result
+    containing the URL of an MP3 or WAV file (the URL''s extension, .mp3 or .wav, says which). The optional
+    modification_strength (0 to 1, default 0.6) controls how far the result departs from the original.
+    Credits are held when the job is accepted and refunded if it fails or is cancelled. Use this to transform
+    existing audio you already have; use createSoundEffect, createAmbiance, or createMusic to generate
+    audio from scratch. Pass an optional request_id to tag the result so you can locate it later via listGenerations
+    (type audio). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 3 credits per call.'
+- name: createVoice
+  description: 'Design a new voice from a character description (such as "deep-voiced warrior" or "cheerful
+    young girl"), a character image, or both, and have it speak a short line of text, returning a sample
+    of that newly created voice. text is required, plus voice_description or image (an image of the speaking
+    character, given as a URL or base64, makes the description optional); the spoken text is limited to
+    100 characters or the call returns HTTP 400, and type selects "human" or "non-human" voices. The job
+    result is a single audio result containing the URL of an MP3 or WAV file (the URL''s extension, .mp3
+    or .wav, says which). Credits are held when the job is accepted and refunded if it fails or is cancelled.
+    Use this to invent and audition a voice from a description; use createSpeech for text-to-speech that
+    clones a specific voice from an audio sample, and createSpeechPreset for text-to-speech using a named
+    preset voice. Pass an optional request_id to tag the result so you can locate it later via listGenerations
+    (type audio). Async generation job: returns `{id, status}` - poll `getApiJob` (job and credit contract:
+    see the server instructions).
+
+
+    Credits: This endpoint consumes 2 credits per call.'
+- name: createSpeech
+  description: 'Convert text to speech by cloning the voice from an audio sample you provide (voice-cloning
+    text-to-speech). Both text and sample are required; the text is limited to 250 characters and the
+    sample is supplied as a URL or base64 audio that must be at most 15MB, with violations returning HTTP
+    400. An optional delivery note (at most 50 characters, e.g. "angry, shouting") says how the line is
+    said. The job result is a single audio result containing the URL of an MP3 or WAV file (the URL''s
+    extension, .mp3 or .wav, says which). Credits are held when the job is accepted and refunded if it
+    fails or is cancelled. Use this when you have a reference voice sample to clone; use createSpeechPreset
+    to speak with a built-in named preset voice instead, and createVoice to design a brand-new voice from
+    a text description rather than cloning one. Pass an optional request_id to tag the result so you can
+    locate it later via listGenerations (type audio). Async generation job: returns `{id, status}` - poll
+    `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 2 credits per call.'
+- name: createSpeechPreset
+  description: 'Convert text to speech using a named built-in preset voice, with optional language and
+    either an emotion or a delivery note, depending on the voice. Both text and voice_preset_id are required
+    and the text is limited to 250 characters. The voices named by a first name (e.g. "Rachel") take a
+    delivery note (at most 50 characters, e.g. "angry, shouting") and no emotion; the descriptive voices
+    (e.g. "Serious woman") take an emotion and no delivery note. Invalid input, including an emotion or
+    delivery note the voice does not take, returns HTTP 400. The job result is a single audio result containing
+    the URL of an MP3 or WAV file (the URL''s extension, .mp3 or .wav, says which). Credits are held when
+    the job is accepted and refunded if it fails or is cancelled. Use this when you want a ready-made
+    catalog voice and do not need to supply your own sample; use createSpeech to clone a voice from an
+    audio sample instead, and createVoice to design a new voice from a text description. Pass an optional
+    request_id to tag the result so you can locate it later via listGenerations (type audio). Async generation
+    job: returns `{id, status}` - poll `getApiJob` (job and credit contract: see the server instructions).
+
+
+    Credits: This endpoint consumes 1 credits per call.'
+- name: listGenerations
+  description: List your generation history across the API and the web app - filter by type, source (api|web|all),
+    text search, and date range. Returns {items, page, page_size, has_more}; keep paging while has_more
+    is true. API-originated results expire after 7 days - download anything you want to retain. For an
+    in-flight job's status use getApiJob instead.
+- name: listApiJobs
+  description: List the generation jobs you started through the API or MCP, most recent first. Web-app
+    jobs are not included. This is a free read-only lookup (no credits, no generation). Filter with a
+    comma-separated status list; limit defaults to 50 and is capped at 100.
+- name: getApiJob
+  description: 'Poll the status of a generation job started by any tool. Every generation tool returns
+    `{id, status}`; call getApiJob with that id until status is `succeeded` (then read `result`, shaped
+    exactly like the tool''s documented output) or `failed` (read `error`). Poll every few seconds, or
+    pass `wait: 30` to long-poll - the call is held up to 30 seconds (max 60) and returns as soon as the
+    job finishes.'
+- name: cancelApiJob
+  description: Cancel a queued job you started through the API or MCP; the credits held for it are refunded.
+    Jobs that are already running cannot be canceled (409). Returns the canceled job. This is free (no
+    credits).
+- name: getAccount
+  description: Show your account's credit balance, plan and auto top-up settings. `credits.available`
+    is what generations can spend right now (plan_credits + extra - used); `resets_at` is when the plan's
+    monthly credits refill (unix seconds). When `team_pool` is true the balance is your team's shared
+    pool, and `auto_topup` is null because the team owner manages it. Check this before an expensive generation
+    instead of waiting for a 402. Buying credits and changing auto top-up happen in the web app at `billing_url`.
+    This is a free read-only lookup (no credits, no generation).
+- name: submitApiFeedback
+  description: 'Report a problem with the Ludo API itself to the Ludo team. Use it ONLY for API bugs (an
+    error, a failed or stuck job, a crash, a response that does not match this documentation) and API
+    limitations (a parameter, operation or format you needed that the API does not support, and that you
+    could not work around). NEVER use it to report model limitations or the quality of a result: an image,
+    sprite, animation, 3D model, video or sound that looks wrong, ignores part of the prompt, has artifacts
+    or is not what you wanted is not an API bug. Do not report those; retry with a different prompt, model
+    or settings instead. Before reporting a limitation, call searchDocs with what you tried: if the docs
+    already describe it as a known limitation, do not report it. Describe what you were trying to do and
+    what went wrong, and name the operation it relates to. Always send the id of every job the report
+    is about, in job_ids (up to 10): we look at those jobs'' inputs and outputs, and a report about a
+    result we cannot find cannot be investigated. Do not include personal data, secrets or file contents.
+    Send one report per issue, and if you are an agent, tell the user what you sent. Free (no credits).'
+tools_count: 44

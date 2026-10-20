@@ -1,11 +1,46 @@
 generated: '2026-10-02'
 method: probed
 source:
-  - url: https://ludo.ai/developers/mcp
-    status: 200
-    content_type: text/html
+- url: https://ludo.ai/developers/mcp
+  status: 200
+  content_type: text/html
 deployment:
   mode: remote
   endpoint: https://mcp.ludo.ai/mcp
   auth: api-key
   verified: probed
+tool_quality:
+  tool_count: 44
+  tokens_total: 41163
+  tokens_per_tool_median: 799
+  heavy_tools:
+  - name: animateSprite
+    tokens: 3674
+  - name: animateSpriteKeyframes
+    tokens: 3302
+  - name: transferMotion
+    tokens: 2681
+  - name: editSpritesheet
+    tokens: 2036
+  - name: rotateSpritesheet
+    tokens: 1628
+  heavy_tool_count: 11
+  params_total: 51
+  params_undescribed: 9
+  params_described_pct: 82.4
+  tools_with_undescribed_params: 9
+  tools_annotated: 44
+  annotated_pct: 100.0
+  state_changing_unhinted: []
+  tools_missing_schema: 0
+  short_descriptions: 0
+  duplicate_descriptions: 0
+  duplicate_names: 0
+  nonportable_names: []
+  output_schema_count: 0
+  token_estimate: chars/3.6 of each compact tool definition
+  source: mcp/ludo-ai-mcp-tools.json
+  measured: '2026-10-20'
+  scored: false
+  note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
+    from Glimind's agent-readiness audit.

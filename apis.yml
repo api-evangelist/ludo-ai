@@ -73,6 +73,8 @@ maintainers:
   email: kin@apievangelist.com
 
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/ludoai/overview
 - type: Security
   url: security/ludo-ai-vulnerability-disclosure.yml
 - type: ToolCrosswalk

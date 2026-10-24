@@ -1,0 +1,511 @@
+{
+  "info": {
+    "_postman_id": "e4cb3056-17d3-4d5e-b306-5c8e2ed2f017",
+    "name": "Ludo.ai Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:06.000Z",
+    "updatedAt": "2026-10-22T03:16:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e4cb3056-17d3-4d5e-b306-5c8e2ed2f017"
+  },
+  "item": [
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "account",
+          "item": [
+            {
+              "name": "Get account",
+              "id": "1828e4e0-c5bf-4d1f-9505-620a49b9dc87",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assets/account",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assets",
+                    "account"
+                  ]
+                },
+                "description": "Show your account's credit balance, plan and auto top-up settings. `credits.available` is what generations can spend right now (plan_credits + extra - used); `resets_at` is when the plan's monthly credits refill (unix seconds). When `team_pool` is true the balance is your team's shared pool, and `auto_topup` is null because the team owner manages it. Check this before an expensive generation instead of waiting for a 402. Buying credits and changing auto top-up happen in the web app at `billing_url`. This is a free read-only lookup (no credits, no generation). Requires an API key (user scope)."
+              },
+              "response": [
+                {
+                  "id": "a8b249db-ac5a-412c-98d7-1ce38bc92eba",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/account",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "account"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"credits\": {\n    \"available\": \"<float>\",\n    \"plan_credits\": \"<float>\",\n    \"used\": \"<float>\",\n    \"extra\": \"<float>\",\n    \"resets_at\": \"<long>\",\n    \"team_pool\": \"<boolean>\",\n    \"paused\": \"<boolean>\",\n    \"grace_until\": \"<long>\"\n  },\n  \"plan\": {\n    \"name\": \"<string>\",\n    \"api_access\": \"<boolean>\"\n  },\n  \"auto_topup\": {\n    \"enabled\": \"<boolean>\",\n    \"threshold\": \"<float>\",\n    \"credits\": \"<integer>\"\n  },\n  \"billing_url\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-a8b249db-ac5a-412c-98d7-1ce38bc92eba"
+                },
+                {
+                  "id": "b135ff6b-bf6e-4b89-ab7e-f5df0090a0f5",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/account",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "account"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-b135ff6b-bf6e-4b89-ab7e-f5df0090a0f5"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:06.000Z",
+              "updatedAt": "2026-10-22T03:16:06.000Z",
+              "uid": "35240-1828e4e0-c5bf-4d1f-9505-620a49b9dc87"
+            }
+          ],
+          "id": "7f45c52c-178a-48df-9d6d-05bc9122cf88",
+          "createdAt": "2026-10-22T03:16:06.000Z",
+          "updatedAt": "2026-10-22T03:16:06.000Z",
+          "uid": "35240-7f45c52c-178a-48df-9d6d-05bc9122cf88"
+        },
+        {
+          "name": "cli-key",
+          "item": [
+            {
+              "name": "Revoke current cli key",
+              "id": "a81b252d-1f68-4803-8d5b-1552b3d66e78",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assets/cli-key",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assets",
+                    "cli-key"
+                  ]
+                },
+                "description": "Revoke the key making this call, when it was created by a browser login. Other API keys are managed in the web app. Free. Requires an API key (user scope)."
+              },
+              "response": [
+                {
+                  "id": "631ec984-41b0-4351-8d8f-0a421f9bc782",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/cli-key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "cli-key"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"ok\": \"<boolean>\"\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-631ec984-41b0-4351-8d8f-0a421f9bc782"
+                },
+                {
+                  "id": "c8a5ec87-e631-4eac-a5bb-2c8db2101bfc",
+                  "name": "Not a browser-login key",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/cli-key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "cli-key"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-c8a5ec87-e631-4eac-a5bb-2c8db2101bfc"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:06.000Z",
+              "updatedAt": "2026-10-22T03:16:06.000Z",
+              "uid": "35240-a81b252d-1f68-4803-8d5b-1552b3d66e78"
+            }
+          ],
+          "id": "934d8a24-4e70-4381-95c0-0a779a594e98",
+          "createdAt": "2026-10-22T03:16:06.000Z",
+          "updatedAt": "2026-10-22T03:16:06.000Z",
+          "uid": "35240-934d8a24-4e70-4381-95c0-0a779a594e98"
+        },
+        {
+          "name": "feedback",
+          "item": [
+            {
+              "name": "Submit api feedback",
+              "id": "179e1caa-4ce1-45d8-bb93-3a06fb504f61",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"praise\",\n  \"message\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"job_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"agent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/assets/feedback",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assets",
+                    "feedback"
+                  ]
+                },
+                "description": "Report a problem with the Ludo API itself to the Ludo team. Use it ONLY for API bugs (an error, a failed or stuck job, a crash, a response that does not match this documentation) and API limitations (a parameter, operation or format you needed that the API does not support, and that you could not work around). NEVER use it to report model limitations or the quality of a result: an image, sprite, animation, 3D model, video or sound that looks wrong, ignores part of the prompt, has artifacts or is not what you wanted is not an API bug. Do not report those; retry with a different prompt, model or settings instead. Before reporting a limitation, call searchDocs with what you tried: if the docs already describe it as a known limitation, do not report it. Describe what you were trying to do and what went wrong, and name the operation it relates to. Always send the id of every job the report is about, in job_ids (up to 10): we look at those jobs' inputs and outputs, and a report about a result we cannot find cannot be investigated. Do not include personal data, secrets or file contents. Send one report per issue, and if you are an agent, tell the user what you sent. Free (no credits). Requires an API key (user scope)."
+              },
+              "response": [
+                {
+                  "id": "3d94cb19-f67a-4b52-ad4d-756ff70659de",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"category\": \"praise\",\n  \"message\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"job_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"agent\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/feedback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "feedback"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"ok\": \"<boolean>\",\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-3d94cb19-f67a-4b52-ad4d-756ff70659de"
+                },
+                {
+                  "id": "a8ab4d95-24fc-4b8d-80a2-61384c6523e3",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"category\": \"praise\",\n  \"message\": \"<string>\",\n  \"operation\": \"<string>\",\n  \"job_id\": \"<string>\",\n  \"job_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"agent\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/feedback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "feedback"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:06.000Z",
+                  "updatedAt": "2026-10-22T03:16:06.000Z",
+                  "uid": "35240-a8ab4d95-24fc-4b8d-80a2-61384c6523e3"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:06.000Z",
+              "updatedAt": "2026-10-22T03:16:06.000Z",
+              "uid": "35240-179e1caa-4ce1-45d8-bb93-3a06fb504f61"
+            }
+          ],
+          "id": "90d7ad72-6eb1-4cfa-9ecd-5ba9484c4cfb",
+          "createdAt": "2026-10-22T03:16:06.000Z",
+          "updatedAt": "2026-10-22T03:16:06.000Z",
+          "uid": "35240-90d7ad72-6eb1-4cfa-9ecd-5ba9484c4cfb"
+        }
+      ],
+      "id": "157ba0be-ab44-47dd-9320-943cbe79484b",
+      "createdAt": "2026-10-22T03:16:06.000Z",
+      "updatedAt": "2026-10-22T03:16:06.000Z",
+      "uid": "35240-157ba0be-ab44-47dd-9320-943cbe79484b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

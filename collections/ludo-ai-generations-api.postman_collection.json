@@ -1,0 +1,301 @@
+{
+  "info": {
+    "_postman_id": "f17614d4-b3ae-43bd-8546-166ab1a23bf4",
+    "name": "Ludo.ai Generations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:41.000Z",
+    "updatedAt": "2026-10-22T03:16:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f17614d4-b3ae-43bd-8546-166ab1a23bf4"
+  },
+  "item": [
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "generations",
+          "item": [
+            {
+              "name": "List generations",
+              "id": "35a596c3-f516-4adf-8c9d-a639b08c5c39",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/assets/generations?type=video&search=<string>&source=all&date_from=<integer>&date_to=<integer>&page_size=20&page_number=1&request_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assets",
+                    "generations"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Which kind of generation to list",
+                      "key": "type",
+                      "value": "video"
+                    },
+                    {
+                      "description": "Free-text search. Every whitespace-separated term must match (case-insensitive substring) the item's tags or one of its text fields (prompt, hints, style, label, ...), so \"dwarf axe\" narrows to items matching both.",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Which surface the items were generated from: api (your API/MCP generations, last 7 days only), web (your Ludo web studio generations, no time limit), or all (default, both)",
+                      "key": "source",
+                      "value": "all"
+                    },
+                    {
+                      "description": "Only return items generated at or after this time (unix seconds)",
+                      "key": "date_from",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Only return items generated at or before this time (unix seconds)",
+                      "key": "date_to",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Items per page (1-100)",
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "description": "1-based page number",
+                      "key": "page_number",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Only return items tagged with this request_id when you generated them",
+                      "key": "request_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "List your generation history - everything you have generated, through the API or in the Ludo web studio - most recent first. This is a free read-only lookup (no credits, no generation); it does not create anything. Pick a media `type` (image, spritesheet, video, audio, or 3d) and optionally narrow by free-text `search` (matched against tags, prompts and the other text on the asset), `source`, a `date_from`/`date_to` range (unix seconds), or the `request_id` you passed when you generated. Results are paginated with `page_size` (default 20, max 100) and 1-based `page_number`, and come back as an object: `items` (this page), plus `page`, `page_size` and `has_more`. Page until `has_more` is false rather than until you get a short page. `has_more` is computed by reading one row beyond the page, so it costs no extra query; there is deliberately no total count.\n\n`source` selects the surface an item came from: `api` returns only your API/MCP generations, `web` only your web-studio ones, `all` (the default) both. API-originated items expire 7 days after creation - their files live under a lifecycle-pruned storage prefix - so `source=api` never returns anything older than 7 days, while web items are kept indefinitely and are not time-bounded. API-originated results expire after 7 days - download anything you want to retain. (Assets can be kept permanently from the Ludo web app.) Each item carries an `id`, its generation-history id, which identifies the item across these listings. Every item also carries `type`, echoing the media type you asked for; on audio items the kind of audio (sfx, music, speech) is reported as `audio_type` so it does not collide with it.\n\nThis lists work that has already FINISHED. To follow a generation that is still queued or running, poll getApiJob with the job id you were given instead. Requires an API key (user scope)."
+              },
+              "response": [
+                {
+                  "id": "0b940b4a-e9ee-4f44-b65c-5b4d970b1168",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/generations?type=video&search=<string>&source=all&date_from=<integer>&date_to=<integer>&page_size=20&page_number=1&request_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "generations"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Which kind of generation to list",
+                          "key": "type",
+                          "value": "video"
+                        },
+                        {
+                          "description": "Free-text search. Every whitespace-separated term must match (case-insensitive substring) the item's tags or one of its text fields (prompt, hints, style, label, ...), so \"dwarf axe\" narrows to items matching both.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the items were generated from: api (your API/MCP generations, last 7 days only), web (your Ludo web studio generations, no time limit), or all (default, both)",
+                          "key": "source",
+                          "value": "all"
+                        },
+                        {
+                          "description": "Only return items generated at or after this time (unix seconds)",
+                          "key": "date_from",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Only return items generated at or before this time (unix seconds)",
+                          "key": "date_to",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Items per page (1-100)",
+                          "key": "page_size",
+                          "value": "20"
+                        },
+                        {
+                          "description": "1-based page number",
+                          "key": "page_number",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Only return items tagged with this request_id when you generated them",
+                          "key": "request_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"audio\",\n      \"request_id\": \"<string>\",\n      \"created_at\": \"<integer>\",\n      \"url\": \"<string>\",\n      \"duration\": \"<float>\",\n      \"has_audio\": \"<boolean>\",\n      \"audio_type\": \"<string>\",\n      \"spritesheet_url\": \"<string>\",\n      \"video_url\": \"<string>\",\n      \"audio_url\": \"<string>\",\n      \"num_frames\": \"<integer>\",\n      \"num_cols\": \"<integer>\",\n      \"num_rows\": \"<integer>\",\n      \"model_url\": \"<string>\",\n      \"snapshots\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"spritesheet\",\n      \"request_id\": \"<string>\",\n      \"created_at\": \"<integer>\",\n      \"url\": \"<string>\",\n      \"duration\": \"<float>\",\n      \"has_audio\": \"<boolean>\",\n      \"audio_type\": \"<string>\",\n      \"spritesheet_url\": \"<string>\",\n      \"video_url\": \"<string>\",\n      \"audio_url\": \"<string>\",\n      \"num_frames\": \"<integer>\",\n      \"num_cols\": \"<integer>\",\n      \"num_rows\": \"<integer>\",\n      \"model_url\": \"<string>\",\n      \"snapshots\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"page\": \"<integer>\",\n  \"page_size\": \"<integer>\",\n  \"has_more\": \"<boolean>\"\n}",
+                  "createdAt": "2026-10-22T03:16:41.000Z",
+                  "updatedAt": "2026-10-22T03:16:41.000Z",
+                  "uid": "35240-0b940b4a-e9ee-4f44-b65c-5b4d970b1168"
+                },
+                {
+                  "id": "6b04a670-8b59-451d-ac43-bb26c83448bd",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/generations?type=video&search=<string>&source=all&date_from=<integer>&date_to=<integer>&page_size=20&page_number=1&request_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "generations"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Which kind of generation to list",
+                          "key": "type",
+                          "value": "video"
+                        },
+                        {
+                          "description": "Free-text search. Every whitespace-separated term must match (case-insensitive substring) the item's tags or one of its text fields (prompt, hints, style, label, ...), so \"dwarf axe\" narrows to items matching both.",
+                          "key": "search",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the items were generated from: api (your API/MCP generations, last 7 days only), web (your Ludo web studio generations, no time limit), or all (default, both)",
+                          "key": "source",
+                          "value": "all"
+                        },
+                        {
+                          "description": "Only return items generated at or after this time (unix seconds)",
+                          "key": "date_from",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Only return items generated at or before this time (unix seconds)",
+                          "key": "date_to",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Items per page (1-100)",
+                          "key": "page_size",
+                          "value": "20"
+                        },
+                        {
+                          "description": "1-based page number",
+                          "key": "page_number",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Only return items tagged with this request_id when you generated them",
+                          "key": "request_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:41.000Z",
+                  "updatedAt": "2026-10-22T03:16:41.000Z",
+                  "uid": "35240-6b04a670-8b59-451d-ac43-bb26c83448bd"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:41.000Z",
+              "updatedAt": "2026-10-22T03:16:41.000Z",
+              "uid": "35240-35a596c3-f516-4adf-8c9d-a639b08c5c39"
+            }
+          ],
+          "id": "79ab72ef-a8ff-4059-a4b9-37ff2e6044fa",
+          "createdAt": "2026-10-22T03:16:41.000Z",
+          "updatedAt": "2026-10-22T03:16:41.000Z",
+          "uid": "35240-79ab72ef-a8ff-4059-a4b9-37ff2e6044fa"
+        }
+      ],
+      "id": "6dbb198c-32e1-4f07-82a7-d11bd7486514",
+      "createdAt": "2026-10-22T03:16:41.000Z",
+      "updatedAt": "2026-10-22T03:16:41.000Z",
+      "uid": "35240-6dbb198c-32e1-4f07-82a7-d11bd7486514"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

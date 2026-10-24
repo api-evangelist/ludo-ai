@@ -1,1126 +1,2515 @@
 {
+  "info": {
+    "_postman_id": "d82a8599-a894-46c3-b812-e4e78d58b290",
+    "name": "Ludo Ai Images API",
+    "description": "Operations tagged Images across 2 of this provider's published API definitions: ludo-ai-openapi.json, ludo-ai-images-api-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:15:28.000Z",
+    "updatedAt": "2026-10-22T03:15:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d82a8599-a894-46c3-b812-e4e78d58b290"
+  },
   "item": [
     {
-      "id": "b36668cf-3d32-4899-914b-dc6fddfc0d65",
-      "name": "Images",
-      "description": {
-        "content": "Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.",
-        "type": "text/plain"
-      },
+      "name": "assets",
       "item": [
         {
-          "id": "eea9c70a-bbc3-4754-9185-b895223d50ce",
-          "name": "Ludo.ai Generate a game-ready image",
-          "request": {
-            "name": "Ludo.ai Generate a game-ready image",
-            "description": {
-              "content": "Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "images",
-                "create"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "image",
+          "item": [
             {
-              "id": "1d5c6670-271c-4fc2-8b55-b98f2375fffd",
-              "name": "Successfully generated image(s)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "create"
+              "name": "style",
+              "item": [
+                {
+                  "name": "Generate new images that match the visual style of a reference image: supply a\u2026",
+                  "id": "ed812021-9cc7-402a-b8f0-a4bc89120417",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image/style",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image",
+                        "style"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f4e2e935-4271-43d3-8ed4-d8f4e4554633",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/style",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "style"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-f4e2e935-4271-43d3-8ed4-d8f4e4554633"
+                    },
+                    {
+                      "id": "045cd495-c588-4f78-ac3f-4e038712c7b3",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/style",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "style"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-045cd495-c588-4f78-ac3f-4e038712c7b3"
+                    },
+                    {
+                      "id": "a0767684-f138-4715-8f74-862b463b51a8",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/style",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "style"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-a0767684-f138-4715-8f74-862b463b51a8"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-ed812021-9cc7-402a-b8f0-a4bc89120417"
+                }
+              ],
+              "id": "ce88591b-476b-49f3-8e3a-07fd4dcf52c3",
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-ce88591b-476b-49f3-8e3a-07fd4dcf52c3"
+            },
+            {
+              "name": "edit",
+              "item": [
+                {
+                  "name": "Modify an existing image according to text instructions: supply a source image\u2026",
+                  "id": "3a126406-a790-4880-8c05-6117650187fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"mask_mode\": \"erase\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "563b9c3b-44ba-46d8-bc30-e6901396abe7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"mask_mode\": \"erase\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-563b9c3b-44ba-46d8-bc30-e6901396abe7"
+                    },
+                    {
+                      "id": "42e7bd25-4fcb-4043-9a87-c197d90eb68d",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"mask_mode\": \"erase\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-42e7bd25-4fcb-4043-9a87-c197d90eb68d"
+                    },
+                    {
+                      "id": "694acd93-7fa3-4654-8f0e-fb60dbefe2d1",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"mask_mode\": \"erase\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-694acd93-7fa3-4654-8f0e-fb60dbefe2d1"
+                    }
                   ],
-                  "query": [],
-                  "variable": []
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-3a126406-a790-4880-8c05-6117650187fe"
+                }
+              ],
+              "id": "e1db9558-cbec-4f81-bbcf-c4ddc6f6145e",
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-e1db9558-cbec-4f81-bbcf-c4ddc6f6145e"
+            },
+            {
+              "name": "remove-background",
+              "item": [
+                {
+                  "name": "Remove the background from a single image, returning the subject isolated on a\u2026",
+                  "id": "a5c75774-9dea-4668-9129-c93daecbdf0e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"crop\": false,\n  \"creative_edit\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image/remove-background",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image",
+                        "remove-background"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "af7d03a6-1596-4257-acb8-69efcd3121d7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"crop\": false,\n  \"creative_edit\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/remove-background",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "remove-background"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-af7d03a6-1596-4257-acb8-69efcd3121d7"
+                    },
+                    {
+                      "id": "a101793f-f3f2-43d1-90a8-6629188a7829",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"crop\": false,\n  \"creative_edit\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/remove-background",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "remove-background"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-a101793f-f3f2-43d1-90a8-6629188a7829"
+                    },
+                    {
+                      "id": "6f86131f-4ba8-4a40-b223-b918e06dad4b",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"crop\": false,\n  \"creative_edit\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/remove-background",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "remove-background"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-6f86131f-4ba8-4a40-b223-b918e06dad4b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-a5c75774-9dea-4668-9129-c93daecbdf0e"
+                }
+              ],
+              "id": "9457913f-40d8-4f8a-887c-54fe90be309a",
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-9457913f-40d8-4f8a-887c-54fe90be309a"
+            },
+            {
+              "name": "upscale",
+              "item": [
+                {
+                  "name": "Upscale an image: the same picture at a higher resolution, up to 4x, with the\u2026",
+                  "id": "783e3c0c-544b-458a-b655-ebb1d4a3d61b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image/upscale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image",
+                        "upscale"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "1b339eeb-acc3-4963-9f0d-159c99163c28",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-1b339eeb-acc3-4963-9f0d-159c99163c28"
+                    },
+                    {
+                      "id": "3b69c09f-3bf2-42e7-a832-9b1098e1dd79",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-3b69c09f-3bf2-42e7-a832-9b1098e1dd79"
+                    },
+                    {
+                      "id": "56d4208f-ec86-490c-9236-a391d57b3eba",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/image/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "image",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-56d4208f-ec86-490c-9236-a391d57b3eba"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-783e3c0c-544b-458a-b655-ebb1d4a3d61b"
+                }
+              ],
+              "id": "9ee3e669-cf98-4b5b-b8dd-29e889792fe7",
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-9ee3e669-cf98-4b5b-b8dd-29e889792fe7"
+            },
+            {
+              "name": "Generate game-art images from a text prompt alone, selecting an image_type (e.g.",
+              "id": "ea9fe746-2d82-4366-a940-f6245936e20b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
                 },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "raw": "{\n  \"image_type\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://oWimjPSlDoIugFL.rgusTeQwnVhkgKbwCC7NzclrLvAmaOhl\"\n    },\n    {\n      \"url\": \"http://RDXejFgYDU.ivlfi.rExHeoB\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6a4cb6d2-49b8-4618-b40e-dc46414cff4c",
-              "name": "Invalid request parameters",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "images",
-                    "create"
-                  ],
+                  "raw": "{{baseUrl}}/assets/image",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "71dcf66f-206a-47c2-9349-7823fe916848",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
                   "path": [
-                    "images",
-                    "create"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                    "assets",
+                    "image"
+                  ]
                 }
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4429789e-16fb-4a9a-9032-bd1dfb4c83af",
-              "name": "Rate limit exceeded or insufficient credits",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "create"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                  "id": "0eef6f52-2284-44cb-906c-65cbc3c90da5",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image_type\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image"
+                      ]
                     }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-0eef6f52-2284-44cb-906c-65cbc3c90da5"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "3e2a2815-135a-4dbb-97e5-eaa0209fa537",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image_type\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-3e2a2815-135a-4dbb-97e5-eaa0209fa537"
+                },
+                {
+                  "id": "ecd49554-67b3-4365-b2a6-e243900dfcfe",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image_type\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"art_style\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"aspect_ratio\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/image",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "image"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-ecd49554-67b3-4365-b2a6-e243900dfcfe"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-ea9fe746-2d82-4366-a940-f6245936e20b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "773ab494-7433-4f98-92f8-a4104783bff2",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-773ab494-7433-4f98-92f8-a4104783bff2"
         },
         {
-          "id": "9244f5bf-72c6-49c1-bd3d-fe2b04dc6cc0",
-          "name": "Ludo.ai Edit an existing image",
-          "request": {
-            "name": "Ludo.ai Edit an existing image",
-            "description": {
-              "content": "Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "images",
-                "edit"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "images",
+          "item": [
             {
-              "id": "ee9ecb7b-baec-42ef-88b4-0cdb62f4c96f",
-              "name": "Successfully edited image(s)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "edit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "results",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Get image results",
+                  "id": "7b8692ba-64fe-4d2a-a707-4127d0140dab",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/images/results?request_id=<string>&source=api",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "images",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by request_id",
+                          "key": "request_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                          "key": "source",
+                          "value": "api"
+                        }
+                      ]
+                    },
+                    "description": "**Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.\nList images you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called createImage, editImage, generateWithStyle, generatePose, rotateSprite, or removeBackground. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "c08b95a0-570f-4361-b27e-f883c38e34ab",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/images/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "images",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-c08b95a0-570f-4361-b27e-f883c38e34ab"
+                    },
+                    {
+                      "id": "7d453da5-21b1-4913-9b69-08d266c49db7",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/images/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "images",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:28.000Z",
+                      "updatedAt": "2026-10-22T03:15:28.000Z",
+                      "uid": "35240-7d453da5-21b1-4913-9b69-08d266c49db7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-7b8692ba-64fe-4d2a-a707-4127d0140dab"
                 }
               ],
-              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://oWimjPSlDoIugFL.rgusTeQwnVhkgKbwCC7NzclrLvAmaOhl\"\n    },\n    {\n      \"url\": \"http://RDXejFgYDU.ivlfi.rExHeoB\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "60b0e87a-b07c-4bfc-922a-9ca171253293",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "edit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ea9f233b-3011-4099-a7fa-edb32f6381d1",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "edit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "64aecbde-4b4b-4497-8477-3acded629586",
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-64aecbde-4b4b-4497-8477-3acded629586"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a99c83e9-3c77-4ba0-99ca-3b0835781b9d",
-          "name": "Ludo.ai Generate an image matching a reference style",
-          "request": {
-            "name": "Ludo.ai Generate an image matching a reference style",
-            "description": {
-              "content": "Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "images",
-                "generate-with-style"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c54e803d-19dc-4f8a-9f8d-586831ce6d7f",
-              "name": "Successfully generated styled image(s)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-with-style"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://oWimjPSlDoIugFL.rgusTeQwnVhkgKbwCC7NzclrLvAmaOhl\"\n    },\n    {\n      \"url\": \"http://RDXejFgYDU.ivlfi.rExHeoB\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "621b0e83-5a8b-4537-ba5c-f886546015bd",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-with-style"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "76a4a13d-3c79-4b54-9813-dccac8dca352",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-with-style"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3e78bf92-137c-4f71-923d-c84d495cd791",
-          "name": "Ludo.ai Generate a new pose for an existing sprite",
-          "request": {
-            "name": "Ludo.ai Generate a new pose for an existing sprite",
-            "description": {
-              "content": "Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "images",
-                "generate-pose"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "4086f072-1840-4edf-b6a7-e2a445bb3c03",
-              "name": "Successfully generated pose(s)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-pose"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://tsoNLnkxieWtLvu.zenDADPdJ\",\n      \"pose\": \"string\",\n      \"motion_prompt\": \"string\"\n    },\n    {\n      \"url\": \"https://rZeJ.mghpKo7ZgnsU+raXvFjHr+jQ9gLoaAu4iDWmeBwbJwVh9Opu6cHYh\",\n      \"pose\": \"string\",\n      \"motion_prompt\": \"string\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cb8f9c77-49a5-47bc-a369-0623aeaa62c5",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-pose"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fe52539d-45eb-448e-a3e8-8a46d2a81ca1",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "generate-pose"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e09efcf9-0b2f-4086-9bf8-b76c2016d53b",
-          "name": "Ludo.ai Remove background from an image",
-          "request": {
-            "name": "Ludo.ai Remove background from an image",
-            "description": {
-              "content": "Remove the background from an image, returning a transparent PNG. Costs 0.5 credits per image.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "images",
-                "remove-background"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f282b9af-4c75-400e-b0f4-62687d13f8ef",
-              "name": "Successfully removed background",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "remove-background"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"images\": [\n    {\n      \"url\": \"https://oWimjPSlDoIugFL.rgusTeQwnVhkgKbwCC7NzclrLvAmaOhl\"\n    },\n    {\n      \"url\": \"http://RDXejFgYDU.ivlfi.rExHeoB\"\n    }\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bd7f74c2-348e-4677-9adf-d4abdb0ba3c6",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "remove-background"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cb6d2e67-8cb4-4869-a19e-3c191a91c64d",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "images",
-                    "remove-background"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "24bcf685-f673-44b9-8ac5-7fe6ae9f4e24",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-24bcf685-f673-44b9-8ac5-7fe6ae9f4e24"
         }
       ],
-      "event": []
+      "id": "aeb014d6-d9e5-4b63-b991-0ac5f4202a51",
+      "createdAt": "2026-10-22T03:15:28.000Z",
+      "updatedAt": "2026-10-22T03:15:28.000Z",
+      "uid": "35240-aeb014d6-d9e5-4b63-b991-0ac5f4202a51"
+    },
+    {
+      "name": "images",
+      "item": [
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "Ludo.ai Generate a game-ready image",
+              "id": "f03a21da-c070-4d74-be51-f056d9a36792",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"fixed_background\",\n  \"art_style\": \"Flat Design\",\n  \"perspective\": \"Side-Scroll\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/images/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "images",
+                    "create"
+                  ]
+                },
+                "description": "Generate sprites, icons, backgrounds, UI assets, textures, and other game-ready images from text descriptions. Supports multiple art styles and perspectives. Costs 0.5 credits per image generated."
+              },
+              "response": [
+                {
+                  "id": "a9130103-e5fb-49cf-b6f5-9596dfc91f09",
+                  "name": "Successfully generated image(s)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"fixed_background\",\n  \"art_style\": \"Flat Design\",\n  \"perspective\": \"Side-Scroll\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"images\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-a9130103-e5fb-49cf-b6f5-9596dfc91f09"
+                },
+                {
+                  "id": "d3fcb4f7-dd26-41f1-86aa-b55ac46ee4fa",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"fixed_background\",\n  \"art_style\": \"Flat Design\",\n  \"perspective\": \"Side-Scroll\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-d3fcb4f7-dd26-41f1-86aa-b55ac46ee4fa"
+                },
+                {
+                  "id": "4dca3ca9-dfb3-4705-b3f1-95ccaf056df6",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"fixed_background\",\n  \"art_style\": \"Flat Design\",\n  \"perspective\": \"Side-Scroll\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-4dca3ca9-dfb3-4705-b3f1-95ccaf056df6"
+                },
+                {
+                  "id": "befec7f8-fc79-43a6-94b3-ffadcf1b2805",
+                  "name": "Rate limit exceeded or insufficient credits",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"image_type\": \"fixed_background\",\n  \"art_style\": \"Flat Design\",\n  \"perspective\": \"Side-Scroll\",\n  \"aspect_ratio\": \"default\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-befec7f8-fc79-43a6-94b3-ffadcf1b2805"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-f03a21da-c070-4d74-be51-f056d9a36792"
+            }
+          ],
+          "id": "2e22bc46-e5ab-4436-84a5-7d3065fdfd72",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-2e22bc46-e5ab-4436-84a5-7d3065fdfd72"
+        },
+        {
+          "name": "edit",
+          "item": [
+            {
+              "name": "Ludo.ai Edit an existing image",
+              "id": "fac843ee-3ba4-418e-9ac0-b514cc799d45",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/images/edit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "images",
+                    "edit"
+                  ]
+                },
+                "description": "Modify an existing image using text instructions for smart editing. Supports operations like background removal, color adjustments, and content additions. An optional reference image can guide style or content. Costs 0.5 credits per image generated."
+              },
+              "response": [
+                {
+                  "id": "a3f2db1d-b57b-437b-b50a-3d7ffbaf5a10",
+                  "name": "Successfully edited image(s)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"images\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-a3f2db1d-b57b-437b-b50a-3d7ffbaf5a10"
+                },
+                {
+                  "id": "fbbab38f-fed7-460f-af42-c70c3eb9f051",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-fbbab38f-fed7-460f-af42-c70c3eb9f051"
+                },
+                {
+                  "id": "f51377da-4b1e-4103-816a-eea50259923c",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"reference_image\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-f51377da-4b1e-4103-816a-eea50259923c"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-fac843ee-3ba4-418e-9ac0-b514cc799d45"
+            }
+          ],
+          "id": "b6f587fc-edab-4552-adcf-ef18fc5d93a5",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-b6f587fc-edab-4552-adcf-ef18fc5d93a5"
+        },
+        {
+          "name": "generate-with-style",
+          "item": [
+            {
+              "name": "Ludo.ai Generate an image matching a reference style",
+              "id": "d1af8335-672d-4170-8227-a1362c12fc5b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/images/generate-with-style",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "images",
+                    "generate-with-style"
+                  ]
+                },
+                "description": "Generate new content while maintaining the visual style of a reference image. Useful for creating consistent asset sets that share an art direction. Costs 0.5 credits per image generated."
+              },
+              "response": [
+                {
+                  "id": "920f3e39-9c7d-4eb2-9f6f-5c71a1ddf046",
+                  "name": "Successfully generated styled image(s)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-with-style",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-with-style"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"images\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-920f3e39-9c7d-4eb2-9f6f-5c71a1ddf046"
+                },
+                {
+                  "id": "3ae7741d-4e89-4e49-bff6-8ec78ebeb5de",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-with-style",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-with-style"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-3ae7741d-4e89-4e49-bff6-8ec78ebeb5de"
+                },
+                {
+                  "id": "b5531166-7273-47af-80b6-d87e1b18fd1f",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"style_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"image_type\": \"sprite\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-with-style",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-with-style"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-b5531166-7273-47af-80b6-d87e1b18fd1f"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-d1af8335-672d-4170-8227-a1362c12fc5b"
+            }
+          ],
+          "id": "e7a6d66e-ae3b-465f-927e-5ccdd98b18a9",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-e7a6d66e-ae3b-465f-927e-5ccdd98b18a9"
+        },
+        {
+          "name": "generate-pose",
+          "item": [
+            {
+              "name": "Ludo.ai Generate a new pose for an existing sprite",
+              "id": "a4572e86-930f-40b5-86c2-d9dcd207a4ae",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"Jumping\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/images/generate-pose",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "images",
+                    "generate-pose"
+                  ]
+                },
+                "description": "Generate a new pose for an existing sprite character. Best used before animateSprite to ensure the starting pose matches the intended animation. Returns a suggested motion prompt for optimal animation results. Costs 0.5 credits per image generated."
+              },
+              "response": [
+                {
+                  "id": "629851f7-bd22-4d55-8e66-0365964690ba",
+                  "name": "Successfully generated pose(s)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"Jumping\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-pose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-pose"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"images\": [\n    {\n      \"url\": \"<uri>\",\n      \"pose\": \"<string>\",\n      \"motion_prompt\": \"<string>\"\n    },\n    {\n      \"url\": \"<uri>\",\n      \"pose\": \"<string>\",\n      \"motion_prompt\": \"<string>\"\n    }\n  ],\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-629851f7-bd22-4d55-8e66-0365964690ba"
+                },
+                {
+                  "id": "a7fdc92e-1650-43c1-8dd7-c4fc8f80b4cf",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"Jumping\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-pose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-pose"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-a7fdc92e-1650-43c1-8dd7-c4fc8f80b4cf"
+                },
+                {
+                  "id": "622813ad-7fdd-4273-a1d0-e3ca6308a8f3",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"Jumping\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/images/generate-pose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "images",
+                        "generate-pose"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:28.000Z",
+                  "updatedAt": "2026-10-22T03:15:28.000Z",
+                  "uid": "35240-622813ad-7fdd-4273-a1d0-e3ca6308a8f3"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:28.000Z",
+              "updatedAt": "2026-10-22T03:15:28.000Z",
+              "uid": "35240-a4572e86-930f-40b5-86c2-d9dcd207a4ae"
+            }
+          ],
+          "id": "af960caf-4b53-42bd-978f-9d7dbe9f216d",
+          "createdAt": "2026-10-22T03:15:28.000Z",
+          "updatedAt": "2026-10-22T03:15:28.000Z",
+          "uid": "35240-af960caf-4b53-42bd-978f-9d7dbe9f216d"
+        }
+      ],
+      "id": "90619dcb-7cec-47ff-bb3c-d55aeb87aaaa",
+      "createdAt": "2026-10-22T03:15:28.000Z",
+      "updatedAt": "2026-10-22T03:15:28.000Z",
+      "uid": "35240-90619dcb-7cec-47ff-bb3c-d55aeb87aaaa"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.ludo.ai/api",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/api"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authentication"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "3adae832-f7e7-4aad-b264-dc2b76fe4546",
-    "name": "Ludo.ai REST 3D Models Images API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

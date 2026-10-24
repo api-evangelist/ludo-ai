@@ -1,0 +1,1215 @@
+{
+  "info": {
+    "_postman_id": "33f6039c-bdf8-4eac-9cba-1716da093de0",
+    "name": "Ludo.ai Videos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:17:07.000Z",
+    "updatedAt": "2026-10-22T03:17:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-33f6039c-bdf8-4eac-9cba-1716da093de0"
+  },
+  "item": [
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "video",
+          "item": [
+            {
+              "name": "references",
+              "item": [
+                {
+                  "name": "Generate a video from 1-5 reference images and a text prompt\u2026",
+                  "id": "dbcede4d-77af-45aa-b8a1-a1a0c5e53318",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\"\n  ],\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"aspect_ratio\": \"default\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video/references",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video",
+                        "references"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f47dfd2e-16c9-41fb-8d76-988e93de5614",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\"\n  ],\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"aspect_ratio\": \"default\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/references",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "references"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"has_audio\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-f47dfd2e-16c9-41fb-8d76-988e93de5614"
+                    },
+                    {
+                      "id": "75de7aac-bc40-46d1-b640-eb3a52233ee6",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\"\n  ],\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"aspect_ratio\": \"default\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/references",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "references"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"succeeded\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-75de7aac-bc40-46d1-b640-eb3a52233ee6"
+                    },
+                    {
+                      "id": "b66bc998-6e2d-4300-9f04-245af9e3ad9f",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\"\n  ],\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"aspect_ratio\": \"default\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/references",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "references"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-b66bc998-6e2d-4300-9f04-245af9e3ad9f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-dbcede4d-77af-45aa-b8a1-a1a0c5e53318"
+                }
+              ],
+              "id": "51eaf553-6d24-404d-b6ca-49a665857bff",
+              "createdAt": "2026-10-22T03:17:08.000Z",
+              "updatedAt": "2026-10-22T03:17:08.000Z",
+              "uid": "35240-51eaf553-6d24-404d-b6ca-49a665857bff"
+            },
+            {
+              "name": "edit",
+              "item": [
+                {
+                  "name": "Edit a previously generated video with a text prompt and optional reference\u2026",
+                  "id": "a4721ffa-64e2-499b-b7da-db1832a6920d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"video\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"griffin-hd\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b800da39-5e22-4095-b5b6-af907ac9bef0",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"video\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"griffin-hd\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"has_audio\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-b800da39-5e22-4095-b5b6-af907ac9bef0"
+                    },
+                    {
+                      "id": "d4f6106b-da12-4ac7-87ac-58be70898c34",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"video\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"griffin-hd\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"succeeded\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-d4f6106b-da12-4ac7-87ac-58be70898c34"
+                    },
+                    {
+                      "id": "cd4ea577-bb8c-4508-999d-8aee775d5a17",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"video\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"griffin-hd\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-cd4ea577-bb8c-4508-999d-8aee775d5a17"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-a4721ffa-64e2-499b-b7da-db1832a6920d"
+                }
+              ],
+              "id": "7c71a20d-417c-4df7-b186-ab59463dbba3",
+              "createdAt": "2026-10-22T03:17:08.000Z",
+              "updatedAt": "2026-10-22T03:17:08.000Z",
+              "uid": "35240-7c71a20d-417c-4df7-b186-ab59463dbba3"
+            },
+            {
+              "name": "upscale",
+              "item": [
+                {
+                  "name": "Upscale a previously generated video to twice its resolution (2x).",
+                  "id": "32721fb6-4b04-41c7-ba56-3e30ffe35e2a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"video\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video/upscale",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video",
+                        "upscale"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ec57c19b-5201-4b89-b514-c09e5348c13b",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"video\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"has_audio\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-ec57c19b-5201-4b89-b514-c09e5348c13b"
+                    },
+                    {
+                      "id": "ad1646b3-1055-44af-aff7-f6b82db09c6f",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"video\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"succeeded\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-ad1646b3-1055-44af-aff7-f6b82db09c6f"
+                    },
+                    {
+                      "id": "4cb59f63-b49d-42fb-96cb-33cb953e548b",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"video\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/video/upscale",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "video",
+                            "upscale"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-4cb59f63-b49d-42fb-96cb-33cb953e548b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-32721fb6-4b04-41c7-ba56-3e30ffe35e2a"
+                }
+              ],
+              "id": "a4bf1aac-baa9-4f00-b600-80d15d6f4049",
+              "createdAt": "2026-10-22T03:17:08.000Z",
+              "updatedAt": "2026-10-22T03:17:08.000Z",
+              "uid": "35240-a4bf1aac-baa9-4f00-b600-80d15d6f4049"
+            },
+            {
+              "name": "Generate a short video clip from a source image and a motion text prompt\u2026",
+              "id": "c5cfff66-b182-4140-9e30-0e4309e8aa6c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"augment_prompt\": true,\n  \"final_image\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/assets/video",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "assets",
+                    "video"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5c4a73dc-cbe6-425d-8453-914cb4998188",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"augment_prompt\": true,\n  \"final_image\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"has_audio\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-5c4a73dc-cbe6-425d-8453-914cb4998188"
+                },
+                {
+                  "id": "546fc8e5-db1a-4c56-95d7-11f19f1a5649",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"augment_prompt\": true,\n  \"final_image\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"succeeded\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-546fc8e5-db1a-4c56-95d7-11f19f1a5649"
+                },
+                {
+                  "id": "046c9c77-a113-4451-b9f0-6cd8755087bd",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"augment_prompt\": true,\n  \"final_image\": \"<string>\",\n  \"duration\": 5,\n  \"model\": \"griffin\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/video",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "video"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-046c9c77-a113-4451-b9f0-6cd8755087bd"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:08.000Z",
+              "updatedAt": "2026-10-22T03:17:08.000Z",
+              "uid": "35240-c5cfff66-b182-4140-9e30-0e4309e8aa6c"
+            }
+          ],
+          "id": "81eaf036-6293-46c0-ad6a-55b7f21d4115",
+          "createdAt": "2026-10-22T03:17:08.000Z",
+          "updatedAt": "2026-10-22T03:17:08.000Z",
+          "uid": "35240-81eaf036-6293-46c0-ad6a-55b7f21d4115"
+        },
+        {
+          "name": "videos",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "Get video results",
+                  "id": "a7113733-d3bf-4a62-9c7c-f311c63cb230",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/videos/results?request_id=<string>&source=api",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "videos",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by request_id",
+                          "key": "request_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                          "key": "source",
+                          "value": "api"
+                        }
+                      ]
+                    },
+                    "description": "**Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.\nList videos you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called createVideo. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "5ca8cab3-a01c-45c2-944c-dc76a3b13f6f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/videos/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "videos",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"has_audio\": \"<boolean>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"has_audio\": \"<boolean>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-5ca8cab3-a01c-45c2-944c-dc76a3b13f6f"
+                    },
+                    {
+                      "id": "c2b32f30-88de-4cde-a474-53c5f169e97e",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/videos/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "videos",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:08.000Z",
+                      "updatedAt": "2026-10-22T03:17:08.000Z",
+                      "uid": "35240-c2b32f30-88de-4cde-a474-53c5f169e97e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:08.000Z",
+                  "updatedAt": "2026-10-22T03:17:08.000Z",
+                  "uid": "35240-a7113733-d3bf-4a62-9c7c-f311c63cb230"
+                }
+              ],
+              "id": "665def28-12da-4c95-9c72-76f822ec3b3d",
+              "createdAt": "2026-10-22T03:17:08.000Z",
+              "updatedAt": "2026-10-22T03:17:08.000Z",
+              "uid": "35240-665def28-12da-4c95-9c72-76f822ec3b3d"
+            }
+          ],
+          "id": "53bb4634-f3e0-4682-b124-9c8b8dea328e",
+          "createdAt": "2026-10-22T03:17:08.000Z",
+          "updatedAt": "2026-10-22T03:17:08.000Z",
+          "uid": "35240-53bb4634-f3e0-4682-b124-9c8b8dea328e"
+        }
+      ],
+      "id": "f3312b55-cd42-44d9-98dc-b8c5612cf068",
+      "createdAt": "2026-10-22T03:17:08.000Z",
+      "updatedAt": "2026-10-22T03:17:08.000Z",
+      "uid": "35240-f3312b55-cd42-44d9-98dc-b8c5612cf068"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

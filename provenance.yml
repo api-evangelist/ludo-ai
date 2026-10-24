@@ -9,30 +9,78 @@ artifacts:
   authentication/ludo-ai-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  changelog/ludo-ai-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
+  cli/ludo-ai-cli.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/ludo-ai-3d-models-api.opencollection.json:
     method: derived
     evidence: openapi/ludo-ai-3d-models-api
   collections/ludo-ai-3d-models-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-3d-models-api
+  collections/ludo-ai-account-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-account-api
   collections/ludo-ai-animation-api.opencollection.json:
     method: derived
     evidence: openapi/ludo-ai-animation-api
   collections/ludo-ai-animation-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-animation-api
+  collections/ludo-ai-api-keys-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-api-keys-api
   collections/ludo-ai-audio-api.opencollection.json:
     method: derived
     evidence: openapi/ludo-ai-audio-api
   collections/ludo-ai-audio-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-audio-api
+  collections/ludo-ai-authentication-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-authentication-api
+  collections/ludo-ai-cli-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-cli-api
+  collections/ludo-ai-documentation-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-documentation-api
+  collections/ludo-ai-files-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-files-api
+  collections/ludo-ai-games-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-games-api
+  collections/ludo-ai-gamestorming-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-gamestorming-api
+  collections/ludo-ai-generations-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-generations-api
+  collections/ludo-ai-guide-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-guide-api
   collections/ludo-ai-images-api.opencollection.json:
     method: derived
     evidence: openapi/ludo-ai-images-api
   collections/ludo-ai-images-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-images-api
+  collections/ludo-ai-jobs-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-jobs-api
+  collections/ludo-ai-misc-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-misc-api
+  collections/ludo-ai-payments-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-payments-api
+  collections/ludo-ai-projects-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-projects-api
   collections/ludo-ai-rest-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -45,145 +93,127 @@ artifacts:
   collections/ludo-ai-results-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-results-api
+  collections/ludo-ai-spritesheets-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-spritesheets-api
+  collections/ludo-ai-team-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-team-api
   collections/ludo-ai-video-api.opencollection.json:
     method: derived
     evidence: openapi/ludo-ai-video-api
   collections/ludo-ai-video-api.postman_collection.json:
     method: derived
     evidence: openapi/ludo-ai-video-api
+  collections/ludo-ai-videos-api.postman_collection.json:
+    method: derived
+    evidence: openapi/ludo-ai-videos-api
+  conformance/ludo-ai-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  data-model/ludo-ai-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/ludo-ai-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   finops/ludo-ai-finops.yml:
     method: generated
     evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/ludo-ai-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/ludo-ai-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/ludo-ai-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-animate-sprite-keyframes-payload-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-animate-sprite-payload-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-audio-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-audio-results-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-image-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-music-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-sound-effect-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-speech-preset-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-speech-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-video-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-create-voice-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-edit-image-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-edit-spritesheet-payload-public-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/ludo-ai-game-asset-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  json-schema/ludo-ai-generate-image-payload-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-generate-pose-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-generate-video-payload-public-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-generate-with-style-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-image-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-image-results-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-model3-dresults-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-pose-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-sprite-results-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-transfer-motion-payload-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-video-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/ludo-ai-video-results-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -267,30 +297,116 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  openapi/_original/ludo-ai-rest-api-openapi.yml:
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  llms/ludo-ai-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
+  llms/ludo-ai-llms.txt:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
+  mcp/ludo-ai-mcp-tools.json:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/ludo-ai-mcp.yml:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/ludo-ai-tool-crosswalk.yml:
+    method: derived
+    evidence: declared in the artifact
+  openapi/_original/ludo-ai-openapi.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://api.ludo.ai/api-docs (sha256 ef16c08d7b06, fetched 2026-10-19)
   openapi/ludo-ai-3d-models-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-account-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/ludo-ai-animation-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-api-keys-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/ludo-ai-audio-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-authentication-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-cli-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-documentation-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-files-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-games-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-gamestorming-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-generations-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-guide-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/ludo-ai-images-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-jobs-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-misc-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-payments-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-projects-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/ludo-ai-results-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-spritesheets-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/ludo-ai-team-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/ludo-ai-video-api-openapi.yml:
+    method: unknown
+    evidence: no authorship recorded
+  openapi/ludo-ai-videos-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  plans/ludo-ai-plans-pricing.yml:
+  overlays/ludo-ai-openapi-overlay.yaml:
     method: generated
+    evidence: declared in the artifact
+  packages/ludo-ai-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  plans/ludo-ai-plans-pricing.yml:
+    method: searched
     evidence: declared in the artifact
   rate-limits/ludo-ai-rate-limits.yml:
     method: generated
@@ -298,6 +414,39 @@ artifacts:
   rules/ludo-ai-jsonschema-spectral-rules.yml:
     method: generated
     evidence: declared in the artifact
+  rules/ludo-ai-rules.yml:
+    method: generated
+    evidence: declared in the artifact
   security/ludo-ai-domain-security.yml:
+    method: unknown
+    evidence: no authorship recorded
+  security/ludo-ai-vulnerability-disclosure.yml:
+    method: searched
+    evidence: declared in the artifact
+  skills/_index.yml:
+    method: generated
+    evidence: declared in the artifact
+  skills/ludo-ai-animate-sprite.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/ludo-ai-create-and-fetch-video.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/ludo-ai-generate-and-edit-image.md:
+    method: generated
+    evidence: declared in the artifact
+  vendors/ludo-ai-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/ludo-ai-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/ludo-ai-api-catalog.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/ludo-ai-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/ludo-ai-well-known.yml:
     method: unknown
     evidence: no authorship recorded

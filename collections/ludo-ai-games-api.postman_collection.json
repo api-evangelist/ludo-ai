@@ -1,0 +1,2022 @@
+{
+  "info": {
+    "_postman_id": "c1625560-a206-4202-b01e-de61a244d7fa",
+    "name": "Ludo.ai Games API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:17:24.000Z",
+    "updatedAt": "2026-10-22T03:17:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c1625560-a206-4202-b01e-de61a244d7fa"
+  },
+  "item": [
+    {
+      "name": "games",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get a game's information (Roles: user)",
+              "id": "f9c19370-72c1-4cc8-a5f8-11c910d1fa4f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/games/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "games",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8b422ce4-b5fd-4532-aa3d-4b093f622c34",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b94383bc-833b-4b7d-b99c-fd00fcb1eeb6",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/games/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "games",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"source_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"short_description_clean\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"description_clean\": \"<string>\",\n  \"description_annotations\": [\n    {\n      \"start\": \"<long>\",\n      \"end\": \"<long>\",\n      \"label\": \"<string>\",\n      \"text\": \"<string>\",\n      \"label_probs\": {\n        \"feature\": \"<float>\",\n        \"junk\": \"<float>\",\n        \"mechanic\": \"<float>\",\n        \"theme\": \"<float>\"\n      }\n    },\n    {\n      \"start\": \"<long>\",\n      \"end\": \"<long>\",\n      \"label\": \"<string>\",\n      \"text\": \"<string>\",\n      \"label_probs\": {\n        \"feature\": \"<float>\",\n        \"junk\": \"<float>\",\n        \"mechanic\": \"<float>\",\n        \"theme\": \"<float>\"\n      }\n    }\n  ],\n  \"user_rating_count\": \"<long>\",\n  \"user_rating\": \"<float>\",\n  \"developers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_date\": \"<long>\",\n  \"update_date\": \"<long>\",\n  \"icon\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"image_id\": \"<string>\",\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"final_score\": \"<float>\",\n    \"nsfw_prob\": \"<float>\",\n    \"similarity\": \"<float>\",\n    \"width\": \"<long>\",\n    \"height\": \"<long>\",\n    \"game_id\": \"<string>\",\n    \"hosted_filename\": \"<string>\",\n    \"icon\": \"<boolean>\",\n    \"targetSize\": \"<integer>\",\n    \"seed\": \"<integer>\",\n    \"embedded\": \"<boolean>\",\n    \"analysed\": \"<boolean>\",\n    \"image\": \"<string>\",\n    \"image_type\": \"<string>\",\n    \"prompt\": \"<string>\",\n    \"motion_prompt\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_style\": \"<string>\",\n    \"selected_perspective\": \"<string>\",\n    \"is_safe\": \"<boolean>\",\n    \"platform\": \"<string>\",\n    \"loading\": \"<boolean>\",\n    \"original_hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"edit_mask\": \"<string>\",\n    \"edit_mode\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\",\n    \"edit_mask_pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"nsfw\": \"<float>\",\n    \"pose\": {\n      \"animation_prompt\": \"<string>\",\n      \"margin_ratio\": \"<float>\",\n      \"margin_ratio_mode\": \"<string>\",\n      \"name\": \"<string>\",\n      \"prompt\": \"<string>\"\n    },\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  },\n  \"header\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"image_id\": \"<string>\",\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"final_score\": \"<float>\",\n    \"nsfw_prob\": \"<float>\",\n    \"similarity\": \"<float>\",\n    \"width\": \"<long>\",\n    \"height\": \"<long>\",\n    \"game_id\": \"<string>\",\n    \"hosted_filename\": \"<string>\",\n    \"icon\": \"<boolean>\",\n    \"targetSize\": \"<integer>\",\n    \"seed\": \"<integer>\",\n    \"embedded\": \"<boolean>\",\n    \"analysed\": \"<boolean>\",\n    \"image\": \"<string>\",\n    \"image_type\": \"<string>\",\n    \"prompt\": \"<string>\",\n    \"motion_prompt\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_style\": \"<string>\",\n    \"selected_perspective\": \"<string>\",\n    \"is_safe\": \"<boolean>\",\n    \"platform\": \"<string>\",\n    \"loading\": \"<boolean>\",\n    \"original_hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"edit_mask\": \"<string>\",\n    \"edit_mode\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\",\n    \"edit_mask_pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"nsfw\": \"<float>\",\n    \"pose\": {\n      \"animation_prompt\": \"<string>\",\n      \"margin_ratio\": \"<float>\",\n      \"margin_ratio_mode\": \"<string>\",\n      \"name\": \"<string>\",\n      \"prompt\": \"<string>\"\n    },\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  },\n  \"videos\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"screenshots\": [\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  ],\n  \"url\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actual_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"predicted_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"augmented_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source\": \"<string>\",\n  \"price\": \"<string>\",\n  \"platforms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"game_modes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"advisory_rating\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-b94383bc-833b-4b7d-b99c-fd00fcb1eeb6"
+                },
+                {
+                  "id": "7f5f6a0f-8e88-4afe-850e-0467d9035974",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/games/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "games",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-7f5f6a0f-8e88-4afe-850e-0467d9035974"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-f9c19370-72c1-4cc8-a5f8-11c910d1fa4f"
+            }
+          ],
+          "id": "1a699db3-c41e-4413-b1cb-f91ec937dba9",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-1a699db3-c41e-4413-b1cb-f91ec937dba9"
+        },
+        {
+          "name": "sprite3d",
+          "item": [
+            {
+              "name": "preview",
+              "item": [
+                {
+                  "name": "Preview a 3D model as a sprite in a style: a few frames of each view asked for\u2026",
+                  "id": "03f3ff18-71ff-4fd4-91c8-3e3a41284b31",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"perspective\": \"low\",\n  \"style_id\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"generated_model\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"asset\": {\n      \"id\": \"<string>\",\n      \"rigged\": \"<boolean>\",\n      \"animatable\": \"<boolean>\",\n      \"seed\": \"<integer>\",\n      \"images_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"params_encrypted\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"video_b64\": \"<string>\",\n      \"mesh_video_b64\": \"<string>\",\n      \"snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"model_b64\": \"<string>\",\n      \"binary_data_b64\": \"<string>\",\n      \"voxels_b64\": \"<string>\",\n      \"mask_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"depth_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"normal_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"textured\": \"<boolean>\",\n      \"view_azimuths\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"generation_parameters\": {\n        \"model\": \"hero\",\n        \"rig\": \"<boolean>\",\n        \"rig_type\": \"humanoid_template_hands\",\n        \"joint_naming\": \"unreal\",\n        \"target_num_faces\": 50000,\n        \"dynamic_simplification\": 0.15,\n        \"remeshing\": \"conservative\",\n        \"texture_size\": 2048,\n        \"texture_type\": \"pbr\",\n        \"render_format\": \"<string>\",\n        \"render_video\": \"<boolean>\"\n      }\n    },\n    \"image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"back_image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  },\n  \"user_model\": \"<string>\",\n  \"user_model_file_type\": \"glb\",\n  \"animation_clip_id\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"direction\": \"SW\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": \"<boolean>\",\n  \"keep_vertical_travel\": \"<boolean>\",\n  \"target_frame_size\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/games/sprite3d/preview",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "games",
+                        "sprite3d",
+                        "preview"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "bb5df296-0d29-4ef3-89a5-b1b8f610d7d6",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"perspective\": \"low\",\n  \"style_id\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"generated_model\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"asset\": {\n      \"id\": \"<string>\",\n      \"rigged\": \"<boolean>\",\n      \"animatable\": \"<boolean>\",\n      \"seed\": \"<integer>\",\n      \"images_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"params_encrypted\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"video_b64\": \"<string>\",\n      \"mesh_video_b64\": \"<string>\",\n      \"snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"model_b64\": \"<string>\",\n      \"binary_data_b64\": \"<string>\",\n      \"voxels_b64\": \"<string>\",\n      \"mask_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"depth_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"normal_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"textured\": \"<boolean>\",\n      \"view_azimuths\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"generation_parameters\": {\n        \"model\": \"hero\",\n        \"rig\": \"<boolean>\",\n        \"rig_type\": \"humanoid_template_hands\",\n        \"joint_naming\": \"unreal\",\n        \"target_num_faces\": 50000,\n        \"dynamic_simplification\": 0.15,\n        \"remeshing\": \"conservative\",\n        \"texture_size\": 2048,\n        \"texture_type\": \"pbr\",\n        \"render_format\": \"<string>\",\n        \"render_video\": \"<boolean>\"\n      }\n    },\n    \"image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"back_image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  },\n  \"user_model\": \"<string>\",\n  \"user_model_file_type\": \"glb\",\n  \"animation_clip_id\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"direction\": \"SW\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": \"<boolean>\",\n  \"keep_vertical_travel\": \"<boolean>\",\n  \"target_frame_size\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "preview"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"request_id\": \"<string>\",\n    \"direction\": \"<string>\",\n    \"video\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"num_frames\": \"<integer>\",\n    \"fps\": \"<float>\",\n    \"preview_scale\": \"<float>\",\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  },\n  {\n    \"request_id\": \"<string>\",\n    \"direction\": \"<string>\",\n    \"video\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"num_frames\": \"<integer>\",\n    \"fps\": \"<float>\",\n    \"preview_scale\": \"<float>\",\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  }\n]",
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-bb5df296-0d29-4ef3-89a5-b1b8f610d7d6"
+                    },
+                    {
+                      "id": "c0cdc508-a9a7-4662-815b-310e5a96bca4",
+                      "name": "Cancelled (DELETE /games/generate/{request_id}) by a newer preview",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"perspective\": \"low\",\n  \"style_id\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"generated_model\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"asset\": {\n      \"id\": \"<string>\",\n      \"rigged\": \"<boolean>\",\n      \"animatable\": \"<boolean>\",\n      \"seed\": \"<integer>\",\n      \"images_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"params_encrypted\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"video_b64\": \"<string>\",\n      \"mesh_video_b64\": \"<string>\",\n      \"snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"model_b64\": \"<string>\",\n      \"binary_data_b64\": \"<string>\",\n      \"voxels_b64\": \"<string>\",\n      \"mask_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"depth_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"normal_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"textured\": \"<boolean>\",\n      \"view_azimuths\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"generation_parameters\": {\n        \"model\": \"hero\",\n        \"rig\": \"<boolean>\",\n        \"rig_type\": \"humanoid_template_hands\",\n        \"joint_naming\": \"unreal\",\n        \"target_num_faces\": 50000,\n        \"dynamic_simplification\": 0.15,\n        \"remeshing\": \"conservative\",\n        \"texture_size\": 2048,\n        \"texture_type\": \"pbr\",\n        \"render_format\": \"<string>\",\n        \"render_video\": \"<boolean>\"\n      }\n    },\n    \"image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"back_image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  },\n  \"user_model\": \"<string>\",\n  \"user_model_file_type\": \"glb\",\n  \"animation_clip_id\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"direction\": \"SW\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": \"<boolean>\",\n  \"keep_vertical_travel\": \"<boolean>\",\n  \"target_frame_size\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "preview"
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-c0cdc508-a9a7-4662-815b-310e5a96bca4"
+                    },
+                    {
+                      "id": "e3f77795-8d50-4a3c-b916-7e6cecb16885",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"perspective\": \"low\",\n  \"style_id\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"generated_model\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"asset\": {\n      \"id\": \"<string>\",\n      \"rigged\": \"<boolean>\",\n      \"animatable\": \"<boolean>\",\n      \"seed\": \"<integer>\",\n      \"images_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"params_encrypted\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"video_b64\": \"<string>\",\n      \"mesh_video_b64\": \"<string>\",\n      \"snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"model_b64\": \"<string>\",\n      \"binary_data_b64\": \"<string>\",\n      \"voxels_b64\": \"<string>\",\n      \"mask_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"depth_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"normal_snapshots_b64\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"textured\": \"<boolean>\",\n      \"view_azimuths\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"generation_parameters\": {\n        \"model\": \"hero\",\n        \"rig\": \"<boolean>\",\n        \"rig_type\": \"humanoid_template_hands\",\n        \"joint_naming\": \"unreal\",\n        \"target_num_faces\": 50000,\n        \"dynamic_simplification\": 0.15,\n        \"remeshing\": \"conservative\",\n        \"texture_size\": 2048,\n        \"texture_type\": \"pbr\",\n        \"render_format\": \"<string>\",\n        \"render_video\": \"<boolean>\"\n      }\n    },\n    \"image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"back_image\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  },\n  \"user_model\": \"<string>\",\n  \"user_model_file_type\": \"glb\",\n  \"animation_clip_id\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"direction\": \"SW\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": \"<boolean>\",\n  \"keep_vertical_travel\": \"<boolean>\",\n  \"target_frame_size\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "preview"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-e3f77795-8d50-4a3c-b916-7e6cecb16885"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-03f3ff18-71ff-4fd4-91c8-3e3a41284b31"
+                }
+              ],
+              "id": "5aad974d-3546-440b-ba13-476cfb08769d",
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-5aad974d-3546-440b-ba13-476cfb08769d"
+            },
+            {
+              "name": "look",
+              "item": [
+                {
+                  "name": "Save the look a 3D model renders as a sprite with (style, its settings, camera)\u2026",
+                  "id": "02a8ac39-718d-4d01-9431-add3a2ee7667",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model_id\": \"<string>\",\n  \"look\": {\n    \"style_id\": \"<string>\",\n    \"style_version\": \"<integer>\",\n    \"style_params\": {},\n    \"perspective\": \"isometric\",\n    \"direction\": \"NE\",\n    \"saved_at\": \"<integer>\",\n    \"preview_url\": \"<string>\"\n  },\n  \"preview_video\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/games/sprite3d/look",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "games",
+                        "sprite3d",
+                        "look"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "76acdd01-f123-4c0e-8994-d36dc1d9cbe8",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model_id\": \"<string>\",\n  \"look\": {\n    \"style_id\": \"<string>\",\n    \"style_version\": \"<integer>\",\n    \"style_params\": {},\n    \"perspective\": \"isometric\",\n    \"direction\": \"NE\",\n    \"saved_at\": \"<integer>\",\n    \"preview_url\": \"<string>\"\n  },\n  \"preview_video\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/look",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "look"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"style_id\": \"<string>\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"perspective\": \"high\",\n  \"direction\": \"SW\",\n  \"saved_at\": \"<integer>\",\n  \"preview_url\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-76acdd01-f123-4c0e-8994-d36dc1d9cbe8"
+                    },
+                    {
+                      "id": "5620b8de-bd8d-475d-a7ea-40d74c54fd8e",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model_id\": \"<string>\",\n  \"look\": {\n    \"style_id\": \"<string>\",\n    \"style_version\": \"<integer>\",\n    \"style_params\": {},\n    \"perspective\": \"isometric\",\n    \"direction\": \"NE\",\n    \"saved_at\": \"<integer>\",\n    \"preview_url\": \"<string>\"\n  },\n  \"preview_video\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/look",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "look"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-5620b8de-bd8d-475d-a7ea-40d74c54fd8e"
+                    },
+                    {
+                      "id": "c5e6faec-246f-475e-85c3-9833916e832d",
+                      "name": "No such 3D model of the caller's",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model_id\": \"<string>\",\n  \"look\": {\n    \"style_id\": \"<string>\",\n    \"style_version\": \"<integer>\",\n    \"style_params\": {},\n    \"perspective\": \"isometric\",\n    \"direction\": \"NE\",\n    \"saved_at\": \"<integer>\",\n    \"preview_url\": \"<string>\"\n  },\n  \"preview_video\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/games/sprite3d/look",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "games",
+                            "sprite3d",
+                            "look"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-c5e6faec-246f-475e-85c3-9833916e832d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-02a8ac39-718d-4d01-9431-add3a2ee7667"
+                }
+              ],
+              "id": "124f1b55-ca18-4899-89d8-09f9f4761073",
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-124f1b55-ca18-4899-89d8-09f9f4761073"
+            }
+          ],
+          "id": "79b910c3-73cb-40ad-ae83-91565ad8242f",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-79b910c3-73cb-40ad-ae83-91565ad8242f"
+        },
+        {
+          "name": "Get multiple games' information (Roles: user)",
+          "id": "db3ed677-3a3c-4e37-8b77-a5c05fd5126e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/games/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "games",
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccfc6920-ca64-406a-8382-7d396d0efd97",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/games/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "games",
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"source_id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"short_description\": \"<string>\",\n  \"short_description_clean\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"description_clean\": \"<string>\",\n  \"description_annotations\": [\n    {\n      \"start\": \"<long>\",\n      \"end\": \"<long>\",\n      \"label\": \"<string>\",\n      \"text\": \"<string>\",\n      \"label_probs\": {\n        \"feature\": \"<float>\",\n        \"junk\": \"<float>\",\n        \"mechanic\": \"<float>\",\n        \"theme\": \"<float>\"\n      }\n    },\n    {\n      \"start\": \"<long>\",\n      \"end\": \"<long>\",\n      \"label\": \"<string>\",\n      \"text\": \"<string>\",\n      \"label_probs\": {\n        \"feature\": \"<float>\",\n        \"junk\": \"<float>\",\n        \"mechanic\": \"<float>\",\n        \"theme\": \"<float>\"\n      }\n    }\n  ],\n  \"user_rating_count\": \"<long>\",\n  \"user_rating\": \"<float>\",\n  \"developers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"release_date\": \"<long>\",\n  \"update_date\": \"<long>\",\n  \"icon\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"image_id\": \"<string>\",\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"final_score\": \"<float>\",\n    \"nsfw_prob\": \"<float>\",\n    \"similarity\": \"<float>\",\n    \"width\": \"<long>\",\n    \"height\": \"<long>\",\n    \"game_id\": \"<string>\",\n    \"hosted_filename\": \"<string>\",\n    \"icon\": \"<boolean>\",\n    \"targetSize\": \"<integer>\",\n    \"seed\": \"<integer>\",\n    \"embedded\": \"<boolean>\",\n    \"analysed\": \"<boolean>\",\n    \"image\": \"<string>\",\n    \"image_type\": \"<string>\",\n    \"prompt\": \"<string>\",\n    \"motion_prompt\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_style\": \"<string>\",\n    \"selected_perspective\": \"<string>\",\n    \"is_safe\": \"<boolean>\",\n    \"platform\": \"<string>\",\n    \"loading\": \"<boolean>\",\n    \"original_hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"edit_mask\": \"<string>\",\n    \"edit_mode\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\",\n    \"edit_mask_pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"nsfw\": \"<float>\",\n    \"pose\": {\n      \"animation_prompt\": \"<string>\",\n      \"margin_ratio\": \"<float>\",\n      \"margin_ratio_mode\": \"<string>\",\n      \"name\": \"<string>\",\n      \"prompt\": \"<string>\"\n    },\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  },\n  \"header\": {\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"image_id\": \"<string>\",\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"final_score\": \"<float>\",\n    \"nsfw_prob\": \"<float>\",\n    \"similarity\": \"<float>\",\n    \"width\": \"<long>\",\n    \"height\": \"<long>\",\n    \"game_id\": \"<string>\",\n    \"hosted_filename\": \"<string>\",\n    \"icon\": \"<boolean>\",\n    \"targetSize\": \"<integer>\",\n    \"seed\": \"<integer>\",\n    \"embedded\": \"<boolean>\",\n    \"analysed\": \"<boolean>\",\n    \"image\": \"<string>\",\n    \"image_type\": \"<string>\",\n    \"prompt\": \"<string>\",\n    \"motion_prompt\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"selected_style\": \"<string>\",\n    \"selected_perspective\": \"<string>\",\n    \"is_safe\": \"<boolean>\",\n    \"platform\": \"<string>\",\n    \"loading\": \"<boolean>\",\n    \"original_hints\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"edit_mask\": \"<string>\",\n    \"edit_mode\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\",\n    \"edit_mask_pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"pil_image\": {\n      \"format\": \"<string>\",\n      \"format_description\": \"<string>\"\n    },\n    \"nsfw\": \"<float>\",\n    \"pose\": {\n      \"animation_prompt\": \"<string>\",\n      \"margin_ratio\": \"<float>\",\n      \"margin_ratio_mode\": \"<string>\",\n      \"name\": \"<string>\",\n      \"prompt\": \"<string>\"\n    },\n    \"render_3d\": {\n      \"style_id\": \"<string>\",\n      \"style_version\": \"<integer>\",\n      \"style_params\": {},\n      \"params\": {},\n      \"perspective\": \"<string>\",\n      \"direction\": \"<string>\",\n      \"animation_name\": \"<string>\",\n      \"fps\": \"<float>\",\n      \"keep_horizontal_travel\": \"<boolean>\",\n      \"keep_vertical_travel\": \"<boolean>\",\n      \"pixel_block\": \"<integer>\",\n      \"generated_model\": {}\n    }\n  },\n  \"videos\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"screenshots\": [\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    }\n  ],\n  \"url\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actual_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"predicted_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"augmented_genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"source\": \"<string>\",\n  \"price\": \"<string>\",\n  \"platforms\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"game_modes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"genres\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"advisory_rating\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-ccfc6920-ca64-406a-8382-7d396d0efd97"
+            },
+            {
+              "id": "d13a04cc-7021-4a83-b5c9-bebe1da7fbeb",
+              "name": "Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/games/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "games",
+                    ""
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-d13a04cc-7021-4a83-b5c9-bebe1da7fbeb"
+            }
+          ],
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-db3ed677-3a3c-4e37-8b77-a5c05fd5126e"
+        }
+      ],
+      "id": "2d35a968-5381-4739-892b-319dae466752",
+      "createdAt": "2026-10-22T03:17:24.000Z",
+      "updatedAt": "2026-10-22T03:17:24.000Z",
+      "uid": "35240-2d35a968-5381-4739-892b-319dae466752"
+    },
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "games",
+          "item": [
+            {
+              "name": "title",
+              "item": [
+                {
+                  "name": "{query}",
+                  "item": [
+                    {
+                      "name": "Searches a game based on title (Roles: user)",
+                      "id": "cfdf6b45-ea8c-47cc-ab3f-165282a084e6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/search/games/title/:query",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "search",
+                            "games",
+                            "title",
+                            ":query"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8e996cb3-22f0-4813-92d7-55560af027f2",
+                              "key": "query",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "865f8704-0299-4a1d-a754-3ddb84fd5297",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/search/games/title/:query",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "search",
+                                "games",
+                                "title",
+                                ":query"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "query"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"_id\": \"<string>\",\n    \"id\": \"<string>\",\n    \"source_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"short_description_clean\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"description\": \"<string>\",\n    \"description_clean\": \"<string>\",\n    \"description_annotations\": [\n      {\n        \"start\": \"<long>\",\n        \"end\": \"<long>\",\n        \"label\": \"<string>\",\n        \"text\": \"<string>\",\n        \"label_probs\": {\n          \"feature\": \"<float>\",\n          \"junk\": \"<float>\",\n          \"mechanic\": \"<float>\",\n          \"theme\": \"<float>\"\n        }\n      },\n      {\n        \"start\": \"<long>\",\n        \"end\": \"<long>\",\n        \"label\": \"<string>\",\n        \"text\": \"<string>\",\n        \"label_probs\": {\n          \"feature\": \"<float>\",\n          \"junk\": \"<float>\",\n          \"mechanic\": \"<float>\",\n          \"theme\": \"<float>\"\n        }\n      }\n    ],\n    \"user_rating_count\": \"<long>\",\n    \"user_rating\": \"<float>\",\n    \"developers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"release_date\": \"<long>\",\n    \"update_date\": \"<long>\",\n    \"icon\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"header\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"videos\": [\n      {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      }\n    ],\n    \"screenshots\": [\n      {\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"image_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"type\": \"<string>\",\n        \"final_score\": \"<float>\",\n        \"nsfw_prob\": \"<float>\",\n        \"similarity\": \"<float>\",\n        \"width\": \"<long>\",\n        \"height\": \"<long>\",\n        \"game_id\": \"<string>\",\n        \"hosted_filename\": \"<string>\",\n        \"icon\": \"<boolean>\",\n        \"targetSize\": \"<integer>\",\n        \"seed\": \"<integer>\",\n        \"embedded\": \"<boolean>\",\n        \"analysed\": \"<boolean>\",\n        \"image\": \"<string>\",\n        \"image_type\": \"<string>\",\n        \"prompt\": \"<string>\",\n        \"motion_prompt\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_colors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_style\": \"<string>\",\n        \"selected_perspective\": \"<string>\",\n        \"is_safe\": \"<boolean>\",\n        \"platform\": \"<string>\",\n        \"loading\": \"<boolean>\",\n        \"original_hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"edit_mask\": \"<string>\",\n        \"edit_mode\": \"<string>\",\n        \"camera_rotation\": \"<integer>\",\n        \"camera_elevation\": \"<integer>\",\n        \"edit_mask_pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"nsfw\": \"<float>\",\n        \"pose\": {\n          \"animation_prompt\": \"<string>\",\n          \"margin_ratio\": \"<float>\",\n          \"margin_ratio_mode\": \"<string>\",\n          \"name\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        \"render_3d\": {\n          \"style_id\": \"<string>\",\n          \"style_version\": \"<integer>\",\n          \"style_params\": {},\n          \"params\": {},\n          \"perspective\": \"<string>\",\n          \"direction\": \"<string>\",\n          \"animation_name\": \"<string>\",\n          \"fps\": \"<float>\",\n          \"keep_horizontal_travel\": \"<boolean>\",\n          \"keep_vertical_travel\": \"<boolean>\",\n          \"pixel_block\": \"<integer>\",\n          \"generated_model\": {}\n        }\n      },\n      {\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"image_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"type\": \"<string>\",\n        \"final_score\": \"<float>\",\n        \"nsfw_prob\": \"<float>\",\n        \"similarity\": \"<float>\",\n        \"width\": \"<long>\",\n        \"height\": \"<long>\",\n        \"game_id\": \"<string>\",\n        \"hosted_filename\": \"<string>\",\n        \"icon\": \"<boolean>\",\n        \"targetSize\": \"<integer>\",\n        \"seed\": \"<integer>\",\n        \"embedded\": \"<boolean>\",\n        \"analysed\": \"<boolean>\",\n        \"image\": \"<string>\",\n        \"image_type\": \"<string>\",\n        \"prompt\": \"<string>\",\n        \"motion_prompt\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_colors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_style\": \"<string>\",\n        \"selected_perspective\": \"<string>\",\n        \"is_safe\": \"<boolean>\",\n        \"platform\": \"<string>\",\n        \"loading\": \"<boolean>\",\n        \"original_hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"edit_mask\": \"<string>\",\n        \"edit_mode\": \"<string>\",\n        \"camera_rotation\": \"<integer>\",\n        \"camera_elevation\": \"<integer>\",\n        \"edit_mask_pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"nsfw\": \"<float>\",\n        \"pose\": {\n          \"animation_prompt\": \"<string>\",\n          \"margin_ratio\": \"<float>\",\n          \"margin_ratio_mode\": \"<string>\",\n          \"name\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        \"render_3d\": {\n          \"style_id\": \"<string>\",\n          \"style_version\": \"<integer>\",\n          \"style_params\": {},\n          \"params\": {},\n          \"perspective\": \"<string>\",\n          \"direction\": \"<string>\",\n          \"animation_name\": \"<string>\",\n          \"fps\": \"<float>\",\n          \"keep_horizontal_travel\": \"<boolean>\",\n          \"keep_vertical_travel\": \"<boolean>\",\n          \"pixel_block\": \"<integer>\",\n          \"generated_model\": {}\n        }\n      }\n    ],\n    \"url\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actual_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"predicted_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"augmented_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"source\": \"<string>\",\n    \"price\": \"<string>\",\n    \"platforms\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"game_modes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"advisory_rating\": \"<string>\"\n  },\n  {\n    \"_id\": \"<string>\",\n    \"id\": \"<string>\",\n    \"source_id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"short_description\": \"<string>\",\n    \"short_description_clean\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"description\": \"<string>\",\n    \"description_clean\": \"<string>\",\n    \"description_annotations\": [\n      {\n        \"start\": \"<long>\",\n        \"end\": \"<long>\",\n        \"label\": \"<string>\",\n        \"text\": \"<string>\",\n        \"label_probs\": {\n          \"feature\": \"<float>\",\n          \"junk\": \"<float>\",\n          \"mechanic\": \"<float>\",\n          \"theme\": \"<float>\"\n        }\n      },\n      {\n        \"start\": \"<long>\",\n        \"end\": \"<long>\",\n        \"label\": \"<string>\",\n        \"text\": \"<string>\",\n        \"label_probs\": {\n          \"feature\": \"<float>\",\n          \"junk\": \"<float>\",\n          \"mechanic\": \"<float>\",\n          \"theme\": \"<float>\"\n        }\n      }\n    ],\n    \"user_rating_count\": \"<long>\",\n    \"user_rating\": \"<float>\",\n    \"developers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"release_date\": \"<long>\",\n    \"update_date\": \"<long>\",\n    \"icon\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"header\": {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"image_id\": \"<string>\",\n      \"url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"final_score\": \"<float>\",\n      \"nsfw_prob\": \"<float>\",\n      \"similarity\": \"<float>\",\n      \"width\": \"<long>\",\n      \"height\": \"<long>\",\n      \"game_id\": \"<string>\",\n      \"hosted_filename\": \"<string>\",\n      \"icon\": \"<boolean>\",\n      \"targetSize\": \"<integer>\",\n      \"seed\": \"<integer>\",\n      \"embedded\": \"<boolean>\",\n      \"analysed\": \"<boolean>\",\n      \"image\": \"<string>\",\n      \"image_type\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"motion_prompt\": \"<string>\",\n      \"request_id\": \"<string>\",\n      \"hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_colors\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"selected_style\": \"<string>\",\n      \"selected_perspective\": \"<string>\",\n      \"is_safe\": \"<boolean>\",\n      \"platform\": \"<string>\",\n      \"loading\": \"<boolean>\",\n      \"original_hints\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"genres\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"edit_mask\": \"<string>\",\n      \"edit_mode\": \"<string>\",\n      \"camera_rotation\": \"<integer>\",\n      \"camera_elevation\": \"<integer>\",\n      \"edit_mask_pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"pil_image\": {\n        \"format\": \"<string>\",\n        \"format_description\": \"<string>\"\n      },\n      \"nsfw\": \"<float>\",\n      \"pose\": {\n        \"animation_prompt\": \"<string>\",\n        \"margin_ratio\": \"<float>\",\n        \"margin_ratio_mode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"prompt\": \"<string>\"\n      },\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\",\n        \"pixel_block\": \"<integer>\",\n        \"generated_model\": {}\n      }\n    },\n    \"videos\": [\n      {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      }\n    ],\n    \"screenshots\": [\n      {\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"image_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"type\": \"<string>\",\n        \"final_score\": \"<float>\",\n        \"nsfw_prob\": \"<float>\",\n        \"similarity\": \"<float>\",\n        \"width\": \"<long>\",\n        \"height\": \"<long>\",\n        \"game_id\": \"<string>\",\n        \"hosted_filename\": \"<string>\",\n        \"icon\": \"<boolean>\",\n        \"targetSize\": \"<integer>\",\n        \"seed\": \"<integer>\",\n        \"embedded\": \"<boolean>\",\n        \"analysed\": \"<boolean>\",\n        \"image\": \"<string>\",\n        \"image_type\": \"<string>\",\n        \"prompt\": \"<string>\",\n        \"motion_prompt\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_colors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_style\": \"<string>\",\n        \"selected_perspective\": \"<string>\",\n        \"is_safe\": \"<boolean>\",\n        \"platform\": \"<string>\",\n        \"loading\": \"<boolean>\",\n        \"original_hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"edit_mask\": \"<string>\",\n        \"edit_mode\": \"<string>\",\n        \"camera_rotation\": \"<integer>\",\n        \"camera_elevation\": \"<integer>\",\n        \"edit_mask_pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"nsfw\": \"<float>\",\n        \"pose\": {\n          \"animation_prompt\": \"<string>\",\n          \"margin_ratio\": \"<float>\",\n          \"margin_ratio_mode\": \"<string>\",\n          \"name\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        \"render_3d\": {\n          \"style_id\": \"<string>\",\n          \"style_version\": \"<integer>\",\n          \"style_params\": {},\n          \"params\": {},\n          \"perspective\": \"<string>\",\n          \"direction\": \"<string>\",\n          \"animation_name\": \"<string>\",\n          \"fps\": \"<float>\",\n          \"keep_horizontal_travel\": \"<boolean>\",\n          \"keep_vertical_travel\": \"<boolean>\",\n          \"pixel_block\": \"<integer>\",\n          \"generated_model\": {}\n        }\n      },\n      {\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"id\": \"<string>\",\n        \"image_id\": \"<string>\",\n        \"url\": \"<string>\",\n        \"type\": \"<string>\",\n        \"final_score\": \"<float>\",\n        \"nsfw_prob\": \"<float>\",\n        \"similarity\": \"<float>\",\n        \"width\": \"<long>\",\n        \"height\": \"<long>\",\n        \"game_id\": \"<string>\",\n        \"hosted_filename\": \"<string>\",\n        \"icon\": \"<boolean>\",\n        \"targetSize\": \"<integer>\",\n        \"seed\": \"<integer>\",\n        \"embedded\": \"<boolean>\",\n        \"analysed\": \"<boolean>\",\n        \"image\": \"<string>\",\n        \"image_type\": \"<string>\",\n        \"prompt\": \"<string>\",\n        \"motion_prompt\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_colors\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"selected_style\": \"<string>\",\n        \"selected_perspective\": \"<string>\",\n        \"is_safe\": \"<boolean>\",\n        \"platform\": \"<string>\",\n        \"loading\": \"<boolean>\",\n        \"original_hints\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"genres\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"edit_mask\": \"<string>\",\n        \"edit_mode\": \"<string>\",\n        \"camera_rotation\": \"<integer>\",\n        \"camera_elevation\": \"<integer>\",\n        \"edit_mask_pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"pil_image\": {\n          \"format\": \"<string>\",\n          \"format_description\": \"<string>\"\n        },\n        \"nsfw\": \"<float>\",\n        \"pose\": {\n          \"animation_prompt\": \"<string>\",\n          \"margin_ratio\": \"<float>\",\n          \"margin_ratio_mode\": \"<string>\",\n          \"name\": \"<string>\",\n          \"prompt\": \"<string>\"\n        },\n        \"render_3d\": {\n          \"style_id\": \"<string>\",\n          \"style_version\": \"<integer>\",\n          \"style_params\": {},\n          \"params\": {},\n          \"perspective\": \"<string>\",\n          \"direction\": \"<string>\",\n          \"animation_name\": \"<string>\",\n          \"fps\": \"<float>\",\n          \"keep_horizontal_travel\": \"<boolean>\",\n          \"keep_vertical_travel\": \"<boolean>\",\n          \"pixel_block\": \"<integer>\",\n          \"generated_model\": {}\n        }\n      }\n    ],\n    \"url\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actual_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"predicted_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"augmented_genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"source\": \"<string>\",\n    \"price\": \"<string>\",\n    \"platforms\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"keywords\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"game_modes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genres\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"advisory_rating\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-10-22T03:17:24.000Z",
+                          "updatedAt": "2026-10-22T03:17:24.000Z",
+                          "uid": "35240-865f8704-0299-4a1d-a754-3ddb84fd5297"
+                        },
+                        {
+                          "id": "56400827-ec0a-4b9a-8b63-3aa6d8c78133",
+                          "name": "Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/search/games/title/:query",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "search",
+                                "games",
+                                "title",
+                                ":query"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "query"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:17:24.000Z",
+                          "updatedAt": "2026-10-22T03:17:24.000Z",
+                          "uid": "35240-56400827-ec0a-4b9a-8b63-3aa6d8c78133"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:17:24.000Z",
+                      "updatedAt": "2026-10-22T03:17:24.000Z",
+                      "uid": "35240-cfdf6b45-ea8c-47cc-ab3f-165282a084e6"
+                    }
+                  ],
+                  "id": "4fee5b18-56ba-4e7d-8532-bbed2dca2e24",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-4fee5b18-56ba-4e7d-8532-bbed2dca2e24"
+                }
+              ],
+              "id": "7c1e9474-0857-4024-839e-076c600d4b0f",
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-7c1e9474-0857-4024-839e-076c600d4b0f"
+            }
+          ],
+          "id": "0c334a05-ac65-4408-83de-2de959f17fc6",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-0c334a05-ac65-4408-83de-2de959f17fc6"
+        }
+      ],
+      "id": "02ad09ed-24d2-453c-bad6-402257935a76",
+      "createdAt": "2026-10-22T03:17:24.000Z",
+      "updatedAt": "2026-10-22T03:17:24.000Z",
+      "uid": "35240-02ad09ed-24d2-453c-bad6-402257935a76"
+    },
+    {
+      "name": "utils",
+      "item": [
+        {
+          "name": "genres",
+          "item": [
+            {
+              "name": "Get all game genres (Roles: user, none)",
+              "id": "9278191b-f377-4bdb-8b0b-0e99d95d6979",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/genres",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "genres"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "be9d75cb-6e67-41f4-ab90-0c3df3ed51e9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/genres",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "genres"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-be9d75cb-6e67-41f4-ab90-0c3df3ed51e9"
+                },
+                {
+                  "id": "43644ab0-8c37-413b-b434-46e846a1ddbc",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/genres",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "genres"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-43644ab0-8c37-413b-b434-46e846a1ddbc"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-9278191b-f377-4bdb-8b0b-0e99d95d6979"
+            }
+          ],
+          "id": "c560ce34-96f2-422f-837f-389cd72610a8",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-c560ce34-96f2-422f-837f-389cd72610a8"
+        },
+        {
+          "name": "generation-styles",
+          "item": [
+            {
+              "name": "Get all generatiokn styles (Roles: user, none)",
+              "id": "a37c0f56-5db0-4d63-b129-dc87b7f22027",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/generation-styles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "generation-styles"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b897a7d2-a995-4a04-93e4-6f47c5496d86",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/generation-styles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "generation-styles"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-b897a7d2-a995-4a04-93e4-6f47c5496d86"
+                },
+                {
+                  "id": "91850a2f-6a5c-42a8-906d-322b7610fd58",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/generation-styles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "generation-styles"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-91850a2f-6a5c-42a8-906d-322b7610fd58"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-a37c0f56-5db0-4d63-b129-dc87b7f22027"
+            }
+          ],
+          "id": "aa96637b-9877-4db3-a33d-9129ca290973",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-aa96637b-9877-4db3-a33d-9129ca290973"
+        },
+        {
+          "name": "platforms",
+          "item": [
+            {
+              "name": "Get all game platforms (Roles: user, none)",
+              "id": "8183f714-2bd6-43d9-a319-847186f51616",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/platforms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "platforms"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "6c64b3c1-da10-429c-ab52-2bd978dc74bf",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/platforms",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "platforms"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-6c64b3c1-da10-429c-ab52-2bd978dc74bf"
+                },
+                {
+                  "id": "dba5035d-e38f-4ee6-9bfa-8ba82f29cff8",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/platforms",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "platforms"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-dba5035d-e38f-4ee6-9bfa-8ba82f29cff8"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-8183f714-2bd6-43d9-a319-847186f51616"
+            }
+          ],
+          "id": "e1a0a29d-c65b-4d14-9874-c6e8109d08f0",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-e1a0a29d-c65b-4d14-9874-c6e8109d08f0"
+        },
+        {
+          "name": "sprite-poses",
+          "item": [
+            {
+              "name": "Get supported sprite poses (Roles: user, none)",
+              "id": "0b665b47-d66c-4d82-a87c-554b069d3833",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/sprite-poses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "sprite-poses"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "ab24bc88-37fe-4594-8341-e3093b8f2d6e",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/sprite-poses",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "sprite-poses"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"animation_prompt\": \"<string>\",\n    \"margin_ratio\": \"<float>\",\n    \"margin_ratio_mode\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prompt\": \"<string>\"\n  },\n  {\n    \"animation_prompt\": \"<string>\",\n    \"margin_ratio\": \"<float>\",\n    \"margin_ratio_mode\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prompt\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-ab24bc88-37fe-4594-8341-e3093b8f2d6e"
+                },
+                {
+                  "id": "e448de98-cd26-4480-88b4-3e5c4756550b",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/sprite-poses",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "sprite-poses"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-e448de98-cd26-4480-88b4-3e5c4756550b"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-0b665b47-d66c-4d82-a87c-554b069d3833"
+            }
+          ],
+          "id": "5181f654-8a3c-42af-a659-159177772743",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-5181f654-8a3c-42af-a659-159177772743"
+        },
+        {
+          "name": "animation-presets",
+          "item": [
+            {
+              "name": "Get animation presets (Roles: user, none)",
+              "id": "5a7d25a4-052c-43a2-87ca-ce5f23ebb625",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/animation-presets?id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "animation-presets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Animation preset ID. If provided, returns the full preset with perspectives. If omitted, returns summaries without perspectives.",
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b55c6cba-8829-4657-b85b-1751af24a271",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/animation-presets?id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "animation-presets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Animation preset ID. If provided, returns the full preset with perspectives. If omitted, returns summaries without perspectives.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"preview_url\": \"<string>\",\n    \"perspectives\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"directions\": {\n          \"E\": \"<string>\",\n          \"N\": \"<string>\",\n          \"NE\": \"<string>\",\n          \"NW\": \"<string>\",\n          \"S\": \"<string>\",\n          \"SE\": \"<string>\",\n          \"SW\": \"<string>\",\n          \"W\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"directions\": {\n          \"E\": \"<string>\",\n          \"N\": \"<string>\",\n          \"NE\": \"<string>\",\n          \"NW\": \"<string>\",\n          \"S\": \"<string>\",\n          \"SE\": \"<string>\",\n          \"SW\": \"<string>\",\n          \"W\": \"<string>\"\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"preview_url\": \"<string>\",\n    \"perspectives\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"directions\": {\n          \"E\": \"<string>\",\n          \"N\": \"<string>\",\n          \"NE\": \"<string>\",\n          \"NW\": \"<string>\",\n          \"S\": \"<string>\",\n          \"SE\": \"<string>\",\n          \"SW\": \"<string>\",\n          \"W\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"directions\": {\n          \"E\": \"<string>\",\n          \"N\": \"<string>\",\n          \"NE\": \"<string>\",\n          \"NW\": \"<string>\",\n          \"S\": \"<string>\",\n          \"SE\": \"<string>\",\n          \"SW\": \"<string>\",\n          \"W\": \"<string>\"\n        }\n      }\n    ]\n  }\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-b55c6cba-8829-4657-b85b-1751af24a271"
+                },
+                {
+                  "id": "d19ebed5-e198-49e8-afd3-0ae2486dc87a",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/animation-presets?id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "animation-presets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Animation preset ID. If provided, returns the full preset with perspectives. If omitted, returns summaries without perspectives.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-d19ebed5-e198-49e8-afd3-0ae2486dc87a"
+                },
+                {
+                  "id": "883ed328-3bda-484f-8c80-c8356591e468",
+                  "name": "Animation preset not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/animation-presets?id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "animation-presets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Animation preset ID. If provided, returns the full preset with perspectives. If omitted, returns summaries without perspectives.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-883ed328-3bda-484f-8c80-c8356591e468"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-5a7d25a4-052c-43a2-87ca-ce5f23ebb625"
+            }
+          ],
+          "id": "43bc1f25-aa4a-4d8d-b9f6-f299a35733e9",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-43bc1f25-aa4a-4d8d-b9f6-f299a35733e9"
+        },
+        {
+          "name": "sprite3d-styles",
+          "item": [
+            {
+              "name": "The styles a 3D model can be rendered into a sprite with (Roles: user)",
+              "id": "57c95394-0015-47c8-9e09-965425afd15a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/utils/sprite3d-styles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "utils",
+                    "sprite3d-styles"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "2b34fc38-4ca8-4a22-a9d6-f776b547642f",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/sprite3d-styles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "sprite3d-styles"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"description\": \"<string>\",\n    \"family\": \"<string>\",\n    \"pixel\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"version\": \"<integer>\",\n    \"versions\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"description\": \"<string>\",\n    \"family\": \"<string>\",\n    \"pixel\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"version\": \"<integer>\",\n    \"versions\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  }\n]",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-2b34fc38-4ca8-4a22-a9d6-f776b547642f"
+                },
+                {
+                  "id": "b725a495-7799-44f4-92fc-55eb565a8f81",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/utils/sprite3d-styles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "utils",
+                        "sprite3d-styles"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:24.000Z",
+                  "updatedAt": "2026-10-22T03:17:24.000Z",
+                  "uid": "35240-b725a495-7799-44f4-92fc-55eb565a8f81"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:24.000Z",
+              "updatedAt": "2026-10-22T03:17:24.000Z",
+              "uid": "35240-57c95394-0015-47c8-9e09-965425afd15a"
+            }
+          ],
+          "id": "4844d4b7-b094-4ce5-ab60-8857daa107d6",
+          "createdAt": "2026-10-22T03:17:24.000Z",
+          "updatedAt": "2026-10-22T03:17:24.000Z",
+          "uid": "35240-4844d4b7-b094-4ce5-ab60-8857daa107d6"
+        }
+      ],
+      "id": "e30af935-2581-4fd3-b9f2-f01b05532e67",
+      "createdAt": "2026-10-22T03:17:24.000Z",
+      "updatedAt": "2026-10-22T03:17:24.000Z",
+      "uid": "35240-e30af935-2581-4fd3-b9f2-f01b05532e67"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

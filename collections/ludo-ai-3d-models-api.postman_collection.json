@@ -1,254 +1,1720 @@
 {
+  "info": {
+    "_postman_id": "9e8b03cc-fd5e-4454-9947-b2b6f1fba085",
+    "name": "Ludo Ai 3D Models API",
+    "description": "Operations tagged 3D Models across 2 of this provider's published API definitions: ludo-ai-openapi.json, ludo-ai-3d-models-api-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:15:55.000Z",
+    "updatedAt": "2026-10-22T03:15:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9e8b03cc-fd5e-4454-9947-b2b6f1fba085"
+  },
   "item": [
     {
-      "id": "b1e1e385-202f-43bb-83cc-b60e8f15ec8c",
-      "name": "3D Models",
-      "description": {
-        "content": "Convert 2D images into textured 3D GLB models with PBR textures and configurable quality settings.",
-        "type": "text/plain"
-      },
+      "name": "assets",
       "item": [
         {
-          "id": "a8c56ecb-b5eb-48c3-8db6-e6c09605738f",
-          "name": "Ludo.ai Convert a 2D image to a 3D model",
-          "request": {
-            "name": "Ludo.ai Convert a 2D image to a 3D model",
-            "description": {
-              "content": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "3d-models",
-                "create"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "3d-model",
+          "item": [
             {
-              "id": "71e051ee-5c28-4192-83d9-0f7d49d335da",
-              "name": "Successfully created 3D model",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "3d-models",
-                    "create"
+              "name": "image",
+              "item": [
+                {
+                  "name": "Make a character image ready to turn into a 3D model, the first step of\u2026",
+                  "id": "d0419a69-e5d1-49b9-b2b2-e4d8949c59a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model/image",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model",
+                        "image"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "fec1c2c5-c238-4a96-92a5-3284cf1e9c5b",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/image",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "image"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-fec1c2c5-c238-4a96-92a5-3284cf1e9c5b"
+                    },
+                    {
+                      "id": "84be776d-1f8d-4789-b334-a3af1f0dc4be",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/image",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "image"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"running\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-84be776d-1f8d-4789-b334-a3af1f0dc4be"
+                    },
+                    {
+                      "id": "27b583d8-586e-4956-b3e6-3a872a36a338",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"image\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/image",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "image"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-27b583d8-586e-4956-b3e6-3a872a36a338"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-d0419a69-e5d1-49b9-b2b2-e4d8949c59a8"
+                }
+              ],
+              "id": "edd14ca9-0f94-4b22-8e4b-09c762736649",
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-edd14ca9-0f94-4b22-8e4b-09c762736649"
+            },
+            {
+              "name": "rig",
+              "item": [
+                {
+                  "name": "Rig a 3D model: generate a skeleton and skin weights for an existing GLB so it\u2026",
+                  "id": "9aeada88-40e5-445e-bc73-de250a10e9c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"rig_type\": \"general\",\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model/rig",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model",
+                        "rig"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "19e95035-408e-45ed-8c78-971c261aa7c7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"rig_type\": \"general\",\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/rig",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "rig"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"model_url\": \"<string>\",\n  \"rigged\": \"<boolean>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-19e95035-408e-45ed-8c78-971c261aa7c7"
+                    },
+                    {
+                      "id": "ccba9598-4a74-4179-9982-5e23feb40ebb",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"rig_type\": \"general\",\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/rig",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "rig"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"running\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-ccba9598-4a74-4179-9982-5e23feb40ebb"
+                    },
+                    {
+                      "id": "c2d35507-edd0-4794-8d9b-1ce48a01d8f5",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"rig_type\": \"general\",\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/rig",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "rig"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-c2d35507-edd0-4794-8d9b-1ce48a01d8f5"
+                    }
                   ],
-                  "query": [],
-                  "variable": []
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-9aeada88-40e5-445e-bc73-de250a10e9c5"
+                }
+              ],
+              "id": "673a522a-a338-41e4-bdc5-25d2278b9774",
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-673a522a-a338-41e4-bdc5-25d2278b9774"
+            },
+            {
+              "name": "animate",
+              "item": [
+                {
+                  "name": "Generate text-driven skeletal animations for an already-rigged 3D model.",
+                  "id": "2305e471-dd4e-47d8-8028-cda1dfd30851",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"mode\": \"rot_trans\",\n  \"num_variants\": 4,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model/animate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model",
+                        "animate"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "232215b0-f053-4e57-9006-d88837233aa3",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"mode\": \"rot_trans\",\n  \"num_variants\": 4,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"animations\": [\n    {\n      \"clip_name\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"preset_id\": \"<string>\",\n      \"mode\": \"rot_only\",\n      \"seed\": \"<integer>\",\n      \"glb_url\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"motion\": \"<float>\",\n      \"fit_rmse\": \"<float>\"\n    },\n    {\n      \"clip_name\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"preset_id\": \"<string>\",\n      \"mode\": \"rot_only\",\n      \"seed\": \"<integer>\",\n      \"glb_url\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"motion\": \"<float>\",\n      \"fit_rmse\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-232215b0-f053-4e57-9006-d88837233aa3"
+                    },
+                    {
+                      "id": "945ae31b-fe2c-47b8-96af-ac8e32de9c79",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"mode\": \"rot_trans\",\n  \"num_variants\": 4,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"running\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-945ae31b-fe2c-47b8-96af-ac8e32de9c79"
+                    },
+                    {
+                      "id": "71d96b51-5d40-489e-96ef-17f28d3b2f0a",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"mode\": \"rot_trans\",\n  \"num_variants\": 4,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-71d96b51-5d40-489e-96ef-17f28d3b2f0a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-2305e471-dd4e-47d8-8028-cda1dfd30851"
+                }
+              ],
+              "id": "0ea0b51c-a3ec-455b-8cb8-5ee2e4ce3f1d",
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-0ea0b51c-a3ec-455b-8cb8-5ee2e4ce3f1d"
+            },
+            {
+              "name": "animate-preset",
+              "item": [
+                {
+                  "name": "Apply a curated animation preset to an already-rigged 3D model (retargeting).",
+                  "id": "2e4ad886-d036-4e9c-8f07-1275129548ab",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"in_place\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model/animate-preset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model",
+                        "animate-preset"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "560180ea-7de4-43db-9c63-a6af1d1a14e3",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"in_place\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate-preset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate-preset"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"animations\": [\n    {\n      \"clip_name\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"preset_id\": \"<string>\",\n      \"mode\": \"rot_only\",\n      \"seed\": \"<integer>\",\n      \"glb_url\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"motion\": \"<float>\",\n      \"fit_rmse\": \"<float>\"\n    },\n    {\n      \"clip_name\": \"<string>\",\n      \"prompt\": \"<string>\",\n      \"preset_id\": \"<string>\",\n      \"mode\": \"rot_only\",\n      \"seed\": \"<integer>\",\n      \"glb_url\": \"<string>\",\n      \"preview_url\": \"<string>\",\n      \"motion\": \"<float>\",\n      \"fit_rmse\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-560180ea-7de4-43db-9c63-a6af1d1a14e3"
+                    },
+                    {
+                      "id": "6535b286-0000-4d1a-bd78-786683d25b51",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"in_place\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate-preset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate-preset"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"running\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-6535b286-0000-4d1a-bd78-786683d25b51"
+                    },
+                    {
+                      "id": "5c30ae2c-2659-405c-8830-3f1a0cf1ad66",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"in_place\": \"<boolean>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-model/animate-preset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-model",
+                            "animate-preset"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-5c30ae2c-2659-405c-8830-3f1a0cf1ad66"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-2e4ad886-d036-4e9c-8f07-1275129548ab"
+                }
+              ],
+              "id": "f0fccc62-229c-4fdc-8c74-7906173a673d",
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-f0fccc62-229c-4fdc-8c74-7906173a673d"
+            },
+            {
+              "name": "Convert a source image into a textured 3D model (image-to-3D).",
+              "id": "57456a03-35e8-47cb-9016-044e8c6e071c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
                 },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"model\": \"prop\",\n  \"back_image\": \"<string>\",\n  \"target_num_faces\": 50000,\n  \"texture_size\": 2048,\n  \"texture_type\": \"pbr\",\n  \"rig\": false,\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"model_url\": \"https://jfwFTw.pxolWHwyLNVeVraO1xwVEE\",\n  \"snapshots\": [\n    \"https://zlbcILvEA.lwpg26Z4--xEbUsQVryxGNv6+Ox43aS12EsQm9Mzw\",\n    \"https://eRVRKyklcxFUowfUyXWUwZAvknMFkXI.aklnisu9SfDjDAiE2Hr9YfBCYievYviMp+nq4eRx-eks\",\n    \"http://apJVgEeMTTCfjbSExBNKh.fsnsataphwuVlyoIlxxDs-20hEVzEYw-PxItRaKkjT-JU-Mbi0Vm5hISc4eM70AVWMUH4HXIW3Oq\",\n    \"http://VEvAsX.rybcDkrlS.xHEQvFZ+W7DipYFhSusnNPTxMSmqxrUTYuLDgWhL+Aj6yw6zJ1y.n6rJFWW6xCU\"\n  ],\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "16f3f891-daef-45d1-b6c1-2a1a8a8958f0",
-              "name": "Invalid request parameters",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "3d-models",
-                    "create"
-                  ],
+                  "raw": "{{baseUrl}}/assets/3d-model",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e6b04231-5b4a-41e2-ac87-308dfcdda7f1",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
                   "path": [
-                    "3d-models",
-                    "create"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                    "assets",
+                    "3d-model"
+                  ]
                 }
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "6cebcd0c-e258-44a1-a694-780c8d8911a5",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"model\": \"prop\",\n  \"back_image\": \"<string>\",\n  \"target_num_faces\": 50000,\n  \"texture_size\": 2048,\n  \"texture_type\": \"pbr\",\n  \"rig\": false,\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"model_url\": \"<string>\",\n  \"snapshots\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rigged\": \"<boolean>\"\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-6cebcd0c-e258-44a1-a694-780c8d8911a5"
+                },
+                {
+                  "id": "485c47bb-09b1-4c89-9bce-ef58e7f8512d",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"model\": \"prop\",\n  \"back_image\": \"<string>\",\n  \"target_num_faces\": 50000,\n  \"texture_size\": 2048,\n  \"texture_type\": \"pbr\",\n  \"rig\": false,\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"running\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-485c47bb-09b1-4c89-9bce-ef58e7f8512d"
+                },
+                {
+                  "id": "ae4cd02f-fa19-41b3-88a0-78117627c6ab",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"model\": \"prop\",\n  \"back_image\": \"<string>\",\n  \"target_num_faces\": 50000,\n  \"texture_size\": 2048,\n  \"texture_type\": \"pbr\",\n  \"rig\": false,\n  \"joint_naming\": \"smpl\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-model",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-model"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-ae4cd02f-fa19-41b3-88a0-78117627c6ab"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-57456a03-35e8-47cb-9016-044e8c6e071c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "40bf24bc-2ef1-43c7-b2d0-b92b59be3b81",
+          "createdAt": "2026-10-22T03:15:56.000Z",
+          "updatedAt": "2026-10-22T03:15:56.000Z",
+          "uid": "35240-40bf24bc-2ef1-43c7-b2d0-b92b59be3b81"
+        },
+        {
+          "name": "3d-models",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "Get3 DModel results",
+                  "id": "1a5ace8b-3b94-4408-b171-194c20294a69",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/3d-models/results?request_id=<string>&source=api",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "3d-models",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by request_id",
+                          "key": "request_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                          "key": "source",
+                          "value": "api"
+                        }
+                      ]
+                    },
+                    "description": "**Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.\nList 3D models you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called create3DModel. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "6bc7c506-61ab-444d-96f0-7910ad690366",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-models/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-models",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"model_url\": \"<string>\",\n    \"snapshots\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"model_url\": \"<string>\",\n    \"snapshots\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-6bc7c506-61ab-444d-96f0-7910ad690366"
+                    },
+                    {
+                      "id": "36f660dc-197e-4e41-8d7a-adb588c32538",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/3d-models/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "3d-models",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:56.000Z",
+                      "updatedAt": "2026-10-22T03:15:56.000Z",
+                      "uid": "35240-36f660dc-197e-4e41-8d7a-adb588c32538"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-1a5ace8b-3b94-4408-b171-194c20294a69"
+                }
+              ],
+              "id": "27ee8b99-c95f-4427-ae47-b9905cc73ba6",
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-27ee8b99-c95f-4427-ae47-b9905cc73ba6"
+            }
+          ],
+          "id": "a472b596-44ed-443e-ab40-e3967433302c",
+          "createdAt": "2026-10-22T03:15:56.000Z",
+          "updatedAt": "2026-10-22T03:15:56.000Z",
+          "uid": "35240-a472b596-44ed-443e-ab40-e3967433302c"
         }
       ],
-      "event": []
+      "id": "6003044a-1dcf-4f73-816c-17e66ba00b80",
+      "createdAt": "2026-10-22T03:15:56.000Z",
+      "updatedAt": "2026-10-22T03:15:56.000Z",
+      "uid": "35240-6003044a-1dcf-4f73-816c-17e66ba00b80"
+    },
+    {
+      "name": "3d-models",
+      "item": [
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "Ludo.ai Convert a 2D image to a 3D model",
+              "id": "7837447c-f7ae-4682-be5c-1920b9985641",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/3d-models/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "3d-models",
+                    "create"
+                  ]
+                },
+                "description": "Convert a 2D image into a textured 3D GLB model with configurable PBR textures, polygon count, and texture resolution. Processing takes 60 to 120 seconds. Returns the GLB model URL and four snapshot images from different angles. Costs 3 credits per model."
+              },
+              "response": [
+                {
+                  "id": "56475295-cae3-4644-9e79-c4ad32dd0e8f",
+                  "name": "Successfully created 3D model",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/3d-models/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "3d-models",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"model_url\": \"<uri>\",\n  \"snapshots\": [\n    \"<uri>\",\n    \"<uri>\",\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-56475295-cae3-4644-9e79-c4ad32dd0e8f"
+                },
+                {
+                  "id": "12d7db7b-18f3-41ab-b35b-31d473b4e10d",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/3d-models/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "3d-models",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-12d7db7b-18f3-41ab-b35b-31d473b4e10d"
+                },
+                {
+                  "id": "4de10668-f631-43fb-aa29-a15d86bd4aef",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"texture_type\": \"pbr\",\n  \"texture_size\": 2048,\n  \"target_num_faces\": 50000,\n  \"high_detail_shape\": \"<boolean>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/3d-models/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "3d-models",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:56.000Z",
+                  "updatedAt": "2026-10-22T03:15:56.000Z",
+                  "uid": "35240-4de10668-f631-43fb-aa29-a15d86bd4aef"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:56.000Z",
+              "updatedAt": "2026-10-22T03:15:56.000Z",
+              "uid": "35240-7837447c-f7ae-4682-be5c-1920b9985641"
+            }
+          ],
+          "id": "31341fff-99bf-4518-b807-8193941f6b4e",
+          "createdAt": "2026-10-22T03:15:56.000Z",
+          "updatedAt": "2026-10-22T03:15:56.000Z",
+          "uid": "35240-31341fff-99bf-4518-b807-8193941f6b4e"
+        }
+      ],
+      "id": "709cc9e8-cad2-4f5d-bdcf-0a1d6d2c2435",
+      "createdAt": "2026-10-22T03:15:56.000Z",
+      "updatedAt": "2026-10-22T03:15:56.000Z",
+      "uid": "35240-709cc9e8-cad2-4f5d-bdcf-0a1d6d2c2435"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.ludo.ai/api",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/api"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authentication"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "2794f3b5-aa42-475f-a23e-3170b845a40f",
-    "name": "Ludo.ai REST 3D Models API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

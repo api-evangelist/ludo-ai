@@ -1,0 +1,491 @@
+{
+  "info": {
+    "_postman_id": "1abb3f8d-0564-486f-9a25-cf7c8ce926e8",
+    "name": "Ludo.ai Documentation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:30.000Z",
+    "updatedAt": "2026-10-22T03:16:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1abb3f8d-0564-486f-9a25-cf7c8ce926e8"
+  },
+  "item": [
+    {
+      "name": "docs",
+      "item": [
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Search docs",
+              "id": "6b538808-e401-4840-acf3-22becf71762d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/docs/search?query=<string>&n=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "docs",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) What you want to know, in plain language, e.g. \"how do I keep a sprite animation's colors consistent\" or \"what does a 3D model cost\".",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of sections to return. Defaults to 3.",
+                      "key": "n",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Search Ludo's own documentation with a plain-language question and get back only the few sections that answer it - the fastest way to learn how a feature is meant to be used before you generate with it (how to pick a sprite animation mode or model, how margins behave, what something costs, known limitations). Start here rather than reading whole documents. Each result carries `doc` and `section`, which you can pass straight to getDocs to re-read that section, and the section's full markdown `content`. Results are best first; weak matches are left out, so an empty `results` list means the documentation does not cover the question - rephrase it, or call getDocs with no parameters to browse the table of contents. This is the same documentation the Ludo web app shows its users, so it occasionally describes buttons rather than parameters; the substance applies to the API and MCP surfaces just the same. Returns up to `n` sections (default 3, max 10). If it answers 503 the search backend is briefly unavailable: call getDocs instead rather than retrying in a loop. This is a free discovery endpoint: it does not charge credits and does not queue a job. Requires an API key (user scope)."
+              },
+              "response": [
+                {
+                  "id": "b1f9b586-a246-4f1f-8f77-a48fdcf501f3",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/docs/search?query=<string>&n=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "docs",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) What you want to know, in plain language, e.g. \"how do I keep a sprite animation's colors consistent\" or \"what does a 3D model cost\".",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of sections to return. Defaults to 3.",
+                          "key": "n",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"results\": [\n    {\n      \"doc\": \"<string>\",\n      \"label\": \"<string>\",\n      \"section\": \"<string>\",\n      \"relevance\": \"<float>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"doc\": \"<string>\",\n      \"label\": \"<string>\",\n      \"section\": \"<string>\",\n      \"relevance\": \"<float>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:31.000Z",
+                  "updatedAt": "2026-10-22T03:16:31.000Z",
+                  "uid": "35240-b1f9b586-a246-4f1f-8f77-a48fdcf501f3"
+                },
+                {
+                  "id": "1cd0c749-1cc1-47e3-b542-60bef4a99adf",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/docs/search?query=<string>&n=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "docs",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) What you want to know, in plain language, e.g. \"how do I keep a sprite animation's colors consistent\" or \"what does a 3D model cost\".",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of sections to return. Defaults to 3.",
+                          "key": "n",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:31.000Z",
+                  "updatedAt": "2026-10-22T03:16:31.000Z",
+                  "uid": "35240-1cd0c749-1cc1-47e3-b542-60bef4a99adf"
+                },
+                {
+                  "id": "356807a7-8859-49d0-9a20-21a68b5c839c",
+                  "name": "Documentation search temporarily unavailable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/docs/search?query=<string>&n=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "docs",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) What you want to know, in plain language, e.g. \"how do I keep a sprite animation's colors consistent\" or \"what does a 3D model cost\".",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of sections to return. Defaults to 3.",
+                          "key": "n",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:16:31.000Z",
+                  "updatedAt": "2026-10-22T03:16:31.000Z",
+                  "uid": "35240-356807a7-8859-49d0-9a20-21a68b5c839c"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:31.000Z",
+              "updatedAt": "2026-10-22T03:16:31.000Z",
+              "uid": "35240-6b538808-e401-4840-acf3-22becf71762d"
+            }
+          ],
+          "id": "bf670cae-a1ed-4cef-bb15-0c6a31c56592",
+          "createdAt": "2026-10-22T03:16:30.000Z",
+          "updatedAt": "2026-10-22T03:16:30.000Z",
+          "uid": "35240-bf670cae-a1ed-4cef-bb15-0c6a31c56592"
+        },
+        {
+          "name": "Get docs",
+          "id": "306510a1-74db-481c-922c-14fb4c6cc9e7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/docs?doc=<string>&sections=<string>,<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "docs"
+              ],
+              "query": [
+                {
+                  "description": "Which document to read, by id (the table of contents returned by the no-parameter call lists them). Omit to receive the table of contents.",
+                  "key": "doc",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Section titles to return from `doc`, copied from the table of contents (an array of titles; over plain REST, a comma-separated string, where a title that itself contains a comma is still matched whole). Matching ignores case, spacing and punctuation; titles that match nothing are reported back in `unmatched_sections` rather than guessed at. Only valid together with `doc`. Omit to return every section of the document.",
+                  "key": "sections",
+                  "value": "<string>,<string>"
+                }
+              ]
+            },
+            "description": "Browse or read Ludo's own documentation in full - how to choose a sprite animation mode, when to use Generate Before / Generate After, how margins behave, which model suits a job, and each generator's known limitations. To answer a specific question, call searchDocs first: it returns just the sections that match. Use getDocs to see what documentation exists, or to read a whole document or named sections. This is the same documentation the Ludo web app shows its users, so it occasionally describes buttons rather than parameters; the substance applies to the API and MCP surfaces just the same. To browse, call it with NO parameters to get a table of contents - every document with its id, label and section titles, and no bodies - then call it again with `doc` (and optionally `sections`) to read only what you need. Fetching a whole document can return tens of thousands of characters, so prefer naming the sections, using titles copied from the table of contents. Section titles match ignoring case, spacing and punctuation: when only some requested titles exist you receive those sections plus `unmatched_sections` and `available_sections`, and when none exist (or `doc` is unknown) the call returns 400 listing the valid values so you can retry once. This is a free discovery endpoint: it does not charge credits and does not queue a job. Requires an API key (user scope)."
+          },
+          "response": [
+            {
+              "id": "c5136ca6-4814-4c40-94a8-534d4690a2c7",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/docs?doc=<string>&sections=<string>,<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "docs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Which document to read, by id (the table of contents returned by the no-parameter call lists them). Omit to receive the table of contents.",
+                      "key": "doc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Section titles to return from `doc`, copied from the table of contents (an array of titles; over plain REST, a comma-separated string, where a title that itself contains a comma is still matched whole). Matching ignores case, spacing and punctuation; titles that match nothing are reported back in `unmatched_sections` rather than guessed at. Only valid together with `doc`. Omit to return every section of the document.",
+                      "key": "sections",
+                      "value": "<string>,<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"models\": {\n    \"current\": {\n      \"ANIMATE_SPRITE\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"TRANSFER_SPRITE_MOTION\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"EDIT_SPRITESHEET\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"NEW_VIEW_SPRITESHEET\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"GENERATE_VIDEO\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"REFERENCES_TO_VIDEO\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"VIDEO_EDIT\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"legacy\": [\n      {\n        \"codename\": \"<string>\",\n        \"name\": \"<string>\",\n        \"legacy_since\": \"<string>\",\n        \"features\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"codename\": \"<string>\",\n        \"name\": \"<string>\",\n        \"legacy_since\": \"<string>\",\n        \"features\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"docs\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"sections\": [\n        {\n          \"title\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"sections\": [\n        {\n          \"title\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"unmatched_sections\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"available_sections\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-10-22T03:16:31.000Z",
+              "updatedAt": "2026-10-22T03:16:31.000Z",
+              "uid": "35240-c5136ca6-4814-4c40-94a8-534d4690a2c7"
+            },
+            {
+              "id": "59419e73-fabc-4305-8349-741efdc63fe0",
+              "name": "Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/docs?doc=<string>&sections=<string>,<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "docs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Which document to read, by id (the table of contents returned by the no-parameter call lists them). Omit to receive the table of contents.",
+                      "key": "doc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Section titles to return from `doc`, copied from the table of contents (an array of titles; over plain REST, a comma-separated string, where a title that itself contains a comma is still matched whole). Matching ignores case, spacing and punctuation; titles that match nothing are reported back in `unmatched_sections` rather than guessed at. Only valid together with `doc`. Omit to return every section of the document.",
+                      "key": "sections",
+                      "value": "<string>,<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T03:16:31.000Z",
+              "updatedAt": "2026-10-22T03:16:31.000Z",
+              "uid": "35240-59419e73-fabc-4305-8349-741efdc63fe0"
+            },
+            {
+              "id": "f343be33-f837-4f82-82b6-48fce2a307c0",
+              "name": "Documentation temporarily unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/docs?doc=<string>&sections=<string>,<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "docs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Which document to read, by id (the table of contents returned by the no-parameter call lists them). Omit to receive the table of contents.",
+                      "key": "doc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Section titles to return from `doc`, copied from the table of contents (an array of titles; over plain REST, a comma-separated string, where a title that itself contains a comma is still matched whole). Matching ignores case, spacing and punctuation; titles that match nothing are reported back in `unmatched_sections` rather than guessed at. Only valid together with `doc`. Omit to return every section of the document.",
+                      "key": "sections",
+                      "value": "<string>,<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T03:16:31.000Z",
+              "updatedAt": "2026-10-22T03:16:31.000Z",
+              "uid": "35240-f343be33-f837-4f82-82b6-48fce2a307c0"
+            }
+          ],
+          "createdAt": "2026-10-22T03:16:31.000Z",
+          "updatedAt": "2026-10-22T03:16:31.000Z",
+          "uid": "35240-306510a1-74db-481c-922c-14fb4c6cc9e7"
+        }
+      ],
+      "id": "09921446-ae2f-4164-b711-c159a257548d",
+      "createdAt": "2026-10-22T03:16:30.000Z",
+      "updatedAt": "2026-10-22T03:16:30.000Z",
+      "uid": "35240-09921446-ae2f-4164-b711-c159a257548d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

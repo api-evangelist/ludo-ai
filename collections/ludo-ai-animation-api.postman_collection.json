@@ -1,554 +1,599 @@
 {
+  "info": {
+    "_postman_id": "c72a1ac5-3a23-48ea-8050-fc2829ca9f44",
+    "name": "Ludo.ai REST Animation API",
+    "description": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities.\n\nContact Support:\n Name: Ludo.ai Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:13.000Z",
+    "updatedAt": "2026-10-22T03:16:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c72a1ac5-3a23-48ea-8050-fc2829ca9f44"
+  },
   "item": [
     {
-      "id": "defacb13-29a3-435d-b4eb-1926a67f42ac",
-      "name": "Animation",
-      "description": {
-        "content": "Create animated spritesheets from static sprites, transfer motion from videos or presets, and list available animation presets.",
-        "type": "text/plain"
-      },
+      "name": "sprites",
       "item": [
         {
-          "id": "bce0b2c7-2e4a-4fc0-aa1d-4d68409cd148",
-          "name": "Ludo.ai Create animated spritesheets from static images",
-          "request": {
-            "name": "Ludo.ai Create animated spritesheets from static images",
-            "description": {
-              "content": "Transform a static sprite image into an animated spritesheet by describing the desired motion. Supports configurable frame counts from 4 to 64, frame sizes, seamless looping, and optional GIF output. Processing takes 30 to 90 seconds. Costs 5 credits per animation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sprites",
-                "animate"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "animate",
+          "item": [
             {
-              "id": "fad0259f-a7ea-47e3-b99e-0bec2ee19946",
-              "name": "Successfully created animation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "sprites",
-                    "animate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Ludo.ai Create animated spritesheets from static images",
+              "id": "15a27ad2-29d0-4f9b-b6ac-df574c53647d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"sprite-vfx\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"spritesheet_url\": \"https://lprAwEyxIauXpItGrigUKH.msif7s4r4xAvX4CGxDYQp6o-VkIWH3QXItLMDDwhK.Vtg+3s\",\n  \"video_url\": \"http://MWPYz.xebCYnBp3dHs51rjtRZStkO8n,XTErP4Hy3YUYjbwgaNmxfr+\",\n  \"gif_url\": \"http://SVAMJsBlqfJol.usRkP3Gy1BVFc0vq6sFjrnUz6OuhsVnrfNYauWy6812\",\n  \"individual_frame_urls\": [\n    \"http://TRluiq.xgirfCO8jdVC0YnKmY5kSunBMDKBAwomlwYqUMb,1yJjQuMuI7l\",\n    \"http://NRRelHkTwRDQmrBcfmyw.cenr3w2pCfEgkgVsL\"\n  ],\n  \"spritesheet_with_background_url\": \"http://uxVWpxggCwOcEXvtYTUlKyhNgqU.mdtuoKJFAXr5gkTcqN7aQUMmXJiSD--hs\",\n  \"individual_frame_with_background_urls\": [\n    \"http://mQYbCCTsDvlXM.nrpvrmSSpbpmMbewKi,-Te9AXi5Eb+l0MVsGr7iwweJ4VptnRgm\",\n    \"http://vFchHhcQtWDXzqpmcasOLsmpRUDX.nvbaY5eJaUb,xXW-bN7s4NKJrzzxJBrX12\"\n  ],\n  \"num_frames\": 3528,\n  \"num_cols\": 1804,\n  \"num_rows\": 3728,\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d461767e-da3f-484b-98d7-9020fe31c6fd",
-              "name": "Invalid request parameters",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "sprites",
-                    "animate"
-                  ],
+                  "raw": "{{baseUrl}}/sprites/animate",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b2ec0398-92c2-44c4-8997-6b1967c698b5",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "sprites",
                     "animate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Transform a static sprite image into an animated spritesheet by describing the desired motion. Supports configurable frame counts from 4 to 64, frame sizes, seamless looping, and optional GIF output. Processing takes 30 to 90 seconds. Costs 5 credits per animation."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "3a4ae65b-878f-4a93-a9f9-efc0e81d9973",
+                  "name": "Successfully created animation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"sprite-vfx\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/animate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "animate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"spritesheet_url\": \"<uri>\",\n  \"video_url\": \"<uri>\",\n  \"gif_url\": \"<uri>\",\n  \"individual_frame_urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"spritesheet_with_background_url\": \"<uri>\",\n  \"individual_frame_with_background_urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-3a4ae65b-878f-4a93-a9f9-efc0e81d9973"
+                },
+                {
+                  "id": "c5983113-ce62-4f60-967f-9e9cf3d81b1f",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"sprite-vfx\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/animate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "animate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-c5983113-ce62-4f60-967f-9e9cf3d81b1f"
+                },
+                {
+                  "id": "5899a970-2c85-42b7-b60f-93614a8acb89",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"initial_image\": \"<string>\",\n  \"motion_prompt\": \"<string>\",\n  \"image_type\": \"sprite-vfx\",\n  \"frames\": 36,\n  \"frame_size\": 256,\n  \"loop\": true,\n  \"model\": \"standard\",\n  \"duration\": \"<number>\",\n  \"final_image\": \"<string>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/animate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "animate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-5899a970-2c85-42b7-b60f-93614a8acb89"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:16:14.000Z",
+              "updatedAt": "2026-10-22T03:16:14.000Z",
+              "uid": "35240-15a27ad2-29d0-4f9b-b6ac-df574c53647d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "1469f538-ed25-4786-9221-afe0aa92e60d",
+          "createdAt": "2026-10-22T03:16:14.000Z",
+          "updatedAt": "2026-10-22T03:16:14.000Z",
+          "uid": "35240-1469f538-ed25-4786-9221-afe0aa92e60d"
         },
         {
-          "id": "4a225f61-f55f-48cb-99c5-57a0dccc3d36",
-          "name": "Ludo.ai Transfer motion onto a static sprite",
-          "request": {
-            "name": "Ludo.ai Transfer motion onto a static sprite",
-            "description": {
-              "content": "Transfer motion from a video or animation preset onto a static sprite, producing an animated spritesheet. Provide either a video URL or a preset ID with perspective and direction. Costs 5 credits per transfer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "sprites",
-                "transfer-motion"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "transfer-motion",
+          "item": [
             {
-              "id": "463f665c-22d0-4906-adcf-47cca2a775a8",
-              "name": "Successfully transferred motion",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "sprites",
-                    "transfer-motion"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Ludo.ai Transfer motion onto a static sprite",
+              "id": "6b44e89d-fb65-4fc4-99eb-41876fbd2a88",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"S\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"spritesheet_url\": \"https://lprAwEyxIauXpItGrigUKH.msif7s4r4xAvX4CGxDYQp6o-VkIWH3QXItLMDDwhK.Vtg+3s\",\n  \"video_url\": \"http://MWPYz.xebCYnBp3dHs51rjtRZStkO8n,XTErP4Hy3YUYjbwgaNmxfr+\",\n  \"gif_url\": \"http://SVAMJsBlqfJol.usRkP3Gy1BVFc0vq6sFjrnUz6OuhsVnrfNYauWy6812\",\n  \"individual_frame_urls\": [\n    \"http://TRluiq.xgirfCO8jdVC0YnKmY5kSunBMDKBAwomlwYqUMb,1yJjQuMuI7l\",\n    \"http://NRRelHkTwRDQmrBcfmyw.cenr3w2pCfEgkgVsL\"\n  ],\n  \"spritesheet_with_background_url\": \"http://uxVWpxggCwOcEXvtYTUlKyhNgqU.mdtuoKJFAXr5gkTcqN7aQUMmXJiSD--hs\",\n  \"individual_frame_with_background_urls\": [\n    \"http://mQYbCCTsDvlXM.nrpvrmSSpbpmMbewKi,-Te9AXi5Eb+l0MVsGr7iwweJ4VptnRgm\",\n    \"http://vFchHhcQtWDXzqpmcasOLsmpRUDX.nvbaY5eJaUb,xXW-bN7s4NKJrzzxJBrX12\"\n  ],\n  \"num_frames\": 3528,\n  \"num_cols\": 1804,\n  \"num_rows\": 3728,\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "876c6fa2-38c8-4872-a87a-06569054e829",
-              "name": "Invalid request parameters",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/sprites/transfer-motion",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "sprites",
                     "transfer-motion"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                "description": "Transfer motion from a video or animation preset onto a static sprite, producing an animated spritesheet. Provide either a video URL or a preset ID with perspective and direction. Costs 5 credits per transfer."
+              },
+              "response": [
+                {
+                  "id": "e6b4c97f-0858-44fe-9536-c8694075ada4",
+                  "name": "Successfully transferred motion",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"S\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/transfer-motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "transfer-motion"
+                      ]
                     }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7a397cea-64ca-492c-89ec-51fce2134cc4",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "sprites",
-                    "transfer-motion"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9e88f608-91f6-4804-9e2a-9b64383bf80d",
-          "name": "Ludo.ai List available animation presets",
-          "request": {
-            "name": "Ludo.ai List available animation presets",
-            "description": {
-              "content": "Retrieve the catalog of available animation presets for use with motion transfer. Returns preset animations with their categories, descriptions, and preview URLs, along with available perspectives and directions. Free endpoint that does not consume credits.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "animation-presets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2ff67f06-73b4-4f7f-9da9-f1467636a5a9",
-              "name": "Successfully retrieved animation presets",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "animation-presets"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"spritesheet_url\": \"<uri>\",\n  \"video_url\": \"<uri>\",\n  \"gif_url\": \"<uri>\",\n  \"individual_frame_urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"spritesheet_with_background_url\": \"<uri>\",\n  \"individual_frame_with_background_urls\": [\n    \"<uri>\",\n    \"<uri>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-e6b4c97f-0858-44fe-9536-c8694075ada4"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"animations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"duration\": 4069.877424993803,\n      \"preview_url\": \"https://NiAQPkwveOTDzEYggsoDJkPZzFbrBmspE.axkMnxsE2FxATwPVQFA0QwdJA75Wi16TfQXfH1xsatGWCGGg-ztbZCdXeHTbhHKBcaj3hta\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"duration\": 2216.4922148611977,\n      \"preview_url\": \"http://FMVDcDOOQbrqjJKhMu.etoY.9IyEM\"\n    }\n  ],\n  \"perspectives\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"directions\": [\n    \"N\",\n    \"NE\"\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0d80303e-c365-41e8-9ed2-46c0684ae5d9",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "animation-presets"
+                  "id": "f7e28374-8053-4312-b3eb-bf072db0cb6e",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"S\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/transfer-motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "transfer-motion"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-f7e28374-8053-4312-b3eb-bf072db0cb6e"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "0e14a185-9342-431a-b8d8-53ed2df24167",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"S\",\n  \"perspective\": \"<string>\",\n  \"frames\": \"<integer>\",\n  \"frame_size\": \"<integer>\",\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"margin_ratio\": \"<number>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/sprites/transfer-motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "sprites",
+                        "transfer-motion"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:14.000Z",
+                  "updatedAt": "2026-10-22T03:16:14.000Z",
+                  "uid": "35240-0e14a185-9342-431a-b8d8-53ed2df24167"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:16:14.000Z",
+              "updatedAt": "2026-10-22T03:16:14.000Z",
+              "uid": "35240-6b44e89d-fb65-4fc4-99eb-41876fbd2a88"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "00996d5a-6708-4cbd-b972-f282d20a6faa",
+          "createdAt": "2026-10-22T03:16:14.000Z",
+          "updatedAt": "2026-10-22T03:16:14.000Z",
+          "uid": "35240-00996d5a-6708-4cbd-b972-f282d20a6faa"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "5fd14d8b-6c34-4983-8749-e47b81fd9b3a",
+      "createdAt": "2026-10-22T03:16:14.000Z",
+      "updatedAt": "2026-10-22T03:16:14.000Z",
+      "uid": "35240-5fd14d8b-6c34-4983-8749-e47b81fd9b3a"
+    },
     {
-      "type": "string",
-      "value": "https://api.ludo.ai/api",
-      "key": "baseUrl"
+      "name": "animation-presets",
+      "item": [
+        {
+          "name": "Ludo.ai List available animation presets",
+          "id": "9bcef25c-105e-426c-adc3-e6fad55afe96",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/animation-presets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "animation-presets"
+              ]
+            },
+            "description": "Retrieve the catalog of available animation presets for use with motion transfer. Returns preset animations with their categories, descriptions, and preview URLs, along with available perspectives and directions. Free endpoint that does not consume credits."
+          },
+          "response": [
+            {
+              "id": "510505ea-999b-4382-b22c-05338b085545",
+              "name": "Successfully retrieved animation presets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/animation-presets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "animation-presets"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"animations\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"category\": \"<string>\",\n      \"description\": \"<string>\",\n      \"duration\": \"<number>\",\n      \"preview_url\": \"<uri>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"category\": \"<string>\",\n      \"description\": \"<string>\",\n      \"duration\": \"<number>\",\n      \"preview_url\": \"<uri>\"\n    }\n  ],\n  \"perspectives\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"directions\": [\n    \"NE\",\n    \"NE\"\n  ]\n}",
+              "createdAt": "2026-10-22T03:16:14.000Z",
+              "updatedAt": "2026-10-22T03:16:14.000Z",
+              "uid": "35240-510505ea-999b-4382-b22c-05338b085545"
+            },
+            {
+              "id": "1e8394eb-5a68-404c-8d1e-6fe9e9b4411e",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authentication",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/animation-presets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "animation-presets"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:16:14.000Z",
+              "updatedAt": "2026-10-22T03:16:14.000Z",
+              "uid": "35240-1e8394eb-5a68-404c-8d1e-6fe9e9b4411e"
+            }
+          ],
+          "createdAt": "2026-10-22T03:16:14.000Z",
+          "updatedAt": "2026-10-22T03:16:14.000Z",
+          "uid": "35240-9bcef25c-105e-426c-adc3-e6fad55afe96"
+        }
+      ],
+      "id": "ca161993-0e13-41ed-839c-e668698b21dc",
+      "createdAt": "2026-10-22T03:16:14.000Z",
+      "updatedAt": "2026-10-22T03:16:14.000Z",
+      "uid": "35240-ca161993-0e13-41ed-839c-e668698b21dc"
     }
   ],
   "auth": {
@@ -556,25 +601,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Authentication"
+        "value": "Authentication",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "995624c4-7372-41e8-8777-bef34d86098d",
-    "name": "Ludo.ai REST 3D Models Animation API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ludo.ai/api"
     }
-  }
+  ]
 }

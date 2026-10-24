@@ -1,0 +1,1235 @@
+{
+  "info": {
+    "_postman_id": "87a067c1-dcc0-4ce3-9d51-8f158b417048",
+    "name": "Ludo.ai CLI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:17:18.000Z",
+    "updatedAt": "2026-10-22T03:17:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-87a067c1-dcc0-4ce3-9d51-8f158b417048"
+  },
+  "item": [
+    {
+      "name": "cli",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "start",
+              "item": [
+                {
+                  "name": "Starts a ludo CLI browser login (Roles: none, user)",
+                  "id": "bae44141-b22c-4458-ac85-78d12b62d74a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"platform\": \"<string>\",\n  \"client_version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cli/auth/start",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cli",
+                        "auth",
+                        "start"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8aa1094b-7577-4501-a8b2-3aad4c16419b",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"platform\": \"<string>\",\n  \"client_version\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/cli/auth/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "cli",
+                            "auth",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"device_code\": \"<string>\",\n  \"user_code\": \"<string>\",\n  \"verification_url\": \"<string>\",\n  \"verification_url_complete\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"interval\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-8aa1094b-7577-4501-a8b2-3aad4c16419b"
+                    },
+                    {
+                      "id": "c700a75b-8efe-4c47-81df-e0dfb0663c56",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"platform\": \"<string>\",\n  \"client_version\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/cli/auth/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "cli",
+                            "auth",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-c700a75b-8efe-4c47-81df-e0dfb0663c56"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:19.000Z",
+                  "updatedAt": "2026-10-22T03:17:19.000Z",
+                  "uid": "35240-bae44141-b22c-4458-ac85-78d12b62d74a"
+                }
+              ],
+              "id": "dfff2ccf-6e7d-4087-92c5-fe8bfb7bfdea",
+              "createdAt": "2026-10-22T03:17:19.000Z",
+              "updatedAt": "2026-10-22T03:17:19.000Z",
+              "uid": "35240-dfff2ccf-6e7d-4087-92c5-fe8bfb7bfdea"
+            },
+            {
+              "name": "token",
+              "item": [
+                {
+                  "name": "Polls a ludo CLI browser login; returns the CLI key once approved (Roles: none\u2026",
+                  "id": "6182ac34-fa9b-473b-a9bb-62bf963b97ca",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"device_code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cli/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cli",
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "233f5552-8ce0-41eb-b0d9-ab0068b30dc2",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"device_code\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/cli/auth/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "cli",
+                            "auth",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"expired\",\n  \"api_key\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-233f5552-8ce0-41eb-b0d9-ab0068b30dc2"
+                    },
+                    {
+                      "id": "11e4f5e1-411f-4faf-a3ab-a7b0dba505e8",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"device_code\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/cli/auth/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "cli",
+                            "auth",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-11e4f5e1-411f-4faf-a3ab-a7b0dba505e8"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:19.000Z",
+                  "updatedAt": "2026-10-22T03:17:19.000Z",
+                  "uid": "35240-6182ac34-fa9b-473b-a9bb-62bf963b97ca"
+                }
+              ],
+              "id": "63c6d560-32e0-496c-8637-de6094cdcdff",
+              "createdAt": "2026-10-22T03:17:19.000Z",
+              "updatedAt": "2026-10-22T03:17:19.000Z",
+              "uid": "35240-63c6d560-32e0-496c-8637-de6094cdcdff"
+            },
+            {
+              "name": "requests",
+              "item": [
+                {
+                  "name": "{user_code}",
+                  "item": [
+                    {
+                      "name": "approve",
+                      "item": [
+                        {
+                          "name": "Approves a ludo CLI login request, minting a CLI key for it (Roles: user)",
+                          "id": "ef40786f-890b-4523-acee-d5caeeb83d40",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/cli/auth/requests/:user_code/approve",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "cli",
+                                "auth",
+                                "requests",
+                                ":user_code",
+                                "approve"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7f0edd88-26ec-410a-8fa8-9b588a541e48",
+                                  "key": "user_code",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "31469367-51b5-47a7-aaaf-4e8719a460ec",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/approve",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "approve"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ok\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-31469367-51b5-47a7-aaaf-4e8719a460ec"
+                            },
+                            {
+                              "id": "7e7197e8-f966-46e4-88b6-6c873f17a102",
+                              "name": "The plan has no API access",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/approve",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "approve"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Payment Required",
+                              "code": 402,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-7e7197e8-f966-46e4-88b6-6c873f17a102"
+                            },
+                            {
+                              "id": "efbcafdc-5c52-4b9b-bfc4-d06a186e4d5a",
+                              "name": "Unknown or expired code",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/approve",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "approve"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-efbcafdc-5c52-4b9b-bfc4-d06a186e4d5a"
+                            },
+                            {
+                              "id": "d3e3b50f-2056-4dbf-ac5c-494abee3d20a",
+                              "name": "Already approved or denied",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/approve",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "approve"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-d3e3b50f-2056-4dbf-ac5c-494abee3d20a"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:17:19.000Z",
+                          "updatedAt": "2026-10-22T03:17:19.000Z",
+                          "uid": "35240-ef40786f-890b-4523-acee-d5caeeb83d40"
+                        }
+                      ],
+                      "id": "2bcdfe63-6c82-4c96-9f8c-7197c1df70ed",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-2bcdfe63-6c82-4c96-9f8c-7197c1df70ed"
+                    },
+                    {
+                      "name": "deny",
+                      "item": [
+                        {
+                          "name": "Denies a ludo CLI login request (Roles: user)",
+                          "id": "8ff5191c-8e55-4539-9f8f-c0cf0e3335ac",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "Authorization",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/cli/auth/requests/:user_code/deny",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "cli",
+                                "auth",
+                                "requests",
+                                ":user_code",
+                                "deny"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "16786d77-2d7e-41ac-8597-67464d6c883a",
+                                  "key": "user_code",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "ee01bb96-c896-428c-85e0-c31f8917dc50",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/deny",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "deny"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ok\": \"<boolean>\"\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-ee01bb96-c896-428c-85e0-c31f8917dc50"
+                            },
+                            {
+                              "id": "6f54439d-9a76-47f3-a8a5-5494044915f7",
+                              "name": "Unknown or expired code",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/cli/auth/requests/:user_code/deny",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "cli",
+                                    "auth",
+                                    "requests",
+                                    ":user_code",
+                                    "deny"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_code"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:17:19.000Z",
+                              "updatedAt": "2026-10-22T03:17:19.000Z",
+                              "uid": "35240-6f54439d-9a76-47f3-a8a5-5494044915f7"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:17:19.000Z",
+                          "updatedAt": "2026-10-22T03:17:19.000Z",
+                          "uid": "35240-8ff5191c-8e55-4539-9f8f-c0cf0e3335ac"
+                        }
+                      ],
+                      "id": "9160a64a-159c-48c9-929c-b591e72d2dac",
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-9160a64a-159c-48c9-929c-b591e72d2dac"
+                    },
+                    {
+                      "name": "Returns a pending ludo CLI login request for the approval page (Roles: user)",
+                      "id": "7dc14736-0189-460b-ac29-a966fec541fb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "Authorization",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/cli/auth/requests/:user_code",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "cli",
+                            "auth",
+                            "requests",
+                            ":user_code"
+                          ],
+                          "variable": [
+                            {
+                              "id": "44625710-02db-4e13-901e-12e3b2f37b56",
+                              "key": "user_code",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "be42d7ec-65c8-4803-8ce7-770841ee415b",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/cli/auth/requests/:user_code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "cli",
+                                "auth",
+                                "requests",
+                                ":user_code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_code\": \"<string>\",\n  \"status\": \"denied\",\n  \"platform\": \"<string>\",\n  \"client_version\": \"<string>\",\n  \"requested_at\": \"<long>\",\n  \"requester_ip\": \"<string>\",\n  \"same_ip\": \"<boolean>\",\n  \"api_access\": \"<boolean>\",\n  \"plan_name\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T03:17:19.000Z",
+                          "updatedAt": "2026-10-22T03:17:19.000Z",
+                          "uid": "35240-be42d7ec-65c8-4803-8ce7-770841ee415b"
+                        },
+                        {
+                          "id": "31b776c5-a120-4247-96e3-7ad4890baa05",
+                          "name": "Unknown or expired code",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/cli/auth/requests/:user_code",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "cli",
+                                "auth",
+                                "requests",
+                                ":user_code"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_code"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:17:19.000Z",
+                          "updatedAt": "2026-10-22T03:17:19.000Z",
+                          "uid": "35240-31b776c5-a120-4247-96e3-7ad4890baa05"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:17:19.000Z",
+                      "updatedAt": "2026-10-22T03:17:19.000Z",
+                      "uid": "35240-7dc14736-0189-460b-ac29-a966fec541fb"
+                    }
+                  ],
+                  "id": "9a1d70ae-0bd6-4f54-b40b-9efa3a63f726",
+                  "createdAt": "2026-10-22T03:17:19.000Z",
+                  "updatedAt": "2026-10-22T03:17:19.000Z",
+                  "uid": "35240-9a1d70ae-0bd6-4f54-b40b-9efa3a63f726"
+                }
+              ],
+              "id": "40efd389-a845-4c6c-8d00-532cb6aa164d",
+              "createdAt": "2026-10-22T03:17:19.000Z",
+              "updatedAt": "2026-10-22T03:17:19.000Z",
+              "uid": "35240-40efd389-a845-4c6c-8d00-532cb6aa164d"
+            }
+          ],
+          "id": "28197607-a377-4c08-826f-0e59ccb393c2",
+          "createdAt": "2026-10-22T03:17:19.000Z",
+          "updatedAt": "2026-10-22T03:17:19.000Z",
+          "uid": "35240-28197607-a377-4c08-826f-0e59ccb393c2"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "Records ludo CLI usage events (Roles: none, user)",
+              "id": "c049f0fd-f835-4fe9-b1e6-7d71e84802c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"install_id\": \"<string>\",\n  \"events\": [\n    {\n      \"command\": \"<string>\",\n      \"at\": \"<long>\",\n      \"props\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cli/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cli",
+                    "events"
+                  ]
+                },
+                "description": "Anonymous-by-default usage telemetry from the ludo CLI: one event per command, keyed by a random install id, plus the account when the CLI sends its API key. Never carries flag values, prompts, paths or file contents. Stored in UserTracking as `cli:`."
+              },
+              "response": [
+                {
+                  "id": "556cfc0e-ea61-46af-a40b-408dd2a75061",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"install_id\": \"<string>\",\n  \"events\": [\n    {\n      \"command\": \"<string>\",\n      \"at\": \"<long>\",\n      \"props\": {}\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cli/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cli",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"ok\": \"<boolean>\"\n}",
+                  "createdAt": "2026-10-22T03:17:19.000Z",
+                  "updatedAt": "2026-10-22T03:17:19.000Z",
+                  "uid": "35240-556cfc0e-ea61-46af-a40b-408dd2a75061"
+                },
+                {
+                  "id": "65d7d3ec-e5c4-480b-91ea-7ca985e0491b",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"install_id\": \"<string>\",\n  \"events\": [\n    {\n      \"command\": \"<string>\",\n      \"at\": \"<long>\",\n      \"props\": {}\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/cli/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "cli",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"setup\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:17:19.000Z",
+                  "updatedAt": "2026-10-22T03:17:19.000Z",
+                  "uid": "35240-65d7d3ec-e5c4-480b-91ea-7ca985e0491b"
+                }
+              ],
+              "createdAt": "2026-10-22T03:17:19.000Z",
+              "updatedAt": "2026-10-22T03:17:19.000Z",
+              "uid": "35240-c049f0fd-f835-4fe9-b1e6-7d71e84802c3"
+            }
+          ],
+          "id": "358b5af2-236e-4e94-aa30-1f95f6175ab0",
+          "createdAt": "2026-10-22T03:17:19.000Z",
+          "updatedAt": "2026-10-22T03:17:19.000Z",
+          "uid": "35240-358b5af2-236e-4e94-aa30-1f95f6175ab0"
+        }
+      ],
+      "id": "3812cec9-49ce-4e0a-89b6-5b14831ef325",
+      "createdAt": "2026-10-22T03:17:19.000Z",
+      "updatedAt": "2026-10-22T03:17:19.000Z",
+      "uid": "35240-3812cec9-49ce-4e0a-89b6-5b14831ef325"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

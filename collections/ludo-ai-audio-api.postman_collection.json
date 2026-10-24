@@ -1,1074 +1,2194 @@
 {
+  "info": {
+    "_postman_id": "3794dc42-1d7e-4d63-97f3-5c7e4c305273",
+    "name": "Ludo Ai Audio API",
+    "description": "Operations tagged Audio across 2 of this provider's published API definitions: ludo-ai-openapi.json, ludo-ai-audio-api-openapi.yml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:15:22.000Z",
+    "updatedAt": "2026-10-22T03:15:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3794dc42-1d7e-4d63-97f3-5c7e4c305273"
+  },
   "item": [
     {
-      "id": "a88a08c4-3a0c-4d8c-947f-3764c6b70bea",
-      "name": "Audio",
-      "description": {
-        "content": "Generate sound effects, background music, character voices, and text-to-speech audio for games.",
-        "type": "text/plain"
-      },
+      "name": "audio",
       "item": [
         {
-          "id": "71f54ed4-c755-47fd-82f7-532d1c32930b",
-          "name": "Ludo.ai Generate a game sound effect",
-          "request": {
-            "name": "Ludo.ai Generate a game sound effect",
-            "description": {
-              "content": "Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "audio",
-                "sound-effects"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "sound-effect",
+          "item": [
             {
-              "id": "7985ddbc-c09d-490c-9c59-f8b74467ecdb",
-              "name": "Successfully created sound effect",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "sound-effects"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+              "name": "Produce a short sound effect (SFX) from a text description, such as \"laser gun\u2026",
+              "id": "f56b3644-55f9-4d27-a81c-c0199f99e215",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
                 },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": false,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/sound-effect",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "sound-effect"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4902ea97-fef9-450a-aadd-0c44d9cb76d1",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": false,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effect",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effect"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-4902ea97-fef9-450a-aadd-0c44d9cb76d1"
+                },
+                {
+                  "id": "81933031-d8d7-48b9-a4b6-d28840d83253",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": false,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effect",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effect"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-81933031-d8d7-48b9-a4b6-d28840d83253"
+                },
+                {
+                  "id": "d3a841c1-5b34-4e16-b246-2d5a5c3c8b0c",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": false,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effect",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effect"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-d3a841c1-5b34-4e16-b246-2d5a5c3c8b0c"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-f56b3644-55f9-4d27-a81c-c0199f99e215"
+            }
+          ],
+          "id": "8200cab0-d38a-415a-bca2-5666eac8fe61",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-8200cab0-d38a-415a-bca2-5666eac8fe61"
+        },
+        {
+          "name": "ambiance",
+          "item": [
+            {
+              "name": "Produce a looping background ambiance soundscape from a text description, such\u2026",
+              "id": "6a26a4d8-6dfa-4927-8eb1-28565517c3c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/ambiance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "ambiance"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "ff0b3d5b-b146-4737-b720-cb2dc4f1093b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/ambiance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "ambiance"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-ff0b3d5b-b146-4737-b720-cb2dc4f1093b"
+                },
+                {
+                  "id": "257178b2-c86c-4f88-ac9e-8acc36bd4f69",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/ambiance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "ambiance"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-257178b2-c86c-4f88-ac9e-8acc36bd4f69"
+                },
+                {
+                  "id": "72f93779-e476-46ce-acfe-140b0053b29c",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": 0,\n  \"loop\": true,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/ambiance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "ambiance"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-72f93779-e476-46ce-acfe-140b0053b29c"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-6a26a4d8-6dfa-4927-8eb1-28565517c3c3"
+            }
+          ],
+          "id": "b6fe8127-3e15-4c7a-91e8-e15a8860018b",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-b6fe8127-3e15-4c7a-91e8-e15a8860018b"
+        },
+        {
+          "name": "music",
+          "item": [
+            {
+              "name": "Produce a piece of music from a text description, such as \"epic orchestral\u2026",
+              "id": "ee72ed26-71a5-4291-a025-0adb5b7e3aaf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"duration\": 0,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/music",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "music"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "97f2970d-e5ae-48ed-a225-32cf67622e24",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"duration\": 0,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/music",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "music"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-97f2970d-e5ae-48ed-a225-32cf67622e24"
+                },
+                {
+                  "id": "cd0e9cf2-e5ac-4ade-bbcf-9a69b4867d17",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"duration\": 0,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/music",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "music"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-cd0e9cf2-e5ac-4ade-bbcf-9a69b4867d17"
+                },
+                {
+                  "id": "0e945055-d067-4b61-b52a-d07e85bfe7d4",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"duration\": 0,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/music",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "music"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-0e945055-d067-4b61-b52a-d07e85bfe7d4"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-ee72ed26-71a5-4291-a025-0adb5b7e3aaf"
+            }
+          ],
+          "id": "184cdbb2-3c30-4d38-b1a2-79ba56994453",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-184cdbb2-3c30-4d38-b1a2-79ba56994453"
+        },
+        {
+          "name": "transform",
+          "item": [
+            {
+              "name": "Remix an existing audio sample (a sound effect, ambiance, or music clip) into a\u2026",
+              "id": "090f4688-8086-4fe2-b00d-df4f7f7c0011",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sample\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 0,\n  \"modification_strength\": 0.6,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/transform",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "transform"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "81072f00-5d46-4987-bd25-4ed3f04e65c5",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sample\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 0,\n  \"modification_strength\": 0.6,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/transform",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "transform"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-81072f00-5d46-4987-bd25-4ed3f04e65c5"
+                },
+                {
+                  "id": "e774f1dc-5095-430e-b2dd-7cccc6669f40",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sample\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 0,\n  \"modification_strength\": 0.6,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/transform",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "transform"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-e774f1dc-5095-430e-b2dd-7cccc6669f40"
+                },
+                {
+                  "id": "1ce38721-c4de-4f29-ad21-3f40d1716a46",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sample\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": 0,\n  \"modification_strength\": 0.6,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/transform",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "transform"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-1ce38721-c4de-4f29-ad21-3f40d1716a46"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-090f4688-8086-4fe2-b00d-df4f7f7c0011"
+            }
+          ],
+          "id": "8ee9d79a-67e8-4821-b168-cd39dd6edff4",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-8ee9d79a-67e8-4821-b168-cd39dd6edff4"
+        },
+        {
+          "name": "voice",
+          "item": [
+            {
+              "name": "Design a new voice from a character description (such as \"deep-voiced warrior\"\u2026",
+              "id": "7428d14d-9c0b-4392-8cd6-e936b516b7d8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"type\": \"human\",\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/voice",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "voice"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "01396a32-c2dc-4208-9ea1-3cfde7a39885",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"type\": \"human\",\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/voice",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "voice"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-01396a32-c2dc-4208-9ea1-3cfde7a39885"
+                },
+                {
+                  "id": "70c4f6fd-936a-4089-ab55-63036f563909",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"type\": \"human\",\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/voice",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "voice"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-70c4f6fd-936a-4089-ab55-63036f563909"
+                },
+                {
+                  "id": "6440720f-3dc5-47e9-9a22-6a9921e0accc",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_description\": \"<string>\",\n  \"image\": \"<string>\",\n  \"type\": \"human\",\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/voice",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "voice"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-6440720f-3dc5-47e9-9a22-6a9921e0accc"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-7428d14d-9c0b-4392-8cd6-e936b516b7d8"
+            }
+          ],
+          "id": "3462f76a-b41c-425c-a175-78c0ed756aef",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-3462f76a-b41c-425c-a175-78c0ed756aef"
+        },
+        {
+          "name": "speech",
+          "item": [
+            {
+              "name": "Convert text to speech by cloning the voice from an audio sample you provide\u2026",
+              "id": "4a5b0f8a-29a8-4487-a99a-5a676598e9a5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/speech",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "speech"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "28b8a711-0a7e-41d3-ac01-6b9bba9e9495",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-28b8a711-0a7e-41d3-ac01-6b9bba9e9495"
+                },
+                {
+                  "id": "ae848368-f970-4167-8135-713c428920c0",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-ae848368-f970-4167-8135-713c428920c0"
+                },
+                {
+                  "id": "0a7f31f9-181f-4f2a-9a9c-34fd42038a7a",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-0a7f31f9-181f-4f2a-9a9c-34fd42038a7a"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-4a5b0f8a-29a8-4487-a99a-5a676598e9a5"
+            }
+          ],
+          "id": "ccdf11f4-e356-4875-8882-6334be148df6",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-ccdf11f4-e356-4875-8882-6334be148df6"
+        },
+        {
+          "name": "speech-preset",
+          "item": [
+            {
+              "name": "Convert text to speech using a named built-in preset voice, with optional\u2026",
+              "id": "10bdf5f6-e7d0-4752-bf0c-4005e0d16395",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/audio/speech-preset",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audio",
+                    "speech-preset"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "a61d503d-831c-4f5f-b7ee-5de13878fef2",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech-preset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech-preset"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-a61d503d-831c-4f5f-b7ee-5de13878fef2"
+                },
+                {
+                  "id": "ada108d8-9d06-4922-b398-3207f4985f69",
+                  "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech-preset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech-preset"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"failed\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-ada108d8-9d06-4922-b398-3207f4985f69"
+                },
+                {
+                  "id": "f5814c74-43e4-4380-9284-3610d0392c36",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"delivery\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/speech-preset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "speech-preset"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-f5814c74-43e4-4380-9284-3610d0392c36"
+                }
+              ],
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-10bdf5f6-e7d0-4752-bf0c-4005e0d16395"
+            }
+          ],
+          "id": "2d352a22-fbbf-445b-a404-2c33ce297f04",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-2d352a22-fbbf-445b-a404-2c33ce297f04"
+        },
+        {
+          "name": "sound-effects",
+          "item": [
+            {
+              "name": "Ludo.ai Generate a game sound effect",
+              "id": "2f224980-5ef0-4653-a4a6-77f6fc2ef11c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authentication",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"url\": \"http://PdQ.ieNUWlWIgsKIzjVJCx\",\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c6db2d60-2e39-477a-8bcf-d7ec6eb71e52",
-              "name": "Invalid request parameters",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/audio/sound-effects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "audio",
                     "sound-effects"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Generate game sound effects from text descriptions. Supports configurable duration from 0 to 10 seconds where 0 uses automatic duration. Costs 3 credits per sound effect."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "95021282-a859-4262-a097-1f1759d85416",
+                  "name": "Successfully created sound effect",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effects"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"url\": \"<uri>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-95021282-a859-4262-a097-1f1759d85416"
+                },
+                {
+                  "id": "d75334f9-9d2d-4cba-a035-adba815e1577",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effects"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-d75334f9-9d2d-4cba-a035-adba815e1577"
+                },
+                {
+                  "id": "9cffdcfe-e80e-452b-9a19-43aa668cd199",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authentication",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/audio/sound-effects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "audio",
+                        "sound-effects"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-9cffdcfe-e80e-452b-9a19-43aa668cd199"
                 }
               ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b20f6a3d-0fd0-4bac-b955-301461f4fb15",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "sound-effects"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"duration\": \"<number>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-2f224980-5ef0-4653-a4a6-77f6fc2ef11c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "306c2c36-357f-44dc-aeba-eff6ce30b5d2",
-          "name": "Ludo.ai Generate background music",
-          "request": {
-            "name": "Ludo.ai Generate background music",
-            "description": {
-              "content": "Generate background music and themes from text descriptions. Supports optional lyrics for vocal tracks. Costs 3 credits per track.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "audio",
-                "music"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "a1279acb-649e-40fb-961f-d7a9299cd86d",
-              "name": "Successfully created music track",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "music"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"url\": \"http://PdQ.ieNUWlWIgsKIzjVJCx\",\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dafc63e1-6348-4e89-aa32-8152af61c24f",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "music"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f5968ff2-f48f-495c-862a-c04b2fbe5e83",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "music"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"lyrics\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c1d1e263-e14e-4d1d-9ca9-937f9f3b67af",
-          "name": "Ludo.ai Generate a unique character voice",
-          "request": {
-            "name": "Ludo.ai Generate a unique character voice",
-            "description": {
-              "content": "Generate unique character voices by describing the character and providing text to speak. Supports human and non-human voice types. Maximum 200 characters of text. Costs 3 credits per voice.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "audio",
-                "voice"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "bbf112d9-3c9f-4e8c-9af3-ec277646be33",
-              "name": "Successfully created voice",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "voice"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"url\": \"http://PdQ.ieNUWlWIgsKIzjVJCx\",\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "42688c32-823b-467c-b6bc-78353d25e6f1",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "voice"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "acee1865-8e16-4ced-a424-ce0b596020be",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "voice"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"voice_description\": \"<string>\",\n  \"text\": \"<string>\",\n  \"type\": \"human\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "de645edd-f059-4e0a-b433-52f0fa3a3910",
-          "name": "Ludo.ai Clone a voice from an audio sample",
-          "request": {
-            "name": "Ludo.ai Clone a voice from an audio sample",
-            "description": {
-              "content": "Generate text-to-speech audio by cloning a voice from a provided audio sample. Maximum 1000 characters of text. Costs 3 credits per generation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "audio",
-                "speech"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "2006be4a-a4a5-4322-8aa6-8f4b0dea4b8b",
-              "name": "Successfully created speech",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"url\": \"http://PdQ.ieNUWlWIgsKIzjVJCx\",\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5e767b98-cf48-48fa-b83b-3ef7522d18cd",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "196d1fdd-b1da-4c25-9635-d375f3a40e1b",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"sample\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "199a6a72-1aa6-419b-8b28-d9cd936529ca",
-          "name": "Ludo.ai Generate speech using a preset voice",
-          "request": {
-            "name": "Ludo.ai Generate speech using a preset voice",
-            "description": {
-              "content": "Generate text-to-speech audio using preset voice characters with optional emotion and language settings. Maximum 1000 characters of text. Costs 3 credits per generation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "audio",
-                "speech-preset"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "22dd33cf-7213-4d54-938c-557de710968e",
-              "name": "Successfully created speech",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech-preset"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"url\": \"http://PdQ.ieNUWlWIgsKIzjVJCx\",\n  \"request_id\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "33831817-71cc-4551-a507-38411e8587f3",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech-preset"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "83508294-e1d4-40db-ae3f-15680a2f5f92",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "audio",
-                    "speech-preset"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Authentication",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"text\": \"<string>\",\n  \"voice_preset_id\": \"<string>\",\n  \"emotion\": \"<string>\",\n  \"language\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"code\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0e4a0ca3-cf35-4d33-9d2e-3f6ae860a912",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-0e4a0ca3-cf35-4d33-9d2e-3f6ae860a912"
         }
       ],
-      "event": []
+      "id": "0beb06a1-d531-460b-8976-e7c1cbcc8ffc",
+      "createdAt": "2026-10-22T03:15:22.000Z",
+      "updatedAt": "2026-10-22T03:15:22.000Z",
+      "uid": "35240-0beb06a1-d531-460b-8976-e7c1cbcc8ffc"
+    },
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "audio",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "Get audio results",
+                  "id": "c1ffbd74-cb4c-42e2-b896-d0003747c918",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/audio/results?request_id=<string>&source=api",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "audio",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by request_id",
+                          "key": "request_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                          "key": "source",
+                          "value": "api"
+                        }
+                      ]
+                    },
+                    "description": "**Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.\nList audio clips you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called createSoundEffect, createAmbiance, createMusic, createAudioTransform, createVoice, createSpeech, or createSpeechPreset. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "6b4dcbbe-0c82-4ffa-bf55-9a21bf234fff",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/audio/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "audio",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"type\": \"<string>\",\n    \"duration\": \"<float>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:15:22.000Z",
+                      "updatedAt": "2026-10-22T03:15:22.000Z",
+                      "uid": "35240-6b4dcbbe-0c82-4ffa-bf55-9a21bf234fff"
+                    },
+                    {
+                      "id": "658a0197-1f8c-4c4d-b90f-1683c88fc7cb",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/audio/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "audio",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:15:22.000Z",
+                      "updatedAt": "2026-10-22T03:15:22.000Z",
+                      "uid": "35240-658a0197-1f8c-4c4d-b90f-1683c88fc7cb"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:15:22.000Z",
+                  "updatedAt": "2026-10-22T03:15:22.000Z",
+                  "uid": "35240-c1ffbd74-cb4c-42e2-b896-d0003747c918"
+                }
+              ],
+              "id": "8f86ffaf-1978-4737-a47a-e2f16c6551f1",
+              "createdAt": "2026-10-22T03:15:22.000Z",
+              "updatedAt": "2026-10-22T03:15:22.000Z",
+              "uid": "35240-8f86ffaf-1978-4737-a47a-e2f16c6551f1"
+            }
+          ],
+          "id": "83f39c28-e19e-4920-8581-8d960d9d7c1a",
+          "createdAt": "2026-10-22T03:15:22.000Z",
+          "updatedAt": "2026-10-22T03:15:22.000Z",
+          "uid": "35240-83f39c28-e19e-4920-8581-8d960d9d7c1a"
+        }
+      ],
+      "id": "5e3b157b-687e-4fd2-866c-febaba6a9122",
+      "createdAt": "2026-10-22T03:15:22.000Z",
+      "updatedAt": "2026-10-22T03:15:22.000Z",
+      "uid": "35240-5e3b157b-687e-4fd2-866c-febaba6a9122"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api.ludo.ai/api",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/api"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "Authentication"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "8ffe4e69-f7f2-4d0b-886c-91100eb59bc9",
-    "name": "Ludo.ai REST 3D Models Audio API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Ludo.ai REST API provides programmatic access to AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, edit existing images with text instructions, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, produce sound effects, music tracks, character voices, and generate short videos. All API requests require an API key passed via the Authentication header, and requests consume credits that vary by endpoint type. The API is currently in beta.\n\nContact Support:\n Name: Ludo.ai Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

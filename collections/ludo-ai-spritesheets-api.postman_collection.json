@@ -1,0 +1,3569 @@
+{
+  "info": {
+    "_postman_id": "2ae967f6-f840-4ce0-91c4-cc14fad19353",
+    "name": "Ludo.ai Spritesheets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:17:01.000Z",
+    "updatedAt": "2026-10-22T03:17:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2ae967f6-f840-4ce0-91c4-cc14fad19353"
+  },
+  "item": [
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "sprite",
+          "item": [
+            {
+              "name": "animate",
+              "item": [
+                {
+                  "name": "Animate a static sprite into a spritesheet driven by a motion text prompt\u2026",
+                  "id": "0ed35704-0ab4-4407-9b88-8e6ea619d5f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"model\": \"hydra\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/animate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "animate"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d26a8b79-aebd-463a-850a-5f5c04cc0463",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"model\": \"hydra\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-d26a8b79-aebd-463a-850a-5f5c04cc0463"
+                    },
+                    {
+                      "id": "7f3376ed-38e9-4d89-a6ca-e0a16d12e1ea",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"model\": \"hydra\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-7f3376ed-38e9-4d89-a6ca-e0a16d12e1ea"
+                    },
+                    {
+                      "id": "98246006-38ee-4848-ae2b-14e5212fb8c1",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"model\": \"hydra\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-98246006-38ee-4848-ae2b-14e5212fb8c1"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-0ed35704-0ab4-4407-9b88-8e6ea619d5f9"
+                }
+              ],
+              "id": "04e2565c-ef1b-4088-80f6-71bc284a6249",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-04e2565c-ef1b-4088-80f6-71bc284a6249"
+            },
+            {
+              "name": "animate-keyframes",
+              "item": [
+                {
+                  "name": "Animate a sprite through up to three fixed keyframes - initial_image\u2026",
+                  "id": "b67590c4-480c-4f65-b4a7-cff14a369ab3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"middle_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"model\": \"hydra\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/animate-keyframes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "animate-keyframes"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "670ad8c3-a3e1-411b-b2ae-4652c7716163",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"middle_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"model\": \"hydra\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate-keyframes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate-keyframes"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-670ad8c3-a3e1-411b-b2ae-4652c7716163"
+                    },
+                    {
+                      "id": "efe73779-d58a-4d4e-b310-6e17f3116fe7",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"middle_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"model\": \"hydra\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate-keyframes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate-keyframes"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-efe73779-d58a-4d4e-b310-6e17f3116fe7"
+                    },
+                    {
+                      "id": "1b54d7e8-cb4f-411b-890b-591d8d418816",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"motion_prompt\": \"<string>\",\n  \"initial_image\": \"<string>\",\n  \"middle_image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"model\": \"hydra\",\n  \"loop\": true,\n  \"crop\": true,\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"auto\",\n  \"image_type\": \"sprite\",\n  \"duration\": 3,\n  \"augment_prompt\": true,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animate-keyframes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animate-keyframes"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-1b54d7e8-cb4f-411b-890b-591d8d418816"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-b67590c4-480c-4f65-b4a7-cff14a369ab3"
+                }
+              ],
+              "id": "bca4c1ea-5c81-44c1-86af-59f6151809ae",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-bca4c1ea-5c81-44c1-86af-59f6151809ae"
+            },
+            {
+              "name": "pose",
+              "item": [
+                {
+                  "name": "Re-pose an existing sprite into a new target pose while preserving the\u2026",
+                  "id": "22ab5969-dd07-484b-8977-4c672a909c78",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/pose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "pose"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "362cf851-7dcd-42d2-af7d-43b75e9927bf",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/pose",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "pose"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"pose\": \"<string>\",\n    \"description\": \"<string>\",\n    \"motion_prompt\": \"<string>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"pose\": \"<string>\",\n    \"description\": \"<string>\",\n    \"motion_prompt\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-362cf851-7dcd-42d2-af7d-43b75e9927bf"
+                    },
+                    {
+                      "id": "ef9860ea-dc66-45cb-9829-49de80771f6e",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/pose",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "pose"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-ef9860ea-dc66-45cb-9829-49de80771f6e"
+                    },
+                    {
+                      "id": "f2100fed-2d63-4b0a-ab5e-86c1eba2c99c",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"pose\": \"<string>\",\n  \"description\": \"<string>\",\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/pose",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "pose"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-f2100fed-2d63-4b0a-ab5e-86c1eba2c99c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-22ab5969-dd07-484b-8977-4c672a909c78"
+                }
+              ],
+              "id": "ebdc4f12-2d29-4c94-9356-57a4c0893d38",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-ebdc4f12-2d29-4c94-9356-57a4c0893d38"
+            },
+            {
+              "name": "rotate",
+              "item": [
+                {
+                  "name": "Re-render an existing sprite from a different camera viewpoint while keeping\u2026",
+                  "id": "cf6572e7-7aca-45a1-bdd6-244d71b242f2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"camera_rotation\": 0,\n  \"camera_elevation\": 30,\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/rotate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "rotate"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "17203320-3b01-475c-b745-b2ff20d9f46f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"camera_rotation\": 0,\n  \"camera_elevation\": 30,\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"url\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\"\n  },\n  {\n    \"url\": \"<string>\",\n    \"camera_rotation\": \"<integer>\",\n    \"camera_elevation\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-17203320-3b01-475c-b745-b2ff20d9f46f"
+                    },
+                    {
+                      "id": "83e0ac04-15e5-4774-a5d3-9cadc131bfb7",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"camera_rotation\": 0,\n  \"camera_elevation\": 30,\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-83e0ac04-15e5-4774-a5d3-9cadc131bfb7"
+                    },
+                    {
+                      "id": "bf69e4e4-d051-44e0-af59-80c6cdab9c8f",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"camera_rotation\": 0,\n  \"camera_elevation\": 30,\n  \"n\": 1,\n  \"augment_prompt\": true,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-bf69e4e4-d051-44e0-af59-80c6cdab9c8f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-cf6572e7-7aca-45a1-bdd6-244d71b242f2"
+                }
+              ],
+              "id": "5c761bef-f2ca-4fe2-80a6-5935da96cac7",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-5c761bef-f2ca-4fe2-80a6-5935da96cac7"
+            },
+            {
+              "name": "transfer-motion",
+              "item": [
+                {
+                  "name": "Transfer motion from a reference video or a named animation preset onto a\u2026",
+                  "id": "c54aa2ec-a322-4600-a767-b89611ae1012",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"N\",\n  \"perspective\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"loop\": true,\n  \"crop\": true,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"model\": \"hydra\",\n  \"prompt\": \"<string>\",\n  \"duration\": 1.5,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/transfer-motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "transfer-motion"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f392a55c-d639-4b92-b8b8-20a4d0cb5bc0",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"N\",\n  \"perspective\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"loop\": true,\n  \"crop\": true,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"model\": \"hydra\",\n  \"prompt\": \"<string>\",\n  \"duration\": 1.5,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/transfer-motion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "transfer-motion"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-f392a55c-d639-4b92-b8b8-20a4d0cb5bc0"
+                    },
+                    {
+                      "id": "28fae8ac-aa25-484b-99a1-21b6f34281c9",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"N\",\n  \"perspective\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"loop\": true,\n  \"crop\": true,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"model\": \"hydra\",\n  \"prompt\": \"<string>\",\n  \"duration\": 1.5,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/transfer-motion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "transfer-motion"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-28fae8ac-aa25-484b-99a1-21b6f34281c9"
+                    },
+                    {
+                      "id": "d81bdd31-ddae-4e47-8ca9-22194c4e9bb5",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image\": \"<string>\",\n  \"video\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"direction\": \"N\",\n  \"perspective\": \"<string>\",\n  \"frames\": 36,\n  \"frame_size\": 0,\n  \"loop\": true,\n  \"crop\": true,\n  \"margin_ratio\": \"<float>\",\n  \"margin_ratio_horizontal\": \"<float>\",\n  \"margin_ratio_vertical\": \"<float>\",\n  \"margin_ratio_mode\": \"manual\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"model\": \"hydra\",\n  \"prompt\": \"<string>\",\n  \"duration\": 1.5,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/transfer-motion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "transfer-motion"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-d81bdd31-ddae-4e47-8ca9-22194c4e9bb5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-c54aa2ec-a322-4600-a767-b89611ae1012"
+                }
+              ],
+              "id": "12dd37a9-e31e-42c7-af79-11284e6abbe6",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-12dd37a9-e31e-42c7-af79-11284e6abbe6"
+            },
+            {
+              "name": "animation-presets",
+              "item": [
+                {
+                  "name": "List animation presets",
+                  "id": "4ccf9905-badf-4ce4-a56f-62f7d1e5fc60",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/animation-presets",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "animation-presets"
+                      ]
+                    },
+                    "description": "List the available animation presets along with their perspectives and the eight supported compass directions (N, NE, E, SE, S, SW, W, NW). Synchronous GET with no request body: it returns an animations array (each with id, name, category, description, duration, and preview_url), a deduplicated perspectives array, and the directions list. This is a free discovery endpoint and does not charge credits. Use it to obtain the preset_id, perspective, and direction values that transferMotion needs, and to find motion preset names you can reference when animating; pair it with transferMotion (to apply a preset onto a sprite), animateSprite (text-prompt animation), or animate3DModelPreset (apply any preset by id to a rigged 3D model). Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "3011b061-f681-4d11-ac18-ca1bacae01fc",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animation-presets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animation-presets"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"animations\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"category\": \"<string>\",\n      \"description\": \"<string>\",\n      \"duration\": \"<float>\",\n      \"preview_url\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"category\": \"<string>\",\n      \"description\": \"<string>\",\n      \"duration\": \"<float>\",\n      \"preview_url\": \"<string>\"\n    }\n  ],\n  \"perspectives\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"directions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-3011b061-f681-4d11-ac18-ca1bacae01fc"
+                    },
+                    {
+                      "id": "b1205bc5-a79c-4e78-9379-471e62098afe",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/animation-presets",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "animation-presets"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-b1205bc5-a79c-4e78-9379-471e62098afe"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-4ccf9905-badf-4ce4-a56f-62f7d1e5fc60"
+                }
+              ],
+              "id": "d2614b6e-2539-4ba8-8905-257e0d0c651d",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-d2614b6e-2539-4ba8-8905-257e0d0c651d"
+            },
+            {
+              "name": "edit",
+              "item": [
+                {
+                  "name": "Edit a previously generated spritesheet: re-prompt its underlying animation\u2026",
+                  "id": "b7dd52c9-7843-48fd-bbc9-41ad1108c499",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"edit_mode\": \"prompt\",\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"crop\": \"<boolean>\",\n  \"loop\": true,\n  \"frames\": 25,\n  \"frame_size\": 0,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/edit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "edit"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2c0790d0-3121-435d-a7a4-2728891e8190",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"edit_mode\": \"prompt\",\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"crop\": \"<boolean>\",\n  \"loop\": true,\n  \"frames\": 25,\n  \"frame_size\": 0,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-2c0790d0-3121-435d-a7a4-2728891e8190"
+                    },
+                    {
+                      "id": "c0a5969f-736a-45ec-bae1-211c710db3ba",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"edit_mode\": \"prompt\",\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"crop\": \"<boolean>\",\n  \"loop\": true,\n  \"frames\": 25,\n  \"frame_size\": 0,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-c0a5969f-736a-45ec-bae1-211c710db3ba"
+                    },
+                    {
+                      "id": "f6ada6ac-0453-49c9-8cfa-7a80aeff92e4",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"edit_mode\": \"prompt\",\n  \"prompt\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"crop\": \"<boolean>\",\n  \"loop\": true,\n  \"frames\": 25,\n  \"frame_size\": 0,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/edit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "edit"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-f6ada6ac-0453-49c9-8cfa-7a80aeff92e4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-b7dd52c9-7843-48fd-bbc9-41ad1108c499"
+                }
+              ],
+              "id": "f9d4ee9b-d9e8-4cdf-80af-fa681021c60c",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-f9d4ee9b-d9e8-4cdf-80af-fa681021c60c"
+            },
+            {
+              "name": "rotate-spritesheet",
+              "item": [
+                {
+                  "name": "Re-render a previously generated sprite animation from a new view: the same\u2026",
+                  "id": "69e63b0a-33f9-4318-b642-ac5d3fa88adb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"loop\": \"<boolean>\",\n  \"crop\": true,\n  \"frames\": 25,\n  \"frame_size\": 384,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/rotate-spritesheet",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "rotate-spritesheet"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "fb6ef1c8-dc42-4603-8c06-74bee02376c1",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"loop\": \"<boolean>\",\n  \"crop\": true,\n  \"frames\": 25,\n  \"frame_size\": 384,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate-spritesheet",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate-spritesheet"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-fb6ef1c8-dc42-4603-8c06-74bee02376c1"
+                    },
+                    {
+                      "id": "9479cf42-9126-4508-b8da-7021a64891ae",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"loop\": \"<boolean>\",\n  \"crop\": true,\n  \"frames\": 25,\n  \"frame_size\": 384,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate-spritesheet",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate-spritesheet"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-9479cf42-9126-4508-b8da-7021a64891ae"
+                    },
+                    {
+                      "id": "5c0f975b-2119-4b7f-9155-d3c9dcbd3e29",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"image\": \"<string>\",\n  \"final_image\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"model\": \"hydra\",\n  \"loop\": \"<boolean>\",\n  \"crop\": true,\n  \"frames\": 25,\n  \"frame_size\": 384,\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/rotate-spritesheet",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "rotate-spritesheet"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-5c0f975b-2119-4b7f-9155-d3c9dcbd3e29"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-69e63b0a-33f9-4318-b642-ac5d3fa88adb"
+                }
+              ],
+              "id": "e8ec22a2-c40c-4ea4-9fa6-2a132063334e",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-e8ec22a2-c40c-4ea4-9fa6-2a132063334e"
+            },
+            {
+              "name": "adjust",
+              "item": [
+                {
+                  "name": "Adjust Sprite Sheet: re-export a previously generated sprite animation with\u2026",
+                  "id": "1274bf25-f37c-4c4b-878d-7296fc4a29ad",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"frames\": 9,\n  \"frame_size\": 128,\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/adjust",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "adjust"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "1c6e8e52-9c5f-4007-ab93-9d83e6d130ec",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"frames\": 9,\n  \"frame_size\": 128,\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/adjust",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "adjust"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"spritesheet_url\": \"<string>\",\n  \"video_url\": \"<string>\",\n  \"audio_url\": \"<string>\",\n  \"gif_url\": \"<string>\",\n  \"individual_frame_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"num_frames\": \"<integer>\",\n  \"num_cols\": \"<integer>\",\n  \"num_rows\": \"<integer>\",\n  \"spritesheet_with_background_url\": \"<string>\",\n  \"individual_frame_with_background_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-1c6e8e52-9c5f-4007-ab93-9d83e6d130ec"
+                    },
+                    {
+                      "id": "eb514d88-cf04-4546-95d3-044d592ad32c",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"frames\": 9,\n  \"frame_size\": 128,\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/adjust",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "adjust"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-eb514d88-cf04-4546-95d3-044d592ad32c"
+                    },
+                    {
+                      "id": "7969617d-f455-4603-8887-12b9f637be8d",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_url\": \"<string>\",\n  \"frames\": 9,\n  \"frame_size\": 128,\n  \"loop\": \"<boolean>\",\n  \"crop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"spritesheet_with_background\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/adjust",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "adjust"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-7969617d-f455-4603-8887-12b9f637be8d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-1274bf25-f37c-4c4b-878d-7296fc4a29ad"
+                }
+              ],
+              "id": "64d989c6-ef86-41e6-8742-15ac77a82e83",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-64d989c6-ef86-41e6-8742-15ac77a82e83"
+            },
+            {
+              "name": "audio",
+              "item": [
+                {
+                  "name": "Generate a sound effect for a previously generated spritesheet animation.",
+                  "id": "363bb437-ab62-497a-9c39-4e005ebb49bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"spritesheet_video_url\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/audio",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "audio"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "5a671220-5c90-484f-b02e-b8dacd94fdf3",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_video_url\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/audio",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "audio"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<string>\",\n  \"type\": \"<string>\",\n  \"duration\": \"<float>\",\n  \"request_id\": \"<string>\",\n  \"created_at\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-5a671220-5c90-484f-b02e-b8dacd94fdf3"
+                    },
+                    {
+                      "id": "5c569f8f-a5da-45c1-8878-1bed5355014c",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_video_url\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/audio",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "audio"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-5c569f8f-a5da-45c1-8878-1bed5355014c"
+                    },
+                    {
+                      "id": "1c188d1b-736e-49b4-a483-24f61d4220f7",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"spritesheet_video_url\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/audio",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "audio"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-1c188d1b-736e-49b4-a483-24f61d4220f7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-363bb437-ab62-497a-9c39-4e005ebb49bc"
+                }
+              ],
+              "id": "508d86d6-8e43-4ed4-9831-e260a5cbcdab",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-508d86d6-8e43-4ed4-9831-e260a5cbcdab"
+            },
+            {
+              "name": "directional-styles",
+              "item": [
+                {
+                  "name": "List directional sprite styles",
+                  "id": "aa42e583-dd7a-4f71-a6bf-95932e1cfb35",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/directional-styles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "directional-styles"
+                      ]
+                    },
+                    "description": "List the styles Directional Sprites can render a 3D model in, with the perspectives (camera heights) and the eight directions they render from. Each style has an id (pass it as style_id), a label, a description, a family, whether it is pixel art, a thumbnail_url of the style at its defaults, its current version, and its settings: each setting has a name (the key in style_params), a kind (choice, bool or color - a color setting also takes any colour), its options ({label, value}) and its default. advanced_settings work the same way. Free discovery endpoint: it does not charge credits. Use it before previewDirectionalSprites, createDirectionalSprites and createDirectionalStills. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "88c30863-aa92-40f0-a236-8c2a8f44ffc8",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-styles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-styles"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"styles\": [\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"family\": \"<string>\",\n      \"pixel\": \"<boolean>\",\n      \"thumbnail_url\": \"<string>\",\n      \"version\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"label\": \"<string>\",\n      \"description\": \"<string>\",\n      \"family\": \"<string>\",\n      \"pixel\": \"<boolean>\",\n      \"thumbnail_url\": \"<string>\",\n      \"version\": \"<integer>\"\n    }\n  ],\n  \"perspectives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"directions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-88c30863-aa92-40f0-a236-8c2a8f44ffc8"
+                    },
+                    {
+                      "id": "15a5a613-eaa8-4e63-ae92-01838291a628",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-styles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-styles"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-15a5a613-eaa8-4e63-ae92-01838291a628"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-aa42e583-dd7a-4f71-a6bf-95932e1cfb35"
+                }
+              ],
+              "id": "4cd31e75-1c23-4441-948e-4e03682c038e",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-4cd31e75-1c23-4441-948e-4e03682c038e"
+            },
+            {
+              "name": "directional-preview",
+              "item": [
+                {
+                  "name": "Preview Directional Sprites: a few frames of a 3D model in a style, from each\u2026",
+                  "id": "6406aca9-b9d3-4dbf-b6d0-89b286bd60b7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 256\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/directional-preview",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "directional-preview"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3410a735-7b15-4785-9f5d-6b6ea7d3ff14",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 256\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-preview"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"previews\": [\n    {\n      \"direction\": \"<string>\",\n      \"frame_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"num_frames\": \"<integer>\",\n      \"fps\": \"<float>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    },\n    {\n      \"direction\": \"<string>\",\n      \"frame_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"num_frames\": \"<integer>\",\n      \"fps\": \"<float>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-3410a735-7b15-4785-9f5d-6b6ea7d3ff14"
+                    },
+                    {
+                      "id": "55bd2d4f-7cc6-4bdf-9f6f-a8e60cdd38fb",
+                      "name": "Cancelled by a newer preview of yours",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 256\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-preview"
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-55bd2d4f-7cc6-4bdf-9f6f-a8e60cdd38fb"
+                    },
+                    {
+                      "id": "b4c16f2b-b9ac-45f1-91ba-d5dfc8a69cf4",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 256\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-preview"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-b4c16f2b-b9ac-45f1-91ba-d5dfc8a69cf4"
+                    },
+                    {
+                      "id": "9b893a30-aac8-4ac3-92c1-3a0b7e0e145a",
+                      "name": "Previews temporarily unavailable",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 256\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-preview"
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-9b893a30-aac8-4ac3-92c1-3a0b7e0e145a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-6406aca9-b9d3-4dbf-b6d0-89b286bd60b7"
+                }
+              ],
+              "id": "574f4caf-db76-479a-822f-cb5b9574d9c9",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-574f4caf-db76-479a-822f-cb5b9574d9c9"
+            },
+            {
+              "name": "directional",
+              "item": [
+                {
+                  "name": "Directional Sprites: render a 3D model into one spritesheet per direction, in a\u2026",
+                  "id": "fbd7e3bc-2e5f-4399-9a87-a11a3e0788d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 640,\n  \"num_frames\": 36,\n  \"loop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/directional",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "directional"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "62340f60-1a5e-41b8-85ad-99bdb032f7b4",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 640,\n  \"num_frames\": 36,\n  \"loop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"sheets\": [\n    {\n      \"direction\": \"<string>\",\n      \"spritesheet_url\": \"<string>\",\n      \"video_url\": \"<string>\",\n      \"gif_url\": \"<string>\",\n      \"individual_frame_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"num_frames\": \"<integer>\",\n      \"num_cols\": \"<integer>\",\n      \"num_rows\": \"<integer>\",\n      \"fps\": \"<float>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    },\n    {\n      \"direction\": \"<string>\",\n      \"spritesheet_url\": \"<string>\",\n      \"video_url\": \"<string>\",\n      \"gif_url\": \"<string>\",\n      \"individual_frame_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"num_frames\": \"<integer>\",\n      \"num_cols\": \"<integer>\",\n      \"num_rows\": \"<integer>\",\n      \"fps\": \"<float>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-62340f60-1a5e-41b8-85ad-99bdb032f7b4"
+                    },
+                    {
+                      "id": "638a0065-15b0-4022-a709-cedc8ddf2f34",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 640,\n  \"num_frames\": 36,\n  \"loop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-638a0065-15b0-4022-a709-cedc8ddf2f34"
+                    },
+                    {
+                      "id": "01c6d5ec-99b2-4704-a4c5-96846bec370e",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"animation_url\": \"<string>\",\n  \"preset_id\": \"<string>\",\n  \"crop_loop\": \"<boolean>\",\n  \"model_animation\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"keep_horizontal_travel\": false,\n  \"keep_vertical_travel\": true,\n  \"target_frame_size\": 640,\n  \"num_frames\": 36,\n  \"loop\": \"<boolean>\",\n  \"gif\": false,\n  \"individual_frames\": false,\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-01c6d5ec-99b2-4704-a4c5-96846bec370e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-fbd7e3bc-2e5f-4399-9a87-a11a3e0788d0"
+                }
+              ],
+              "id": "15b9a441-5102-45d0-b0bd-d6f137a905f2",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-15b9a441-5102-45d0-b0bd-d6f137a905f2"
+            },
+            {
+              "name": "directional-stills",
+              "item": [
+                {
+                  "name": "Directional Sprites stills: render a 3D model as it is (no animation) into one\u2026",
+                  "id": "23e44821-41b6-4ae4-a41d-b3860e11cf10",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"model\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprite/directional-stills",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprite",
+                        "directional-stills"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "324293c3-29dd-41c0-a4af-56b464766672",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-stills",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-stills"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"images\": [\n    {\n      \"direction\": \"<string>\",\n      \"url\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    },\n    {\n      \"direction\": \"<string>\",\n      \"url\": \"<string>\",\n      \"width\": \"<integer>\",\n      \"height\": \"<integer>\",\n      \"render_3d\": {\n        \"style_id\": \"<string>\",\n        \"style_version\": \"<integer>\",\n        \"style_params\": {},\n        \"perspective\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"animation_name\": \"<string>\",\n        \"fps\": \"<float>\",\n        \"keep_horizontal_travel\": \"<boolean>\",\n        \"keep_vertical_travel\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-324293c3-29dd-41c0-a4af-56b464766672"
+                    },
+                    {
+                      "id": "1124266c-84af-4775-b3c4-deede9f8fa37",
+                      "name": "Accepted - the generation was queued; poll GET /assets/jobs/{id}. A synchronous (async: false) call still running after 15 minutes also receives this.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-stills",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-stills"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"task_type\": \"<string>\",\n  \"status\": \"queued\",\n  \"created_at\": \"<long>\",\n  \"request_id\": \"<string>\",\n  \"finished_at\": \"<long>\",\n  \"credits_charged\": \"<float>\",\n  \"result\": {},\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"message\": \"<string>\"\n  },\n  \"poll_after_ms\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-1124266c-84af-4775-b3c4-deede9f8fa37"
+                    },
+                    {
+                      "id": "104beb86-cb47-4fef-87b1-cc68ce2d8257",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"model\": \"<string>\",\n  \"perspective\": \"isometric\",\n  \"directions\": [\n    \"SW\"\n  ],\n  \"style_id\": \"render_3d\",\n  \"style_version\": \"<integer>\",\n  \"style_params\": {},\n  \"request_id\": \"<string>\",\n  \"async\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprite/directional-stills",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprite",
+                            "directional-stills"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-104beb86-cb47-4fef-87b1-cc68ce2d8257"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-23e44821-41b6-4ae4-a41d-b3860e11cf10"
+                }
+              ],
+              "id": "2196494d-98fc-4594-8b43-2e34dbd75695",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-2196494d-98fc-4594-8b43-2e34dbd75695"
+            }
+          ],
+          "id": "22632046-78ef-46f5-af5c-dcd39a1e9a93",
+          "createdAt": "2026-10-22T03:17:01.000Z",
+          "updatedAt": "2026-10-22T03:17:01.000Z",
+          "uid": "35240-22632046-78ef-46f5-af5c-dcd39a1e9a93"
+        },
+        {
+          "name": "sprites",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "Get sprite results",
+                  "id": "ea35085f-d362-468d-900d-85d357b3450f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/assets/sprites/results?request_id=<string>&source=api",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "assets",
+                        "sprites",
+                        "results"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by request_id",
+                          "key": "request_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                          "key": "source",
+                          "value": "api"
+                        }
+                      ]
+                    },
+                    "description": "**Deprecated:** prefer `GET /assets/generations` (all types, paginated, same source filter). This endpoint continues to work; no removal is scheduled.\nList spritesheets you previously generated through the API, most recent first. This is a free read-only history lookup (no credits, no generation); it does not create anything. Pass an optional request_id query parameter to return only the results tagged with that id when you originally called animateSprite or transferMotion. Requires an API key (user scope)."
+                  },
+                  "response": [
+                    {
+                      "id": "e65830ed-f05d-41d3-925e-a1e7629ef1ac",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprites/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprites",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"spritesheet_url\": \"<string>\",\n    \"video_url\": \"<string>\",\n    \"audio_url\": \"<string>\",\n    \"gif_url\": \"<string>\",\n    \"individual_frame_urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"num_frames\": \"<integer>\",\n    \"num_cols\": \"<integer>\",\n    \"num_rows\": \"<integer>\",\n    \"spritesheet_with_background_url\": \"<string>\",\n    \"individual_frame_with_background_urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"duration\": \"<float>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  },\n  {\n    \"spritesheet_url\": \"<string>\",\n    \"video_url\": \"<string>\",\n    \"audio_url\": \"<string>\",\n    \"gif_url\": \"<string>\",\n    \"individual_frame_urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"num_frames\": \"<integer>\",\n    \"num_cols\": \"<integer>\",\n    \"num_rows\": \"<integer>\",\n    \"spritesheet_with_background_url\": \"<string>\",\n    \"individual_frame_with_background_urls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"duration\": \"<float>\",\n    \"request_id\": \"<string>\",\n    \"created_at\": \"<integer>\"\n  }\n]",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-e65830ed-f05d-41d3-925e-a1e7629ef1ac"
+                    },
+                    {
+                      "id": "f8167953-9c11-4c80-a5fa-7ceb25d1eaad",
+                      "name": "Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/assets/sprites/results?request_id=<string>&source=api",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "assets",
+                            "sprites",
+                            "results"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter results by request_id",
+                              "key": "request_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Which surface the results were generated from: api (default, your API/MCP generations from the last 7 days), web (your Ludo web studio generations, no time limit), or all",
+                              "key": "source",
+                              "value": "api"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"error_payload\": \"<string>\",\n  \"intent\": {\n    \"id\": \"<string>\",\n    \"type\": \"payment\",\n    \"client_secret\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T03:17:01.000Z",
+                      "updatedAt": "2026-10-22T03:17:01.000Z",
+                      "uid": "35240-f8167953-9c11-4c80-a5fa-7ceb25d1eaad"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:17:01.000Z",
+                  "updatedAt": "2026-10-22T03:17:01.000Z",
+                  "uid": "35240-ea35085f-d362-468d-900d-85d357b3450f"
+                }
+              ],
+              "id": "2bad8ded-e068-4cd3-8dab-ab0d3ef36995",
+              "createdAt": "2026-10-22T03:17:01.000Z",
+              "updatedAt": "2026-10-22T03:17:01.000Z",
+              "uid": "35240-2bad8ded-e068-4cd3-8dab-ab0d3ef36995"
+            }
+          ],
+          "id": "add4777b-6e4f-43ed-b365-fd152dfc44c2",
+          "createdAt": "2026-10-22T03:17:01.000Z",
+          "updatedAt": "2026-10-22T03:17:01.000Z",
+          "uid": "35240-add4777b-6e4f-43ed-b365-fd152dfc44c2"
+        }
+      ],
+      "id": "5cf1e575-a1e4-4d99-95fa-5ef710a52cb3",
+      "createdAt": "2026-10-22T03:17:01.000Z",
+      "updatedAt": "2026-10-22T03:17:01.000Z",
+      "uid": "35240-5cf1e575-a1e4-4d99-95fa-5ef710a52cb3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

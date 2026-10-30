@@ -1,4 +1,4 @@
-# Ludo.ai (ludo-ai)
+# Ludo.ai
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,106 +66,199 @@
 
 Ludo.ai is a game design hub that uses artificial intelligence to help developers generate production-ready game assets including images, 3D models, audio, and animations. The platform entered beta for its Model Context Protocol (MCP) integration, exposing its asset generation suite as a headless API that enables vibe coding where developers can trigger asset creation directly from AI assistants like Claude or Cursor.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ludo-ai/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Asset Generation · Game Design · Game Development · Game Asset Generation · AI Art · Sprite Sheets
 
-## Scope
+## Ludo.ai on APIs.io
 
-- **Type:** Index
+Everything profiled for Ludo.ai is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ludo-ai/](https://apis.io/providers/ludo-ai/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (16)
 
-- Artificial Intelligence
-- Asset Generation
-- Game Design
-- Game Development
+- [Ludo.ai MCP Server](https://apis.io/apis/ludo-ai/mcp-server/) — The Ludo.ai MCP Server exposes the platform's asset generation tools via the Model Context Protocol, allowing AI assistants like Claude and Cursor to…
+- [Ludo.ai Unity Plugin](https://apis.io/apis/ludo-ai/unity-plugin/) — The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine. It provides a native interface for Unity developers to…
+- [Ludo.ai Audio API](https://apis.io/apis/ludo-ai/ludo-ai-audio-api/) — Generate sound effects, background music, character voices, and text-to-speech audio for games.
+- [Ludo.ai Images API](https://apis.io/apis/ludo-ai/ludo-ai-images-api/) — Generate, edit, and manipulate game-ready images including sprites, icons, UI assets, textures, and backgrounds.
+- [Ludo.ai Results API](https://apis.io/apis/ludo-ai/ludo-ai-results-api/) — Retrieve previously generated assets using request IDs or browse recent API-generated content.
+- [Ludo.ai Video API](https://apis.io/apis/ludo-ai/ludo-ai-video-api/) — Generate short videos from images with motion prompts, suitable for cinematics, trailers, and dynamic backgrounds.
+- [Ludo.ai 3D Models API](https://apis.io/apis/ludo-ai/ludo-ai-3d-models-api/) — The 3D Models API from Ludo.ai — 6 operation(s) for 3d models.
+- [Ludo.ai Account API](https://apis.io/apis/ludo-ai/ludo-ai-account-api/) — The Account API from Ludo.ai — 3 operation(s) for account.
+- [Ludo.ai Animation API](https://apis.io/apis/ludo-ai/ludo-ai-animation-api/) — Create animated spritesheets from static sprites, transfer motion from videos or presets, and list available animation presets.
+- [Ludo.ai Authentication API](https://apis.io/apis/ludo-ai/ludo-ai-authentication-api/) — The Authentication API from Ludo.ai — 1 operation(s) for authentication.
+- [Ludo.ai Documentation API](https://apis.io/apis/ludo-ai/ludo-ai-documentation-api/) — The Documentation API from Ludo.ai — 2 operation(s) for documentation.
+- [Ludo.ai Files API](https://apis.io/apis/ludo-ai/ludo-ai-files-api/) — The Files API from Ludo.ai — 1 operation(s) for files.
+- [Ludo.ai Generations API](https://apis.io/apis/ludo-ai/ludo-ai-generations-api/) — The Generations API from Ludo.ai — 1 operation(s) for generations.
+- [Ludo.ai Jobs API](https://apis.io/apis/ludo-ai/ludo-ai-jobs-api/) — The Jobs API from Ludo.ai — 2 operation(s) for jobs.
+- [Ludo.ai Spritesheets API](https://apis.io/apis/ludo-ai/ludo-ai-spritesheets-api/) — The Spritesheets API from Ludo.ai — 10 operation(s) for spritesheets.
+- [Ludo.ai Videos API](https://apis.io/apis/ludo-ai/ludo-ai-videos-api/) — The Videos API from Ludo.ai — 5 operation(s) for videos.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-24
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Ludo.ai REST API
+Model Context Protocol servers that expose the API to agents.
 
-The Ludo.ai REST API provides programmatic access to the full suite of AI-powered game asset generation capabilities. Developers can generate sprites, icons, UI assets, textures, and backgrounds through image generation endpoints, convert 2D images to 3D GLB models with PBR textures, create animated spritesheets from static images, and produce sound effects, music tracks, and character voices.
+- [MCP Server](https://apis.io/servers/ludo-ai/mcp-server/)
 
-- **Human URL:** [https://ludo.ai/api-mcp-integration](https://ludo.ai/api-mcp-integration)
-- **Base URL:** `https://api.ludo.ai/api/`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- 3D Models
-- Animation
-- Asset Generation
-- Audio
-- Game Development
-- Images
-- Sprites
+- [Ludo Ai Agentic Access](https://apis.io/agentic-access/ludo-ai/ludo-ai-agentic-access/)
 
-#### Properties
+#### JSON Schema (26)
 
-- [Documentation](https://ludo.ai/api-mcp-integration)
-- [OpenAPI](openapi/ludo-ai-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/ludo-ai-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ludo-ai-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-### Ludo.ai MCP Server
+- [AnimateSpriteKeyframesPayload](https://apis.io/schemas/ludo-ai/ludo-ai-animate-sprite-keyframes-payload/)
+- [AnimateSpritePayload](https://apis.io/schemas/ludo-ai/ludo-ai-animate-sprite-payload/)
+- [AudioResponse](https://apis.io/schemas/ludo-ai/ludo-ai-audio-response/)
+- [AudioResultsResponse](https://apis.io/schemas/ludo-ai/ludo-ai-audio-results-response/)
+- [CreateImageRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-image-request/)
+- [CreateMusicRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-music-request/)
+- [CreateSoundEffectRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-sound-effect-request/)
+- [CreateSpeechPresetRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-speech-preset-request/)
+- [CreateSpeechRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-speech-request/)
+- [CreateVideoRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-video-request/)
+- [CreateVoiceRequest](https://apis.io/schemas/ludo-ai/ludo-ai-create-voice-request/)
+- [EditImageRequest](https://apis.io/schemas/ludo-ai/ludo-ai-edit-image-request/)
+- [EditSpritesheetPayloadPublic](https://apis.io/schemas/ludo-ai/ludo-ai-edit-spritesheet-payload-public/)
+- [Ludo.ai Game Asset](https://apis.io/schemas/ludo-ai/ludo-ai-game-asset/)
+- [GenerateImagePayload](https://apis.io/schemas/ludo-ai/ludo-ai-generate-image-payload/)
+- [GeneratePoseRequest](https://apis.io/schemas/ludo-ai/ludo-ai-generate-pose-request/)
+- [GenerateVideoPayloadPublic](https://apis.io/schemas/ludo-ai/ludo-ai-generate-video-payload-public/)
+- [GenerateWithStyleRequest](https://apis.io/schemas/ludo-ai/ludo-ai-generate-with-style-request/)
+- [ImageResponse](https://apis.io/schemas/ludo-ai/ludo-ai-image-response/)
+- [ImageResultsResponse](https://apis.io/schemas/ludo-ai/ludo-ai-image-results-response/)
+- [Model3DResultsResponse](https://apis.io/schemas/ludo-ai/ludo-ai-model3-dresults-response/)
+- [PoseResponse](https://apis.io/schemas/ludo-ai/ludo-ai-pose-response/)
+- [SpriteResultsResponse](https://apis.io/schemas/ludo-ai/ludo-ai-sprite-results-response/)
+- [TransferMotionPayload](https://apis.io/schemas/ludo-ai/ludo-ai-transfer-motion-payload/)
+- [VideoResponse](https://apis.io/schemas/ludo-ai/ludo-ai-video-response/)
+- …and 1 more published on APIs.io
 
-The Ludo.ai MCP Server exposes the platform's asset generation tools via the Model Context Protocol, allowing AI assistants like Claude and Cursor to generate game assets through natural language conversations. The server provides over 20 tools including createImage, editImage, animateSprite, create3DModel, createSoundEffect, createMusic, createVoice, and createVideo.
+#### JSON-LD (1)
 
-- **Human URL:** [https://ludo.ai/docs/api-mcp](https://ludo.ai/docs/api-mcp)
-- **Base URL:** `https://mcp.ludo.ai/mcp`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Ludo Ai Context](https://apis.io/jsonld/ludo-ai/ludo-ai-context/)
 
-- AI Assistants
-- Asset Generation
-- Game Development
-- Model Context Protocol
-- Vibe Coding
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://ludo.ai/docs/api-mcp)
-- [GitHub Repository](https://github.com/Ludo-AI/ludo-mcp)
-- [Postman Collection](collections/ludo-ai-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ludo-ai-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Ludo.ai REST 3D Models API](https://apis.io/collections/ludo-ai/open-ludo-ai-3d-models-api/)
+- [Ludo.ai REST 3D Models Animation API](https://apis.io/collections/ludo-ai/open-ludo-ai-animation-api/)
+- [Ludo.ai REST 3D Models Audio API](https://apis.io/collections/ludo-ai/open-ludo-ai-audio-api/)
+- [Ludo.ai REST 3D Models Images API](https://apis.io/collections/ludo-ai/open-ludo-ai-images-api/)
+- [Ludo.ai REST API](https://apis.io/collections/ludo-ai/open-ludo-ai-rest-api/)
+- [Ludo.ai REST 3D Models Results API](https://apis.io/collections/ludo-ai/open-ludo-ai-results-api/)
+- [Ludo.ai REST 3D Models Video API](https://apis.io/collections/ludo-ai/open-ludo-ai-video-api/)
 
-### Ludo.ai Unity Plugin
+#### Overlays (1)
 
-The Ludo.ai Unity Plugin integrates AI-powered asset generation directly into the Unity game engine. It provides a native interface for Unity developers to access Ludo.ai's image generation, 3D model creation, audio production, and animation tools without leaving the editor. The plugin connects to the Ludo.ai API to deliver generated assets directly into Unity projects, streamlining the game development workflow.
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- **Human URL:** [https://github.com/Ludo-AI/ludo-unity-plugin](https://github.com/Ludo-AI/ludo-unity-plugin)
-- **Base URL:** `https://api.example.com`
+- [Ludo Ai Openapi Overlay](https://apis.io/overlays/ludo-ai/ludo-ai-openapi-overlay/)
 
-#### Tags
+#### Governance rules (2)
 
-- Asset Generation
-- Game Development
-- Plugin
-- Unity
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Ludo.ai — jsonschema rules](https://apis.io/rules/ludo-ai/ludo-ai-jsonschema-spectral-rules/)
+- [Ludo.ai API Rules](https://apis.io/rules/ludo-ai/ludo-ai-rules/)
 
-- [Documentation](https://github.com/Ludo-AI/ludo-unity-plugin)
-- [Postman Collection](collections/ludo-ai-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ludo-ai-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (3)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [LinkedIn](https://www.linkedin.com/company/ludoai)
-- [JSON-LD](json-ld/ludo-ai-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/ludo-ai-game-asset-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Ludo Ai Authentication](https://apis.io/security/ludo-ai/ludo-ai-authentication/)
+- [Ludo Ai Domain Security](https://apis.io/security/ludo-ai/ludo-ai-domain-security/)
+- [Ludo Ai Vulnerability Disclosure](https://apis.io/security/ludo-ai/ludo-ai-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ludo Ai Plans Pricing](https://apis.io/plans/ludo-ai/ludo-ai-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ludo Ai Rate Limits](https://apis.io/rate-limits/ludo-ai/ludo-ai-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ludo Ai Finops](https://apis.io/finops/ludo-ai/ludo-ai-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://ludo.ai/)
-- [Portal](https://ludo.ai/api-mcp-integration)
 - [Documentation](https://ludo.ai/docs)
+- [API reference](https://api.ludo.ai/api-documentation/openapi.json)
+- [Pricing](https://ludo.ai/pricing)
+- [Changelog](https://ludo.ai/whats-new)
 - [Blog](https://ludo.ai/blog/introducing-ludo-ai-api-mcp-integration)
-- [GitHub Organization](https://github.com/Ludo-AI)
-- [Login](https://ludo.ai/)
-- [M C P Server](https://github.com/Ludo-AI/ludo-mcp)
+- [Privacy policy](https://ludo.ai/privacy-policies)
+- [GitHub](https://github.com/Ludo-AI)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 51.0** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 57.2 |
+| Contract governance | 22.0 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 48.7 |
+
+**Agent readiness 32.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ludo-ai/](https://apis.io/providers/ludo-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ludo.ai: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ludo-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
